@@ -22,9 +22,8 @@ public class CommandExecutor {
 
 	static String run(String commandString, BufferedReader input) {
 		String result = "";
-		String line;
 		try {
-			if(!(commandString.substring(0, 8).equals("command:")))
+			if(!(commandString.startsWith("command:")))
 				return "Invalid command";
 			String commandStr = commandString.substring(9);
 			int menuSelection = Integer.parseInt(commandStr);
@@ -33,15 +32,28 @@ public class CommandExecutor {
 				case 0:
 					//login teacher, read username and password
 					String inString = input.readLine();
-					if(!(inString.substring(0, 9).equals("username:")))
+					if(!(inString.startsWith("username:")))
 						return "Invalid request no username";
 					String username = inString.substring(9);
 					inString = input.readLine();
-					if(!(inString.substring(0, 9).equals("password:")))
+					if(!(inString.startsWith("password:")))
 						return "Invalid request no password";
 					String password = inString.substring(9);
 					result = Server.LoginTeacher(username, password);
 					break;
+				case 1:
+					inString = input.readLine();
+					if(!(inString.startsWith("name:")))
+						return "Invalid request no username";
+					String teacherName = inString.substring(5);
+					if(!(inString.startsWith("username:")))
+						return "Invalid request no username";
+					String teacherUsername = inString.substring(9);
+					inString = input.readLine();
+					if(!(inString.startsWith("password:")))
+						return "Invalid request no password";
+					String teacherPassword = inString.substring(9);
+					result = Server.CreateTeacher(teacherName, teacherUsername, teacherPassword);
 			}
 
 			result = result.concat("\n");

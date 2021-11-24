@@ -47,15 +47,23 @@ public class ClientThread extends Thread {
 	}
 
 	public void sendCommandToServer(int menuSelection, PrintWriter out) {
-		//0) login student
-		//1) login teacher
-		//2) ...
+		//0) login teacher
+		//1) login student
+		//2) create teacher
 		switch (menuSelection) {
-			case 0:
-				out.println("command: " + Integer.toString(menuSelection));
-				out.println("username: " + "azajzon"); // we will change this username later to the input from gui
-				out.println("password: " + "a");
+			case 0: //this formats the request sent to the server in the observable order: "command: #", new line, "username: " newline "password: "
+				out.println("command:1");
+				out.println("username:" + "azajzon"); // we will change this username later to the input from gui
+				out.println("password:" + "a");
 				break;
+			case 1:
+				out.println("command:2");
+				break;
+			case 2:
+				out.println("command:3");
+				out.println("name:abel zajzon");
+				out.println("username:az");
+				out.println("password:a");
 			default:
 				break;
 		}

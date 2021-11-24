@@ -87,5 +87,11 @@ public class Server {
 		}
 		return null;
 	}
+
+	public static String CreateTeacher(String teacherName, String teacherUsername, String teacherPassword) {
+		Teacher teacher = new Teacher(teacherName, teacherUsername, teacherPassword);
+		teachers.add(teacher);
+		return "Success";
+	}
 }
 
