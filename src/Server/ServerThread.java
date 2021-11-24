@@ -1,3 +1,5 @@
+package Server;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -34,7 +36,7 @@ public class ServerThread extends Thread {
 			System.out.println("Read command " + inString);
 
 			// run the command using CommandExecutor and get its output
-			String outString = CommandExecutor.run(inString);
+			String outString = CommandExecutor.run(inString, input);
 			System.out.println("Server sending result to client");
 			// send the result of the command to the client
 			output.println(outString);

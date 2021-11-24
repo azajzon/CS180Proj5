@@ -1,3 +1,5 @@
+package Server;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,29 +18,41 @@ public class CommandExecutor {
 	 * @param commandString		A string containing a single digit, 1-6;
 	 * @return			A string containing the results of the shell command.
 	 */
-	static String run(String commandString) {
+
+
+	static String run(String commandString, BufferedReader input) {
 		String result = "";
 		String line;
 		try {
-			// start the shell command running as a child processes
-			Process child = Runtime.getRuntime().exec(parseCommand(commandString));
+			if(!(commandString.substring(0, 8).equals("command:")))
+				return "Invalid command";
+			String commandStr = commandString.substring(9);
+			int menuSelection = Integer.parseInt(commandStr);
 
-			// open a BufferedReader to read the output of the child process
-			BufferedReader output = new BufferedReader(new InputStreamReader(child.getInputStream()));
-			// while the child process is still outputting, add the output to the result string
-			while ((line = output.readLine()) != null) {
-				result = result.concat(line);
-				result = result.concat("\n");
+			switch (menuSelection) {
+				case 0:
+					//login teacher, read username and password
+					String inString = input.readLine();
+					if(!(inString.substring(0, 9).equals("username:")))
+						return "Invalid request no username";
+					String username = inString.substring(9);
+					inString = input.readLine();
+					if(!(inString.substring(0, 9).equals("password:")))
+						return "Invalid request no password";
+					String password = inString.substring(9);
+					result = Server.LoginTeacher(username, password);
+					break;
 			}
 
 			result = result.concat("\n");
 			// add "END_MESSAGE" to the result string. When the client sees END_MESSAGE it
 			// will know that the server is done sending
 			result = result.concat("END_MESSAGE");
-			output.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (NumberFormatException e) {
+			result = "Invalid command number";
 		}
 
 		return result;

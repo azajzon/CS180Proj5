@@ -1,3 +1,6 @@
+package Client;
+
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -12,7 +15,7 @@ public class ClientThread extends Thread {
 	// every clientThread is passed which command to send to the server
 	int menuSelection;
 	// every clientThread is passed the hostname of the server to connect to
-	String hostName;
+	String hostName = "localhost";
 	Socket socket = null; 
 	
 	// totalTime is used to keep the sum of response times for all threads. after all threads
@@ -36,12 +39,33 @@ public class ClientThread extends Thread {
 	long startTime;
 	long endTime;
 
-	ClientThread(String hostName, int menuSelection, AtomicLong totalTime, boolean printOutput, AtomicLong runningThreads) {
+	ClientThread(int menuSelection, AtomicLong totalTime, boolean printOutput, AtomicLong runningThreads) {
 		this.menuSelection = menuSelection;
-		this.hostName = hostName;
 		this.totalTime = totalTime;
 		this.printOutput = printOutput;
 		this.runningThreads = runningThreads;
+	}
+
+	public void sendCommandToServer(int menuSelection, PrintWriter out) {
+		//0) login student
+		//1) login teacher
+		//2) ...
+		switch (menuSelection) {
+			case 0:
+				out.println("command: " + Integer.toString(menuSelection));
+				out.println("username: " + "azajzon"); // we will change this username later to the input from gui
+				out.println("password: " + "a");
+				break;
+			default:
+				break;
+		}
+	}
+
+	public void readCommandResultsFromServer(int menuSelection, BufferedReader input) throws IOException {
+		String outputString;
+		/*while (((outputString = input.readLine()) != null) && (!outputString.equals("END_MESSAGE"))) {
+			if (printOutput) System.out.println(outputString);
+		}*/
 	}
 
 	public void run() {
@@ -51,28 +75,39 @@ public class ClientThread extends Thread {
 			//creates a new Socket object and names it socket.
 			//Establishes the socket connection between the client & server
 			//name of the machine & the port number to which we want to connect
-			socket = new Socket(hostName, 15432);
+			socket = new Socket(hostName, 5000);
 			if (printOutput) {
-				System.out.print("Establishing connection.");
+				//System.out.print("Establishing connection.");
 			}
 			//opens a PrintWriter on the socket input autoflush mode
 			out = new PrintWriter(socket.getOutputStream(), true);
 
 			//opens a BufferedReader on the socket
 			input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			if (printOutput) System.out.println("\nRequesting output for the '" + menuSelection + "' command from " + hostName);
-			
+			//if (printOutput) System.out.println("\nRequesting output for the '" + menuSelection + "' command from " + hostName);
+
 			// get the current time (before sending the request to the server)
 			startTime = System.currentTimeMillis();
 
 			// send the command to the server
-			out.println(Integer.toString(menuSelection));
-			if (printOutput) System.out.println("Sent output");
+			sendCommandToServer(0, out);
+
+			//if (printOutput) System.out.println("Sent output");
 
 			// read the output from the server
 			String outputString;
 			while (((outputString = input.readLine()) != null) && (!outputString.equals("END_MESSAGE"))) {
-				if (printOutput) System.out.println(outputString);
+				//if (printOutput) System.out.println(outputString);
+				if (outputString.contains("true")) {
+					//TODO message box that says login successful.
+					JOptionPane.showMessageDialog(null, "Login Successful.", "Login",JOptionPane.INFORMATION_MESSAGE);
+
+				}
+				else {
+					//TODO message box incorrect username/password
+					JOptionPane.showMessageDialog(null, "Login Failed.", "Login",JOptionPane.WARNING_MESSAGE);
+
+				}
 			}
 
 			// get the current time (after connecting to the server)
