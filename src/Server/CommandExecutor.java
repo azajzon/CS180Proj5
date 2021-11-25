@@ -25,9 +25,8 @@ public class CommandExecutor {
 		try {
 			if(!(commandString.startsWith("command:")))
 				return "Invalid command";
-			String commandStr = commandString.substring(9);
+			String commandStr = commandString.substring(8);
 			int menuSelection = Integer.parseInt(commandStr);
-
 			switch (menuSelection) {
 				case 0:
 					//login teacher, read username and password

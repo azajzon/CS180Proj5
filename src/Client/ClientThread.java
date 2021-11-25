@@ -46,15 +46,19 @@ public class ClientThread extends Thread {
 		this.runningThreads = runningThreads;
 	}
 
+	public void formatLoginTeacherRequest(PrintWriter out, String username, String password) {
+		out.println("command:0");
+		out.println("username:" + username); // we will change this username later to the input from gui
+		out.println("password:" + password);
+	}
+
 	public void sendCommandToServer(int menuSelection, PrintWriter out) {
 		//0) login teacher
 		//1) login student
 		//2) create teacher
 		switch (menuSelection) {
 			case 0: //this formats the request sent to the server in the observable order: "command: #", new line, "username: " newline "password: "
-				out.println("command:1");
-				out.println("username:" + "azajzon"); // we will change this username later to the input from gui
-				out.println("password:" + "a");
+				formatLoginTeacherRequest(out, "azajzon", "a");
 				break;
 			case 1:
 				out.println("command:2");
