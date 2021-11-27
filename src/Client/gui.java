@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class gui {
     private static String hostName;
@@ -15,30 +14,46 @@ public class gui {
     // the threads are kept track of with a linked list
     private static LinkedList<Thread> list = new LinkedList<Thread>();
 
-    // AtomicLong is a class that is synchronized, and can be used across
-    // multiple threads. Here it is used for benchmarking, to store the sum
-    // of the command completion times for all threads
-    private static AtomicLong totalTime = new AtomicLong(0);
-
-    // this AtomicLong is used to keep track of the current # of running threads
-    private static AtomicLong runningThreads = new AtomicLong(0);
-    private static boolean printOutput = true;
-    public static JFrame frame;
+    public static JFrame mainFrame;
     public static JPanel panel;
     public static JLabel userLabel;
     public static JLabel passwordLabel;
     public static JTextField userText;
     public static JTextField passText;
-    public static JButton loginButton;
+
     public static JLabel welcomeLabel;
     public static JLabel lsmTool;
+
+    /////////////////////////
+    //TEACHER MENU ATTRIBUTES
+    /////////////////////////
     public static JButton createTeacherButton;
-    public static JButton createStudentButton;
+    public static JButton loginTeacherAccountButton;
+    public static JButton createTeacherAccountButton;
+    public static JFrame teacherLoginFrame;
+    public static JPanel teacherLoginPanel;
+    public static JLabel teacherWelcomeLabel;
+    public static JLabel teacherLoginLabel;
+    public static JLabel teacherPasswordLabel;
+    public static JTextField teacherUsernameText;
+    public static JTextField teacherPasswordText;
+    public static JFrame createTeacherFrame;
+    public static JPanel createTeacherPanel;
+    public static JLabel createTeacherWelcomeLabel;
+    public static JLabel createTeacherNameLabel;
+    public static JTextField createTeacherUsernameText;
+    public static JTextField createTeacherNameText;
+    public static JLabel createTeacherUsernameLabel;
+    public static JLabel createTeacherPasswordLabel;
+    public static JTextField createTeacherPasswordText;
+
     public static JButton loginTeacherButton;
     public static JButton loginStudentButton;
     public static JButton saveButton;
     public static JLabel nameLabel;
     public static JTextField nameText;
+
+    public static JButton createStudentButton;
     public static JLabel addCourse;
     public static JButton yesCourse;
     public static JButton noCourse;
@@ -54,10 +69,19 @@ public class gui {
     public static JButton editAccount;
     public static JButton logout;
 
+    static ActionListener actionListener = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getSource() == loginTeacherAccountButton) {
+                loginTeacher();
+            }
+        }
+    };
 
 
     public static void main(String[] args) {
         int numProcesses = 1;
+
 
 
         mainMenu();
@@ -65,28 +89,43 @@ public class gui {
             @Override
             public void actionPerformed(ActionEvent e) {
                 loginTeacher();
-                thrd = new Thread(new ClientThread(0, totalTime, printOutput, runningThreads));
-                thrd.start(); // start the thread
-                list.add(thrd);
             }
         });
         createTeacherButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 createTeacher();
-                //thrd = new Thread(new ClientThread(1, totalTime, printOutput, runningThreads));
-                //thrd.start(); // start the thread
-                //list.add(thrd);
             }
         });
+
+        loginTeacherAccountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                thrd = new Thread(new ClientThread(0, new LoginTeacherParameters(userText.getText(), passText.getText())));
+                thrd.start(); // start the thread
+                list.add(thrd);
+            }
+        });
+
+        createTeacherAccountButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                thrd = new Thread(new ClientThread(1, new CreateTeacherParameters(nameText.getText(), userText.getText(), passText.getText())));
+                thrd.start(); // start the thread
+                list.add(thrd);
+
+            }
+        });
+
+
     }
 
     public static void mainMenu() {
-        frame = new JFrame();
+        mainFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        mainFrame.setSize(400, 300);
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.add(panel);
 
 
         lsmTool = new JLabel("Learning System Management Tool");
@@ -116,90 +155,92 @@ public class gui {
 
         panel.setLayout(null);
 
-        frame.setVisible(true);
+        mainFrame.setVisible(true);
 
     }
 
     public static void loginTeacher() {
-        frame = new JFrame();
-        panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        teacherLoginFrame = new JFrame();
+        teacherLoginPanel = new JPanel();
+        teacherLoginFrame.setSize(400, 300);
+        teacherLoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        teacherLoginFrame.add(teacherLoginPanel);
 
-        panel.setLayout(null);
+        teacherLoginPanel.setLayout(null);
 
-        welcomeLabel = new JLabel("Welcome teachers!");
-        welcomeLabel.setBounds(80, 20, 150, 25);
-        panel.add(welcomeLabel);
+        teacherWelcomeLabel = new JLabel("Welcome teachers!");
+        teacherWelcomeLabel.setBounds(80, 20, 150, 25);
+        teacherLoginPanel.add(welcomeLabel);
 
-        userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 50, 80, 25);
-        panel.add(userLabel);
+        teacherLoginLabel = new JLabel("Username:");
+        teacherLoginLabel.setBounds(20, 50, 80, 25);
+        teacherLoginPanel.add(teacherLoginLabel);
 
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 80, 80, 25);
-        panel.add(passwordLabel);
-
-        userText = new JTextField(20);
-        userText.setBounds(100, 50, 165, 25);
-        panel.add(userText);
-
-        passText = new JTextField(20);
-        passText.setBounds(100, 80, 165, 25);
-        panel.add(passText);
-
-        loginButton = new JButton("Login");
-        loginButton.setBounds(30, 120, 80, 25);
-        panel.add(loginButton);
+        teacherPasswordLabel = new JLabel("Password:");
+        teacherPasswordLabel.setBounds(20, 80, 80, 25);
+        teacherLoginPanel.add(teacherPasswordLabel);
 
 
-        frame.setVisible(true);
+        teacherUsernameText = new JTextField(20);
+        teacherUsernameText.setBounds(100, 50, 165, 25);
+        teacherLoginPanel.add(teacherUsernameText);
+
+        teacherPasswordText = new JTextField(20);
+        teacherPasswordText.setBounds(100, 80, 165, 25);
+        teacherLoginPanel.add(teacherPasswordText);
+
+        loginTeacherAccountButton = new JButton("Login");
+        loginTeacherAccountButton.addActionListener(actionListener);
+        loginTeacherAccountButton.setBounds(30, 120, 80, 25);
+        teacherLoginPanel.add(loginTeacherAccountButton);
+
+
+        teacherLoginFrame.setVisible(true);
     }
 
     public static void createTeacher() {
-        frame = new JFrame();
-        panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        createTeacherFrame = new JFrame();
+        createTeacherPanel = new JPanel();
+        createTeacherFrame.setSize(400, 300);
+        createTeacherFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createTeacherFrame.add(createTeacherPanel);
 
-        panel.setLayout(null);
+        createTeacherPanel.setLayout(null);
 
-        welcomeLabel = new JLabel("Create a teacher account");
-        welcomeLabel.setBounds(80, 20, 200, 25);
-        panel.add(welcomeLabel);
+        createTeacherWelcomeLabel = new JLabel("Create a teacher account");
+        createTeacherWelcomeLabel.setBounds(80, 20, 200, 25);
+        createTeacherPanel.add(createTeacherWelcomeLabel);
 
-        nameLabel = new JLabel("First & Last Name:");
-        nameLabel.setBounds(20, 50, 150, 25);
-        panel.add(nameLabel);
+        createTeacherNameLabel = new JLabel("First & Last Name:");
+        createTeacherNameLabel.setBounds(20, 50, 150, 25);
+        createTeacherPanel.add(createTeacherNameLabel);
 
-        nameText = new JTextField(20);
-        nameText.setBounds(150, 50, 165, 25);
-        panel.add(nameText);
+        createTeacherNameText = new JTextField(20);
+        createTeacherNameText.setBounds(150, 50, 165, 25);
+        createTeacherPanel.add(createTeacherNameText);
 
-        userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 80, 80, 25);
-        panel.add(userLabel);
+        createTeacherUsernameLabel = new JLabel("Username:");
+        createTeacherUsernameLabel.setBounds(20, 80, 80, 25);
+        createTeacherPanel.add(createTeacherUsernameLabel);
 
-        userText = new JTextField(20);
-        userText.setBounds(150, 80, 165, 25);
-        panel.add(userText);
+        createTeacherUsernameText = new JTextField(20);
+        createTeacherUsernameText.setBounds(150, 80, 165, 25);
+        createTeacherPanel.add(createTeacherUsernameText);
 
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 110, 80, 25);
-        panel.add(passwordLabel);
+        createTeacherPasswordLabel = new JLabel("Password:");
+        createTeacherPasswordLabel.setBounds(20, 110, 80, 25);
+        createTeacherPanel.add(createTeacherPasswordLabel);
 
-        passText = new JTextField(20);
-        passText.setBounds(150, 110, 165, 25);
-        panel.add(passText);
+        createTeacherPasswordText = new JTextField(20);
+        createTeacherPasswordText.setBounds(150, 110, 165, 25);
+        createTeacherPanel.add(createTeacherPasswordText);
 
-        loginButton = new JButton("Create Account");
-        loginButton.setBounds(30, 150, 150, 25);
-        panel.add(loginButton);
+        createTeacherAccountButton = new JButton("Create Account");
+        createTeacherAccountButton.setBounds(30, 150, 150, 25);
+        createTeacherPanel.add(createTeacherAccountButton);
 
 
-        frame.setVisible(true);
+        createTeacherFrame.setVisible(true);
 
     }
 }

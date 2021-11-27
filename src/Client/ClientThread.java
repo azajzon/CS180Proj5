@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicLong;
 public class ClientThread extends Thread {
 	// every clientThread is passed which command to send to the server
 	int menuSelection;
+	Object threadParams;
 	// every clientThread is passed the hostname of the server to connect to
 	String hostName = "localhost";
 	Socket socket = null; 
@@ -39,35 +40,27 @@ public class ClientThread extends Thread {
 	long startTime;
 	long endTime;
 
-	ClientThread(int menuSelection, AtomicLong totalTime, boolean printOutput, AtomicLong runningThreads) {
+	ClientThread(int menuSelection, Object threadParameters) {
 		this.menuSelection = menuSelection;
-		this.totalTime = totalTime;
-		this.printOutput = printOutput;
-		this.runningThreads = runningThreads;
+		this.threadParams = threadParameters;
 	}
 
-	public void formatLoginTeacherRequest(PrintWriter out, String username, String password) {
-		out.println("command:0");
-		out.println("username:" + username); // we will change this username later to the input from gui
-		out.println("password:" + password);
-	}
 
-	public void sendCommandToServer(int menuSelection, PrintWriter out) {
+	public void sendCommandToServer(int menuSelection, Object threadParameters, PrintWriter out) {
 		//0) login teacher
 		//1) login student
 		//2) create teacher
 		switch (menuSelection) {
 			case 0: //this formats the request sent to the server in the observable order: "command: #", new line, "username: " newline "password: "
-				formatLoginTeacherRequest(out, "azajzon", "a");
+				LoginTeacherParameters loginTeacherParameters = (LoginTeacherParameters) threadParameters;
+				loginTeacherParameters.formatLoginTeacherRequest(out);
 				break;
 			case 1:
-				out.println("command:2");
+				CreateTeacherParameters createTeacherParameters = (CreateTeacherParameters) threadParameters;
+				createTeacherParameters.formatCreateTeacherRequest(out);
 				break;
 			case 2:
-				out.println("command:3");
-				out.println("name:abel zajzon");
-				out.println("username:az");
-				out.println("password:a");
+				break;
 			default:
 				break;
 		}
@@ -88,21 +81,15 @@ public class ClientThread extends Thread {
 			//Establishes the socket connection between the client & server
 			//name of the machine & the port number to which we want to connect
 			socket = new Socket(hostName, 5000);
-			if (printOutput) {
-				//System.out.print("Establishing connection.");
-			}
 			//opens a PrintWriter on the socket input autoflush mode
 			out = new PrintWriter(socket.getOutputStream(), true);
 
 			//opens a BufferedReader on the socket
 			input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			//if (printOutput) System.out.println("\nRequesting output for the '" + menuSelection + "' command from " + hostName);
 
-			// get the current time (before sending the request to the server)
-			startTime = System.currentTimeMillis();
 
 			// send the command to the server
-			sendCommandToServer(0, out);
+			sendCommandToServer(0, threadParams, out);
 
 			//if (printOutput) System.out.println("Sent output");
 

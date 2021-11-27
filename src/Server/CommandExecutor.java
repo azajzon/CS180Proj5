@@ -65,51 +65,7 @@ public class CommandExecutor {
 		} catch (NumberFormatException e) {
 			result = "Invalid command number";
 		}
-
 		return result;
 	}
 
-	/**
-	 * Converts the digit string into its respective shell command.
-	 * 
-	 * @param inputString		A string containing a single digit, 1-6;
-	 * @return			A string containing the shell command to run		
-	 */
-	static String parseCommand(String inputString) {
-		int inputInt = Integer.parseInt(inputString);
-		String commandString = "";
-		switch (inputInt) {
-			// Date
-			case 1:
-				commandString = "date";
-				break;
-
-				// Uptime
-			case 2:
-				commandString = "uptime";
-				break;
-
-				// Memory use
-			case 3:
-				commandString = "free";
-				break;
-
-				// netstat
-			case 4:
-				commandString = "netstat";
-				break;
-
-				// current users
-			case 5:
-				commandString = "who";
-				break;
-
-				// running processes
-			case 6:
-				commandString = "ps -e";
-				break;
-		}
-
-		return commandString;
-	}
 }

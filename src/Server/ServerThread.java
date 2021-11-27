@@ -30,13 +30,13 @@ public class ServerThread extends Thread {
 			input = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			System.out.print("Reader and writer created. ");
 
-			String inString;
+			String command;
 			// read the command from the client
-		        while  ((inString = input.readLine()) == null);
-			System.out.println("Read command " + inString);
+		        while  ((command = input.readLine()) == null);
+			System.out.println("Read command " + command);
 
 			// run the command using CommandExecutor and get its output
-			String outString = CommandExecutor.run(inString, input);
+			String outString = CommandExecutor.run(command, input);
 			System.out.println("Server sending result to client");
 			// send the result of the command to the client
 			output.println(outString);
