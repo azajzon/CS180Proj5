@@ -1,10 +1,12 @@
-//NOTE: WITH GUI's, not done yet 
+
+
+//NOTE: WITH GUI's, not done yet
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Main implements ActionListener {
+public class LearningSystemManager implements ActionListener {
     public static JFrame frame;
     public static JPanel panel;
     public static JLabel userLabel;
@@ -37,22 +39,17 @@ public class Main implements ActionListener {
     public static JButton logout;
 
 
-
-
-
-
     public static void main(String[] args) {
 
         //teacherLogIn(); //Screen for teacher login
         //studentLogIn(); // Screen for student login
-        //mainMenu();
+        mainMenu();
         //createTeacher();
         //createStudent();
         //teacherMenu();
         //addCourse();
         //teacherQuizMenu();
-        //studentMenu();
-        editAccount();
+        //editAccount();
     }
 
     public static void mainMenu() {
@@ -63,33 +60,39 @@ public class Main implements ActionListener {
         frame.add(panel);
 
 
-        lsmTool = new JLabel("Learning System Management Tool");
+        lsmTool = new JLabel("Welcome to Learning System Management Tool!");
         lsmTool.setBounds(80, 20, 500, 25);
         panel.add(lsmTool);
 
         createTeacher = new JButton("Create Teacher");
         createTeacher.setBounds(110, 50, 150, 25);
-        createTeacher.addActionListener(new Main());
+        createTeacher.addActionListener(new LearningSystemManager());
         panel.add(createTeacher);
+
+        createTeacher.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                createTeacher();
+            }
+        });
 
         createStudent = new JButton("Create Student");
         createStudent.setBounds(110, 80, 150, 25);
-        createStudent.addActionListener(new Main());
+        createStudent.addActionListener(new LearningSystemManager());
         panel.add(createStudent);
 
         loginTeacher = new JButton("Login Teacher");
         loginTeacher.setBounds(110, 110, 150, 25);
-        loginTeacher.addActionListener(new Main());
+        loginTeacher.addActionListener(new LearningSystemManager());
         panel.add(loginTeacher);
 
         loginStudent = new JButton("Login Student");
         loginStudent.setBounds(110, 140, 150, 25);
-        loginStudent.addActionListener(new Main());
+        loginStudent.addActionListener(new LearningSystemManager());
         panel.add(loginStudent);
 
         saveButton = new JButton("Save and Exit");
         saveButton.setBounds(110, 170, 150, 25);
-        saveButton.addActionListener(new Main());
+        saveButton.addActionListener(new LearningSystemManager());
         panel.add(saveButton);
 
         panel.setLayout(null);
@@ -137,7 +140,7 @@ public class Main implements ActionListener {
 
         loginButton = new JButton("Login");
         loginButton.setBounds(30, 150, 80, 25);
-        loginButton.addActionListener(new Main());
+        loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
 
@@ -158,12 +161,12 @@ public class Main implements ActionListener {
 
         yesCourse = new JButton("Yes");
         yesCourse.setBounds(120, 50, 80, 25);
-        yesCourse.addActionListener(new Main());
+        yesCourse.addActionListener(new LearningSystemManager());
         panel.add(yesCourse);
 
         noCourse = new JButton("No");
         noCourse.setBounds(120, 80, 80, 25);
-        noCourse.addActionListener(new Main());
+        noCourse.addActionListener(new LearningSystemManager());
         panel.add(noCourse);
 
 
@@ -193,7 +196,7 @@ public class Main implements ActionListener {
 
         courseEnter = new JButton("Create Course");
         courseEnter.setBounds(70, 80, 140, 25);
-        courseEnter.addActionListener(new Main());
+        courseEnter.addActionListener(new LearningSystemManager());
         panel.add(courseEnter);
 
         panel.setLayout(null);
@@ -213,22 +216,22 @@ public class Main implements ActionListener {
 
         createQuiz = new JButton("Create a Quiz");
         createQuiz.setBounds(80, 50, 250, 25);
-        createQuiz.addActionListener(new Main());
+        createQuiz.addActionListener(new LearningSystemManager());
         panel.add(createQuiz);
 
         editQuiz = new JButton("Edit Quiz");
         editQuiz.setBounds(80, 80, 250, 25);
-        editQuiz.addActionListener(new Main());
+        editQuiz.addActionListener(new LearningSystemManager());
         panel.add(editQuiz);
 
         deleteQuiz = new JButton("Delete Quiz");
         deleteQuiz.setBounds(80, 110, 250, 25);
-        deleteQuiz.addActionListener(new Main());
+        deleteQuiz.addActionListener(new LearningSystemManager());
         panel.add(deleteQuiz);
 
         viewStudentQuizSubmissions = new JButton("View Student Quiz Submissions");
         viewStudentQuizSubmissions.setBounds(80, 140, 250, 25);
-        viewStudentQuizSubmissions.addActionListener(new Main());
+        viewStudentQuizSubmissions.addActionListener(new LearningSystemManager());
         panel.add(viewStudentQuizSubmissions);
 
 
@@ -276,7 +279,7 @@ public class Main implements ActionListener {
 
         loginButton = new JButton("Login");
         loginButton.setBounds(30, 150, 80, 25);
-        loginButton.addActionListener(new Main());
+        loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
 
@@ -296,22 +299,22 @@ public class Main implements ActionListener {
 
         takeQuiz = new JButton("Take a Quiz");
         takeQuiz.setBounds(80, 50, 250, 25);
-        takeQuiz.addActionListener(new Main());
+        takeQuiz.addActionListener(new LearningSystemManager());
         panel.add(takeQuiz);
 
         viewGradedQuiz = new JButton("View Graded Quiz");
         viewGradedQuiz.setBounds(80, 80, 250, 25);
-        viewGradedQuiz.addActionListener(new Main());
+        viewGradedQuiz.addActionListener(new LearningSystemManager());
         panel.add(viewGradedQuiz);
 
         editAccount = new JButton("Edit Account");
         editAccount.setBounds(80, 110, 250, 25);
-        editAccount.addActionListener(new Main());
+        editAccount.addActionListener(new LearningSystemManager());
         panel.add(editAccount);
 
         logout = new JButton("Logout");
         logout.setBounds(80, 140, 250, 25);
-        logout.addActionListener(new Main());
+        logout.addActionListener(new LearningSystemManager());
         panel.add(logout);
 
         panel.setLayout(null);
@@ -358,7 +361,7 @@ public class Main implements ActionListener {
 
         loginButton = new JButton("Save and Update Account");
         loginButton.setBounds(30, 150, 200, 25);
-        loginButton.addActionListener(new Main());
+        loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
 
@@ -396,7 +399,7 @@ public class Main implements ActionListener {
 
         loginButton = new JButton("Login");
         loginButton.setBounds(30, 120, 80, 25);
-        loginButton.addActionListener(new Main());
+        loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
 
@@ -434,17 +437,11 @@ public class Main implements ActionListener {
 
         loginButton = new JButton("Login");
         loginButton.setBounds(30, 120, 80, 25);
-        loginButton.addActionListener(new Main());
+        loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
 
         frame.setVisible(true);
     }
-
-
-    //performing actions to switch from screens
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    
 }
