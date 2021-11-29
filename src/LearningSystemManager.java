@@ -33,6 +33,9 @@ public class LearningSystemManager implements ActionListener {
     public static JButton createQuiz;
     public static JLabel nameOfQuizLabel;
     public static JTextField nameOfQuizText;
+    public static JLabel formatOfQuizLabel;
+    public static JButton formatOfQuiz1;
+    public static JButton formatOfQuiz2;
     public static JButton editQuiz;
     public static JButton deleteQuiz;
     public static JButton viewStudentQuizSubmissions;
@@ -46,13 +49,14 @@ public class LearningSystemManager implements ActionListener {
 
         //teacherLogIn(); //Screen for teacher login
         //studentLogIn(); // Screen for student login
-        mainMenu();
+        //mainMenu();
         //createTeacher();
         //createStudent();
         //teacherMenu();
         //addCourse();
         //teacherQuizMenu();
         //editAccount();
+        createQuiz();
     }
 
     public static void mainMenu() {
@@ -384,9 +388,22 @@ public class LearningSystemManager implements ActionListener {
         panel.add(nameOfQuizLabel);
 
         nameOfQuizText = new JTextField(20);
-        nameOfQuizText.setBounds(100, 50, 165, 25);
+        nameOfQuizText.setBounds(120, 50, 125, 25);
         panel.add(nameOfQuizText);
 
+        formatOfQuizLabel = new JLabel("Format of Quiz:");
+        formatOfQuizLabel.setBounds(20, 90, 150, 25);
+        panel.add(formatOfQuizLabel);
+
+        formatOfQuiz1 = new JButton("Multiple-Choice");
+        formatOfQuiz1.setBounds(80, 130, 190, 25);
+        formatOfQuiz1.addActionListener(new LearningSystemManager());
+        panel.add(formatOfQuiz1);
+
+        formatOfQuiz2 = new JButton("True/False");
+        formatOfQuiz2.setBounds(80, 160, 190, 25);
+        formatOfQuiz2.addActionListener(new LearningSystemManager());
+        panel.add(formatOfQuiz2);
 
         panel.setLayout(null);
         frame.setVisible(true);
