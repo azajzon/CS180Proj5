@@ -37,6 +37,7 @@ public class LearningSystemManager implements ActionListener {
     public static JButton formatOfQuiz1;
     public static JButton formatOfQuiz2;
     public static JButton editQuiz;
+    public static JLabel courseToEditLabel;
     public static JButton deleteQuiz;
     public static JButton viewStudentQuizSubmissions;
     public static JButton takeQuiz;
@@ -47,7 +48,7 @@ public class LearningSystemManager implements ActionListener {
 
     public static void main(String[] args) {
 
-        //teacherLogIn(); //Screen for teacher login
+        teacherLogIn(); //Screen for teacher login
         //studentLogIn(); // Screen for student login
         //mainMenu();
         //createTeacher();
@@ -56,7 +57,10 @@ public class LearningSystemManager implements ActionListener {
         //addCourse();
         //teacherQuizMenu();
         //editAccount();
-        createQuiz();
+        //createQuiz();
+        //editQuiz();
+        //accountCreatedTeacher();
+
     }
 
     public static void mainMenu() {
@@ -68,11 +72,11 @@ public class LearningSystemManager implements ActionListener {
 
 
         lsmTool = new JLabel("Welcome to Learning System Management Tool!");
-        lsmTool.setBounds(80, 20, 500, 25);
+        lsmTool.setBounds(50, 20, 500, 25);
         panel.add(lsmTool);
 
         createTeacher = new JButton("Create Teacher");
-        createTeacher.setBounds(110, 50, 150, 25);
+        createTeacher.setBounds(120, 50, 150, 25);
         createTeacher.addActionListener(new LearningSystemManager());
         panel.add(createTeacher);
 
@@ -83,7 +87,7 @@ public class LearningSystemManager implements ActionListener {
         });
 
         createStudent = new JButton("Create Student");
-        createStudent.setBounds(110, 80, 150, 25);
+        createStudent.setBounds(120, 80, 150, 25);
         createStudent.addActionListener(new LearningSystemManager());
         panel.add(createStudent);
 
@@ -94,7 +98,7 @@ public class LearningSystemManager implements ActionListener {
         });
 
         loginTeacher = new JButton("Login Teacher");
-        loginTeacher.setBounds(110, 110, 150, 25);
+        loginTeacher.setBounds(120, 110, 150, 25);
         loginTeacher.addActionListener(new LearningSystemManager());
         panel.add(loginTeacher);
 
@@ -105,7 +109,7 @@ public class LearningSystemManager implements ActionListener {
         });
 
         loginStudent = new JButton("Login Student");
-        loginStudent.setBounds(110, 140, 150, 25);
+        loginStudent.setBounds(120, 140, 150, 25);
         loginStudent.addActionListener(new LearningSystemManager());
         panel.add(loginStudent);
 
@@ -116,7 +120,7 @@ public class LearningSystemManager implements ActionListener {
         });
 
         saveButton = new JButton("Save and Exit");
-        saveButton.setBounds(110, 170, 150, 25);
+        saveButton.setBounds(120, 170, 150, 25);
         saveButton.addActionListener(new LearningSystemManager());
         panel.add(saveButton);
 
@@ -142,7 +146,7 @@ public class LearningSystemManager implements ActionListener {
         panel.setLayout(null);
 
         welcomeLabel = new JLabel("Create a teacher account");
-        welcomeLabel.setBounds(80, 20, 200, 25);
+        welcomeLabel.setBounds(120, 20, 200, 25);
         panel.add(welcomeLabel);
 
         nameLabel = new JLabel("First & Last Name:");
@@ -169,8 +173,8 @@ public class LearningSystemManager implements ActionListener {
         passText.setBounds(150, 110, 165, 25);
         panel.add(passText);
 
-        createAccountButton = new JButton("Create");
-        createAccountButton.setBounds(30, 150, 80, 25);
+        createAccountButton = new JButton("Create Account");
+        createAccountButton.setBounds(120, 150, 150, 25);
         createAccountButton.addActionListener(new LearningSystemManager());
         panel.add(createAccountButton);
 
@@ -193,11 +197,11 @@ public class LearningSystemManager implements ActionListener {
         panel.setLayout(null);
 
         welcomeLabel = new JLabel("Account successfully created!");
-        welcomeLabel.setBounds(80, 20, 200, 25);
+        welcomeLabel.setBounds(110, 20, 200, 25);
         panel.add(welcomeLabel);
 
         loginButton = new JButton("Log In");
-        loginButton.setBounds(30, 150, 80, 25);
+        loginButton.setBounds(150, 70, 90, 25);
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
@@ -223,7 +227,7 @@ public class LearningSystemManager implements ActionListener {
         panel.setLayout(null);
 
         welcomeLabel = new JLabel("Welcome teachers!");
-        welcomeLabel.setBounds(80, 20, 150, 25);
+        welcomeLabel.setBounds(140, 20, 150, 25);
         panel.add(welcomeLabel);
 
         userLabel = new JLabel("Username:");
@@ -243,7 +247,7 @@ public class LearningSystemManager implements ActionListener {
         panel.add(passText);
 
         loginButton = new JButton("Login");
-        loginButton.setBounds(30, 120, 80, 25);
+        loginButton.setBounds(150, 120, 80, 25);
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
@@ -357,6 +361,12 @@ public class LearningSystemManager implements ActionListener {
         editQuiz.addActionListener(new LearningSystemManager());
         panel.add(editQuiz);
 
+        editQuiz.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editQuiz();
+            }
+        });
+
         deleteQuiz = new JButton("Delete Quiz");
         deleteQuiz.setBounds(80, 110, 250, 25);
         deleteQuiz.addActionListener(new LearningSystemManager());
@@ -380,7 +390,7 @@ public class LearningSystemManager implements ActionListener {
         frame.add(panel);
 
         lsmTool = new JLabel("Create a Quiz");
-        lsmTool.setBounds(90, 20, 500, 25);
+        lsmTool.setBounds(130, 20, 500, 25);
         panel.add(lsmTool);
 
         nameOfQuizLabel = new JLabel("Name of Quiz:");
@@ -407,6 +417,29 @@ public class LearningSystemManager implements ActionListener {
 
         panel.setLayout(null);
         frame.setVisible(true);
+    }
+
+    public static void editQuiz() {
+        frame = new JFrame();
+        panel = new JPanel();
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+
+        lsmTool = new JLabel("Edit a Quiz");
+        lsmTool.setBounds(160, 20, 500, 25);
+        panel.add(lsmTool);
+
+        courseToEditLabel = new JLabel("Which course do you want to edit quiz from?");
+        courseToEditLabel.setBounds(20, 50, 280, 25);
+        panel.add(courseToEditLabel);
+
+
+
+
+        panel.setLayout(null);
+        frame.setVisible(true);
+
     }
 
     public static void createStudent() {
