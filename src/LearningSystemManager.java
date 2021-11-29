@@ -31,6 +31,8 @@ public class LearningSystemManager implements ActionListener {
     public static JTextField courseText;
     public static JButton courseEnter;
     public static JButton createQuiz;
+    public static JLabel nameOfQuizLabel;
+    public static JTextField nameOfQuizText;
     public static JButton editQuiz;
     public static JButton deleteQuiz;
     public static JButton viewStudentQuizSubmissions;
@@ -314,6 +316,12 @@ public class LearningSystemManager implements ActionListener {
         courseEnter.addActionListener(new LearningSystemManager());
         panel.add(courseEnter);
 
+        courseEnter.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                teacherQuizMenu();
+            }
+        });
+
         panel.setLayout(null);
         frame.setVisible(true);
     }
@@ -334,6 +342,12 @@ public class LearningSystemManager implements ActionListener {
         createQuiz.addActionListener(new LearningSystemManager());
         panel.add(createQuiz);
 
+        createQuiz.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                createQuiz();
+            }
+        });
+
         editQuiz = new JButton("Edit Quiz");
         editQuiz.setBounds(80, 80, 250, 25);
         editQuiz.addActionListener(new LearningSystemManager());
@@ -348,6 +362,30 @@ public class LearningSystemManager implements ActionListener {
         viewStudentQuizSubmissions.setBounds(80, 140, 250, 25);
         viewStudentQuizSubmissions.addActionListener(new LearningSystemManager());
         panel.add(viewStudentQuizSubmissions);
+
+
+        panel.setLayout(null);
+        frame.setVisible(true);
+    }
+
+    public static void createQuiz() {
+        frame = new JFrame();
+        panel = new JPanel();
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+
+        lsmTool = new JLabel("Create a Quiz");
+        lsmTool.setBounds(90, 20, 500, 25);
+        panel.add(lsmTool);
+
+        nameOfQuizLabel = new JLabel("Name of Quiz:");
+        nameOfQuizLabel.setBounds(20, 50, 150, 25);
+        panel.add(nameOfQuizLabel);
+
+        nameOfQuizText = new JTextField(20);
+        nameOfQuizText.setBounds(100, 50, 165, 25);
+        panel.add(nameOfQuizText);
 
 
         panel.setLayout(null);
