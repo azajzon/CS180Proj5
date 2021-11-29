@@ -14,6 +14,7 @@ public class LearningSystemManager implements ActionListener {
     public static JTextField userText;
     public static JTextField passText;
     public static JButton loginButton;
+    public static JButton createAccountButton;
     public static JLabel welcomeLabel;
     public static JLabel lsmTool;
     public static JButton createTeacher;
@@ -156,11 +157,45 @@ public class LearningSystemManager implements ActionListener {
         passText.setBounds(150, 110, 165, 25);
         panel.add(passText);
 
-        loginButton = new JButton("Create");
+        createAccountButton = new JButton("Create");
+        createAccountButton.setBounds(30, 150, 80, 25);
+        createAccountButton.addActionListener(new LearningSystemManager());
+        panel.add(createAccountButton);
+
+        createAccountButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                accountCreatedTeacher();
+            }
+        });
+
+        frame.setVisible(true);
+
+    }
+
+    public static void accountCreatedTeacher() {
+        frame = new JFrame();
+        panel = new JPanel();
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+        panel.setLayout(null);
+
+        welcomeLabel = new JLabel("Account successfully created!");
+        welcomeLabel.setBounds(80, 20, 200, 25);
+        panel.add(welcomeLabel);
+
+        loginButton = new JButton("Log In");
         loginButton.setBounds(30, 150, 80, 25);
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                logInTeacher();
+            }
+        });
+
+        panel.setLayout(null);
 
         frame.setVisible(true);
 
@@ -200,6 +235,11 @@ public class LearningSystemManager implements ActionListener {
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                teacherMenu();
+            }
+        });
 
         frame.setVisible(true);
 
@@ -220,6 +260,12 @@ public class LearningSystemManager implements ActionListener {
         yesCourse.setBounds(120, 50, 80, 25);
         yesCourse.addActionListener(new LearningSystemManager());
         panel.add(yesCourse);
+
+        yesCourse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                addCourse();
+            }
+        });
 
         noCourse = new JButton("No");
         noCourse.setBounds(120, 80, 80, 25);
@@ -333,13 +379,45 @@ public class LearningSystemManager implements ActionListener {
         passText.setBounds(150, 110, 165, 25);
         panel.add(passText);
 
-        loginButton = new JButton("Login");
+        createAccountButton = new JButton("Login");
+        createAccountButton.setBounds(30, 150, 80, 25);
+        createAccountButton.addActionListener(new LearningSystemManager());
+        panel.add(createAccountButton);
+
+        createAccountButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                accountCreatedStudent();
+            }
+        });
+
+        frame.setVisible(true);
+    }
+
+    public static void accountCreatedStudent() {
+        frame = new JFrame();
+        panel = new JPanel();
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+        panel.setLayout(null);
+
+        welcomeLabel = new JLabel("Account successfully created! Please log back in.");
+        welcomeLabel.setBounds(80, 20, 200, 25);
+        panel.add(welcomeLabel);
+
+        loginButton = new JButton("Log In");
         loginButton.setBounds(30, 150, 80, 25);
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                logInStudent();
+            }
+        });
 
         frame.setVisible(true);
+
     }
 
     public static void logInStudent() {
