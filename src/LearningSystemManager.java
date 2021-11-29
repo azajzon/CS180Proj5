@@ -94,7 +94,7 @@ public class LearningSystemManager implements ActionListener {
 
         loginTeacher.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                logInTeacher();
+                teacherLogIn();
             }
         });
 
@@ -105,7 +105,7 @@ public class LearningSystemManager implements ActionListener {
 
         loginStudent.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                logInStudent();
+                studentLogIn();
             }
         });
 
@@ -113,6 +113,12 @@ public class LearningSystemManager implements ActionListener {
         saveButton.setBounds(110, 170, 150, 25);
         saveButton.addActionListener(new LearningSystemManager());
         panel.add(saveButton);
+
+        /*saveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //call the save data methods
+            }
+        });*/
 
         panel.setLayout(null);
 
@@ -191,7 +197,7 @@ public class LearningSystemManager implements ActionListener {
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                logInTeacher();
+                teacherLogIn();
             }
         });
 
@@ -201,7 +207,7 @@ public class LearningSystemManager implements ActionListener {
 
     }
 
-    public static void logInTeacher() {
+    public static void teacherLogIn() {
         frame = new JFrame();
         panel = new JPanel();
         frame.setSize(400, 300);
@@ -210,28 +216,28 @@ public class LearningSystemManager implements ActionListener {
 
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Log In to your teacher account");
-        welcomeLabel.setBounds(80, 20, 200, 25);
+        welcomeLabel = new JLabel("Welcome teachers!");
+        welcomeLabel.setBounds(80, 20, 150, 25);
         panel.add(welcomeLabel);
 
         userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 80, 80, 25);
+        userLabel.setBounds(20, 50, 80, 25);
         panel.add(userLabel);
 
-        userText = new JTextField(20);
-        userText.setBounds(150, 80, 165, 25);
-        panel.add(userText);
-
         passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 110, 80, 25);
+        passwordLabel.setBounds(20, 80, 80, 25);
         panel.add(passwordLabel);
 
+        userText = new JTextField(20);
+        userText.setBounds(100, 50, 165, 25);
+        panel.add(userText);
+
         passText = new JTextField(20);
-        passText.setBounds(150, 110, 165, 25);
+        passText.setBounds(100, 80, 165, 25);
         panel.add(passText);
 
-        loginButton = new JButton("Log In");
-        loginButton.setBounds(30, 150, 80, 25);
+        loginButton = new JButton("Login");
+        loginButton.setBounds(30, 120, 80, 25);
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
@@ -242,7 +248,6 @@ public class LearningSystemManager implements ActionListener {
         });
 
         frame.setVisible(true);
-
     }
 
     public static void teacherMenu() {
@@ -272,6 +277,13 @@ public class LearningSystemManager implements ActionListener {
         noCourse.addActionListener(new LearningSystemManager());
         panel.add(noCourse);
 
+        /* what should happen if teacher doesn't want to create a course
+        noCourse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        */
 
         panel.setLayout(null);
         frame.setVisible(true);
@@ -412,7 +424,7 @@ public class LearningSystemManager implements ActionListener {
 
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                logInStudent();
+                studentLogIn();
             }
         });
 
@@ -420,7 +432,7 @@ public class LearningSystemManager implements ActionListener {
 
     }
 
-    public static void logInStudent() {
+    public static void studentLogIn() {
         frame = new JFrame();
         panel = new JPanel();
         frame.setSize(400, 300);
@@ -429,34 +441,41 @@ public class LearningSystemManager implements ActionListener {
 
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Log In to your student account");
-        welcomeLabel.setBounds(80, 20, 200, 25);
+        welcomeLabel = new JLabel("Welcome students!");
+        welcomeLabel.setBounds(80, 20, 150, 25);
         panel.add(welcomeLabel);
 
         userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 80, 80, 25);
+        userLabel.setBounds(20, 50, 80, 25);
         panel.add(userLabel);
 
-        userText = new JTextField(20);
-        userText.setBounds(150, 80, 165, 25);
-        panel.add(userText);
-
         passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 110, 80, 25);
+        passwordLabel.setBounds(20, 80, 80, 25);
         panel.add(passwordLabel);
 
+        userText = new JTextField(20);
+        userText.setBounds(100, 50, 165, 25);
+        panel.add(userText);
+
         passText = new JTextField(20);
-        passText.setBounds(150, 110, 165, 25);
+        passText.setBounds(100, 80, 165, 25);
         panel.add(passText);
 
         loginButton = new JButton("Login");
-        loginButton.setBounds(30, 150, 80, 25);
+        loginButton.setBounds(30, 120, 80, 25);
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                studentMenu();
+            }
+        });
 
         frame.setVisible(true);
     }
+
+
 
     public static void studentMenu() {
         frame = new JFrame();
@@ -483,6 +502,12 @@ public class LearningSystemManager implements ActionListener {
         editAccount.setBounds(80, 110, 250, 25);
         editAccount.addActionListener(new LearningSystemManager());
         panel.add(editAccount);
+
+        editAccount.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editAccount();
+            }
+        });
 
         logout = new JButton("Logout");
         logout.setBounds(80, 140, 250, 25);
@@ -539,81 +564,6 @@ public class LearningSystemManager implements ActionListener {
 
         frame.setVisible(true);
 
-    }
-    public static void teacherLogIn() {
-        frame = new JFrame();
-        panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
-
-        panel.setLayout(null);
-
-        welcomeLabel = new JLabel("Welcome teachers!");
-        welcomeLabel.setBounds(80, 20, 150, 25);
-        panel.add(welcomeLabel);
-
-        userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 50, 80, 25);
-        panel.add(userLabel);
-
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 80, 80, 25);
-        panel.add(passwordLabel);
-
-        userText = new JTextField(20);
-        userText.setBounds(100, 50, 165, 25);
-        panel.add(userText);
-
-        passText = new JTextField(20);
-        passText.setBounds(100, 80, 165, 25);
-        panel.add(passText);
-
-        loginButton = new JButton("Login");
-        loginButton.setBounds(30, 120, 80, 25);
-        loginButton.addActionListener(new LearningSystemManager());
-        panel.add(loginButton);
-
-
-        frame.setVisible(true);
-    }
-
-    public static void studentLogIn() {
-        frame = new JFrame();
-        panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
-
-        panel.setLayout(null);
-
-        welcomeLabel = new JLabel("Welcome students!");
-        welcomeLabel.setBounds(80, 20, 150, 25);
-        panel.add(welcomeLabel);
-
-        userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 50, 80, 25);
-        panel.add(userLabel);
-
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 80, 80, 25);
-        panel.add(passwordLabel);
-
-        userText = new JTextField(20);
-        userText.setBounds(100, 50, 165, 25);
-        panel.add(userText);
-
-        passText = new JTextField(20);
-        passText.setBounds(100, 80, 165, 25);
-        panel.add(passText);
-
-        loginButton = new JButton("Login");
-        loginButton.setBounds(30, 120, 80, 25);
-        loginButton.addActionListener(new LearningSystemManager());
-        panel.add(loginButton);
-
-
-        frame.setVisible(true);
     }
 
     @Override
