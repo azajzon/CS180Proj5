@@ -66,13 +66,13 @@ public class LearningSystemManager implements ActionListener {
 
         //teacherLogIn(); //Screen for teacher login
         //studentLogIn(); // Screen for student login
-        //mainMenu();
+        mainMenu();
         //createTeacher();
         //createStudent();
         //teacherMenu();
-        addCourse();
+        //addCourse();
         //teacherQuizMenu();
-        //editAccount();
+        //editStudentAccount();
         //createQuiz();
         //editQuiz();
         //accountCreatedTeacher();
@@ -429,7 +429,7 @@ public class LearningSystemManager implements ActionListener {
         panel.add(viewStudentQuizSubmissions);
 
         backButton = new JButton("Back");
-        backButton.setBounds(30, 120, 110, 25);
+        backButton.setBounds(30, 180, 110, 25);
         backButton.addActionListener(new LearningSystemManager());
         panel.add(backButton);
 
@@ -485,6 +485,17 @@ public class LearningSystemManager implements ActionListener {
         formatOfQuiz2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 trueOrFalseQuiz();
+            }
+        });
+
+        backButton = new JButton("Back");
+        backButton.setBounds(30, 190, 110, 25);
+        backButton.addActionListener(new LearningSystemManager());
+        panel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                teacherQuizMenu();
             }
         });
 
@@ -571,6 +582,17 @@ public class LearningSystemManager implements ActionListener {
         addQuestion.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addAnotherQuestion();
+            }
+        });
+
+        backButton = new JButton("Back");
+        backButton.setBounds(30, 290, 110, 25);
+        backButton.addActionListener(new LearningSystemManager());
+        panel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                createQuiz();
             }
         });
 
@@ -701,6 +723,7 @@ public class LearningSystemManager implements ActionListener {
         panel.add(lsmTool);
 
         // dropdown feature to show list of courses
+        /*
         String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
 
         String getCourse = (String) JOptionPane.showInputDialog(
@@ -711,6 +734,7 @@ public class LearningSystemManager implements ActionListener {
                 null,
                 optionsToChoose,
                 optionsToChoose[0]);
+        */
 
         panel.setLayout(null);
         frame.setVisible(true);
@@ -754,8 +778,8 @@ public class LearningSystemManager implements ActionListener {
         passText.setBounds(150, 110, 165, 25);
         panel.add(passText);
 
-        createAccountButton = new JButton("Login");
-        createAccountButton.setBounds(30, 150, 80, 25);
+        createAccountButton = new JButton("Create");
+        createAccountButton.setBounds(170, 150, 90, 25);
         createAccountButton.addActionListener(new LearningSystemManager());
         panel.add(createAccountButton);
 
@@ -764,6 +788,18 @@ public class LearningSystemManager implements ActionListener {
                 accountCreatedStudent();
             }
         });
+
+        backButton = new JButton("Back");
+        backButton.setBounds(70, 150, 90, 25);
+        backButton.addActionListener(new LearningSystemManager());
+        panel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainMenu();
+            }
+        });
+
 
         frame.setVisible(true);
     }
@@ -776,12 +812,12 @@ public class LearningSystemManager implements ActionListener {
         frame.add(panel);
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Account successfully created! Please log back in.");
+        welcomeLabel = new JLabel("Account successfully created!");
         welcomeLabel.setBounds(80, 20, 200, 25);
         panel.add(welcomeLabel);
 
         loginButton = new JButton("Log In");
-        loginButton.setBounds(30, 150, 80, 25);
+        loginButton.setBounds(130, 60, 80, 25);
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
@@ -825,7 +861,7 @@ public class LearningSystemManager implements ActionListener {
         panel.add(passText);
 
         loginButton = new JButton("Login");
-        loginButton.setBounds(30, 120, 80, 25);
+        loginButton.setBounds(130, 120, 80, 25);
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
 
@@ -834,6 +870,18 @@ public class LearningSystemManager implements ActionListener {
                 studentMenu();
             }
         });
+
+        backButton = new JButton("Back");
+        backButton.setBounds(30, 120, 80, 25);
+        backButton.addActionListener(new LearningSystemManager());
+        panel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainMenu();
+            }
+        });
+
 
         frame.setVisible(true);
     }
@@ -856,10 +904,22 @@ public class LearningSystemManager implements ActionListener {
         takeQuiz.addActionListener(new LearningSystemManager());
         panel.add(takeQuiz);
 
+        takeQuiz.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                takeQuiz();
+            }
+        });
+
         viewGradedQuiz = new JButton("View Graded Quiz");
         viewGradedQuiz.setBounds(80, 80, 250, 25);
         viewGradedQuiz.addActionListener(new LearningSystemManager());
         panel.add(viewGradedQuiz);
+
+        viewGradedQuiz.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewGradedQuiz();
+            }
+        });
 
         editAccount = new JButton("Edit Account");
         editAccount.setBounds(80, 110, 250, 25);
@@ -868,7 +928,7 @@ public class LearningSystemManager implements ActionListener {
 
         editAccount.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                editAccount();
+                editStudentAccount();
             }
         });
 
@@ -877,11 +937,54 @@ public class LearningSystemManager implements ActionListener {
         logout.addActionListener(new LearningSystemManager());
         panel.add(logout);
 
+        //TODO what should happen when the student log outs
+        /*
+        logout.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        */
+
         panel.setLayout(null);
         frame.setVisible(true);
     }
 
-    public static void editAccount() {
+    public static void takeQuiz() {
+        frame = new JFrame();
+        panel = new JPanel();
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+
+        lsmTool = new JLabel("Take a Quiz");
+        lsmTool.setBounds(160, 20, 500, 25);
+        panel.add(lsmTool);
+
+        // dropdown feature to show list of courses so student can choose which course they want to take a quiz from
+        /*
+        String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+
+        String getCourse = (String) JOptionPane.showInputDialog(
+                null,
+                "Which course would you like to take or view a quiz from?",
+                "Choose Course",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                optionsToChoose,
+                optionsToChoose[0]);
+        */
+
+        panel.setLayout(null);
+        frame.setVisible(true);
+
+    }
+
+    public static void viewGradedQuiz() {
+
+    }
+
+    public static void editStudentAccount() {
         frame = new JFrame();
         panel = new JPanel();
         frame.setSize(400, 300);
@@ -893,7 +996,6 @@ public class LearningSystemManager implements ActionListener {
         welcomeLabel = new JLabel("Edit Student Account");
         welcomeLabel.setBounds(80, 20, 200, 25);
         panel.add(welcomeLabel);
-
 
         nameLabel = new JLabel("First & Last Name:");
         nameLabel.setBounds(20, 50, 150, 25);
@@ -923,6 +1025,26 @@ public class LearningSystemManager implements ActionListener {
         loginButton.setBounds(30, 150, 200, 25);
         loginButton.addActionListener(new LearningSystemManager());
         panel.add(loginButton);
+
+        //TODO what should happen when the student save and updates their information (call the specific method that saves the updated data)
+        /*
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        */
+
+        backButton = new JButton("Back");
+        backButton.setBounds(30, 180, 110, 25);
+        backButton.addActionListener(new LearningSystemManager());
+        panel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                studentMenu();
+            }
+        });
 
 
         frame.setVisible(true);
