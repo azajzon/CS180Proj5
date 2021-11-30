@@ -528,7 +528,8 @@ public class Main implements ActionListener {
         courseToEditLabel.setBounds(20, 50, 280, 25);
         panel.add(courseToEditLabel);
 
-        // are we displaying the list of courses as buttons or just text??
+ 
+        //DROP DOWN feature
 
         panel.setLayout(null);
         frame.setVisible(true);
