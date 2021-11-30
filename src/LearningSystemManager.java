@@ -36,6 +36,20 @@ public class LearningSystemManager implements ActionListener {
     public static JLabel formatOfQuizLabel;
     public static JButton formatOfQuiz1;
     public static JButton formatOfQuiz2;
+    public static JLabel questionOne;
+    public static JTextField questionOneText;
+    public static JLabel optionOne;
+    public static JTextField optionOneText;
+    public static JLabel optionTwo;
+    public static JTextField optionTwoText;
+    public static JLabel optionThree;
+    public static JTextField optionThreeText;
+    public static JLabel optionFour;
+    public static JTextField optionFourText;
+    public static JLabel correctAnsChoice;
+    public static JTextField correctAnsChoiceText;
+    public static JLabel pointValue;
+    public static JTextField pointValueText;
     public static JButton editQuiz;
     public static JLabel courseToEditLabel;
     public static JButton deleteQuiz;
@@ -48,9 +62,9 @@ public class LearningSystemManager implements ActionListener {
 
     public static void main(String[] args) {
 
-        teacherLogIn(); //Screen for teacher login
+        //teacherLogIn(); //Screen for teacher login
         //studentLogIn(); // Screen for student login
-        //mainMenu();
+        mainMenu();
         //createTeacher();
         //createStudent();
         //teacherMenu();
@@ -60,6 +74,7 @@ public class LearningSystemManager implements ActionListener {
         //createQuiz();
         //editQuiz();
         //accountCreatedTeacher();
+        //multipleChoiceQuiz();
 
     }
 
@@ -410,10 +425,79 @@ public class LearningSystemManager implements ActionListener {
         formatOfQuiz1.addActionListener(new LearningSystemManager());
         panel.add(formatOfQuiz1);
 
+        formatOfQuiz1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                multipleChoiceQuiz();
+            }
+        });
+
         formatOfQuiz2 = new JButton("True/False");
         formatOfQuiz2.setBounds(80, 160, 190, 25);
         formatOfQuiz2.addActionListener(new LearningSystemManager());
         panel.add(formatOfQuiz2);
+
+        panel.setLayout(null);
+        frame.setVisible(true);
+    }
+
+    public static void multipleChoiceQuiz() {
+        frame = new JFrame();
+        panel = new JPanel();
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+
+        lsmTool = new JLabel("Name of Quiz: "); // + show name of quiz);
+        lsmTool.setBounds(130, 20, 500, 25);
+        panel.add(lsmTool);
+
+        questionOne = new JLabel("Type in Question 1:");
+        questionOne.setBounds(20, 50, 130, 25);
+        panel.add(questionOne);
+
+        questionOneText = new JTextField(20);
+        questionOneText.setBounds(210, 50, 165, 25);
+        panel.add(questionOneText);
+
+        optionOne = new JLabel("Option 1:");
+        optionOne.setBounds(20, 80, 80, 25);
+        panel.add(optionOne);
+
+        optionOneText = new JTextField(20);
+        optionOneText.setBounds(210, 80, 165, 25);
+        panel.add(optionOneText);
+
+        optionTwo = new JLabel("Option 2:");
+        optionTwo.setBounds(20, 110, 80, 25);
+        panel.add(optionTwo);
+
+        optionTwoText = new JTextField(20);
+        optionTwoText.setBounds(210, 110, 165, 25);
+        panel.add(optionTwoText);
+
+        optionThree = new JLabel("Option 3:");
+        optionThree.setBounds(20, 140, 80, 25);
+        panel.add(optionThree);
+
+        optionThreeText = new JTextField(20);
+        optionThreeText.setBounds(210, 140, 165, 25);
+        panel.add(optionThreeText);
+
+        optionFour = new JLabel("Option 4:");
+        optionFour.setBounds(20, 170, 80, 25);
+        panel.add(optionFour);
+
+        optionFourText = new JTextField(20);
+        optionFourText.setBounds(210, 170, 165, 25);
+        panel.add(optionFourText);
+
+        correctAnsChoice = new JLabel("Enter correct answer choice:");
+        correctAnsChoice.setBounds(20, 200, 250, 25);
+        panel.add(correctAnsChoice);
+
+        correctAnsChoiceText = new JTextField(20);
+        correctAnsChoiceText.setBounds(210, 200, 165, 25);
+        panel.add(correctAnsChoiceText);
 
         panel.setLayout(null);
         frame.setVisible(true);
@@ -434,8 +518,7 @@ public class LearningSystemManager implements ActionListener {
         courseToEditLabel.setBounds(20, 50, 280, 25);
         panel.add(courseToEditLabel);
 
-
-
+        // are we displaying the list of courses as buttons or just text??
 
         panel.setLayout(null);
         frame.setVisible(true);
