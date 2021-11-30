@@ -58,6 +58,7 @@ public class LearningSystemManager implements ActionListener {
     public static JButton editAccount;
     public static JButton logout;
     public static JButton addQuestion;
+    public static JButton backButton;
 
 
 
@@ -69,14 +70,14 @@ public class LearningSystemManager implements ActionListener {
         //createTeacher();
         //createStudent();
         //teacherMenu();
-        //addCourse();
+        addCourse();
         //teacherQuizMenu();
         //editAccount();
         //createQuiz();
         //editQuiz();
         //accountCreatedTeacher();
         //multipleChoiceQuiz();
-        trueOrFalseQuiz();
+        //trueOrFalseQuiz();
 
     }
 
@@ -191,13 +192,24 @@ public class LearningSystemManager implements ActionListener {
         panel.add(passText);
 
         createAccountButton = new JButton("Create Account");
-        createAccountButton.setBounds(120, 150, 150, 25);
+        createAccountButton.setBounds(160, 150, 150, 25);
         createAccountButton.addActionListener(new LearningSystemManager());
         panel.add(createAccountButton);
 
         createAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 accountCreatedTeacher();
+            }
+        });
+
+        backButton = new JButton("Back");
+        backButton.setBounds(30, 150, 110, 25);
+        backButton.addActionListener(new LearningSystemManager());
+        panel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainMenu();
             }
         });
 
@@ -274,6 +286,17 @@ public class LearningSystemManager implements ActionListener {
             }
         });
 
+        backButton = new JButton("Back");
+        backButton.setBounds(30, 120, 110, 25);
+        backButton.addActionListener(new LearningSystemManager());
+        panel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainMenu();
+            }
+        });
+
         frame.setVisible(true);
     }
 
@@ -304,12 +327,13 @@ public class LearningSystemManager implements ActionListener {
         noCourse.addActionListener(new LearningSystemManager());
         panel.add(noCourse);
 
-        /* what should happen if teacher doesn't want to create a course
+        //if teacher doesn't want to create a course
         noCourse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                mainMenu();
             }
         });
-        */
+
 
         panel.setLayout(null);
         frame.setVisible(true);
@@ -328,15 +352,15 @@ public class LearningSystemManager implements ActionListener {
         // PATHWAY IS
 
         courseName = new JLabel("Enter Course Name:");
-        courseName.setBounds(80, 20, 200, 25);
+        courseName.setBounds(130, 20, 200, 25);
         panel.add(courseName);
 
         courseText = new JTextField(50);
-        courseText.setBounds(60, 50, 165, 25);
+        courseText.setBounds(120, 50, 165, 25);
         panel.add(courseText);
 
         courseEnter = new JButton("Create Course");
-        courseEnter.setBounds(70, 80, 140, 25);
+        courseEnter.setBounds(180, 80, 140, 25);
         courseEnter.addActionListener(new LearningSystemManager());
         panel.add(courseEnter);
 
@@ -346,6 +370,17 @@ public class LearningSystemManager implements ActionListener {
             }
         });
 
+        backButton = new JButton("Back");
+        backButton.setBounds(60, 80, 80, 25);
+        backButton.addActionListener(new LearningSystemManager());
+        panel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                teacherMenu();
+            }
+        });
+        
         panel.setLayout(null);
         frame.setVisible(true);
     }
@@ -393,6 +428,16 @@ public class LearningSystemManager implements ActionListener {
         viewStudentQuizSubmissions.addActionListener(new LearningSystemManager());
         panel.add(viewStudentQuizSubmissions);
 
+        backButton = new JButton("Back");
+        backButton.setBounds(30, 120, 110, 25);
+        backButton.addActionListener(new LearningSystemManager());
+        panel.add(backButton);
+
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                addCourse();
+            }
+        });
 
         panel.setLayout(null);
         frame.setVisible(true);
@@ -655,11 +700,17 @@ public class LearningSystemManager implements ActionListener {
         lsmTool.setBounds(160, 20, 500, 25);
         panel.add(lsmTool);
 
-        courseToEditLabel = new JLabel("Which course do you want to edit quiz from?");
-        courseToEditLabel.setBounds(20, 50, 280, 25);
-        panel.add(courseToEditLabel);
+        // dropdown feature to show list of courses
+        String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
 
-        // are we displaying the list of courses as buttons or just text??
+        String getCourse = (String) JOptionPane.showInputDialog(
+                null,
+                "Which course do you want to edit quiz from?",
+                "Choose Course",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                optionsToChoose,
+                optionsToChoose[0]);
 
         panel.setLayout(null);
         frame.setVisible(true);
