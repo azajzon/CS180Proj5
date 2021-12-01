@@ -5,79 +5,143 @@ import java.awt.event.ActionListener;
 public class LearningSystemManager implements ActionListener {
     public static JFrame frame;
     public static JPanel panel;
-    public static JLabel userLabel;
-    public static JLabel passwordLabel;
-    public static JTextField userText;
-    public static JTextField passText;
-    public static JButton loginButton;
-    public static JButton createAccountButton;
-    public static JLabel welcomeLabel;
-    public static JLabel lsmTool;
-    public static JButton createTeacher;
-    public static JButton createStudent;
-    public static JButton loginTeacher;
-    public static JButton loginStudent;
+    public static JLabel lsmToolLabel;
+
+    //TEACHER VARIABLES
+    public static JButton createTeacherButton;
+    public static JButton createStudentButton;
+    public static JButton loginTeacherButton;
+    public static JButton loginStudentButton;
     public static JButton saveButton;
-    public static JLabel nameLabel;
-    public static JTextField nameText;
-    public static JLabel addCourse;
-    public static JButton yesCourse;
-    public static JButton noCourse;
-    public static JLabel courseName;
-    public static JTextField courseText;
-    public static JButton courseEnter;
-    public static JButton createQuiz;
+    public static JLabel createTeacherLabel;
+    public static JLabel teacherNameLabel;
+    public static JTextField teacherNameText;
+    public static JLabel teacherUsernameLabel;
+    public static JTextField teacherUsernameText;
+    public static JLabel teacherPasswordLabel;
+    public static JTextField teacherPasswordText;
+    public static JButton createTeacherAccountButton;
+    public static JButton createTeacherAccountBackButton;
+    public static JLabel teacherAccountCreatedLabel;
+    public static JButton teacherLogInButton;
+    public static JLabel welcomeTeachersLabel;
+    public static JLabel teacherLogInUsernameLabel;
+    public static JLabel teacherLogInPasswordLabel;
+    public static JTextField teacherLogInUsernameText;
+    public static JTextField teacherLogInPasswordText;
+    public static JButton teacherLogInBackButton;
+    public static JLabel addCourseLabel;
+    public static JButton yesCourseButton;
+    public static JButton noCourseButton;
+    public static JLabel enterCourseNameLabel;
+    public static JTextField enterCourseNameText;
+    public static JButton createCourseButton;
+    public static JButton addCourseBackButton;
+    public static JButton createQuizButton;
+    public static JButton editQuizButton;
+    public static JButton deleteQuizButton;
+    public static JButton viewStudentQuizSubmissionsButton;
+    public static JButton editTeacherAccountButton;
+    public static JButton teacherQuizMenuBackButton;
     public static JLabel nameOfQuizLabel;
     public static JTextField nameOfQuizText;
     public static JLabel formatOfQuizLabel;
-    public static JButton formatOfQuiz1;
-    public static JButton formatOfQuiz2;
-    public static JLabel questionOne;
-    public static JTextField questionOneText;
-    public static JLabel optionOne;
-    public static JTextField optionOneText;
-    public static JLabel optionTwo;
-    public static JTextField optionTwoText;
-    public static JLabel optionThree;
-    public static JTextField optionThreeText;
-    public static JLabel optionFour;
-    public static JTextField optionFourText;
-    public static JLabel correctAnsChoice;
-    public static JTextField correctAnsChoiceText;
-    public static JLabel pointValue;
-    public static JTextField pointValueText;
-    public static JLabel addAnotherQuestion;
-    public static JButton yesAnotherQuestion;
-    public static JButton noAnotherQuestion;
-    public static JButton editQuiz;
-    public static JLabel courseToEditLabel;
-    public static JButton deleteQuiz;
-    public static JButton viewStudentQuizSubmissions;
-    public static JButton takeQuiz;
-    public static JButton viewGradedQuiz;
-    public static JButton editAccount;
-    public static JButton logout;
-    public static JButton addQuestion;
-    public static JButton backButton;
+    public static JButton formatOfQuiz1Button;
+    public static JButton formatOfQuiz2Button;
+    public static JButton createQuizBackButton;
+    public static JLabel questionOneMCLabel;
+    public static JTextField questionOneMCText;
+    public static JLabel optionOneMCLabel;
+    public static JTextField optionOneMCText;
+    public static JLabel optionTwoMCLabel;
+    public static JTextField optionTwoMCText;
+    public static JLabel optionThreeMCLabel;
+    public static JTextField optionThreeMCText;
+    public static JLabel optionFourMCLabel;
+    public static JTextField optionFourMCText;
+    public static JLabel correctAnsChoiceMCLabel;
+    public static JTextField correctAnsChoiceMCText;
+    public static JLabel pointValueMCLabel;
+    public static JTextField pointValueMCText;
+    public static JButton addQuestionMCButton;
+    public static JButton multipleChoiceQuizBackButton;
+    public static JLabel questionOneTFLabel;
+    public static JTextField questionOneTFText;
+    public static JLabel optionOneTFLabel;
+    public static JLabel optionTwoTFLabel;
+    public static JLabel correctAnsChoiceTFLabelChoice;
+    public static JTextField correctAnsChoiceTFText;
+    public static JLabel pointValueTFLabel;
+    public static JTextField pointValueTFText;
+    public static JButton addQuestionTFButton;
+    public static JLabel addAnotherQuestionLabel;
+    public static JButton yesAnotherQuestionButton;
+    public static JButton noAnotherQuestionButton;
+    public static JLabel editTeachAccountLabel;
+    public static JLabel editedTeachNameLabel;
+    public static JTextField editedTeachNameText;
+    public static JLabel editedTeachUsernameLabel;
+    public static JTextField editedTeachUsernameText;
+    public static JLabel editedTeachPasswordLabel;
+    public static JTextField editedTeachPasswordText;
+    public static JButton updateTeachAccountButton;
+    public static JButton editTeachAccountBackButton;
 
-
+    //STUDENT VARIABLES
+    public static JLabel createStudentLabel;
+    public static JLabel studentNameLabel;
+    public static JTextField studentNameText;
+    public static JLabel studentUsernameLabel;
+    public static JTextField studentUsernameText;
+    public static JLabel studentPasswordLabel;
+    public static JTextField studentPasswordText;
+    public static JButton createStudentAccountButton;
+    public static JButton createStudentAccountBackButton;
+    public static JLabel studentAccountCreatedLabel;
+    public static JButton studentLogInButton;
+    public static JLabel welcomeStudentsLabel;
+    public static JLabel studentLogInUsernameLabel;
+    public static JTextField studentLogInUsernameText;
+    public static JLabel studentLogInPasswordLabel;
+    public static JTextField studentLogInPasswordText;
+    public static JButton studentLogInBackButton;
+    public static JButton takeQuizButton;
+    public static JButton viewGradedQuizButton;
+    public static JButton editStudentAccountButton;
+    public static JButton studentLogOutButton;
+    public static JLabel editStuAccountLabel;
+    public static JLabel editedStuNameLabel;
+    public static JTextField editedStuNameText;
+    public static JLabel editedStuUsernameLabel;
+    public static JTextField editedStuUsernameText;
+    public static JLabel editedStuPasswordLabel;
+    public static JTextField editedStuPasswordText;
+    public static JButton updateStuAccountButton;
+    public static JButton editStuAccountBackButton;
+    
 
     public static void main(String[] args) {
 
-        //teacherLogIn(); //Screen for teacher login
-        //studentLogIn(); // Screen for student login
-        mainMenu();
+        //mainMenu();
         //createTeacher();
-        //createStudent();
+        //accountCreatedTeacher();
+        //teacherLogIn();
         //teacherMenu();
         //addCourse();
         //teacherQuizMenu();
         //editStudentAccount();
         //createQuiz();
         //editQuiz();
-        //accountCreatedTeacher();
         //multipleChoiceQuiz();
         //trueOrFalseQuiz();
+        //editTeacherAccount();
+        //createStudent();
+        //accountCreatedStudent();
+        //studentLogIn();
+        //studentMenu();
+        //takeQuiz();
+        //viewGradedQuiz();
+        //editStudentAccount();
 
     }
 
@@ -88,50 +152,49 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
+        lsmToolLabel = new JLabel("Welcome to Learning System Management Tool!");
+        lsmToolLabel.setBounds(50, 20, 500, 25);
+        panel.add(lsmToolLabel);
 
-        lsmTool = new JLabel("Welcome to Learning System Management Tool!");
-        lsmTool.setBounds(50, 20, 500, 25);
-        panel.add(lsmTool);
+        createTeacherButton = new JButton("Create Teacher");
+        createTeacherButton.setBounds(120, 50, 150, 25);
+        createTeacherButton.addActionListener(new LearningSystemManager());
+        panel.add(createTeacherButton);
 
-        createTeacher = new JButton("Create Teacher");
-        createTeacher.setBounds(120, 50, 150, 25);
-        createTeacher.addActionListener(new LearningSystemManager());
-        panel.add(createTeacher);
-
-        createTeacher.addActionListener(new ActionListener() {
+        createTeacherButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 createTeacher();
             }
         });
 
-        createStudent = new JButton("Create Student");
-        createStudent.setBounds(120, 80, 150, 25);
-        createStudent.addActionListener(new LearningSystemManager());
-        panel.add(createStudent);
+        createStudentButton = new JButton("Create Student");
+        createStudentButton.setBounds(120, 80, 150, 25);
+        createStudentButton.addActionListener(new LearningSystemManager());
+        panel.add(createStudentButton);
 
-        createStudent.addActionListener(new ActionListener() {
+        createStudentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 createStudent();
             }
         });
 
-        loginTeacher = new JButton("Login Teacher");
-        loginTeacher.setBounds(120, 110, 150, 25);
-        loginTeacher.addActionListener(new LearningSystemManager());
-        panel.add(loginTeacher);
+        loginTeacherButton = new JButton("Login Teacher");
+        loginTeacherButton.setBounds(120, 110, 150, 25);
+        loginTeacherButton.addActionListener(new LearningSystemManager());
+        panel.add(loginTeacherButton);
 
-        loginTeacher.addActionListener(new ActionListener() {
+        loginTeacherButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 teacherLogIn();
             }
         });
 
-        loginStudent = new JButton("Login Student");
-        loginStudent.setBounds(120, 140, 150, 25);
-        loginStudent.addActionListener(new LearningSystemManager());
-        panel.add(loginStudent);
+        loginStudentButton = new JButton("Login Student");
+        loginStudentButton.setBounds(120, 140, 150, 25);
+        loginStudentButton.addActionListener(new LearningSystemManager());
+        panel.add(loginStudentButton);
 
-        loginStudent.addActionListener(new ActionListener() {
+        loginStudentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 studentLogIn();
             }
@@ -163,51 +226,51 @@ public class LearningSystemManager implements ActionListener {
 
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Create a teacher account");
-        welcomeLabel.setBounds(120, 20, 200, 25);
-        panel.add(welcomeLabel);
+        createTeacherLabel = new JLabel("Create a teacher account");
+        createTeacherLabel.setBounds(120, 20, 200, 25);
+        panel.add(createTeacherLabel);
 
-        nameLabel = new JLabel("First & Last Name:");
-        nameLabel.setBounds(20, 50, 150, 25);
-        panel.add(nameLabel);
+        teacherNameLabel = new JLabel("First & Last Name:");
+        teacherNameLabel.setBounds(20, 50, 150, 25);
+        panel.add(teacherNameLabel);
 
-        nameText = new JTextField(20);
-        nameText.setBounds(150, 50, 165, 25);
-        panel.add(nameText);
+        teacherNameText = new JTextField(20);
+        teacherNameText.setBounds(150, 50, 165, 25);
+        panel.add(teacherNameText);
 
-        userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 80, 80, 25);
-        panel.add(userLabel);
+        teacherUsernameLabel = new JLabel("Username:");
+        teacherUsernameLabel.setBounds(20, 80, 80, 25);
+        panel.add(teacherUsernameLabel);
 
-        userText = new JTextField(20);
-        userText.setBounds(150, 80, 165, 25);
-        panel.add(userText);
+        teacherUsernameText = new JTextField(20);
+        teacherUsernameText.setBounds(150, 80, 165, 25);
+        panel.add(teacherUsernameText);
 
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 110, 80, 25);
-        panel.add(passwordLabel);
+        teacherPasswordLabel = new JLabel("Password:");
+        teacherPasswordLabel.setBounds(20, 110, 80, 25);
+        panel.add(teacherPasswordLabel);
 
-        passText = new JTextField(20);
-        passText.setBounds(150, 110, 165, 25);
-        panel.add(passText);
+        teacherPasswordText = new JTextField(20);
+        teacherPasswordText.setBounds(150, 110, 165, 25);
+        panel.add(teacherPasswordText);
 
-        createAccountButton = new JButton("Create Account");
-        createAccountButton.setBounds(160, 150, 150, 25);
-        createAccountButton.addActionListener(new LearningSystemManager());
-        panel.add(createAccountButton);
+        createTeacherAccountButton = new JButton("Create Account");
+        createTeacherAccountButton.setBounds(160, 150, 150, 25);
+        createTeacherAccountButton.addActionListener(new LearningSystemManager());
+        panel.add(createTeacherAccountButton);
 
-        createAccountButton.addActionListener(new ActionListener() {
+        createTeacherAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 accountCreatedTeacher();
             }
         });
 
-        backButton = new JButton("Back");
-        backButton.setBounds(30, 150, 110, 25);
-        backButton.addActionListener(new LearningSystemManager());
-        panel.add(backButton);
+        createTeacherAccountBackButton = new JButton("Back");
+        createTeacherAccountBackButton.setBounds(30, 150, 110, 25);
+        createTeacherAccountBackButton.addActionListener(new LearningSystemManager());
+        panel.add(createTeacherAccountBackButton);
 
-        backButton.addActionListener(new ActionListener() {
+        createTeacherAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
             }
@@ -225,16 +288,16 @@ public class LearningSystemManager implements ActionListener {
         frame.add(panel);
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Account successfully created!");
-        welcomeLabel.setBounds(110, 20, 200, 25);
-        panel.add(welcomeLabel);
+        teacherAccountCreatedLabel = new JLabel("Account successfully created!");
+        teacherAccountCreatedLabel.setBounds(110, 20, 200, 25);
+        panel.add(teacherAccountCreatedLabel);
 
-        loginButton = new JButton("Log In");
-        loginButton.setBounds(150, 70, 90, 25);
-        loginButton.addActionListener(new LearningSystemManager());
-        panel.add(loginButton);
+        teacherLogInButton = new JButton("Log In");
+        teacherLogInButton.setBounds(150, 70, 90, 25);
+        teacherLogInButton.addActionListener(new LearningSystemManager());
+        panel.add(teacherLogInButton);
 
-        loginButton.addActionListener(new ActionListener() {
+        teacherLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 teacherLogIn();
             }
@@ -255,43 +318,43 @@ public class LearningSystemManager implements ActionListener {
 
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Welcome teachers!");
-        welcomeLabel.setBounds(140, 20, 150, 25);
-        panel.add(welcomeLabel);
+        welcomeTeachersLabel = new JLabel("Welcome teachers!");
+        welcomeTeachersLabel.setBounds(140, 20, 150, 25);
+        panel.add(welcomeTeachersLabel);
 
-        userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 50, 80, 25);
-        panel.add(userLabel);
+        teacherLogInUsernameLabel = new JLabel("Username:");
+        teacherLogInUsernameLabel.setBounds(20, 50, 80, 25);
+        panel.add(teacherLogInUsernameLabel);
 
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 80, 80, 25);
-        panel.add(passwordLabel);
+        teacherLogInPasswordLabel = new JLabel("Password:");
+        teacherLogInPasswordLabel.setBounds(20, 80, 80, 25);
+        panel.add(teacherLogInPasswordLabel);
 
-        userText = new JTextField(20);
-        userText.setBounds(100, 50, 165, 25);
-        panel.add(userText);
+        teacherLogInUsernameText = new JTextField(20);
+        teacherLogInUsernameText.setBounds(100, 50, 165, 25);
+        panel.add(teacherLogInUsernameText);
 
-        passText = new JTextField(20);
-        passText.setBounds(100, 80, 165, 25);
-        panel.add(passText);
+        teacherLogInPasswordText = new JTextField(20);
+        teacherLogInPasswordText.setBounds(100, 80, 165, 25);
+        panel.add(teacherLogInPasswordText);
 
-        loginButton = new JButton("Login");
-        loginButton.setBounds(150, 120, 80, 25);
-        loginButton.addActionListener(new LearningSystemManager());
-        panel.add(loginButton);
+        teacherLogInButton = new JButton("Login");
+        teacherLogInButton.setBounds(150, 120, 80, 25);
+        teacherLogInButton.addActionListener(new LearningSystemManager());
+        panel.add(teacherLogInButton);
 
-        loginButton.addActionListener(new ActionListener() {
+        teacherLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 teacherMenu();
             }
         });
 
-        backButton = new JButton("Back");
-        backButton.setBounds(30, 120, 110, 25);
-        backButton.addActionListener(new LearningSystemManager());
-        panel.add(backButton);
+        teacherLogInBackButton = new JButton("Back");
+        teacherLogInBackButton.setBounds(30, 120, 110, 25);
+        teacherLogInBackButton.addActionListener(new LearningSystemManager());
+        panel.add(teacherLogInBackButton);
 
-        backButton.addActionListener(new ActionListener() {
+        teacherLogInBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
             }
@@ -307,28 +370,28 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
-        addCourse = new JLabel("Do you want to add a course?");
-        addCourse.setBounds(80, 20, 200, 25);
-        panel.add(addCourse);
+        addCourseLabel = new JLabel("Do you want to add a course?");
+        addCourseLabel.setBounds(80, 20, 200, 25);
+        panel.add(addCourseLabel);
 
-        yesCourse = new JButton("Yes");
-        yesCourse.setBounds(120, 50, 80, 25);
-        yesCourse.addActionListener(new LearningSystemManager());
-        panel.add(yesCourse);
+        yesCourseButton = new JButton("Yes");
+        yesCourseButton.setBounds(120, 50, 80, 25);
+        yesCourseButton.addActionListener(new LearningSystemManager());
+        panel.add(yesCourseButton);
 
-        yesCourse.addActionListener(new ActionListener() {
+        yesCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addCourse();
             }
         });
 
-        noCourse = new JButton("No");
-        noCourse.setBounds(120, 80, 80, 25);
-        noCourse.addActionListener(new LearningSystemManager());
-        panel.add(noCourse);
+        noCourseButton = new JButton("No");
+        noCourseButton.setBounds(120, 80, 80, 25);
+        noCourseButton.addActionListener(new LearningSystemManager());
+        panel.add(noCourseButton);
 
         //if teacher doesn't want to create a course
-        noCourse.addActionListener(new ActionListener() {
+        noCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
             }
@@ -351,36 +414,36 @@ public class LearningSystemManager implements ActionListener {
         // if yes to adding a course
         // PATHWAY IS
 
-        courseName = new JLabel("Enter Course Name:");
-        courseName.setBounds(130, 20, 200, 25);
-        panel.add(courseName);
+        enterCourseNameLabel = new JLabel("Enter Course Name:");
+        enterCourseNameLabel.setBounds(130, 20, 200, 25);
+        panel.add(enterCourseNameLabel);
 
-        courseText = new JTextField(50);
-        courseText.setBounds(120, 50, 165, 25);
-        panel.add(courseText);
+        enterCourseNameText = new JTextField(50);
+        enterCourseNameText.setBounds(120, 50, 165, 25);
+        panel.add(enterCourseNameText);
 
-        courseEnter = new JButton("Create Course");
-        courseEnter.setBounds(180, 80, 140, 25);
-        courseEnter.addActionListener(new LearningSystemManager());
-        panel.add(courseEnter);
+        createCourseButton = new JButton("Create Course");
+        createCourseButton.setBounds(180, 80, 140, 25);
+        createCourseButton.addActionListener(new LearningSystemManager());
+        panel.add(createCourseButton);
 
-        courseEnter.addActionListener(new ActionListener() {
+        createCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 teacherQuizMenu();
             }
         });
 
-        backButton = new JButton("Back");
-        backButton.setBounds(60, 80, 80, 25);
-        backButton.addActionListener(new LearningSystemManager());
-        panel.add(backButton);
+        addCourseBackButton = new JButton("Back");
+        addCourseBackButton.setBounds(60, 80, 80, 25);
+        addCourseBackButton.addActionListener(new LearningSystemManager());
+        panel.add(addCourseBackButton);
 
-        backButton.addActionListener(new ActionListener() {
+        addCourseBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 teacherMenu();
             }
         });
-        
+
         panel.setLayout(null);
         frame.setVisible(true);
     }
@@ -392,48 +455,60 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
-        lsmTool = new JLabel("Learning System Management Tool");
-        lsmTool.setBounds(90, 20, 500, 25);
-        panel.add(lsmTool);
+        lsmToolLabel = new JLabel("Learning System Management Tool");
+        lsmToolLabel.setBounds(90, 20, 500, 25);
+        panel.add(lsmToolLabel);
 
-        createQuiz = new JButton("Create a Quiz");
-        createQuiz.setBounds(80, 50, 250, 25);
-        createQuiz.addActionListener(new LearningSystemManager());
-        panel.add(createQuiz);
+        createQuizButton = new JButton("Create a Quiz");
+        createQuizButton.setBounds(80, 50, 250, 25);
+        createQuizButton.addActionListener(new LearningSystemManager());
+        panel.add(createQuizButton);
 
-        createQuiz.addActionListener(new ActionListener() {
+        createQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 createQuiz();
             }
         });
 
-        editQuiz = new JButton("Edit Quiz");
-        editQuiz.setBounds(80, 80, 250, 25);
-        editQuiz.addActionListener(new LearningSystemManager());
-        panel.add(editQuiz);
+        editQuizButton = new JButton("Edit Quiz");
+        editQuizButton.setBounds(80, 80, 250, 25);
+        editQuizButton.addActionListener(new LearningSystemManager());
+        panel.add(editQuizButton);
 
-        editQuiz.addActionListener(new ActionListener() {
+        editQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 editQuiz();
             }
         });
 
-        deleteQuiz = new JButton("Delete Quiz");
-        deleteQuiz.setBounds(80, 110, 250, 25);
-        deleteQuiz.addActionListener(new LearningSystemManager());
-        panel.add(deleteQuiz);
+        deleteQuizButton = new JButton("Delete Quiz");
+        deleteQuizButton.setBounds(80, 110, 250, 25);
+        deleteQuizButton.addActionListener(new LearningSystemManager());
+        panel.add(deleteQuizButton);
 
-        viewStudentQuizSubmissions = new JButton("View Student Quiz Submissions");
-        viewStudentQuizSubmissions.setBounds(80, 140, 250, 25);
-        viewStudentQuizSubmissions.addActionListener(new LearningSystemManager());
-        panel.add(viewStudentQuizSubmissions);
+        viewStudentQuizSubmissionsButton = new JButton("View Student Quiz Submissions");
+        viewStudentQuizSubmissionsButton.setBounds(80, 140, 250, 25);
+        viewStudentQuizSubmissionsButton.addActionListener(new LearningSystemManager());
+        panel.add(viewStudentQuizSubmissionsButton);
 
-        backButton = new JButton("Back");
-        backButton.setBounds(30, 180, 110, 25);
-        backButton.addActionListener(new LearningSystemManager());
-        panel.add(backButton);
+        editTeacherAccountButton = new JButton("Edit Account");
+        editTeacherAccountButton.setBounds(80, 170, 250, 25);
+        editTeacherAccountButton.addActionListener(new LearningSystemManager());
+        panel.add(editTeacherAccountButton);
 
-        backButton.addActionListener(new ActionListener() {
+        editTeacherAccountButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editTeacherAccount();
+            }
+        });
+
+
+        teacherQuizMenuBackButton = new JButton("Back");
+        teacherQuizMenuBackButton.setBounds(30, 200, 110, 25);
+        teacherQuizMenuBackButton.addActionListener(new LearningSystemManager());
+        panel.add(teacherQuizMenuBackButton);
+
+        teacherQuizMenuBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addCourse();
             }
@@ -450,9 +525,9 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
-        lsmTool = new JLabel("Create a Quiz");
-        lsmTool.setBounds(130, 20, 500, 25);
-        panel.add(lsmTool);
+        lsmToolLabel = new JLabel("Create a Quiz");
+        lsmToolLabel.setBounds(130, 20, 500, 25);
+        panel.add(lsmToolLabel);
 
         nameOfQuizLabel = new JLabel("Name of Quiz:");
         nameOfQuizLabel.setBounds(20, 50, 150, 25);
@@ -466,34 +541,34 @@ public class LearningSystemManager implements ActionListener {
         formatOfQuizLabel.setBounds(20, 90, 150, 25);
         panel.add(formatOfQuizLabel);
 
-        formatOfQuiz1 = new JButton("Multiple-Choice");
-        formatOfQuiz1.setBounds(80, 130, 190, 25);
-        formatOfQuiz1.addActionListener(new LearningSystemManager());
-        panel.add(formatOfQuiz1);
+        formatOfQuiz1Button = new JButton("Multiple-Choice");
+        formatOfQuiz1Button.setBounds(80, 130, 190, 25);
+        formatOfQuiz1Button.addActionListener(new LearningSystemManager());
+        panel.add(formatOfQuiz1Button);
 
-        formatOfQuiz1.addActionListener(new ActionListener() {
+        formatOfQuiz1Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 multipleChoiceQuiz();
             }
         });
 
-        formatOfQuiz2 = new JButton("True/False");
-        formatOfQuiz2.setBounds(80, 160, 190, 25);
-        formatOfQuiz2.addActionListener(new LearningSystemManager());
-        panel.add(formatOfQuiz2);
+        formatOfQuiz2Button = new JButton("True/False");
+        formatOfQuiz2Button.setBounds(80, 160, 190, 25);
+        formatOfQuiz2Button.addActionListener(new LearningSystemManager());
+        panel.add(formatOfQuiz2Button);
 
-        formatOfQuiz2.addActionListener(new ActionListener() {
+        formatOfQuiz2Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 trueOrFalseQuiz();
             }
         });
 
-        backButton = new JButton("Back");
-        backButton.setBounds(30, 190, 110, 25);
-        backButton.addActionListener(new LearningSystemManager());
-        panel.add(backButton);
+        createQuizBackButton = new JButton("Back");
+        createQuizBackButton.setBounds(30, 190, 110, 25);
+        createQuizBackButton.addActionListener(new LearningSystemManager());
+        panel.add(createQuizBackButton);
 
-        backButton.addActionListener(new ActionListener() {
+        createQuizBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 teacherQuizMenu();
             }
@@ -510,87 +585,87 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
-        lsmTool = new JLabel("Name of Quiz: "); // + show name of quiz);
-        lsmTool.setBounds(130, 20, 500, 25);
-        panel.add(lsmTool);
+        lsmToolLabel = new JLabel("Name of Quiz: "); // + show name of quiz);
+        lsmToolLabel.setBounds(130, 20, 500, 25);
+        panel.add(lsmToolLabel);
 
-        questionOne = new JLabel("Type in Question 1:");
-        questionOne.setBounds(20, 50, 130, 25);
-        panel.add(questionOne);
+        questionOneMCLabel = new JLabel("Type in Question 1:");
+        questionOneMCLabel.setBounds(20, 50, 130, 25);
+        panel.add(questionOneMCLabel);
 
-        questionOneText = new JTextField(20);
-        questionOneText.setBounds(210, 50, 165, 25);
-        panel.add(questionOneText);
+        questionOneMCText = new JTextField(20);
+        questionOneMCText.setBounds(210, 50, 165, 25);
+        panel.add(questionOneMCText);
 
-        optionOne = new JLabel("Option 1:");
-        optionOne.setBounds(20, 80, 80, 25);
-        panel.add(optionOne);
+        optionOneMCLabel = new JLabel("Option 1:");
+        optionOneMCLabel.setBounds(20, 80, 80, 25);
+        panel.add(optionOneMCLabel);
 
-        optionOneText = new JTextField(20);
-        optionOneText.setBounds(210, 80, 165, 25);
-        panel.add(optionOneText);
+        optionOneMCText = new JTextField(20);
+        optionOneMCText.setBounds(210, 80, 165, 25);
+        panel.add(optionOneMCText);
 
-        optionTwo = new JLabel("Option 2:");
-        optionTwo.setBounds(20, 110, 80, 25);
-        panel.add(optionTwo);
+        optionTwoMCLabel = new JLabel("Option 2:");
+        optionTwoMCLabel.setBounds(20, 110, 80, 25);
+        panel.add(optionTwoMCLabel);
 
-        optionTwoText = new JTextField(20);
-        optionTwoText.setBounds(210, 110, 165, 25);
-        panel.add(optionTwoText);
+        optionTwoMCText = new JTextField(20);
+        optionTwoMCText.setBounds(210, 110, 165, 25);
+        panel.add(optionTwoMCText);
 
-        optionThree = new JLabel("Option 3:");
-        optionThree.setBounds(20, 140, 80, 25);
-        panel.add(optionThree);
+        optionThreeMCLabel = new JLabel("Option 3:");
+        optionThreeMCLabel.setBounds(20, 140, 80, 25);
+        panel.add(optionThreeMCLabel);
 
-        optionThreeText = new JTextField(20);
-        optionThreeText.setBounds(210, 140, 165, 25);
-        panel.add(optionThreeText);
+        optionThreeMCText = new JTextField(20);
+        optionThreeMCText.setBounds(210, 140, 165, 25);
+        panel.add(optionThreeMCText);
 
-        optionFour = new JLabel("Option 4:");
-        optionFour.setBounds(20, 170, 80, 25);
-        panel.add(optionFour);
+        optionFourMCLabel = new JLabel("Option 4:");
+        optionFourMCLabel.setBounds(20, 170, 80, 25);
+        panel.add(optionFourMCLabel);
 
-        optionFourText = new JTextField(20);
-        optionFourText.setBounds(210, 170, 165, 25);
-        panel.add(optionFourText);
+        optionFourMCText = new JTextField(20);
+        optionFourMCText.setBounds(210, 170, 165, 25);
+        panel.add(optionFourMCText);
 
-        correctAnsChoice = new JLabel("Enter correct answer choice:");
-        correctAnsChoice.setBounds(20, 200, 250, 25);
-        panel.add(correctAnsChoice);
+        correctAnsChoiceMCLabel = new JLabel("Enter correct answer choice:");
+        correctAnsChoiceMCLabel.setBounds(20, 200, 250, 25);
+        panel.add(correctAnsChoiceMCLabel);
 
-        correctAnsChoiceText = new JTextField(20);
-        correctAnsChoiceText.setBounds(210, 200, 165, 25);
-        panel.add(correctAnsChoiceText);
+        correctAnsChoiceMCText = new JTextField(20);
+        correctAnsChoiceMCText.setBounds(210, 200, 165, 25);
+        panel.add(correctAnsChoiceMCText);
 
-        pointValue = new JLabel("Enter the point value:");
-        pointValue.setBounds(20, 230, 250, 25);
-        panel.add(pointValue);
+        pointValueMCLabel = new JLabel("Enter the point value:");
+        pointValueMCLabel.setBounds(20, 230, 250, 25);
+        panel.add(pointValueMCLabel);
 
-        pointValueText = new JTextField(20);
-        pointValueText.setBounds(210, 230, 165, 25);
-        panel.add(pointValueText);
+        pointValueMCText = new JTextField(20);
+        pointValueMCText.setBounds(210, 230, 165, 25);
+        panel.add(pointValueMCText);
 
         //adds the questions
-        addQuestion = new JButton("Add Question");
-        addQuestion.setBounds(210, 260, 150, 25);
-        addQuestion.addActionListener(new LearningSystemManager());
-        panel.add(addQuestion);
+        addQuestionMCButton = new JButton("Add Question");
+        addQuestionMCButton.setBounds(210, 260, 150, 25);
+        addQuestionMCButton.addActionListener(new LearningSystemManager());
+        panel.add(addQuestionMCButton);
 
         // once the add question button is clicked, we need to add the question to the list of questions for that specific quiz
         // calls the method that displays the screen and asks if the user wants to add another question or not
 
-        addQuestion.addActionListener(new ActionListener() {
+        addQuestionMCButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addAnotherQuestion();
             }
         });
 
-        backButton = new JButton("Back");
-        backButton.setBounds(30, 290, 110, 25);
-        backButton.addActionListener(new LearningSystemManager());
-        panel.add(backButton);
+        multipleChoiceQuizBackButton = new JButton("Back");
+        multipleChoiceQuizBackButton.setBounds(30, 290, 110, 25);
+        multipleChoiceQuizBackButton.addActionListener(new LearningSystemManager());
+        panel.add(multipleChoiceQuizBackButton);
 
-        backButton.addActionListener(new ActionListener() {
+        multipleChoiceQuizBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 createQuiz();
             }
@@ -607,52 +682,52 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
-        lsmTool = new JLabel("Name of Quiz: "); // + show name of quiz);
-        lsmTool.setBounds(130, 20, 500, 25);
-        panel.add(lsmTool);
+        lsmToolLabel = new JLabel("Name of Quiz: "); // + show name of quiz);
+        lsmToolLabel.setBounds(130, 20, 500, 25);
+        panel.add(lsmToolLabel);
 
-        questionOne = new JLabel("Type in Question 1:");
-        questionOne.setBounds(20, 50, 130, 25);
-        panel.add(questionOne);
+        questionOneTFLabel = new JLabel("Type in Question 1:");
+        questionOneTFLabel.setBounds(20, 50, 130, 25);
+        panel.add(questionOneTFLabel);
 
-        questionOneText = new JTextField(20);
-        questionOneText.setBounds(210, 50, 165, 25);
-        panel.add(questionOneText);
+        questionOneTFText = new JTextField(20);
+        questionOneTFText.setBounds(210, 50, 165, 25);
+        panel.add(questionOneTFText);
 
-        optionOne = new JLabel("1) True");
-        optionOne.setBounds(20, 80, 80, 25);
-        panel.add(optionOne);
+        optionOneTFLabel = new JLabel("1) True");
+        optionOneTFLabel.setBounds(20, 80, 80, 25);
+        panel.add(optionOneTFLabel);
 
-        optionTwo = new JLabel("2) False");
-        optionTwo.setBounds(20, 110, 80, 25);
-        panel.add(optionTwo);
+        optionTwoTFLabel = new JLabel("2) False");
+        optionTwoTFLabel.setBounds(20, 110, 80, 25);
+        panel.add(optionTwoTFLabel);
 
-        correctAnsChoice = new JLabel("Enter correct answer choice (True or False):");
-        correctAnsChoice.setBounds(20, 140, 320, 25);
-        panel.add(correctAnsChoice);
+        correctAnsChoiceTFLabelChoice = new JLabel("Enter correct answer choice (True or False):");
+        correctAnsChoiceTFLabelChoice.setBounds(20, 140, 320, 25);
+        panel.add(correctAnsChoiceTFLabelChoice);
 
-        correctAnsChoiceText = new JTextField(20);
-        correctAnsChoiceText.setBounds(300, 140, 90, 25);
-        panel.add(correctAnsChoiceText);
+        correctAnsChoiceTFText = new JTextField(20);
+        correctAnsChoiceTFText.setBounds(300, 140, 90, 25);
+        panel.add(correctAnsChoiceTFText);
 
-        pointValue = new JLabel("Enter the point value:");
-        pointValue.setBounds(20, 170, 250, 25);
-        panel.add(pointValue);
+        pointValueTFLabel = new JLabel("Enter the point value:");
+        pointValueTFLabel.setBounds(20, 170, 250, 25);
+        panel.add(pointValueTFLabel);
 
-        pointValueText = new JTextField(20);
-        pointValueText.setBounds(300, 170, 90, 25);
-        panel.add(pointValueText);
+        pointValueTFText = new JTextField(20);
+        pointValueTFText.setBounds(300, 170, 90, 25);
+        panel.add(pointValueTFText);
 
         //adds the questions
-        addQuestion = new JButton("Add Question");
-        addQuestion.setBounds(120, 210, 150, 25);
-        addQuestion.addActionListener(new LearningSystemManager());
-        panel.add(addQuestion);
+        addQuestionTFButton = new JButton("Add Question");
+        addQuestionTFButton.setBounds(120, 210, 150, 25);
+        addQuestionTFButton.addActionListener(new LearningSystemManager());
+        panel.add(addQuestionTFButton);
 
         // once the add question button is clicked, we need to add the question to the list of questions for that specific quiz
         // calls the method that displays the screen and asks if the user wants to add another question or not
 
-        addQuestion.addActionListener(new ActionListener() {
+        addQuestionTFButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addAnotherQuestion();
             }
@@ -670,14 +745,14 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
-        addAnotherQuestion = new JLabel("Do you want to add another question?");
-        addAnotherQuestion.setBounds(70, 20, 280, 25);
-        panel.add(addAnotherQuestion);
+        addAnotherQuestionLabel = new JLabel("Do you want to add another question?");
+        addAnotherQuestionLabel.setBounds(70, 20, 280, 25);
+        panel.add(addAnotherQuestionLabel);
 
-        yesAnotherQuestion = new JButton("Yes");
-        yesAnotherQuestion.setBounds(110, 50, 80, 25);
-        yesAnotherQuestion.addActionListener(new LearningSystemManager());
-        panel.add(yesAnotherQuestion);
+        yesAnotherQuestionButton = new JButton("Yes");
+        yesAnotherQuestionButton.setBounds(110, 50, 80, 25);
+        yesAnotherQuestionButton.addActionListener(new LearningSystemManager());
+        panel.add(yesAnotherQuestionButton);
 
         //if the user wants to add another question, display the screen of the question, options, correct answer and point value again
         //this time however, it should say type in question 2
@@ -692,10 +767,10 @@ public class LearningSystemManager implements ActionListener {
         */
 
         // if the user doesn't want to add another question
-        noAnotherQuestion = new JButton("No");
-        noAnotherQuestion.setBounds(200, 50, 80, 25);
-        noAnotherQuestion.addActionListener(new LearningSystemManager());
-        panel.add(noAnotherQuestion);
+        noAnotherQuestionButton = new JButton("No");
+        noAnotherQuestionButton.setBounds(200, 50, 80, 25);
+        noAnotherQuestionButton.addActionListener(new LearningSystemManager());
+        panel.add(noAnotherQuestionButton);
 
         // save the quiz if the user doesn't want to add another question
         /*
@@ -718,9 +793,9 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
-        lsmTool = new JLabel("Edit a Quiz");
-        lsmTool.setBounds(160, 20, 500, 25);
-        panel.add(lsmTool);
+        lsmToolLabel = new JLabel("Edit a Quiz");
+        lsmToolLabel.setBounds(160, 20, 500, 25);
+        panel.add(lsmToolLabel);
 
         // dropdown feature to show list of courses
         /*
@@ -741,6 +816,75 @@ public class LearningSystemManager implements ActionListener {
 
     }
 
+    public static void editTeacherAccount() {
+        frame = new JFrame();
+        panel = new JPanel();
+        frame.setSize(400, 300);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.add(panel);
+
+        panel.setLayout(null);
+
+        editTeachAccountLabel = new JLabel("Edit Student Account");
+        editTeachAccountLabel.setBounds(80, 20, 200, 25);
+        panel.add(editTeachAccountLabel);
+
+        editedTeachNameLabel = new JLabel("First & Last Name:");
+        editedTeachNameLabel.setBounds(20, 50, 150, 25);
+        panel.add(editedTeachNameLabel);
+
+        editedTeachNameText = new JTextField(20);
+        editedTeachNameText.setBounds(150, 50, 165, 25);
+        panel.add(editedTeachNameText);
+
+        editedTeachUsernameLabel = new JLabel("Username:");
+        editedTeachUsernameLabel.setBounds(20, 80, 80, 25);
+        panel.add(editedTeachUsernameLabel);
+
+        editedTeachUsernameText = new JTextField(20);
+        editedTeachUsernameText.setBounds(150, 80, 165, 25);
+        panel.add(editedTeachUsernameText);
+
+        editedTeachPasswordLabel = new JLabel("Password:");
+        editedTeachPasswordLabel.setBounds(20, 110, 80, 25);
+        panel.add(editedTeachPasswordLabel);
+
+        editedTeachPasswordText = new JTextField(20);
+        editedTeachPasswordText.setBounds(150, 110, 165, 25);
+        panel.add(editedTeachPasswordText);
+
+        updateTeachAccountButton = new JButton("Save and Update Account");
+        updateTeachAccountButton.setBounds(30, 150, 200, 25);
+        updateTeachAccountButton.addActionListener(new LearningSystemManager());
+        panel.add(updateTeachAccountButton);
+
+        //TODO what should happen when the student save and updates their information (call the specific method that saves the updated data)
+        /*
+        updateTeachAccountButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        */
+
+        editTeachAccountBackButton = new JButton("Back");
+        editTeachAccountBackButton.setBounds(30, 180, 110, 25);
+        editTeachAccountBackButton.addActionListener(new LearningSystemManager());
+        panel.add(editTeachAccountBackButton);
+
+        editTeachAccountBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                studentMenu();
+            }
+        });
+
+
+        frame.setVisible(true);
+
+    }
+    //Teacher Pathway ends
+
+    //Student pathway starts
     public static void createStudent() {
         frame = new JFrame();
         panel = new JPanel();
@@ -750,51 +894,51 @@ public class LearningSystemManager implements ActionListener {
 
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Create a student account");
-        welcomeLabel.setBounds(80, 20, 200, 25);
-        panel.add(welcomeLabel);
+        createStudentLabel = new JLabel("Create a student account");
+        createStudentLabel.setBounds(80, 20, 200, 25);
+        panel.add(createStudentLabel);
 
-        nameLabel = new JLabel("First & Last Name:");
-        nameLabel.setBounds(20, 50, 150, 25);
-        panel.add(nameLabel);
+        studentNameLabel = new JLabel("First & Last Name:");
+        studentNameLabel.setBounds(20, 50, 150, 25);
+        panel.add(studentNameLabel);
 
-        nameText = new JTextField(20);
-        nameText.setBounds(150, 50, 165, 25);
-        panel.add(nameText);
+        studentNameText = new JTextField(20);
+        studentNameText.setBounds(150, 50, 165, 25);
+        panel.add(studentNameText);
 
-        userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 80, 80, 25);
-        panel.add(userLabel);
+        studentUsernameLabel = new JLabel("Username:");
+        studentUsernameLabel.setBounds(20, 80, 80, 25);
+        panel.add(studentUsernameLabel);
 
-        userText = new JTextField(20);
-        userText.setBounds(150, 80, 165, 25);
-        panel.add(userText);
+        studentUsernameText = new JTextField(20);
+        studentUsernameText.setBounds(150, 80, 165, 25);
+        panel.add(studentUsernameText);
 
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 110, 80, 25);
-        panel.add(passwordLabel);
+        studentPasswordLabel = new JLabel("Password:");
+        studentPasswordLabel.setBounds(20, 110, 80, 25);
+        panel.add(studentPasswordLabel);
 
-        passText = new JTextField(20);
-        passText.setBounds(150, 110, 165, 25);
-        panel.add(passText);
+        studentPasswordText = new JTextField(20);
+        studentPasswordText.setBounds(150, 110, 165, 25);
+        panel.add(studentPasswordText);
 
-        createAccountButton = new JButton("Create");
-        createAccountButton.setBounds(170, 150, 90, 25);
-        createAccountButton.addActionListener(new LearningSystemManager());
-        panel.add(createAccountButton);
+        createStudentAccountButton = new JButton("Create");
+        createStudentAccountButton.setBounds(170, 150, 90, 25);
+        createStudentAccountButton.addActionListener(new LearningSystemManager());
+        panel.add(createStudentAccountButton);
 
-        createAccountButton.addActionListener(new ActionListener() {
+        createStudentAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 accountCreatedStudent();
             }
         });
 
-        backButton = new JButton("Back");
-        backButton.setBounds(70, 150, 90, 25);
-        backButton.addActionListener(new LearningSystemManager());
-        panel.add(backButton);
+        createStudentAccountBackButton = new JButton("Back");
+        createStudentAccountBackButton.setBounds(70, 150, 90, 25);
+        createStudentAccountBackButton.addActionListener(new LearningSystemManager());
+        panel.add(createStudentAccountBackButton);
 
-        backButton.addActionListener(new ActionListener() {
+        createStudentAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
             }
@@ -812,16 +956,16 @@ public class LearningSystemManager implements ActionListener {
         frame.add(panel);
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Account successfully created!");
-        welcomeLabel.setBounds(80, 20, 200, 25);
-        panel.add(welcomeLabel);
+        studentAccountCreatedLabel = new JLabel("Account successfully created!");
+        studentAccountCreatedLabel.setBounds(80, 20, 200, 25);
+        panel.add(studentAccountCreatedLabel);
 
-        loginButton = new JButton("Log In");
-        loginButton.setBounds(130, 60, 80, 25);
-        loginButton.addActionListener(new LearningSystemManager());
-        panel.add(loginButton);
+        studentLogInButton = new JButton("Log In");
+        studentLogInButton.setBounds(130, 60, 80, 25);
+        studentLogInButton.addActionListener(new LearningSystemManager());
+        panel.add(studentLogInButton);
 
-        loginButton.addActionListener(new ActionListener() {
+        studentLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 studentLogIn();
             }
@@ -840,53 +984,50 @@ public class LearningSystemManager implements ActionListener {
 
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Welcome students!");
-        welcomeLabel.setBounds(80, 20, 150, 25);
-        panel.add(welcomeLabel);
+        welcomeStudentsLabel = new JLabel("Welcome students!");
+        welcomeStudentsLabel.setBounds(80, 20, 150, 25);
+        panel.add(welcomeStudentsLabel);
 
-        userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 50, 80, 25);
-        panel.add(userLabel);
+        studentLogInUsernameLabel = new JLabel("Username:");
+        studentLogInUsernameLabel.setBounds(20, 50, 80, 25);
+        panel.add(studentLogInUsernameLabel);
 
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 80, 80, 25);
-        panel.add(passwordLabel);
+        studentLogInPasswordLabel = new JLabel("Password:");
+        studentLogInPasswordLabel.setBounds(20, 80, 80, 25);
+        panel.add(studentLogInPasswordLabel);
 
-        userText = new JTextField(20);
-        userText.setBounds(100, 50, 165, 25);
-        panel.add(userText);
+        studentLogInUsernameText = new JTextField(20);
+        studentLogInUsernameText.setBounds(100, 50, 165, 25);
+        panel.add(studentLogInUsernameText);
 
-        passText = new JTextField(20);
-        passText.setBounds(100, 80, 165, 25);
-        panel.add(passText);
+        studentLogInPasswordText = new JTextField(20);
+        studentLogInPasswordText.setBounds(100, 80, 165, 25);
+        panel.add(studentLogInPasswordText);
 
-        loginButton = new JButton("Login");
-        loginButton.setBounds(130, 120, 80, 25);
-        loginButton.addActionListener(new LearningSystemManager());
-        panel.add(loginButton);
+        studentLogInButton = new JButton("Login");
+        studentLogInButton.setBounds(130, 120, 80, 25);
+        studentLogInButton.addActionListener(new LearningSystemManager());
+        panel.add(studentLogInButton);
 
-        loginButton.addActionListener(new ActionListener() {
+        studentLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 studentMenu();
             }
         });
 
-        backButton = new JButton("Back");
-        backButton.setBounds(30, 120, 80, 25);
-        backButton.addActionListener(new LearningSystemManager());
-        panel.add(backButton);
+        studentLogInBackButton = new JButton("Back");
+        studentLogInBackButton.setBounds(30, 120, 80, 25);
+        studentLogInBackButton.addActionListener(new LearningSystemManager());
+        panel.add(studentLogInBackButton);
 
-        backButton.addActionListener(new ActionListener() {
+        studentLogInBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mainMenu();
             }
         });
 
-
         frame.setVisible(true);
     }
-
-
 
     public static void studentMenu() {
         frame = new JFrame();
@@ -895,51 +1036,51 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
-        lsmTool = new JLabel("Learning System Management Tool");
-        lsmTool.setBounds(90, 20, 500, 25);
-        panel.add(lsmTool);
+        lsmToolLabel = new JLabel("Learning System Management Tool");
+        lsmToolLabel.setBounds(90, 20, 500, 25);
+        panel.add(lsmToolLabel);
 
-        takeQuiz = new JButton("Take a Quiz");
-        takeQuiz.setBounds(80, 50, 250, 25);
-        takeQuiz.addActionListener(new LearningSystemManager());
-        panel.add(takeQuiz);
+        takeQuizButton = new JButton("Take a Quiz");
+        takeQuizButton.setBounds(80, 50, 250, 25);
+        takeQuizButton.addActionListener(new LearningSystemManager());
+        panel.add(takeQuizButton);
 
-        takeQuiz.addActionListener(new ActionListener() {
+        takeQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 takeQuiz();
             }
         });
 
-        viewGradedQuiz = new JButton("View Graded Quiz");
-        viewGradedQuiz.setBounds(80, 80, 250, 25);
-        viewGradedQuiz.addActionListener(new LearningSystemManager());
-        panel.add(viewGradedQuiz);
+        viewGradedQuizButton = new JButton("View Graded Quiz");
+        viewGradedQuizButton.setBounds(80, 80, 250, 25);
+        viewGradedQuizButton.addActionListener(new LearningSystemManager());
+        panel.add(viewGradedQuizButton);
 
-        viewGradedQuiz.addActionListener(new ActionListener() {
+        viewGradedQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 viewGradedQuiz();
             }
         });
 
-        editAccount = new JButton("Edit Account");
-        editAccount.setBounds(80, 110, 250, 25);
-        editAccount.addActionListener(new LearningSystemManager());
-        panel.add(editAccount);
+        editStudentAccountButton = new JButton("Edit Account");
+        editStudentAccountButton.setBounds(80, 110, 250, 25);
+        editStudentAccountButton.addActionListener(new LearningSystemManager());
+        panel.add(editStudentAccountButton);
 
-        editAccount.addActionListener(new ActionListener() {
+        editStudentAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 editStudentAccount();
             }
         });
 
-        logout = new JButton("Logout");
-        logout.setBounds(80, 140, 250, 25);
-        logout.addActionListener(new LearningSystemManager());
-        panel.add(logout);
+        studentLogOutButton = new JButton("Logout");
+        studentLogOutButton.setBounds(80, 140, 250, 25);
+        studentLogOutButton.addActionListener(new LearningSystemManager());
+        panel.add(studentLogOutButton);
 
         //TODO what should happen when the student log outs
         /*
-        logout.addActionListener(new ActionListener() {
+        studentLogOutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
             }
@@ -957,9 +1098,9 @@ public class LearningSystemManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(panel);
 
-        lsmTool = new JLabel("Take a Quiz");
-        lsmTool.setBounds(160, 20, 500, 25);
-        panel.add(lsmTool);
+        lsmToolLabel = new JLabel("Take a Quiz");
+        lsmToolLabel.setBounds(160, 20, 500, 25);
+        panel.add(lsmToolLabel);
 
         // dropdown feature to show list of courses so student can choose which course they want to take a quiz from
         /*
@@ -993,54 +1134,54 @@ public class LearningSystemManager implements ActionListener {
 
         panel.setLayout(null);
 
-        welcomeLabel = new JLabel("Edit Student Account");
-        welcomeLabel.setBounds(80, 20, 200, 25);
-        panel.add(welcomeLabel);
+        editStuAccountLabel = new JLabel("Edit Student Account");
+        editStuAccountLabel.setBounds(80, 20, 200, 25);
+        panel.add(editStuAccountLabel);
 
-        nameLabel = new JLabel("First & Last Name:");
-        nameLabel.setBounds(20, 50, 150, 25);
-        panel.add(nameLabel);
+        editedStuNameLabel = new JLabel("First & Last Name:");
+        editedStuNameLabel.setBounds(20, 50, 150, 25);
+        panel.add(editedStuNameLabel);
 
-        nameText = new JTextField(20);
-        nameText.setBounds(150, 50, 165, 25);
-        panel.add(nameText);
+        editedStuNameText = new JTextField(20);
+        editedStuNameText.setBounds(150, 50, 165, 25);
+        panel.add(editedStuNameText);
 
-        userLabel = new JLabel("Username:");
-        userLabel.setBounds(20, 80, 80, 25);
-        panel.add(userLabel);
+        editedStuUsernameLabel = new JLabel("Username:");
+        editedStuUsernameLabel.setBounds(20, 80, 80, 25);
+        panel.add(editedStuUsernameLabel);
 
-        userText = new JTextField(20);
-        userText.setBounds(150, 80, 165, 25);
-        panel.add(userText);
+        editedStuUsernameText = new JTextField(20);
+        editedStuUsernameText.setBounds(150, 80, 165, 25);
+        panel.add(editedStuUsernameText);
 
-        passwordLabel = new JLabel("Password:");
-        passwordLabel.setBounds(20, 110, 80, 25);
-        panel.add(passwordLabel);
+        editedStuPasswordLabel = new JLabel("Password:");
+        editedStuPasswordLabel.setBounds(20, 110, 80, 25);
+        panel.add(editedStuPasswordLabel);
 
-        passText = new JTextField(20);
-        passText.setBounds(150, 110, 165, 25);
-        panel.add(passText);
+        editedStuPasswordText = new JTextField(20);
+        editedStuPasswordText.setBounds(150, 110, 165, 25);
+        panel.add(editedStuPasswordText);
 
-        loginButton = new JButton("Save and Update Account");
-        loginButton.setBounds(30, 150, 200, 25);
-        loginButton.addActionListener(new LearningSystemManager());
-        panel.add(loginButton);
+        updateStuAccountButton = new JButton("Save and Update Account");
+        updateStuAccountButton.setBounds(30, 150, 200, 25);
+        updateStuAccountButton.addActionListener(new LearningSystemManager());
+        panel.add(updateStuAccountButton);
 
         //TODO what should happen when the student save and updates their information (call the specific method that saves the updated data)
         /*
-        loginButton.addActionListener(new ActionListener() {
+        updateStuAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
 
             }
         });
         */
 
-        backButton = new JButton("Back");
-        backButton.setBounds(30, 180, 110, 25);
-        backButton.addActionListener(new LearningSystemManager());
-        panel.add(backButton);
+        editStuAccountBackButton = new JButton("Back");
+        editStuAccountBackButton.setBounds(30, 180, 110, 25);
+        editStuAccountBackButton.addActionListener(new LearningSystemManager());
+        panel.add(editStuAccountBackButton);
 
-        backButton.addActionListener(new ActionListener() {
+        editStuAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 studentMenu();
             }
@@ -1070,3 +1211,4 @@ public class LearningSystemManager implements ActionListener {
         }
     }
      */
+
