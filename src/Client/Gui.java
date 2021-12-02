@@ -1,15 +1,13 @@
 package Client;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
-public class gui {
+public class Gui {
     private static String hostName;
 
     // create a variable to initialize new threads with
-    private static Thread thrd = null;
+
 
     // the threads are kept track of with a linked list
     private static LinkedList<Thread> list = new LinkedList<Thread>();
@@ -69,19 +67,25 @@ public class gui {
     public static JButton editAccount;
     public static JButton logout;
 
-    static ActionListener actionListener = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (e.getSource() == loginTeacherAccountButton) {
-                loginTeacher();
-            }
-        }
-    };
-
 
     public static void main(String[] args) {
         int numProcesses = 1;
+        mainMenu();
 
+        /*ActionListener actionListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == loginTeacherButton) {
+                    loginTeacher();
+                    if (e.getSource() == loginTeacherAccountButton) {
+                        thrd = new Thread(new ClientThread(0, new LoginTeacherParameters(loginTeacherAccountButton.getText(), teacherPasswordText.getText())));
+                        thrd.start(); // start the thread
+                        list.add(thrd);
+                    }
+                }
+
+            }
+        };
 
 
         mainMenu();
@@ -101,7 +105,7 @@ public class gui {
         loginTeacherAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                thrd = new Thread(new ClientThread(0, new LoginTeacherParameters(userText.getText(), passText.getText())));
+                thrd = new Thread(new ClientThread(0, new LoginTeacherParameters(loginTeacherAccountButton.getText(), teacherPasswordText.getText())));
                 thrd.start(); // start the thread
                 list.add(thrd);
             }
@@ -110,12 +114,15 @@ public class gui {
         createTeacherAccountButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                thrd = new Thread(new ClientThread(1, new CreateTeacherParameters(nameText.getText(), userText.getText(), passText.getText())));
+                thrd = new Thread(new ClientThread(1,
+                        new CreateTeacherParameters(createTeacherNameText.getText(),
+                                createTeacherUsernameText.getText(),
+                                createTeacherPasswordText.getText())));
                 thrd.start(); // start the thread
                 list.add(thrd);
 
             }
-        });
+        });*/
 
 
     }
@@ -134,6 +141,9 @@ public class gui {
 
         loginTeacherButton = new JButton("Login Teacher");
         loginTeacherButton.setBounds(110, 50, 150, 25);
+        loginTeacherButton.addActionListener((e) -> {
+            loginTeacher();
+        });
         panel.add(loginTeacherButton);
 
         loginStudentButton = new JButton("Login Student");
@@ -142,10 +152,16 @@ public class gui {
 
         createTeacherButton = new JButton("Create Teacher");
         createTeacherButton.setBounds(110, 110, 150, 25);
+        createTeacherButton.addActionListener((e) -> {
+            createTeacher();
+        });
         panel.add(createTeacherButton);
 
         createStudentButton = new JButton("Create Student");
         createStudentButton.setBounds(110, 140, 150, 25);
+        /*createStudentButton.addActionListener((e) -> {
+
+        });*/
         panel.add(createStudentButton);
 
 
@@ -190,7 +206,11 @@ public class gui {
         teacherLoginPanel.add(teacherPasswordText);
 
         loginTeacherAccountButton = new JButton("Login");
-        loginTeacherAccountButton.addActionListener(actionListener);
+        loginTeacherAccountButton.addActionListener((e) -> {
+            Thread thrd = new Thread(new ClientThread(0, new LoginTeacherParams(teacherUsernameText.getText(), teacherPasswordText.getText())));
+            thrd.start(); // start the thread
+            list.add(thrd);
+        });
         loginTeacherAccountButton.setBounds(30, 120, 80, 25);
         teacherLoginPanel.add(loginTeacherAccountButton);
 
@@ -237,6 +257,14 @@ public class gui {
 
         createTeacherAccountButton = new JButton("Create Account");
         createTeacherAccountButton.setBounds(30, 150, 150, 25);
+        createTeacherAccountButton.addActionListener((e) -> {
+            Thread thrd = new Thread(new ClientThread(1,
+                    new CreateTeacherParams(createTeacherNameText.getText(),
+                            createTeacherUsernameText.getText(),
+                            createTeacherPasswordText.getText())));
+            thrd.start(); // start the thread
+            list.add(thrd);
+        });
         createTeacherPanel.add(createTeacherAccountButton);
 
 

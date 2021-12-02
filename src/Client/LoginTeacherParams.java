@@ -2,11 +2,11 @@ package Client;
 
 import java.io.PrintWriter;
 
-public class LoginTeacherParameters {
+public class LoginTeacherParams {
     private String username;
     private String password;
 
-    public LoginTeacherParameters(String username, String password) {
+    public LoginTeacherParams(String username, String password) {
         this.username = username;
         this.password = password;
     }

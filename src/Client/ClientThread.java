@@ -51,13 +51,15 @@ public class ClientThread extends Thread {
 		//1) login student
 		//2) create teacher
 		switch (menuSelection) {
-			case 0: //this formats the request sent to the server in the observable order: "command: #", new line, "username: " newline "password: "
-				LoginTeacherParameters loginTeacherParameters = (LoginTeacherParameters) threadParameters;
+			case 0: { //this formats the request sent to the server in the observable order: "command: #", new line, "username: " newline "password: "
+				LoginTeacherParams loginTeacherParameters = LoginTeacherParams.class.cast(threadParameters);
 				loginTeacherParameters.formatLoginTeacherRequest(out);
+			}
 				break;
-			case 1:
-				CreateTeacherParameters createTeacherParameters = (CreateTeacherParameters) threadParameters;
+			case 1: {
+				CreateTeacherParams createTeacherParameters = CreateTeacherParams.class.cast(threadParameters);
 				createTeacherParameters.formatCreateTeacherRequest(out);
+			}
 				break;
 			case 2:
 				break;
@@ -89,7 +91,7 @@ public class ClientThread extends Thread {
 
 
 			// send the command to the server
-			sendCommandToServer(0, threadParams, out);
+			sendCommandToServer(menuSelection, threadParams, out);
 
 			//if (printOutput) System.out.println("Sent output");
 
@@ -131,7 +133,7 @@ public class ClientThread extends Thread {
 			if (printOutput) System.out.println("closing");
 			try {
 				socket.close();
-				runningThreads.decrementAndGet();
+				//runningThreads.decrementAndGet();
 				System.out.flush();
 			}
 			catch (IOException e ) {
