@@ -118,11 +118,11 @@ public class LearningSystemManager implements ActionListener {
     public static JTextField editedStuPasswordText;
     public static JButton updateStuAccountButton;
     public static JButton editStuAccountBackButton;
-    
+
 
     public static void main(String[] args) {
 
-        //mainMenu();
+        mainMenu();
         //createTeacher();
         //accountCreatedTeacher();
         //teacherLogIn();
@@ -874,7 +874,7 @@ public class LearningSystemManager implements ActionListener {
 
         editTeachAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                studentMenu();
+                teacherQuizMenu();
             }
         });
 
