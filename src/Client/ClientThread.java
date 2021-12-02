@@ -101,20 +101,14 @@ public class ClientThread extends Thread {
 				//if (printOutput) System.out.println(outputString);
 				if (outputString.contains("true")) {
 					//TODO message box that says login successful.
-					JOptionPane.showMessageDialog(null, "Login Successful.", "Login",JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Login Successful.", "Login", JOptionPane.INFORMATION_MESSAGE);
 
-				}
-				else {
+				} else {
 					//TODO message box incorrect username/password
-					JOptionPane.showMessageDialog(null, "Login Failed.", "Login",JOptionPane.WARNING_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Login Failed.", "Login", JOptionPane.WARNING_MESSAGE);
 
 				}
 			}
-
-			// get the current time (after connecting to the server)
-			endTime = System.currentTimeMillis();
-			// endTime - startTime = the time it took to get the response from the sever
-			totalTime.addAndGet(endTime - startTime);
 
 		}
 		catch (UnknownHostException e) {

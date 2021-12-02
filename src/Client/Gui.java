@@ -186,7 +186,7 @@ public class Gui {
 
         teacherWelcomeLabel = new JLabel("Welcome teachers!");
         teacherWelcomeLabel.setBounds(80, 20, 150, 25);
-        teacherLoginPanel.add(welcomeLabel);
+        teacherLoginPanel.add(teacherWelcomeLabel);
 
         teacherLoginLabel = new JLabel("Username:");
         teacherLoginLabel.setBounds(20, 50, 80, 25);

@@ -45,6 +45,7 @@ public class CommandExecutor {
 					if(!(inString.startsWith("name:")))
 						return "Invalid request no username";
 					String teacherName = inString.substring(5);
+					inString = input.readLine();
 					if(!(inString.startsWith("username:")))
 						return "Invalid request no username";
 					String teacherUsername = inString.substring(9);
@@ -53,6 +54,7 @@ public class CommandExecutor {
 						return "Invalid request no password";
 					String teacherPassword = inString.substring(9);
 					result = Server.CreateTeacher(teacherName, teacherUsername, teacherPassword);
+					break;
 			}
 
 			result = result.concat("\n");

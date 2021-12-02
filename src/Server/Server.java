@@ -72,7 +72,7 @@ public class Server {
 			} else {
 				// returns the student object
 				loggedInTeachers.add(teacher);
-				return "Success!";
+				return "true";
 			}
 		}
 	}
@@ -91,7 +91,7 @@ public class Server {
 	public static String CreateTeacher(String teacherName, String teacherUsername, String teacherPassword) {
 		Teacher teacher = new Teacher(teacherName, teacherUsername, teacherPassword);
 		teachers.add(teacher);
-		return "Success";
+		return "true";
 	}
 
 
