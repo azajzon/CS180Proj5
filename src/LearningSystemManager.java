@@ -40,6 +40,7 @@ public class Main implements ActionListener {
     public static JButton addCourseBackButton;
     public static JButton createQuizButton;
     public static JButton editQuizButton;
+    
     public static JButton deleteQuizButton;
     public static JButton viewStudentQuizSubmissionsButton;
     public static JButton editTeacherAccountButton;
