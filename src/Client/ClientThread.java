@@ -34,45 +34,10 @@ public class ClientThread extends Thread {
 	// than one client thread the clientThreads should not print output, input order to not clutter the screen
 	boolean printOutput;
 
-	// startTime and endTime are used to keep track of the current time when the thread conects to the 
-	// server and when the thread gets a response from the server. The difference between the two
-	// (endTime - startTime) is the response time
-	long startTime;
-	long endTime;
 
 	ClientThread(int menuSelection, Object threadParameters) {
 		this.menuSelection = menuSelection;
 		this.threadParams = threadParameters;
-	}
-
-
-	public void sendCommandToServer(int menuSelection, Object threadParameters, PrintWriter out) {
-		//0) login teacher
-		//1) login student
-		//2) create teacher
-		switch (menuSelection) {
-			case 0: { //this formats the request sent to the server in the observable order: "command: #", new line, "username: " newline "password: "
-				LoginTeacherParams loginTeacherParameters = LoginTeacherParams.class.cast(threadParameters);
-				loginTeacherParameters.formatLoginTeacherRequest(out);
-			}
-				break;
-			case 1: {
-				CreateTeacherParams createTeacherParameters = CreateTeacherParams.class.cast(threadParameters);
-				createTeacherParameters.formatCreateTeacherRequest(out);
-			}
-				break;
-			case 2:
-				break;
-			default:
-				break;
-		}
-	}
-
-	public void readCommandResultsFromServer(int menuSelection, BufferedReader input) throws IOException {
-		String outputString;
-		/*while (((outputString = input.readLine()) != null) && (!outputString.equals("END_MESSAGE"))) {
-			if (printOutput) System.out.println(outputString);
-		}*/
 	}
 
 	public void run() {
@@ -136,5 +101,37 @@ public class ClientThread extends Thread {
 		}
 
 	}
+
+
+	public void sendCommandToServer(int menuSelection, Object threadParameters, PrintWriter out) {
+		//0) login teacher
+		switch (menuSelection) {
+			case 0: { //this formats the request sent to the server in the observable order: "command: #", new line, "username: " newline "password: "
+				LoginTeacherParams loginTeacherParameters = LoginTeacherParams.class.cast(threadParameters);
+				loginTeacherParameters.formatLoginTeacherRequest(out);
+			}
+				break;
+			case 1: {
+				CreateTeacherParams createTeacherParameters = CreateTeacherParams.class.cast(threadParameters);
+				createTeacherParameters.formatCreateTeacherRequest(out);
+				break;
+			}
+			case 2: {
+				LoginStudentParams loginStudentParameters = LoginStudentParams.class.cast(threadParameters);
+				loginStudentParameters.formatLoginStudentRequest(out);
+			}
+				break;
+			case 3: {
+				CreateStudentParams createStudentParameters = CreateStudentParams.class.cast(threadParameters);
+				createStudentParameters.formatCreateStudentRequest(out);
+			}
+				break;
+			default:
+				break;
+		}
+	}
+
+
+
 
 }

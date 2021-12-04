@@ -32,7 +32,7 @@ public class ServerThread extends Thread {
 
 			String command;
 			// read the command from the client
-		        while  ((command = input.readLine()) == null);
+			while((command = input.readLine()) == null);
 			System.out.println("Read command " + command);
 
 			// run the command using CommandExecutor and get its output

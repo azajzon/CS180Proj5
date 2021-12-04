@@ -94,6 +94,41 @@ public class Server {
 		return "true";
 	}
 
+	public static String LoginStudent(String username, String password) {
+		// creates an object of the Student class
+		Student student = getStudentByUsername(username);
+		// checks if object is null or not
+		if (student == null) {
+			return "Invalid username.";
+		} else {
+			// reads the password input and checks if it's right or not
+			if (!student.getPassword().equals(password)) {
+				return "Incorrect password.";
+			} else {
+				// returns the student object
+				loggedInStudents.add(student);
+				return "true";
+			}
+		}
+	}
+
+	public static Student getStudentByUsername(String username) {
+		Iterator<Student> it = students.iterator();
+		while(it.hasNext()) {
+			Student student = it.next();
+			if (student.getUsername().equals(username)) {
+				return student;
+			}
+		}
+		return null;
+	}
+
+	public static String CreateStudent(String studentName, String studentUsername, String studentPassword) {
+		Student student = new Student(studentName, studentUsername, studentPassword);
+		students.add(student);
+		return "true";
+	}
+
 
 }
 

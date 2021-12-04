@@ -51,7 +51,30 @@ public class Gui {
     public static JLabel nameLabel;
     public static JTextField nameText;
 
+
+    /////////////////////
+    //Student attributes
+    ////////////////////
     public static JButton createStudentButton;
+    public static JButton loginStudentAccountButton;
+    public static JButton createStudentAccountButton;
+    public static JFrame studentLoginFrame;
+    public static JPanel studentLoginPanel;
+    public static JLabel studentWelcomeLabel;
+    public static JLabel studentLoginLabel;
+    public static JLabel studentPasswordLabel;
+    public static JTextField studentUsernameText;
+    public static JTextField studentPasswordText;
+    public static JFrame createStudentFrame;
+    public static JPanel createStudentPanel;
+    public static JLabel createStudentWelcomeLabel;
+    public static JLabel createStudentNameLabel;
+    public static JTextField createStudentUsernameText;
+    public static JTextField createStudentNameText;
+    public static JLabel createStudentUsernameLabel;
+    public static JLabel createStudentPasswordLabel;
+    public static JTextField createStudentPasswordText;
+
     public static JLabel addCourse;
     public static JButton yesCourse;
     public static JButton noCourse;
@@ -71,58 +94,6 @@ public class Gui {
     public static void main(String[] args) {
         int numProcesses = 1;
         mainMenu();
-
-        /*ActionListener actionListener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (e.getSource() == loginTeacherButton) {
-                    loginTeacher();
-                    if (e.getSource() == loginTeacherAccountButton) {
-                        thrd = new Thread(new ClientThread(0, new LoginTeacherParameters(loginTeacherAccountButton.getText(), teacherPasswordText.getText())));
-                        thrd.start(); // start the thread
-                        list.add(thrd);
-                    }
-                }
-
-            }
-        };
-
-
-        mainMenu();
-        loginTeacherButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                loginTeacher();
-            }
-        });
-        createTeacherButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                createTeacher();
-            }
-        });
-
-        loginTeacherAccountButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                thrd = new Thread(new ClientThread(0, new LoginTeacherParameters(loginTeacherAccountButton.getText(), teacherPasswordText.getText())));
-                thrd.start(); // start the thread
-                list.add(thrd);
-            }
-        });
-
-        createTeacherAccountButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                thrd = new Thread(new ClientThread(1,
-                        new CreateTeacherParameters(createTeacherNameText.getText(),
-                                createTeacherUsernameText.getText(),
-                                createTeacherPasswordText.getText())));
-                thrd.start(); // start the thread
-                list.add(thrd);
-
-            }
-        });*/
 
 
     }
@@ -148,6 +119,9 @@ public class Gui {
 
         loginStudentButton = new JButton("Login Student");
         loginStudentButton.setBounds(110, 80, 150, 25);
+        loginStudentButton.addActionListener((e) -> {
+            loginStudent();
+        });
         panel.add(loginStudentButton);
 
         createTeacherButton = new JButton("Create Teacher");
@@ -159,9 +133,9 @@ public class Gui {
 
         createStudentButton = new JButton("Create Student");
         createStudentButton.setBounds(110, 140, 150, 25);
-        /*createStudentButton.addActionListener((e) -> {
-
-        });*/
+        createStudentButton.addActionListener((e) -> {
+            createStudent();
+        });
         panel.add(createStudentButton);
 
 
@@ -271,4 +245,105 @@ public class Gui {
         createTeacherFrame.setVisible(true);
 
     }
+    public static void loginStudent() {
+        studentLoginFrame = new JFrame();
+        studentLoginPanel = new JPanel();
+        studentLoginFrame.setSize(400, 300);
+        studentLoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        studentLoginFrame.add(studentLoginPanel);
+
+        studentLoginPanel.setLayout(null);
+
+        studentWelcomeLabel = new JLabel("Welcome students!");
+        studentWelcomeLabel.setBounds(80, 20, 150, 25);
+        studentLoginPanel.add(studentWelcomeLabel);
+
+        studentLoginLabel = new JLabel("Username:");
+        studentLoginLabel.setBounds(20, 50, 80, 25);
+        studentLoginPanel.add(studentLoginLabel);
+
+        studentPasswordLabel = new JLabel("Password:");
+        studentPasswordLabel.setBounds(20, 80, 80, 25);
+        studentLoginPanel.add(studentPasswordLabel);
+
+
+        studentUsernameText = new JTextField(20);
+        studentUsernameText.setBounds(100, 50, 165, 25);
+        studentLoginPanel.add(studentUsernameText);
+
+        studentPasswordText = new JTextField(20);
+        studentPasswordText.setBounds(100, 80, 165, 25);
+        studentLoginPanel.add(studentPasswordText);
+
+        loginStudentAccountButton = new JButton("Login");
+        loginStudentAccountButton.addActionListener((e) -> {
+            Thread thrd = new Thread(new ClientThread(2, new LoginStudentParams(studentUsernameText.getText(), studentPasswordText.getText())));
+            thrd.start(); // start the thread
+            list.add(thrd);
+        });
+        loginStudentAccountButton.setBounds(30, 120, 80, 25);
+        studentLoginPanel.add(loginStudentAccountButton);
+
+
+        studentLoginFrame.setVisible(true);
+    }
+
+    public static void createStudent() {
+        createStudentFrame = new JFrame();
+        createStudentPanel = new JPanel();
+        createStudentFrame.setSize(400, 300);
+        createStudentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createStudentFrame.add(createStudentPanel);
+
+        createStudentPanel.setLayout(null);
+
+        createStudentWelcomeLabel = new JLabel("Create a student account");
+        createStudentWelcomeLabel.setBounds(80, 20, 200, 25);
+        createStudentPanel.add(createStudentWelcomeLabel);
+
+        createStudentNameLabel = new JLabel("First & Last Name:");
+        createStudentNameLabel.setBounds(20, 50, 150, 25);
+        createStudentPanel.add(createStudentNameLabel);
+
+        createStudentNameText = new JTextField(20);
+        createStudentNameText.setBounds(150, 50, 165, 25);
+        createStudentPanel.add(createStudentNameText);
+
+        createStudentUsernameLabel = new JLabel("Username:");
+        createStudentUsernameLabel.setBounds(20, 80, 80, 25);
+        createStudentPanel.add(createStudentUsernameLabel);
+
+        createStudentUsernameText = new JTextField(20);
+        createStudentUsernameText.setBounds(150, 80, 165, 25);
+        createStudentPanel.add(createStudentUsernameText);
+
+        createStudentPasswordLabel = new JLabel("Password:");
+        createStudentPasswordLabel.setBounds(20, 110, 80, 25);
+        createStudentPanel.add(createStudentPasswordLabel);
+
+        createStudentPasswordText = new JTextField(20);
+        createStudentPasswordText.setBounds(150, 110, 165, 25);
+        createStudentPanel.add(createStudentPasswordText);
+
+        createStudentAccountButton = new JButton("Create Account");
+        createStudentAccountButton.setBounds(30, 150, 150, 25);
+        createStudentAccountButton.addActionListener((e) -> {
+            Thread thrd = new Thread(new ClientThread(3,
+                    new CreateStudentParams(createStudentNameText.getText(),
+                            createStudentUsernameText.getText(),
+                            createStudentPasswordText.getText())));
+            thrd.start(); // start the thread
+            list.add(thrd);
+        });
+        createStudentPanel.add(createStudentAccountButton);
+
+
+        createStudentFrame.setVisible(true);
+    }
+
+
+
+
+
+
 }

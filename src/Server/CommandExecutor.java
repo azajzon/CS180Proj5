@@ -55,6 +55,33 @@ public class CommandExecutor {
 					String teacherPassword = inString.substring(9);
 					result = Server.CreateTeacher(teacherName, teacherUsername, teacherPassword);
 					break;
+				case 2:
+					inString = input.readLine();
+					if(!(inString.startsWith("username:")))
+						return "Invalid request no username";
+					username = inString.substring(9);
+					inString = input.readLine();
+					if(!(inString.startsWith("password:")))
+						return "Invalid request no password";
+					password = inString.substring(9);
+					result = Server.LoginStudent(username, password);
+					break;
+				case 3:
+					inString = input.readLine();
+					if(!(inString.startsWith("name:")))
+						return "Invalid request no username";
+					String studentName = inString.substring(5);
+					inString = input.readLine();
+					if(!(inString.startsWith("username:")))
+						return "Invalid request no username";
+					String studentUsername = inString.substring(9);
+					inString = input.readLine();
+					if(!(inString.startsWith("password:")))
+						return "Invalid request no password";
+					String studentPassword = inString.substring(9);
+					result = Server.CreateStudent(studentName, studentUsername, studentPassword);
+					break;
+
 			}
 
 			result = result.concat("\n");
