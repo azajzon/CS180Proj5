@@ -40,7 +40,6 @@ public class Main implements ActionListener {
     public static JButton addCourseBackButton;
     public static JButton createQuizButton;
     public static JButton editQuizButton;
-    
     public static JButton deleteQuizButton;
     public static JButton viewStudentQuizSubmissionsButton;
     public static JButton editTeacherAccountButton;
@@ -166,6 +165,8 @@ public class Main implements ActionListener {
 
         createTeacherButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 createTeacher();
             }
         });
@@ -178,6 +179,8 @@ public class Main implements ActionListener {
 
         createStudentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 createStudent();
             }
         });
@@ -189,6 +192,8 @@ public class Main implements ActionListener {
 
         loginTeacherButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 teacherLogIn();
             }
         });
@@ -200,6 +205,8 @@ public class Main implements ActionListener {
 
         loginStudentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 studentLogIn();
             }
         });
@@ -264,10 +271,21 @@ public class Main implements ActionListener {
         createTeacherAccountButton.setBounds(160, 150, 150, 25);
         createTeacherAccountButton.addActionListener(new Main());
         panel.add(createTeacherAccountButton);
-
+        JLabel invalidName = new JLabel();
         createTeacherAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                accountCreatedTeacher();
+                String returnValue = checkSpaceForTeacherName(teacherNameText);
+                if(returnValue.equals("Success")) {
+                    frame.setVisible(false);
+                    frame.dispose();
+                    accountCreatedTeacher();
+                }
+                else {
+                    invalidName.setText(returnValue);
+                    invalidName.setBounds(30, 180, 250, 20);
+                    panel.add(invalidName);
+                    panel.repaint();
+                }
             }
         });
 
@@ -287,18 +305,18 @@ public class Main implements ActionListener {
     }
 
 // Sample invalid input check
-    /*
-    public static boolean checkSpaceForTeacherName(JTextField teacherNameText) {
+
+    public static String checkSpaceForTeacherName(JTextField teacherNameText) {
         try {
-            int name = Integer.parseInt(teacherNameText.getText());
-            return true;
+            if(teacherNameText.getText().contains(" ") )
+                return "Success";
+            else
+                return "Enter a space for first and last name";
         } catch (NumberFormatException e) {
-            JLabel invalidName = new JLabel("Enter a space for first name and last name");
-            return false;
+            return "Something went wrong Please re-enter all fields!!";
         }
     }
 
-     */
 
     public static void accountCreatedTeacher() {
         frame = new JFrame();
@@ -365,6 +383,8 @@ public class Main implements ActionListener {
 
         teacherLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 teacherMenu();
             }
         });
@@ -401,6 +421,8 @@ public class Main implements ActionListener {
 
         yesCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 addCourse();
             }
         });
@@ -449,6 +471,8 @@ public class Main implements ActionListener {
 
         createCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 teacherQuizMenu();
             }
         });
@@ -460,6 +484,8 @@ public class Main implements ActionListener {
 
         addCourseBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 teacherMenu();
             }
         });
@@ -486,6 +512,8 @@ public class Main implements ActionListener {
 
         createQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 createQuiz();
             }
         });
@@ -497,6 +525,8 @@ public class Main implements ActionListener {
 
         editQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 editQuiz();
             }
         });
@@ -518,6 +548,8 @@ public class Main implements ActionListener {
 
         editTeacherAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 editTeacherAccount();
             }
         });
@@ -530,6 +562,8 @@ public class Main implements ActionListener {
 
         teacherQuizMenuBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 addCourse();
             }
         });
@@ -568,6 +602,8 @@ public class Main implements ActionListener {
 
         formatOfQuiz1Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 multipleChoiceQuiz();
             }
         });
@@ -579,6 +615,8 @@ public class Main implements ActionListener {
 
         formatOfQuiz2Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 trueOrFalseQuiz();
             }
         });
@@ -590,6 +628,8 @@ public class Main implements ActionListener {
 
         createQuizBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 teacherQuizMenu();
             }
         });
@@ -676,6 +716,8 @@ public class Main implements ActionListener {
 
         addQuestionMCButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 addAnotherQuestion();
             }
         });
@@ -687,6 +729,8 @@ public class Main implements ActionListener {
 
         multipleChoiceQuizBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 createQuiz();
             }
         });
@@ -749,6 +793,8 @@ public class Main implements ActionListener {
 
         addQuestionTFButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 addAnotherQuestion();
             }
         });
@@ -898,6 +944,8 @@ public class Main implements ActionListener {
 
         editTeachAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 studentMenu();
             }
         });
@@ -953,6 +1001,8 @@ public class Main implements ActionListener {
 
         createStudentAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 accountCreatedStudent();
             }
         });
@@ -964,6 +1014,8 @@ public class Main implements ActionListener {
 
         createStudentAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 mainMenu();
             }
         });
@@ -991,6 +1043,8 @@ public class Main implements ActionListener {
 
         studentLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 studentLogIn();
             }
         });
@@ -1035,6 +1089,8 @@ public class Main implements ActionListener {
 
         studentLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 studentMenu();
             }
         });
@@ -1046,6 +1102,8 @@ public class Main implements ActionListener {
 
         studentLogInBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 mainMenu();
             }
         });
@@ -1071,6 +1129,8 @@ public class Main implements ActionListener {
 
         takeQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 takeQuiz();
             }
         });
@@ -1082,6 +1142,8 @@ public class Main implements ActionListener {
 
         viewGradedQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 viewGradedQuiz();
             }
         });
@@ -1093,6 +1155,8 @@ public class Main implements ActionListener {
 
         editStudentAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 editStudentAccount();
             }
         });
@@ -1224,6 +1288,8 @@ public class Main implements ActionListener {
 
         editStuAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frame.dispose();
                 studentMenu();
             }
         });
@@ -1238,16 +1304,3 @@ public class Main implements ActionListener {
     }
 }
 
-//example for plugging in invalid inputs
-
-    /*
-    @Override
-    public boolean verify(JComponent input) {
-        try {
-            int value = Double.parseDouble();
-            return true;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-     */
