@@ -2,11 +2,32 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class Main implements ActionListener {
-    public static JFrame frame;
+public class Main implements ActionListener {
+
+    //ALL FRAMES
+    public static JFrame maineMenuFrame;
+    public static JFrame createTeacherFrame;
+    public static JFrame accountCreatedTeacherFrame;
+    public static JFrame teacherLogInFrame;
+    public static JFrame teacherMenuFrame;
+    public static JFrame addCourseFrame;
+    public static JFrame teacherQuizMenuFrame;
+    public static JFrame createQuizFrame;
+    public static JFrame multipleChoiceQuizFrame;
+    public static JFrame trueOrFalseQuizFrame;
+    public static JFrame addAnotherQuestionFrame;
+    public static JFrame editQuizFrame;
+    public static JFrame editTeacherAccountFrame;
+    public static JFrame createStudentFrame;
+    public static JFrame accountCreatedStudentFrame;
+    public static JFrame studentLogInFrame;
+    public static JFrame studentMenuFrame;
+    public static JFrame takeQuizFrame;
+    public static JFrame viewGradedQuizFrame;
+    public static JFrame editStudentAccountFrame;
+
     public static JPanel panel;
     public static JLabel lsmToolLabel;
-
 
     //TEACHER VARIABLES
     public static JButton createTeacherButton;
@@ -148,11 +169,11 @@ class Main implements ActionListener {
     }
 
     public static void mainMenu() {
-        frame = new JFrame();
+        maineMenuFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        maineMenuFrame.setSize(400, 300);
+        maineMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        maineMenuFrame.add(panel);
 
         lsmToolLabel = new JLabel("Welcome to Learning System Management Tool!");
         lsmToolLabel.setBounds(50, 20, 500, 25);
@@ -165,8 +186,8 @@ class Main implements ActionListener {
 
         createTeacherButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                maineMenuFrame.setVisible(false);
+                maineMenuFrame.dispose();
                 createTeacher();
             }
         });
@@ -179,8 +200,8 @@ class Main implements ActionListener {
 
         createStudentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                maineMenuFrame.setVisible(false);
+                maineMenuFrame.dispose();
                 createStudent();
             }
         });
@@ -192,8 +213,8 @@ class Main implements ActionListener {
 
         loginTeacherButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                maineMenuFrame.setVisible(false);
+                maineMenuFrame.dispose();
                 teacherLogIn();
             }
         });
@@ -205,8 +226,8 @@ class Main implements ActionListener {
 
         loginStudentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                maineMenuFrame.setVisible(false);
+                maineMenuFrame.dispose();
                 studentLogIn();
             }
         });
@@ -224,18 +245,18 @@ class Main implements ActionListener {
 
         panel.setLayout(null);
 
-        frame.setVisible(true);
+        maineMenuFrame.setVisible(true);
 
     }
 
 
 
     public static void createTeacher() {
-        frame = new JFrame();
+        createTeacherFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        createTeacherFrame.setSize(400, 300);
+        createTeacherFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createTeacherFrame.add(panel);
 
         panel.setLayout(null);
 
@@ -276,8 +297,8 @@ class Main implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 String returnValue = checkSpaceForTeacherName(teacherNameText);
                 if(returnValue.equals("Success")) {
-                    frame.setVisible(false);
-                    frame.dispose();
+                    createTeacherFrame.setVisible(false);
+                    createTeacherFrame.dispose();
                     accountCreatedTeacher();
                 }
                 else {
@@ -300,7 +321,7 @@ class Main implements ActionListener {
             }
         });
 
-        frame.setVisible(true);
+        createTeacherFrame.setVisible(true);
 
     }
 
@@ -319,11 +340,11 @@ class Main implements ActionListener {
 
 
     public static void accountCreatedTeacher() {
-        frame = new JFrame();
+        accountCreatedTeacherFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        accountCreatedTeacherFrame.setSize(400, 300);
+        accountCreatedTeacherFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        accountCreatedTeacherFrame.add(panel);
         panel.setLayout(null);
 
         teacherAccountCreatedLabel = new JLabel("Account successfully created!");
@@ -343,16 +364,16 @@ class Main implements ActionListener {
 
         panel.setLayout(null);
 
-        frame.setVisible(true);
+        accountCreatedTeacherFrame.setVisible(true);
 
     }
 
     public static void teacherLogIn() {
-        frame = new JFrame();
+        teacherLogInFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        teacherLogInFrame.setSize(400, 300);
+        teacherLogInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        teacherLogInFrame.add(panel);
 
         panel.setLayout(null);
 
@@ -383,8 +404,8 @@ class Main implements ActionListener {
 
         teacherLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                teacherLogInFrame.setVisible(false);
+                teacherLogInFrame.dispose();
                 teacherMenu();
             }
         });
@@ -400,15 +421,15 @@ class Main implements ActionListener {
             }
         });
 
-        frame.setVisible(true);
+        teacherLogInFrame.setVisible(true);
     }
 
     public static void teacherMenu() {
-        frame = new JFrame();
+        teacherMenuFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        teacherMenuFrame.setSize(400, 300);
+        teacherMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        teacherMenuFrame.add(panel);
 
         addCourseLabel = new JLabel("Do you want to add a course?");
         addCourseLabel.setBounds(80, 20, 200, 25);
@@ -421,8 +442,8 @@ class Main implements ActionListener {
 
         yesCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                teacherMenuFrame.setVisible(false);
+                teacherMenuFrame.dispose();
                 addCourse();
             }
         });
@@ -441,17 +462,17 @@ class Main implements ActionListener {
 
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        teacherMenuFrame.setVisible(true);
 
     }
 
     public static void addCourse() {
 
-        frame = new JFrame();
+        addCourseFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        addCourseFrame.setSize(400, 300);
+        addCourseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addCourseFrame.add(panel);
 
         // if yes to adding a course
         // PATHWAY IS
@@ -471,8 +492,8 @@ class Main implements ActionListener {
 
         createCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                addCourseFrame.setVisible(false);
+                addCourseFrame.dispose();
                 teacherQuizMenu();
             }
         });
@@ -484,22 +505,22 @@ class Main implements ActionListener {
 
         addCourseBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                addCourseFrame.setVisible(false);
+                addCourseFrame.dispose();
                 teacherMenu();
             }
         });
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        addCourseFrame.setVisible(true);
     }
 
     public static void teacherQuizMenu() {
-        frame = new JFrame();
+        teacherQuizMenuFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        teacherQuizMenuFrame.setSize(400, 300);
+        teacherQuizMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        teacherQuizMenuFrame.add(panel);
 
         lsmToolLabel = new JLabel("Learning System Management Tool");
         lsmToolLabel.setBounds(90, 20, 500, 25);
@@ -512,8 +533,8 @@ class Main implements ActionListener {
 
         createQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                teacherQuizMenuFrame.setVisible(false);
+                teacherQuizMenuFrame.dispose();
                 createQuiz();
             }
         });
@@ -525,8 +546,8 @@ class Main implements ActionListener {
 
         editQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                teacherQuizMenuFrame.setVisible(false);
+                teacherQuizMenuFrame.dispose();
                 editQuiz();
             }
         });
@@ -548,8 +569,8 @@ class Main implements ActionListener {
 
         editTeacherAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                teacherQuizMenuFrame.setVisible(false);
+                teacherQuizMenuFrame.dispose();
                 editTeacherAccount();
             }
         });
@@ -562,22 +583,22 @@ class Main implements ActionListener {
 
         teacherQuizMenuBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                teacherQuizMenuFrame.setVisible(false);
+                teacherQuizMenuFrame.dispose();
                 addCourse();
             }
         });
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        teacherQuizMenuFrame.setVisible(true);
     }
 
     public static void createQuiz() {
-        frame = new JFrame();
+        createQuizFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        createQuizFrame.setSize(400, 300);
+        createQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createQuizFrame.add(panel);
 
         lsmToolLabel = new JLabel("Create a Quiz");
         lsmToolLabel.setBounds(130, 20, 500, 25);
@@ -602,8 +623,8 @@ class Main implements ActionListener {
 
         formatOfQuiz1Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                createQuizFrame.setVisible(false);
+                createQuizFrame.dispose();
                 multipleChoiceQuiz();
             }
         });
@@ -615,8 +636,8 @@ class Main implements ActionListener {
 
         formatOfQuiz2Button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                createQuizFrame.setVisible(false);
+                createQuizFrame.dispose();
                 trueOrFalseQuiz();
             }
         });
@@ -628,22 +649,22 @@ class Main implements ActionListener {
 
         createQuizBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                createQuizFrame.setVisible(false);
+                createQuizFrame.dispose();
                 teacherQuizMenu();
             }
         });
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        createQuizFrame.setVisible(true);
     }
 
     public static void multipleChoiceQuiz() {
-        frame = new JFrame();
+        multipleChoiceQuizFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 320);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        multipleChoiceQuizFrame.setSize(400, 320);
+        multipleChoiceQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        multipleChoiceQuizFrame.add(panel);
 
         lsmToolLabel = new JLabel("Name of Quiz: "); // + show name of quiz);
         lsmToolLabel.setBounds(130, 20, 500, 25);
@@ -716,8 +737,8 @@ class Main implements ActionListener {
 
         addQuestionMCButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                multipleChoiceQuizFrame.setVisible(false);
+                multipleChoiceQuizFrame.dispose();
                 addAnotherQuestion();
             }
         });
@@ -729,22 +750,22 @@ class Main implements ActionListener {
 
         multipleChoiceQuizBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                multipleChoiceQuizFrame.setVisible(false);
+                multipleChoiceQuizFrame.dispose();
                 createQuiz();
             }
         });
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        multipleChoiceQuizFrame.setVisible(true);
     }
 
     public static void trueOrFalseQuiz() {
-        frame = new JFrame();
+        trueOrFalseQuizFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 320);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        trueOrFalseQuizFrame.setSize(400, 320);
+        trueOrFalseQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        trueOrFalseQuizFrame.add(panel);
 
         lsmToolLabel = new JLabel("Name of Quiz: "); // + show name of quiz);
         lsmToolLabel.setBounds(130, 20, 500, 25);
@@ -793,23 +814,23 @@ class Main implements ActionListener {
 
         addQuestionTFButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                trueOrFalseQuizFrame.setVisible(false);
+                trueOrFalseQuizFrame.dispose();
                 addAnotherQuestion();
             }
         });
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        trueOrFalseQuizFrame.setVisible(true);
 
     }
 
     public static void addAnotherQuestion() {
-        frame = new JFrame();
+        addAnotherQuestionFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        addAnotherQuestionFrame.setSize(400, 300);
+        addAnotherQuestionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addAnotherQuestionFrame.add(panel);
 
         addAnotherQuestionLabel = new JLabel("Do you want to add another question?");
         addAnotherQuestionLabel.setBounds(70, 20, 280, 25);
@@ -847,16 +868,16 @@ class Main implements ActionListener {
         */
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        addAnotherQuestionFrame.setVisible(true);
 
     }
 
     public static void editQuiz() {
-        frame = new JFrame();
+        editQuizFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        editQuizFrame.setSize(400, 300);
+        editQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editQuizFrame.add(panel);
 
         lsmToolLabel = new JLabel("Edit a Quiz");
         lsmToolLabel.setBounds(160, 20, 500, 25);
@@ -883,16 +904,16 @@ class Main implements ActionListener {
         */
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        editQuizFrame.setVisible(true);
 
     }
 
     public static void editTeacherAccount() {
-        frame = new JFrame();
+        editTeacherAccountFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        editTeacherAccountFrame.setSize(400, 300);
+        editTeacherAccountFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editTeacherAccountFrame.add(panel);
 
         panel.setLayout(null);
 
@@ -944,25 +965,25 @@ class Main implements ActionListener {
 
         editTeachAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                editTeacherAccountFrame.setVisible(false);
+                editTeacherAccountFrame.dispose();
                 studentMenu();
             }
         });
 
 
-        frame.setVisible(true);
+        editTeacherAccountFrame.setVisible(true);
 
     }
     //Teacher Pathway ends
 
     //Student pathway starts
     public static void createStudent() {
-        frame = new JFrame();
+        createStudentFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        createStudentFrame.setSize(400, 300);
+        createStudentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createStudentFrame.add(panel);
 
         panel.setLayout(null);
 
@@ -1001,8 +1022,8 @@ class Main implements ActionListener {
 
         createStudentAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                createStudentFrame.setVisible(false);
+                createStudentFrame.dispose();
                 accountCreatedStudent();
             }
         });
@@ -1014,22 +1035,22 @@ class Main implements ActionListener {
 
         createStudentAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                createStudentFrame.setVisible(false);
+                createStudentFrame.dispose();
                 mainMenu();
             }
         });
 
 
-        frame.setVisible(true);
+        createStudentFrame.setVisible(true);
     }
 
     public static void accountCreatedStudent() {
-        frame = new JFrame();
+        accountCreatedStudentFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        accountCreatedStudentFrame.setSize(400, 300);
+        accountCreatedStudentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        accountCreatedStudentFrame.add(panel);
         panel.setLayout(null);
 
         studentAccountCreatedLabel = new JLabel("Account successfully created!");
@@ -1043,22 +1064,22 @@ class Main implements ActionListener {
 
         studentLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                accountCreatedStudentFrame.setVisible(false);
+                accountCreatedStudentFrame.dispose();
                 studentLogIn();
             }
         });
 
-        frame.setVisible(true);
+        accountCreatedStudentFrame.setVisible(true);
 
     }
 
     public static void studentLogIn() {
-        frame = new JFrame();
+        studentLogInFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        studentLogInFrame.setSize(400, 300);
+        studentLogInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        studentLogInFrame.add(panel);
 
         panel.setLayout(null);
 
@@ -1089,8 +1110,8 @@ class Main implements ActionListener {
 
         studentLogInButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                studentLogInFrame.setVisible(false);
+                studentLogInFrame.dispose();
                 studentMenu();
             }
         });
@@ -1102,21 +1123,21 @@ class Main implements ActionListener {
 
         studentLogInBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                studentLogInFrame.setVisible(false);
+                studentLogInFrame.dispose();
                 mainMenu();
             }
         });
 
-        frame.setVisible(true);
+        studentLogInFrame.setVisible(true);
     }
 
     public static void studentMenu() {
-        frame = new JFrame();
+        studentMenuFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        studentMenuFrame.setSize(400, 300);
+        studentMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        studentMenuFrame.add(panel);
 
         lsmToolLabel = new JLabel("Learning System Management Tool");
         lsmToolLabel.setBounds(90, 20, 500, 25);
@@ -1129,8 +1150,8 @@ class Main implements ActionListener {
 
         takeQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                studentMenuFrame.setVisible(false);
+                studentMenuFrame.dispose();
                 takeQuiz();
             }
         });
@@ -1142,8 +1163,8 @@ class Main implements ActionListener {
 
         viewGradedQuizButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                studentMenuFrame.setVisible(false);
+                studentMenuFrame.dispose();
                 viewGradedQuiz();
             }
         });
@@ -1155,8 +1176,8 @@ class Main implements ActionListener {
 
         editStudentAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                studentMenuFrame.setVisible(false);
+                studentMenuFrame.dispose();
                 editStudentAccount();
             }
         });
@@ -1175,15 +1196,15 @@ class Main implements ActionListener {
         */
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        studentMenuFrame.setVisible(true);
     }
 
     public static void takeQuiz() {
-        frame = new JFrame();
+        takeQuizFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        takeQuizFrame.setSize(400, 300);
+        takeQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        takeQuizFrame.add(panel);
 
         lsmToolLabel = new JLabel("Take a Quiz");
         lsmToolLabel.setBounds(160, 20, 500, 25);
@@ -1208,16 +1229,16 @@ class Main implements ActionListener {
         */
 
         panel.setLayout(null);
-        frame.setVisible(true);
+        takeQuizFrame.setVisible(true);
 
     }
 
     public static void viewGradedQuiz() {
-        frame = new JFrame();
+        viewGradedQuizFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        viewGradedQuizFrame.setSize(400, 300);
+        viewGradedQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        viewGradedQuizFrame.add(panel);
 
         viewGradedQuiz = new JLabel("View a Graded Quiz");
         viewGradedQuiz.setBounds(160, 20, 500, 25);
@@ -1232,11 +1253,11 @@ class Main implements ActionListener {
     }
 
     public static void editStudentAccount() {
-        frame = new JFrame();
+        editStudentAccountFrame = new JFrame();
         panel = new JPanel();
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(panel);
+        editStudentAccountFrame.setSize(400, 300);
+        editStudentAccountFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editStudentAccountFrame.add(panel);
 
         panel.setLayout(null);
 
@@ -1288,13 +1309,13 @@ class Main implements ActionListener {
 
         editStuAccountBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                frame.setVisible(false);
-                frame.dispose();
+                editStudentAccountFrame.setVisible(false);
+                editStudentAccountFrame.dispose();
                 studentMenu();
             }
         });
 
-        frame.setVisible(true);
+        editStudentAccountFrame.setVisible(true);
 
     }
 
@@ -1303,3 +1324,4 @@ class Main implements ActionListener {
 
     }
 }
+
