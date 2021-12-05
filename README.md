@@ -321,5 +321,38 @@
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
 | run()  | public static String  | String commandString, BufferedReader input | Description |
+
+
+ #### 11) Server.java
+ 
+##### Description: 
+<p> The Server class </p>
+
+##### Fields: 
+| Modifier and Type  | Field | Description |
+| ------------- | ------------- | ------------- |
+| public static CopyOnWriteArrayList<Student> | teachers |  | 
+| public static CopyOnWriteArrayList<Teacher> | courses |  | 
+| public static CopyOnWriteArrayList<Course> | students |  | 
+| public static CopyOnWriteArrayList<Teacher> | loggedInTeachers |  | 
+| public static CopyOnWriteArrayList<Student> | loggedInStudents |  | 
+ 
+##### Constructors: 
+
+ <p> None </p>
+ 
+##### Methods: 
+
+| Method  | Signature | Parameters  | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| main()  | public static void  | String [] args | Description |
+| LoginTeacher()  | public static String  | String username, String password | Description |
+| getTeacherByUsername()  | public static Teacher | String username | Description |
+| CreateTeacher()  | public static String  | String teacherName, String teacherUsername, String teacherPassword | Description |
+| LoginStudent()  | public static String  | tring username, String password | Description |
+| getStudentByUsername()  | public static Student | String username | Description |
+| CreateStudent()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
+ 
+ 
  
  
