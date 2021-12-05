@@ -323,7 +323,7 @@
 | run()  | public static String  | String commandString, BufferedReader input | Description |
 
 
- #### 11) Server.java
+#### 11) Server.java
  
 ##### Description: 
 <p> The Server class </p>
@@ -354,5 +354,28 @@
 | CreateStudent()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
  
  
+#### 12) ServerThread.java
  
+##### Description: 
+<p> The Server class </p>
+
+##### Fields: 
+| Modifier and Type  | Field | Description |
+| ------------- | ------------- | ------------- |
+| Socket | client |  | 
+| PrintWriter | output |  | 
+| BufferedReader | input |  | 
+
+
+##### Constructors: 
+
+ <p> None </p>
+ 
+##### Methods: 
+
+| Method  | Signature | Parameters  | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| ServerThread()  | public  | Socket client | Description |
+| run()  | public void  | None | Description |
+
  
