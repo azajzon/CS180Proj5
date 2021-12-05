@@ -357,7 +357,7 @@
 #### 12) ServerThread.java
  
 ##### Description: 
-<p> The Server class </p>
+<p> The ServerThread class </p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
@@ -369,20 +369,21 @@
 
 ##### Constructors: 
 
- <p> None </p>
- 
+| Constructor  | Description |
+| ------------- | ------------- |
+|  public ServerThread(Socket client) | Constructs a newly allocated ServerThread object with the field values specified by the input parameters. |
+
 ##### Methods: 
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| ServerThread()  | public  | Socket client | Description |
 | run()  | public void  | None | Description |
 
  
 #### 13) ClientThread.java
  
 ##### Description: 
-<p> The Server class </p>
+<p> The ClientThread class </p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
@@ -398,15 +399,43 @@
 
 ##### Constructors: 
 
- <p> None </p>
+| Constructor  | Description |
+| ------------- | ------------- |
+|  public ClientThread(int menuSelection, Object threadParameters) | Constructs a newly allocated ClientThread object with the field values specified by the input parameters. |
+
  
 ##### Methods: 
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| ClientThread()  | public  | int menuSelection, Object threadParameters | Description |
 | run()  | public void  | None | Description |
 | sendCommandToServer()  | public void  | int menuSelection, Object threadParameters, PrintWriter out | Description |
  
+ #### 14) CreateStudentParams.java
  
+##### Description: 
+<p> The CreateStudentParams class </p>
+
+##### Fields: 
+| Modifier and Type  | Field | Description |
+| ------------- | ------------- | ------------- |
+| private String | name |  | 
+| private String | username |  | 
+| private String | password |  | 
+ 
+
+##### Constructors: 
+
+| Constructor  | Description |
+| ------------- | ------------- |
+|  public CreateStudentParams(String name, String username, String password) | Constructs a newly allocated CreateStudentParams object with the field values specified by the input parameters. |
+ 
+##### Methods: 
+
+| Method  | Signature | Parameters  | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| formatCreateStudentRequest()  | public void  | PrintWriter out | Description |
+
+ 
+
 
