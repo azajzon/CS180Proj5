@@ -437,5 +437,79 @@
 | formatCreateStudentRequest()  | public void  | PrintWriter out | Description |
 
  
+ #### 15) CreateTeacherParams.java
+ 
+##### Description: 
+<p> The CreateTeacherParams class </p>
+
+##### Fields: 
+| Modifier and Type  | Field | Description |
+| ------------- | ------------- | ------------- |
+| private String | name |  | 
+| private String | username |  | 
+| private String | password |  | 
+ 
+
+##### Constructors: 
+
+| Constructor  | Description |
+| ------------- | ------------- |
+|  public CreateTeacherParams(String name, String username, String password) | Constructs a newly allocated CreateTeacherParams object with the field values specified by the input parameters. |
+ 
+##### Methods: 
+
+| Method  | Signature | Parameters  | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| formatCreateTeacherRequest()  | public void  | PrintWriter out | Description |
+
+
+ #### 16) LoginStudentParams.java
+ 
+##### Description: 
+<p> The LoginStudentParams class </p>
+
+##### Fields: 
+| Modifier and Type  | Field | Description |
+| ------------- | ------------- | ------------- |
+| private String | username |  | 
+| private String | password |  | 
+ 
+
+##### Constructors: 
+
+| Constructor  | Description |
+| ------------- | ------------- |
+|  public LoginStudentParams(String username, String password) | Constructs a newly allocated LoginStudentParams object with the field values specified by the input parameters. |
+ 
+##### Methods: 
+
+| Method  | Signature | Parameters  | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| formatLoginStudentRequest()  | public void  | PrintWriter out | Description |
+ 
+
+#### 17)  LoginTeacherParams.java
+ 
+##### Description: 
+<p> The LoginTeacherParams class </p>
+
+##### Fields: 
+| Modifier and Type  | Field | Description |
+| ------------- | ------------- | ------------- |
+| private String | username |  | 
+| private String | password |  | 
+ 
+
+##### Constructors: 
+
+| Constructor  | Description |
+| ------------- | ------------- |
+|  public LoginTeacherParams (String username, String password) | Constructs a newly allocated LoginTeacherParams  object with the field values specified by the input parameters. |
+ 
+##### Methods: 
+
+| Method  | Signature | Parameters  | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| formatLoginTeacherRequest()  | public void  | PrintWriter out | Description |
 
 
