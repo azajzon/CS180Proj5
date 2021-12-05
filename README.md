@@ -300,4 +300,26 @@
 | setUsername() | public void   | String username | Sets the username instance variable to the value given as a parameter |
 
 
+#### 10) CommandExecutor.java
+ 
+##### Description: 
+<p> The Command Executor class </p>
 
+##### Fields: 
+| Modifier and Type  | Field | Description |
+| ------------- | ------------- | ------------- |
+| |  |  | 
+|   |  |  | 
+
+
+##### Constructors: 
+
+ <p> None </p>
+ 
+##### Methods: 
+
+| Method  | Signature | Parameters  | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| run()  | public static String  | String commandString, BufferedReader input | Description |
+ 
+ 
