@@ -379,3 +379,34 @@
 | run()  | public void  | None | Description |
 
  
+#### 13) ClientThread.java
+ 
+##### Description: 
+<p> The Server class </p>
+
+##### Fields: 
+| Modifier and Type  | Field | Description |
+| ------------- | ------------- | ------------- |
+| int | menuSelection |  | 
+| Object | threadParams |  | 
+| String | hostName |  | 
+| Socket | socket |  | 
+| AtomicLong | totalTime |  | 
+| AtomicLong | runningThreads |  | 
+| boolean | printOutput |  | 
+ 
+
+##### Constructors: 
+
+ <p> None </p>
+ 
+##### Methods: 
+
+| Method  | Signature | Parameters  | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| ClientThread()  | public  | int menuSelection, Object threadParameters | Description |
+| run()  | public void  | None | Description |
+| sendCommandToServer()  | public void  | int menuSelection, Object threadParameters, PrintWriter out | Description |
+ 
+ 
+
