@@ -26,7 +26,31 @@ public class Main implements ActionListener {
     public static JFrame viewGradedQuizFrame;
     public static JFrame editStudentAccountFrame;
 
-    public static JPanel panel;
+    //ALL PANELS
+    public static JPanel maineMenuPanel;
+    public static JPanel createTeacherPanel;
+    public static JPanel accountCreatedTeacherPanel;
+    public static JPanel teacherLogInPanel;
+    public static JPanel teacherMenuPanel;
+    public static JPanel addCoursePanel;
+    public static JPanel teacherQuizMenuPanel;
+    public static JPanel createQuizPanel;
+    public static JPanel multipleChoiceQuizPanel;
+    public static JPanel trueOrFalseQuizPanel;
+    public static JPanel addAnotherQuestionPanel;
+    public static JPanel editQuizPanel;
+    public static JPanel editTeacherAccountPanel;
+    public static JPanel createStudentPanel;
+    public static JPanel accountCreatedStudentPanel;
+    public static JPanel studentLogInPanel;
+    public static JPanel studentMenuPanel;
+    public static JPanel takeQuizPanel;
+    public static JPanel viewGradedQuizPanel;
+    public static JPanel editStudentAccountPanel;
+
+
+
+
     public static JLabel lsmToolLabel;
 
     //TEACHER VARIABLES
@@ -170,7 +194,7 @@ public class Main implements ActionListener {
 
     public static void mainMenu() {
         maineMenuFrame = new JFrame();
-        panel = new JPanel();
+        maineMenuPanel = new JPanel();
         maineMenuFrame.setSize(400, 300);
         maineMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         maineMenuFrame.add(panel);
@@ -253,7 +277,7 @@ public class Main implements ActionListener {
 
     public static void createTeacher() {
         createTeacherFrame = new JFrame();
-        panel = new JPanel();
+        createTeacherPanel = new JPanel();
         createTeacherFrame.setSize(400, 300);
         createTeacherFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         createTeacherFrame.add(panel);
@@ -341,7 +365,7 @@ public class Main implements ActionListener {
 
     public static void accountCreatedTeacher() {
         accountCreatedTeacherFrame = new JFrame();
-        panel = new JPanel();
+        accountCreatedTeacherPanel = new JPanel();
         accountCreatedTeacherFrame.setSize(400, 300);
         accountCreatedTeacherFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         accountCreatedTeacherFrame.add(panel);
@@ -370,7 +394,7 @@ public class Main implements ActionListener {
 
     public static void teacherLogIn() {
         teacherLogInFrame = new JFrame();
-        panel = new JPanel();
+        teacherLogInPanel = new JPanel();
         teacherLogInFrame.setSize(400, 300);
         teacherLogInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         teacherLogInFrame.add(panel);
@@ -426,7 +450,7 @@ public class Main implements ActionListener {
 
     public static void teacherMenu() {
         teacherMenuFrame = new JFrame();
-        panel = new JPanel();
+        teacherMenuPanel = new JPanel();
         teacherMenuFrame.setSize(400, 300);
         teacherMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         teacherMenuFrame.add(panel);
@@ -469,7 +493,7 @@ public class Main implements ActionListener {
     public static void addCourse() {
 
         addCourseFrame = new JFrame();
-        panel = new JPanel();
+        addCoursePanel = new JPanel();
         addCourseFrame.setSize(400, 300);
         addCourseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addCourseFrame.add(panel);
@@ -517,7 +541,7 @@ public class Main implements ActionListener {
 
     public static void teacherQuizMenu() {
         teacherQuizMenuFrame = new JFrame();
-        panel = new JPanel();
+        teacherQuizMenuPanel = new JPanel();
         teacherQuizMenuFrame.setSize(400, 300);
         teacherQuizMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         teacherQuizMenuFrame.add(panel);
@@ -595,7 +619,7 @@ public class Main implements ActionListener {
 
     public static void createQuiz() {
         createQuizFrame = new JFrame();
-        panel = new JPanel();
+        createQuizPanel = new JPanel();
         createQuizFrame.setSize(400, 300);
         createQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         createQuizFrame.add(panel);
@@ -661,7 +685,7 @@ public class Main implements ActionListener {
 
     public static void multipleChoiceQuiz() {
         multipleChoiceQuizFrame = new JFrame();
-        panel = new JPanel();
+        multipleChoiceQuizPanel = new JPanel();
         multipleChoiceQuizFrame.setSize(400, 320);
         multipleChoiceQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         multipleChoiceQuizFrame.add(panel);
@@ -762,7 +786,7 @@ public class Main implements ActionListener {
 
     public static void trueOrFalseQuiz() {
         trueOrFalseQuizFrame = new JFrame();
-        panel = new JPanel();
+        trueOrFalseQuizPanel = new JPanel();
         trueOrFalseQuizFrame.setSize(400, 320);
         trueOrFalseQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         trueOrFalseQuizFrame.add(panel);
@@ -827,7 +851,7 @@ public class Main implements ActionListener {
 
     public static void addAnotherQuestion() {
         addAnotherQuestionFrame = new JFrame();
-        panel = new JPanel();
+        addAnotherQuestionPanel = new JPanel();
         addAnotherQuestionFrame.setSize(400, 300);
         addAnotherQuestionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         addAnotherQuestionFrame.add(panel);
@@ -874,7 +898,7 @@ public class Main implements ActionListener {
 
     public static void editQuiz() {
         editQuizFrame = new JFrame();
-        panel = new JPanel();
+        editQuizPanel = new JPanel();
         editQuizFrame.setSize(400, 300);
         editQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         editQuizFrame.add(panel);
@@ -910,7 +934,7 @@ public class Main implements ActionListener {
 
     public static void editTeacherAccount() {
         editTeacherAccountFrame = new JFrame();
-        panel = new JPanel();
+        editTeacherAccountPanel = new JPanel();
         editTeacherAccountFrame.setSize(400, 300);
         editTeacherAccountFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         editTeacherAccountFrame.add(panel);
@@ -980,7 +1004,7 @@ public class Main implements ActionListener {
     //Student pathway starts
     public static void createStudent() {
         createStudentFrame = new JFrame();
-        panel = new JPanel();
+        createStudentPanel = new JPanel();
         createStudentFrame.setSize(400, 300);
         createStudentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         createStudentFrame.add(panel);
@@ -1047,7 +1071,7 @@ public class Main implements ActionListener {
 
     public static void accountCreatedStudent() {
         accountCreatedStudentFrame = new JFrame();
-        panel = new JPanel();
+        accountCreatedStudentPanel = new JPanel();
         accountCreatedStudentFrame.setSize(400, 300);
         accountCreatedStudentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         accountCreatedStudentFrame.add(panel);
@@ -1076,7 +1100,7 @@ public class Main implements ActionListener {
 
     public static void studentLogIn() {
         studentLogInFrame = new JFrame();
-        panel = new JPanel();
+        studentLogInPanel = new JPanel();
         studentLogInFrame.setSize(400, 300);
         studentLogInFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         studentLogInFrame.add(panel);
@@ -1134,7 +1158,7 @@ public class Main implements ActionListener {
 
     public static void studentMenu() {
         studentMenuFrame = new JFrame();
-        panel = new JPanel();
+        studentMenuPanel = new JPanel();
         studentMenuFrame.setSize(400, 300);
         studentMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         studentMenuFrame.add(panel);
@@ -1201,7 +1225,7 @@ public class Main implements ActionListener {
 
     public static void takeQuiz() {
         takeQuizFrame = new JFrame();
-        panel = new JPanel();
+        takeQuizPanel = new JPanel();
         takeQuizFrame.setSize(400, 300);
         takeQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         takeQuizFrame.add(panel);
@@ -1235,7 +1259,7 @@ public class Main implements ActionListener {
 
     public static void viewGradedQuiz() {
         viewGradedQuizFrame = new JFrame();
-        panel = new JPanel();
+        viewGradedQuizPanel = new JPanel();
         viewGradedQuizFrame.setSize(400, 300);
         viewGradedQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewGradedQuizFrame.add(panel);
@@ -1254,7 +1278,7 @@ public class Main implements ActionListener {
 
     public static void editStudentAccount() {
         editStudentAccountFrame = new JFrame();
-        panel = new JPanel();
+        editStudentAccountPanel = new JPanel();
         editStudentAccountFrame.setSize(400, 300);
         editStudentAccountFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         editStudentAccountFrame.add(panel);
