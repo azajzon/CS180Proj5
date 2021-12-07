@@ -48,9 +48,6 @@ public class Main implements ActionListener {
     public static JPanel viewGradedQuizPanel;
     public static JPanel editStudentAccountPanel;
 
-
-
-
     public static JLabel lsmToolLabel;
 
     //TEACHER VARIABLES
