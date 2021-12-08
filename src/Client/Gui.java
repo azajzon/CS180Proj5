@@ -1,6 +1,11 @@
 package Client;
 
+import Server.Question;
+
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class Gui {
@@ -50,6 +55,8 @@ public class Gui {
     public static JButton saveButton;
     public static JLabel nameLabel;
     public static JTextField nameText;
+    public static JPanel teacherMenuPanel;
+    public static JPanel addCoursePanel;
 
 
     /////////////////////
@@ -74,7 +81,10 @@ public class Gui {
     public static JLabel createStudentUsernameLabel;
     public static JLabel createStudentPasswordLabel;
     public static JTextField createStudentPasswordText;
+    public static JFrame teacherMenuFrame;
 
+
+    public static JPanel studentMenuPanel;
     public static JLabel addCourse;
     public static JButton yesCourse;
     public static JButton noCourse;
@@ -92,10 +102,7 @@ public class Gui {
 
 
     public static void main(String[] args) {
-        int numProcesses = 1;
         mainMenu();
-
-
     }
 
     public static void mainMenu() {
@@ -114,6 +121,7 @@ public class Gui {
         loginTeacherButton.setBounds(110, 50, 150, 25);
         loginTeacherButton.addActionListener((e) -> {
             loginTeacher();
+
         });
         panel.add(loginTeacherButton);
 
@@ -121,6 +129,7 @@ public class Gui {
         loginStudentButton.setBounds(110, 80, 150, 25);
         loginStudentButton.addActionListener((e) -> {
             loginStudent();
+
         });
         panel.add(loginStudentButton);
 
@@ -135,6 +144,7 @@ public class Gui {
         createStudentButton.setBounds(110, 140, 150, 25);
         createStudentButton.addActionListener((e) -> {
             createStudent();
+
         });
         panel.add(createStudentButton);
 
@@ -181,9 +191,15 @@ public class Gui {
 
         loginTeacherAccountButton = new JButton("Login");
         loginTeacherAccountButton.addActionListener((e) -> {
-            Thread thrd = new Thread(new ClientThread(0, new LoginTeacherParams(teacherUsernameText.getText(), teacherPasswordText.getText())));
-            thrd.start(); // start the thread
-            list.add(thrd);
+            if (ClientClass.serverCall(new String[]{"command:0", "username:" + teacherUsernameText.getText(),
+                    "password:" + teacherPasswordText.getText()})) {
+                JOptionPane.showMessageDialog(null, "Logged in successfully.",
+                        "Login", JOptionPane.INFORMATION_MESSAGE);
+                teacherMenu();
+            } else {
+                JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
+                mainMenu();
+            }
         });
         loginTeacherAccountButton.setBounds(30, 120, 80, 25);
         teacherLoginPanel.add(loginTeacherAccountButton);
@@ -232,12 +248,13 @@ public class Gui {
         createTeacherAccountButton = new JButton("Create Account");
         createTeacherAccountButton.setBounds(30, 150, 150, 25);
         createTeacherAccountButton.addActionListener((e) -> {
-            Thread thrd = new Thread(new ClientThread(1,
-                    new CreateTeacherParams(createTeacherNameText.getText(),
-                            createTeacherUsernameText.getText(),
-                            createTeacherPasswordText.getText())));
-            thrd.start(); // start the thread
-            list.add(thrd);
+            if (ClientClass.serverCall(new String[]{"command:1", "name:" + createTeacherNameText.getText(),
+                    "username:" + createTeacherUsernameText.getText(), "password:" + createTeacherPasswordText.getText()})) {
+                JOptionPane.showMessageDialog(null, "Account created successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
+            }
+            mainMenu();
         });
         createTeacherPanel.add(createTeacherAccountButton);
 
@@ -245,6 +262,7 @@ public class Gui {
         createTeacherFrame.setVisible(true);
 
     }
+
     public static void loginStudent() {
         studentLoginFrame = new JFrame();
         studentLoginPanel = new JPanel();
@@ -277,9 +295,14 @@ public class Gui {
 
         loginStudentAccountButton = new JButton("Login");
         loginStudentAccountButton.addActionListener((e) -> {
-            Thread thrd = new Thread(new ClientThread(2, new LoginStudentParams(studentUsernameText.getText(), studentPasswordText.getText())));
-            thrd.start(); // start the thread
-            list.add(thrd);
+            if (ClientClass.serverCall(new String[]{"command:2", "username:" + studentUsernameText.getText(),
+                    "password:" + studentPasswordText.getText()})) {
+                JOptionPane.showMessageDialog(null, "Logged in successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
+                studentMenu();
+            } else {
+                JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
+                mainMenu();
+            }
         });
         loginStudentAccountButton.setBounds(30, 120, 80, 25);
         studentLoginPanel.add(loginStudentAccountButton);
@@ -328,12 +351,13 @@ public class Gui {
         createStudentAccountButton = new JButton("Create Account");
         createStudentAccountButton.setBounds(30, 150, 150, 25);
         createStudentAccountButton.addActionListener((e) -> {
-            Thread thrd = new Thread(new ClientThread(3,
-                    new CreateStudentParams(createStudentNameText.getText(),
-                            createStudentUsernameText.getText(),
-                            createStudentPasswordText.getText())));
-            thrd.start(); // start the thread
-            list.add(thrd);
+            if (ClientClass.serverCall(new String[]{"command:3", "name:" + createStudentNameText.getText(),
+                    "username:" + createStudentUsernameText.getText(), "password:" + createStudentPasswordText})) {
+                JOptionPane.showMessageDialog(null, "Account created successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
+                mainMenu();
+            } else {
+                JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
+            }
         });
         createStudentPanel.add(createStudentAccountButton);
 
@@ -341,9 +365,423 @@ public class Gui {
         createStudentFrame.setVisible(true);
     }
 
+    public static void teacherMenu() {
+        teacherMenuFrame = new JFrame();
+        teacherMenuPanel = new JPanel();
+        teacherMenuFrame.setSize(400, 300);
+        teacherMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        teacherMenuFrame.add(teacherMenuPanel);
+
+        JLabel addCourseLabel = new JLabel("Do you want to add a course?");
+        addCourseLabel.setBounds(80, 20, 200, 25);
+        teacherMenuPanel.add(addCourseLabel);
+
+        JButton yesCourseButton = new JButton("Yes");
+        yesCourseButton.setBounds(120, 50, 80, 25);
+        teacherMenuPanel.add(yesCourseButton);
+
+        yesCourseButton.addActionListener((e) -> {
+            teacherMenuFrame.setVisible(false);
+            teacherMenuFrame.dispose();
+            addCourse();
+        });
+
+        JButton noCourseButton = new JButton("No");
+        noCourseButton.setBounds(120, 80, 80, 25);
+        teacherMenuPanel.add(noCourseButton);
+
+        //if teacher doesn't want to create a course
+        noCourseButton.addActionListener((e) -> {
+            teacherQuizMenu();
+        });
+
+        teacherMenuPanel.setLayout(null);
+        teacherMenuFrame.setVisible(true);
+    }
+
+    public static void addCourse() {
+        JFrame addCourseFrame = new JFrame();
+        addCoursePanel = new JPanel();
+        addCourseFrame.setSize(400, 300);
+        addCourseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addCourseFrame.add(addCoursePanel);
+
+        // if yes to adding a course
+        // PATHWAY IS
+
+        JLabel enterCourseNameLabel = new JLabel("Enter Course Name:");
+        enterCourseNameLabel.setBounds(130, 20, 200, 25);
+        addCoursePanel.add(enterCourseNameLabel);
+
+        JTextField enterCourseNameText = new JTextField(50);
+        enterCourseNameText.setBounds(120, 50, 165, 25);
+        addCoursePanel.add(enterCourseNameText);
+
+        JButton createCourseButton = new JButton("Create Course");
+        createCourseButton.setBounds(180, 80, 140, 25);
+
+        addCoursePanel.add(createCourseButton);
+
+        createCourseButton.addActionListener((e) -> {
+
+            if (ClientClass.serverCall(new String[]{"command:4", "name:" + enterCourseNameText.getText()})) {
+                JOptionPane.showMessageDialog(null, "Course created successfully.", "Course Creation", JOptionPane.INFORMATION_MESSAGE);
+                teacherQuizMenu();
+            }
+        });
+
+        JButton addCourseBackButton = new JButton("Back");
+        addCourseBackButton.setBounds(60, 80, 80, 25);
+        addCoursePanel.add(addCourseBackButton);
+
+        addCourseBackButton.addActionListener((e) -> {
+            addCourseFrame.setVisible(false);
+            addCourseFrame.dispose();
+            teacherQuizMenu();
+        });
+
+        addCoursePanel.setLayout(null);
+        addCourseFrame.setVisible(true);
+    }
+
+    public static void studentMenu() {
+        JFrame studentMenuFrame = new JFrame();
+        studentMenuPanel = new JPanel();
+        studentMenuFrame.setSize(400, 300);
+        studentMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        studentMenuFrame.add(studentMenuPanel);
+
+        JLabel lsmToolLabel = new JLabel("Learning System Management Tool");
+        lsmToolLabel.setBounds(90, 20, 500, 25);
+        studentMenuPanel.add(lsmToolLabel);
+
+        JButton takeQuizButton = new JButton("Take a Quiz");
+        takeQuizButton.setBounds(80, 50, 250, 25);
+
+        studentMenuPanel.add(takeQuizButton);
+
+        takeQuizButton.addActionListener(e -> {
+            studentMenuFrame.setVisible(false);
+            studentMenuFrame.dispose();
+            //takeQuiz();
+        });
+
+        JButton viewGradedQuizButton = new JButton("View Graded Quiz");
+        viewGradedQuizButton.setBounds(80, 80, 250, 25);
+
+        studentMenuPanel.add(viewGradedQuizButton);
+
+        viewGradedQuizButton.addActionListener(e -> {
+            studentMenuFrame.setVisible(false);
+            studentMenuFrame.dispose();
+            //viewGradedQuiz();
+        });
+
+        JButton editStudentAccountButton = new JButton("Edit Account");
+        editStudentAccountButton.setBounds(80, 110, 250, 25);
+
+        studentMenuPanel.add(editStudentAccountButton);
+
+        editStudentAccountButton.addActionListener(e -> {
+            studentMenuFrame.setVisible(false);
+            studentMenuFrame.dispose();
+            //editStudentAccount();
+        });
+
+        JButton studentLogOutButton = new JButton("Logout");
+        studentLogOutButton.setBounds(80, 140, 250, 25);
+
+        studentMenuPanel.add(studentLogOutButton);
+
+        //TODO what should happen when the student log outs
+        /*
+        studentLogOutButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        */
+
+        studentMenuPanel.setLayout(null);
+        studentMenuFrame.setVisible(true);
+    }
+
+    public static void teacherQuizMenu() {
+        JFrame teacherQuizMenuFrame = new JFrame();
+        JPanel teacherQuizMenuPanel = new JPanel();
+        teacherQuizMenuFrame.setSize(400, 300);
+        teacherQuizMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        teacherQuizMenuFrame.add(teacherQuizMenuPanel);
+
+        JLabel lsmToolLabel = new JLabel("Learning System Management Tool");
+        lsmToolLabel.setBounds(90, 20, 500, 25);
+        teacherQuizMenuPanel.add(lsmToolLabel);
+
+        JButton createQuizButton = new JButton("Create a Quiz");
+        createQuizButton.setBounds(80, 50, 250, 25);
+        teacherQuizMenuPanel.add(createQuizButton);
+
+        createQuizButton.addActionListener(e -> {
+            teacherQuizMenuFrame.setVisible(false);
+            teacherQuizMenuFrame.dispose();
+            createQuiz();
+        });
+
+        JButton editQuizButton = new JButton("Edit Quiz");
+        editQuizButton.setBounds(80, 80, 250, 25);
+        teacherQuizMenuPanel.add(editQuizButton);
+
+        editQuizButton.addActionListener(e -> {
+            teacherQuizMenuFrame.setVisible(false);
+            teacherQuizMenuFrame.dispose();
+            //editQuiz();
+        });
+
+        JButton deleteQuizButton = new JButton("Delete Quiz");
+        deleteQuizButton.setBounds(80, 110, 250, 25);
+        teacherQuizMenuPanel.add(deleteQuizButton);
+
+        JButton viewStudentQuizSubmissionsButton = new JButton("View Student Quiz Submissions");
+        viewStudentQuizSubmissionsButton.setBounds(80, 140, 250, 25);
+        teacherQuizMenuPanel.add(viewStudentQuizSubmissionsButton);
+
+        JButton editTeacherAccountButton = new JButton("Edit Account");
+        editTeacherAccountButton.setBounds(80, 170, 250, 25);
+        teacherQuizMenuPanel.add(editTeacherAccountButton);
+
+        editTeacherAccountButton.addActionListener((e) -> {
+            teacherQuizMenuFrame.setVisible(false);
+            teacherQuizMenuFrame.dispose();
+            //editTeacherAccount();
+
+        });
 
 
+        JButton teacherQuizMenuBackButton = new JButton("Back");
+        teacherQuizMenuBackButton.setBounds(30, 200, 110, 25);
+        teacherQuizMenuPanel.add(teacherQuizMenuBackButton);
 
+        teacherQuizMenuBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                teacherQuizMenuFrame.setVisible(false);
+                teacherQuizMenuFrame.dispose();
+                addCourse();
+            }
+        });
+
+        teacherQuizMenuPanel.setLayout(null);
+        teacherQuizMenuFrame.setVisible(true);
+    }
+
+    public static void createQuiz() {
+        JFrame createQuizFrame = new JFrame();
+        JPanel createQuizPanel = new JPanel();
+        createQuizFrame.setSize(400, 300);
+        createQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        createQuizFrame.add(createQuizPanel);
+
+        JLabel lsmToolLabel = new JLabel("Create a Quiz");
+        lsmToolLabel.setBounds(130, 20, 500, 25);
+        createQuizPanel.add(lsmToolLabel);
+
+        JLabel nameOfQuizLabel = new JLabel("Name of Quiz:");
+        nameOfQuizLabel.setBounds(20, 50, 150, 25);
+        createQuizPanel.add(nameOfQuizLabel);
+
+        JTextField nameOfQuizText = new JTextField(20);
+        nameOfQuizText.setBounds(120, 50, 125, 25);
+        createQuizPanel.add(nameOfQuizText);
+
+        JLabel formatOfQuizLabel = new JLabel("Format of Quiz:");
+        formatOfQuizLabel.setBounds(20, 90, 150, 25);
+        createQuizPanel.add(formatOfQuizLabel);
+
+        JButton formatOfQuiz1Button = new JButton("Multiple-Choice");
+        formatOfQuiz1Button.setBounds(80, 130, 190, 25);
+        createQuizPanel.add(formatOfQuiz1Button);
+
+        formatOfQuiz1Button.addActionListener(e -> {
+            createQuizFrame.setVisible(false);
+            createQuizFrame.dispose();
+            multipleChoiceQuiz();
+        });
+
+        JButton formatOfQuiz2Button = new JButton("True/False");
+        formatOfQuiz2Button.setBounds(80, 160, 190, 25);
+        createQuizPanel.add(formatOfQuiz2Button);
+
+        formatOfQuiz2Button.addActionListener(e -> {
+            createQuizFrame.setVisible(false);
+            createQuizFrame.dispose();
+            //trueOrFalseQuiz();
+        });
+
+        JButton createQuizBackButton = new JButton("Back");
+        createQuizBackButton.setBounds(30, 190, 110, 25);
+        createQuizPanel.add(createQuizBackButton);
+
+        createQuizBackButton.addActionListener(e -> {
+            createQuizFrame.setVisible(false);
+            createQuizFrame.dispose();
+            teacherQuizMenu();
+        });
+
+        createQuizPanel.setLayout(null);
+        createQuizFrame.setVisible(true);
+    }
+
+    public static void multipleChoiceQuiz() {
+        JFrame multipleChoiceQuizFrame = new JFrame();
+        JPanel multipleChoiceQuizPanel = new JPanel();
+        ArrayList<Question> questions = new ArrayList<>();
+        multipleChoiceQuizFrame.setSize(400, 320);
+        multipleChoiceQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        multipleChoiceQuizFrame.add(multipleChoiceQuizPanel);
+
+        JLabel lsmToolLabel = new JLabel("Name of Quiz: "); // + show name of quiz);
+        lsmToolLabel.setBounds(130, 20, 500, 25);
+        multipleChoiceQuizPanel.add(lsmToolLabel);
+
+        var questionOneMCLabel = new JLabel("Type in Question");
+        questionOneMCLabel.setBounds(20, 50, 130, 25);
+        multipleChoiceQuizPanel.add(questionOneMCLabel);
+
+        var questionOneMCText = new JTextField(20);
+        questionOneMCText.setBounds(210, 50, 165, 25);
+        multipleChoiceQuizPanel.add(questionOneMCText);
+
+        var optionOneMCLabel = new JLabel("Option 1:");
+        optionOneMCLabel.setBounds(20, 80, 80, 25);
+        multipleChoiceQuizPanel.add(optionOneMCLabel);
+
+        var optionOneMCText = new JTextField(20);
+        optionOneMCText.setBounds(210, 80, 165, 25);
+        multipleChoiceQuizPanel.add(optionOneMCText);
+
+        var optionTwoMCLabel = new JLabel("Option 2:");
+        optionTwoMCLabel.setBounds(20, 110, 80, 25);
+        multipleChoiceQuizPanel.add(optionTwoMCLabel);
+
+        var optionTwoMCText = new JTextField(20);
+        optionTwoMCText.setBounds(210, 110, 165, 25);
+        multipleChoiceQuizPanel.add(optionTwoMCText);
+
+        var optionThreeMCLabel = new JLabel("Option 3:");
+        optionThreeMCLabel.setBounds(20, 140, 80, 25);
+        multipleChoiceQuizPanel.add(optionThreeMCLabel);
+
+        var optionThreeMCText = new JTextField(20);
+        optionThreeMCText.setBounds(210, 140, 165, 25);
+        multipleChoiceQuizPanel.add(optionThreeMCText);
+
+        var optionFourMCLabel = new JLabel("Option 4:");
+        optionFourMCLabel.setBounds(20, 170, 80, 25);
+        multipleChoiceQuizPanel.add(optionFourMCLabel);
+
+        var optionFourMCText = new JTextField(20);
+        optionFourMCText.setBounds(210, 170, 165, 25);
+        multipleChoiceQuizPanel.add(optionFourMCText);
+
+        var correctAnsChoiceMCLabel = new JLabel("Enter correct answer choice:");
+        correctAnsChoiceMCLabel.setBounds(20, 200, 250, 25);
+        multipleChoiceQuizPanel.add(correctAnsChoiceMCLabel);
+
+        var correctAnsChoiceMCText = new JTextField(20);
+        correctAnsChoiceMCText.setBounds(210, 200, 165, 25);
+        multipleChoiceQuizPanel.add(correctAnsChoiceMCText);
+
+        var pointValueMCLabel = new JLabel("Enter the point value:");
+        pointValueMCLabel.setBounds(20, 230, 250, 25);
+        multipleChoiceQuizPanel.add(pointValueMCLabel);
+
+        var pointValueMCText = new JTextField(20);
+        pointValueMCText.setBounds(210, 230, 165, 25);
+        multipleChoiceQuizPanel.add(pointValueMCText);
+
+        //adds the questions
+        var addQuestionMCButton = new JButton("Add Question");
+        addQuestionMCButton.setBounds(210, 260, 150, 25);
+        multipleChoiceQuizPanel.add(addQuestionMCButton);
+
+        // once the add question button is clicked, we need to add the question to the list of questions for that specific quiz
+        // calls the method that displays the screen and asks if the user wants to add another question or not
+
+        addQuestionMCButton.addActionListener(e -> {
+            Question q = new Question(questionOneMCText.getText());
+            q.addChoice(optionOneMCLabel.getText());
+            q.addChoice(optionTwoMCLabel.getText());
+            q.addChoice(optionThreeMCLabel.getText());
+            q.addChoice(optionFourMCLabel.getText());
+            q.setPointValue(Integer.parseInt(pointValueMCText.getText()));
+            questions.add(q);
+
+
+            JFrame addAnotherQuestionFrame = new JFrame();
+            JPanel addAnotherQuestionPanel = new JPanel();
+            addAnotherQuestionFrame.setSize(400, 300);
+            addAnotherQuestionFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            addAnotherQuestionFrame.add(addAnotherQuestionPanel);
+
+            var addAnotherQuestionLabel = new JLabel("Do you want to add another question?");
+            addAnotherQuestionLabel.setBounds(70, 20, 280, 25);
+            addAnotherQuestionPanel.add(addAnotherQuestionLabel);
+
+            var yesAnotherQuestionButton = new JButton("Yes");
+            yesAnotherQuestionButton.setBounds(110, 50, 80, 25);
+            addAnotherQuestionPanel.add(yesAnotherQuestionButton);
+            yesAnotherQuestionButton.addActionListener(ae -> {
+                createQuiz();
+            });
+
+            //if the user wants to add another question, display the screen of the question, options, correct answer and point value again
+            //this time however, it should say type in question 2
+            //call whichever type of quiz based on the format of the quiz
+        /*
+        yesAnotherQuestion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                multipleChoiceQuiz();
+                trueOrFalseQuiz();
+            }
+        });
+        */
+
+            // if the user doesn't want to add another question
+            var noAnotherQuestionButton = new JButton("No");
+            noAnotherQuestionButton.setBounds(200, 50, 80, 25);
+            addAnotherQuestionPanel.add(noAnotherQuestionButton);
+            noAnotherQuestionButton.addActionListener(ae -> {
+                ClientClass.createQuiz(questionOneMCText.getText(), questions);
+            });
+
+            // save the quiz if the user doesn't want to add another question
+        /*
+        noAnotherQuestion.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        */
+
+            addAnotherQuestionPanel.setLayout(null);
+            addAnotherQuestionFrame.setVisible(true);
+        });
+
+        JButton multipleChoiceQuizBackButton = new JButton("Back");
+        multipleChoiceQuizBackButton.setBounds(30, 290, 110, 25);
+        multipleChoiceQuizPanel.add(multipleChoiceQuizBackButton);
+
+        multipleChoiceQuizBackButton.addActionListener(e -> {
+            multipleChoiceQuizFrame.setVisible(false);
+            multipleChoiceQuizFrame.dispose();
+            createQuiz();
+        });
+
+        multipleChoiceQuizPanel.setLayout(null);
+        multipleChoiceQuizFrame.setVisible(true);
+    }
+
+    public static void addAnotherQuestion(ArrayList<Question> questions) {
+
+
+    }
 
 
 }

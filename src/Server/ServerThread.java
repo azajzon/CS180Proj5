@@ -1,11 +1,7 @@
 package Server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
-import java.util.concurrent.atomic.AtomicInteger;
 
 /*
  * Individual ServerThread listens for the client to tell it what command to run, then
@@ -13,41 +9,42 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  */
 public class ServerThread extends Thread {
-	Socket client = null;
-	PrintWriter output;
-	BufferedReader input;
+	Socket socket = null;
+	ObjectOutputStream output = null;
+	ObjectInputStream input = null;
 	
-	public ServerThread(Socket client) {
-		this.client = client;
+	public ServerThread(Socket socket) {
+		this.socket = socket;
 	}
 	
 	public void run() {
 		System.out.print("Accepted connection. ");
 
 		try {
-			// open a new PrintWriter and BufferedReader on the socket
-			output = new PrintWriter(client.getOutputStream(), true);
-			input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			output = new ObjectOutputStream(socket.getOutputStream());
+
+			//opens a BufferedReader on the socket
+			input = new ObjectInputStream(socket.getInputStream());
 			System.out.print("Reader and writer created. ");
 
 			String command;
 			// read the command from the client
-			while((command = input.readLine()) == null);
+			while((command = (String) input.readObject()) == null);
 			System.out.println("Read command " + command);
 
 			// run the command using CommandExecutor and get its output
 			String outString = CommandExecutor.run(command, input);
 			System.out.println("Server sending result to client");
 			// send the result of the command to the client
-			output.println(outString);
+			output.writeObject(outString);
 		}
-		catch (IOException e) {
+		catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 		} 
 		finally {
 			// close the connection to the client
 			try {
-				client.close();
+				socket.close();
 			}
 			catch (IOException e) {
 				e.printStackTrace();	

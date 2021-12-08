@@ -123,11 +123,22 @@ public class Server {
 		return null;
 	}
 
-	public static String CreateStudent(String studentName, String studentUsername, String studentPassword) {
+	public static String createStudent(String studentName, String studentUsername, String studentPassword) {
 		Student student = new Student(studentName, studentUsername, studentPassword);
 		students.add(student);
 		return "true";
 	}
+
+	public static String createCourse(String courseName) {
+		Course course = new Course(courseName);
+		courses.add(course);
+		return "true";
+	}
+
+	/*public static String createQuiz(String quizName, ArrayList<Question> questions) {
+		Quiz quiz = new Quiz(questions, quizName);
+
+	}*/
 
 
 }
