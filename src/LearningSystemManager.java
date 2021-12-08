@@ -18,6 +18,7 @@ public class Main implements ActionListener {
     public static JFrame addAnotherQuestionFrame;
     public static JFrame editQuizFrame;
     public static JFrame editTeacherAccountFrame;
+    public static JFrame editTeachAccountDoneFrame;
     public static JFrame createStudentFrame;
     public static JFrame accountCreatedStudentFrame;
     public static JFrame studentLogInFrame;
@@ -28,6 +29,7 @@ public class Main implements ActionListener {
     public static JFrame quizSubmittedFrame;
     public static JFrame viewGradedQuizFrame;
     public static JFrame editStudentAccountFrame;
+    public static JFrame editStudentAccountDoneFrame;
 
 
     //ALL PANELS
@@ -44,6 +46,7 @@ public class Main implements ActionListener {
     public static JPanel addAnotherQuestionPanel;
     public static JPanel editQuizPanel;
     public static JPanel editTeacherAccountPanel;
+    public static JPanel editTeachAccountDonePanel;
     public static JPanel createStudentPanel;
     public static JPanel accountCreatedStudentPanel;
     public static JPanel studentLogInPanel;
@@ -54,6 +57,7 @@ public class Main implements ActionListener {
     public static JPanel quizSubmittedPanel;
     public static JPanel viewGradedQuizPanel;
     public static JPanel editStudentAccountPanel;
+    public static JPanel editStudentAccountDonePanel;
 
     public static JLabel lsmToolLabel;
 
@@ -136,6 +140,7 @@ public class Main implements ActionListener {
     public static JTextField editedTeachPasswordText;
     public static JButton updateTeachAccountButton;
     public static JButton editTeachAccountBackButton;
+    public static JButton editAccountDoneBackButton;
 
     //STUDENT VARIABLES
     public static JLabel createStudentLabel;
@@ -185,7 +190,8 @@ public class Main implements ActionListener {
     public static JButton updateStuAccountButton;
     public static JButton editStuAccountBackButton;
 
-
+    //COMMON VARIABLES
+    public static JLabel accountUpdatedLabel;
 
     public static void main(String[] args) {
 
@@ -205,12 +211,12 @@ public class Main implements ActionListener {
         //createStudent();
         //accountCreatedStudent();
         //studentLogIn();
-        studentMenu();
+        //studentMenu();
         //chooseCourseForTakeQuiz();
         //whichQuizToTake();
         //quizStudentTakes();
         //viewGradedQuiz();
-        //editStudentAccount();
+        editStudentAccount();
 
     }
 
@@ -968,7 +974,7 @@ public class Main implements ActionListener {
 
         editTeacherAccountPanel.setLayout(null);
 
-        editTeachAccountLabel = new JLabel("Edit Student Account");
+        editTeachAccountLabel = new JLabel("Edit Teacher Account");
         editTeachAccountLabel.setBounds(80, 20, 200, 25);
         editTeacherAccountPanel.add(editTeachAccountLabel);
 
@@ -1001,13 +1007,17 @@ public class Main implements ActionListener {
         updateTeachAccountButton.addActionListener(new Main());
         editTeacherAccountPanel.add(updateTeachAccountButton);
 
-        //TODO what should happen when the student save and updates their information (call the specific method that saves the updated data)
-        /*
-        updateTeachAccountButton.addActionListener(new ActionListener() {
+        //what should happen when the student save and updates their information (call the specific method that saves the updated data)
+
+        updateTeachAccountButton.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
+                editTeacherAccountFrame.setVisible(false);
+                editTeacherAccountFrame.dispose();
+                editTeachAccountDone();
+
             }
         });
-        */
+
 
         editTeachAccountBackButton = new JButton("Back");
         editTeachAccountBackButton.setBounds(30, 180, 110, 25);
@@ -1026,6 +1036,38 @@ public class Main implements ActionListener {
         editTeacherAccountFrame.setVisible(true);
 
     }
+
+    public static void editTeachAccountDone(){
+        editTeachAccountDoneFrame = new JFrame();
+        editTeachAccountDonePanel = new JPanel();
+        editTeachAccountDoneFrame.setSize(400, 300);
+        editTeachAccountDoneFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editTeachAccountDoneFrame.add(editTeachAccountDonePanel);
+
+        editTeachAccountDonePanel.setLayout(null);
+
+        accountUpdatedLabel = new JLabel("Account updated!");
+        accountUpdatedLabel.setBounds(140, 30, 280, 25);
+        editTeachAccountDonePanel.add(accountUpdatedLabel);
+
+        editAccountDoneBackButton = new JButton("Back");
+        editAccountDoneBackButton.setBounds(140, 60, 110, 25);
+        editAccountDoneBackButton.addActionListener(new Main());
+        editTeachAccountDonePanel.add(editAccountDoneBackButton);
+
+        editAccountDoneBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editTeachAccountDoneFrame.setVisible(false);
+                editTeachAccountDoneFrame.dispose();
+                mainMenu();
+            }
+        });
+
+
+        editTeachAccountDoneFrame.setVisible(true);
+
+    }
+
     //Teacher Pathway ends
 
     //Student pathway starts
@@ -1466,7 +1508,7 @@ public class Main implements ActionListener {
         editStudentAccountPanel.setLayout(null);
 
         editStuAccountLabel = new JLabel("Edit Student Account");
-        editStuAccountLabel.setBounds(80, 20, 200, 25);
+        editStuAccountLabel.setBounds(130, 20, 200, 25);
         editStudentAccountPanel.add(editStuAccountLabel);
 
         editedStuNameLabel = new JLabel("First & Last Name:");
@@ -1498,13 +1540,16 @@ public class Main implements ActionListener {
         updateStuAccountButton.addActionListener(new Main());
         editStudentAccountPanel.add(updateStuAccountButton);
 
-        //TODO what should happen when the student save and updates their information (call the specific method that saves the updated data
-        /*
+        //what should happen when the student save and updates their information (call the specific method that saves the updated data
         updateStuAccountButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                editStudentAccountFrame.setVisible(false);
+                editStudentAccountFrame.dispose();
+                editStudentAccountDone();
+
             }
         });
-          */
+
 
         editStuAccountBackButton = new JButton("Back");
         editStuAccountBackButton.setBounds(30, 180, 110, 25);
@@ -1522,6 +1567,38 @@ public class Main implements ActionListener {
         editStudentAccountFrame.setVisible(true);
 
     }
+
+    public static void editStudentAccountDone(){
+        editStudentAccountDoneFrame = new JFrame();
+        editStudentAccountDonePanel = new JPanel();
+        editStudentAccountDoneFrame.setSize(400, 300);
+        editStudentAccountDoneFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editStudentAccountDoneFrame.add(editStudentAccountDonePanel);
+
+        editStudentAccountDonePanel.setLayout(null);
+
+        accountUpdatedLabel = new JLabel("Account updated!");
+        accountUpdatedLabel.setBounds(140, 30, 280, 25);
+        editStudentAccountDonePanel.add(accountUpdatedLabel);
+
+        editAccountDoneBackButton = new JButton("Back");
+        editAccountDoneBackButton.setBounds(140, 60, 110, 25);
+        editAccountDoneBackButton.addActionListener(new Main());
+        editStudentAccountDonePanel.add(editAccountDoneBackButton);
+
+        editAccountDoneBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editStudentAccountDoneFrame.setVisible(false);
+                editStudentAccountDoneFrame.dispose();
+                mainMenu();
+            }
+        });
+
+
+        editStudentAccountDoneFrame.setVisible(true);
+
+    }
+
 
     @Override
     public void actionPerformed(ActionEvent e) {
