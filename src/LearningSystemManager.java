@@ -22,9 +22,13 @@ public class Main implements ActionListener {
     public static JFrame accountCreatedStudentFrame;
     public static JFrame studentLogInFrame;
     public static JFrame studentMenuFrame;
-    public static JFrame takeQuizFrame;
+    public static JFrame chooseCourseForTakeQuizFrame;
+    public static JFrame whichQuizToTakeFrame;
+    public static JFrame quizStudentTakesFrame1;
+    public static JFrame quizSubmittedFrame;
     public static JFrame viewGradedQuizFrame;
     public static JFrame editStudentAccountFrame;
+
 
     //ALL PANELS
     public static JPanel maineMenuPanel;
@@ -44,7 +48,10 @@ public class Main implements ActionListener {
     public static JPanel accountCreatedStudentPanel;
     public static JPanel studentLogInPanel;
     public static JPanel studentMenuPanel;
-    public static JPanel takeQuizPanel;
+    public static JPanel chooseCourseForTakeQuizPanel;
+    public static JPanel whichQuizToTakePanel;
+    public static JPanel quizStudentTakesPanel1;
+    public static JPanel quizSubmittedPanel;
     public static JPanel viewGradedQuizPanel;
     public static JPanel editStudentAccountPanel;
 
@@ -149,8 +156,23 @@ public class Main implements ActionListener {
     public static JTextField studentLogInPasswordText;
     public static JButton studentLogInBackButton;
     public static JButton takeQuizButton;
-    public static JButton takeQuizBackButton;
+    public static JLabel studentChooseCourseLabel;
+    public static JLabel chooseCourseTitleLabel;
+    public static JButton courseChoosenForQuizNextButton;
+    public static JLabel chooseQuizTakeTitleLabel;
+    public static JLabel studentChooseQuizLabel;
+    public static JButton quizChoosenNextButton;
+    public static JLabel questionOneTitleLabel;
+    public static JLabel questionOneStuQuizLabel;
+    public static JTextField questionOneStuAns;
+    public static JLabel typeInAnswerLabel;
+    public static JButton quizStuTakesNextButton;
+    public static JLabel quizSubmittedLabel;
+    public static JButton quizDoneBackToStuMenuButton;
+    public static JLabel viewGradedQuizTitleLabel;
     public static JButton viewGradedQuizButton;
+    public static JLabel whichGradedQuizToViewLabel;
+    public static JButton viewQuizButton;
     public static JButton editStudentAccountButton;
     public static JButton studentLogOutButton;
     public static JLabel editStuAccountLabel;
@@ -162,13 +184,12 @@ public class Main implements ActionListener {
     public static JTextField editedStuPasswordText;
     public static JButton updateStuAccountButton;
     public static JButton editStuAccountBackButton;
-    public static JLabel viewGradedQuiz;
 
 
 
     public static void main(String[] args) {
 
-        mainMenu();
+        //mainMenu();
         //createTeacher();
         //accountCreatedTeacher();
         //teacherLogIn();
@@ -184,8 +205,10 @@ public class Main implements ActionListener {
         //createStudent();
         //accountCreatedStudent();
         //studentLogIn();
-        //studentMenu();
-        //takeQuiz();
+        studentMenu();
+        //chooseCourseForTakeQuiz();
+        //whichQuizToTake();
+        //quizStudentTakes();
         //viewGradedQuiz();
         //editStudentAccount();
 
@@ -1180,7 +1203,7 @@ public class Main implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 studentMenuFrame.setVisible(false);
                 studentMenuFrame.dispose();
-                takeQuiz();
+                chooseCourseForTakeQuiz();
             }
         });
 
@@ -1227,33 +1250,169 @@ public class Main implements ActionListener {
         studentMenuFrame.setVisible(true);
     }
 
-    public static void takeQuiz() {
-        takeQuizFrame = new JFrame();
-        takeQuizPanel = new JPanel();
-        takeQuizFrame.setSize(400, 300);
-        takeQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        takeQuizFrame.add(takeQuizPanel);
+    public static void chooseCourseForTakeQuiz() {
+        chooseCourseForTakeQuizFrame = new JFrame();
+        chooseCourseForTakeQuizPanel = new JPanel();
+        chooseCourseForTakeQuizFrame.setSize(400, 300);
+        chooseCourseForTakeQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        chooseCourseForTakeQuizFrame.add(chooseCourseForTakeQuizPanel);
 
-        lsmToolLabel = new JLabel("Take a Quiz");
-        lsmToolLabel.setBounds(160, 20, 500, 25);
-        takeQuizPanel.add(lsmToolLabel);
+        chooseCourseTitleLabel = new JLabel("Choose Course To Take Quiz From");
+        chooseCourseTitleLabel.setBounds(100, 20, 500, 25);
+        chooseCourseForTakeQuizPanel.add(chooseCourseTitleLabel);
 
-        String[] quizTakeOptionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        studentChooseCourseLabel = new JLabel("Which course would you like to take a quiz from?");
+        studentChooseCourseLabel.setBounds(30, 50, 700, 25);
+        chooseCourseForTakeQuizPanel.add(studentChooseCourseLabel);
 
-        JComboBox<String> jComboBox = new JComboBox<>(quizTakeOptionsToChoose);
-        jComboBox.setBounds(120, 50, 140, 20);
-        takeQuizPanel.add(jComboBox);
+        //below array needs to contain the list of courses that have bene created so far
+        String[] coursesToTakeQuizFromOptions = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> jComboBox = new JComboBox<>(coursesToTakeQuizFromOptions);
+        jComboBox.setBounds(120, 80, 140, 20);
+        chooseCourseForTakeQuizPanel.add(jComboBox);
 
 
-        takeQuizBackButton = new JButton("Back");
-        takeQuizBackButton.setBounds(30, 180, 110, 25);
-        takeQuizBackButton.addActionListener(new Main());
-        takeQuizPanel.add(takeQuizBackButton);
+        courseChoosenForQuizNextButton = new JButton("Next");
+        courseChoosenForQuizNextButton.setBounds(220, 180, 110, 25);
+        courseChoosenForQuizNextButton.addActionListener(new Main());
+        chooseCourseForTakeQuizPanel.add(courseChoosenForQuizNextButton);
 
-        takeQuizPanel.setLayout(null);
-        takeQuizFrame.setVisible(true);
+        courseChoosenForQuizNextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                chooseCourseForTakeQuizFrame.setVisible(false);
+                chooseCourseForTakeQuizFrame.dispose();
+                whichQuizToTake();
+            }
+        });
+
+        chooseCourseForTakeQuizPanel.setLayout(null);
+        chooseCourseForTakeQuizFrame.setVisible(true);
 
     }
+
+    public static void whichQuizToTake() {
+        whichQuizToTakeFrame = new JFrame();
+        whichQuizToTakePanel = new JPanel();
+        whichQuizToTakeFrame.setSize(400, 300);
+        whichQuizToTakeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        whichQuizToTakeFrame.add(whichQuizToTakePanel);
+
+        chooseQuizTakeTitleLabel = new JLabel("Choose Quiz To Take");
+        chooseQuizTakeTitleLabel.setBounds(120, 20, 500, 25);
+        whichQuizToTakePanel.add(chooseQuizTakeTitleLabel);
+
+        studentChooseQuizLabel = new JLabel("Which quiz would you like to take?");
+        studentChooseQuizLabel.setBounds(30, 50, 700, 25);
+        whichQuizToTakePanel.add(studentChooseQuizLabel);
+
+        //below array needs to contain the list of quizzes for the course choose by the user
+        String[] quizzesToTakeOptions = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> jComboBox = new JComboBox<>(quizzesToTakeOptions);
+        jComboBox.setBounds(120, 80, 140, 20);
+        whichQuizToTakePanel.add(jComboBox);
+
+
+        quizChoosenNextButton = new JButton("Next");
+        quizChoosenNextButton.setBounds(220, 180, 110, 25);
+        quizChoosenNextButton.addActionListener(new Main());
+        whichQuizToTakePanel.add(quizChoosenNextButton);
+
+        quizChoosenNextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                whichQuizToTakeFrame.setVisible(false);
+                whichQuizToTakeFrame.dispose();
+                quizStudentTakes();
+
+            }
+        });
+
+        whichQuizToTakePanel.setLayout(null);
+        whichQuizToTakeFrame.setVisible(true);
+    }
+
+    public static void quizStudentTakes() {
+        quizStudentTakesFrame1 = new JFrame();
+        quizStudentTakesPanel1 = new JPanel();
+        quizStudentTakesFrame1.setSize(400, 300);
+        quizStudentTakesFrame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        quizStudentTakesFrame1.add(quizStudentTakesPanel1);
+
+
+        questionOneTitleLabel = new JLabel("Question 1");
+        questionOneTitleLabel.setBounds(120, 20, 500, 25);
+        quizStudentTakesPanel1.add(questionOneTitleLabel);
+
+        //below label will display the first question of the quiz
+        questionOneStuQuizLabel = new JLabel("What day is it today?");
+        questionOneStuQuizLabel.setBounds(30, 50, 700, 25);
+        quizStudentTakesPanel1.add(questionOneStuQuizLabel);
+
+        typeInAnswerLabel = new JLabel("Type in Answer: ");
+        typeInAnswerLabel.setBounds(30, 80, 700, 25);
+        quizStudentTakesPanel1.add(typeInAnswerLabel);
+
+        questionOneStuAns = new JTextField(20);
+        questionOneStuAns.setBounds(140, 80, 165, 25);
+        quizStudentTakesPanel1.add(questionOneStuAns);
+
+        quizStuTakesNextButton = new JButton("Next");
+        quizStuTakesNextButton.setBounds(220, 180, 110, 25);
+        quizStuTakesNextButton.addActionListener(new Main());
+        quizStudentTakesPanel1.add(quizStuTakesNextButton);
+
+        quizStuTakesNextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                quizStudentTakesFrame1.setVisible(false);
+                quizStudentTakesFrame1.dispose();
+
+                // 3 indicates the number of question in the quiz choosen by the student, 3 is just a number used for testing
+                for (int i = 0; i < 3; i++) {
+                    quizStudentTakes();
+                }
+
+                quizSubmitted();
+
+            }
+        });
+
+        quizStudentTakesPanel1.setLayout(null);
+        quizStudentTakesFrame1.setVisible(true);
+
+    }
+
+    public static void quizSubmitted() {
+        quizSubmittedFrame = new JFrame();
+        quizSubmittedPanel = new JPanel();
+        quizSubmittedFrame.setSize(400, 300);
+        quizSubmittedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        quizSubmittedFrame.add(quizSubmittedPanel);
+
+        quizSubmittedLabel = new JLabel("You are done with the quiz and it has been submitted!");
+        quizSubmittedLabel.setBounds(30, 20, 500, 25);
+        quizSubmittedPanel.add(quizSubmittedLabel);
+
+        quizDoneBackToStuMenuButton = new JButton("Back To HomePage");
+        quizDoneBackToStuMenuButton.setBounds(90, 60, 200, 25);
+        quizDoneBackToStuMenuButton.addActionListener(new Main());
+        quizSubmittedPanel.add(quizDoneBackToStuMenuButton);
+
+        quizDoneBackToStuMenuButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                quizSubmittedFrame.setVisible(false);
+                quizSubmittedFrame.dispose();
+
+                studentMenu();
+
+            }
+        });
+
+
+        quizSubmittedPanel.setLayout(null);
+        quizSubmittedFrame.setVisible(true);
+
+
+    }
+
 
     public static void viewGradedQuiz() {
         viewGradedQuizFrame = new JFrame();
@@ -1262,15 +1421,37 @@ public class Main implements ActionListener {
         viewGradedQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         viewGradedQuizFrame.add(viewGradedQuizPanel);
 
-        viewGradedQuiz = new JLabel("View a Graded Quiz");
-        viewGradedQuiz.setBounds(160, 20, 500, 25);
-        viewGradedQuizPanel.add(viewGradedQuiz);
+        viewGradedQuizTitleLabel = new JLabel("View a Graded Quiz");
+        viewGradedQuizTitleLabel.setBounds(140, 20, 500, 25);
+        viewGradedQuizPanel.add(viewGradedQuizTitleLabel);
 
-        String[] quizTakeOptionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        whichGradedQuizToViewLabel = new JLabel("Which of the graded quizzes do you want to view?");
+        whichGradedQuizToViewLabel.setBounds(30, 50, 500, 25);
+        viewGradedQuizPanel.add(whichGradedQuizToViewLabel);
 
-        JComboBox<String> jComboBox = new JComboBox<>(quizTakeOptionsToChoose);
-        jComboBox.setBounds(120, 50, 140, 20);
+        // below array has to contain the graded quizzes for the student that is logged in
+        String[] gradedQuizOptions = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> jComboBox = new JComboBox<>(gradedQuizOptions);
+        jComboBox.setBounds(120, 80, 140, 20);
         viewGradedQuizPanel.add(jComboBox);
+
+        viewQuizButton = new JButton("Back To HomePage");
+        viewQuizButton.setBounds(90, 60, 200, 25);
+        viewQuizButton.addActionListener(new Main());
+        viewGradedQuizPanel.add(viewQuizButton);
+
+        quizDoneBackToStuMenuButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewGradedQuizFrame.setVisible(false);
+                viewGradedQuizFrame.dispose();
+
+                //create a method that shows graded quiz and call it here
+
+            }
+        });
+
+        viewGradedQuizPanel.setLayout(null);
+        viewGradedQuizFrame.setVisible(true);
 
 
     }
