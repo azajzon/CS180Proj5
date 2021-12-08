@@ -1,3 +1,4 @@
+/*
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -289,11 +290,13 @@ public class Main implements ActionListener {
         saveButton.addActionListener(new Main());
         maineMenuPanel.add(saveButton);
 
-        /*saveButton.addActionListener(new ActionListener() {
+        */
+/*saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //call the save data methods
             }
-        });*/
+        });*//*
+
 
         maineMenuPanel.setLayout(null);
 
@@ -948,7 +951,8 @@ public class Main implements ActionListener {
         editQuizPanel.add(jComboBox);
 
         // dropdown feature to show list of courses
-        /*
+        */
+/*
         String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
         String getCourse = (String) JOptionPane.showInputDialog(
                 null,
@@ -958,7 +962,8 @@ public class Main implements ActionListener {
                 null,
                 optionsToChoose,
                 optionsToChoose[0]);
-        */
+        *//*
+
 
         editQuizPanel.setLayout(null);
         editQuizFrame.setVisible(true);
@@ -1281,12 +1286,14 @@ public class Main implements ActionListener {
         studentMenuPanel.add(studentLogOutButton);
 
         //TODO what should happen when the student log outs
-        /*
+        */
+/*
         studentLogOutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        */
+        *//*
+
 
         studentMenuPanel.setLayout(null);
         studentMenuFrame.setVisible(true);
@@ -1606,3 +1613,4 @@ public class Main implements ActionListener {
     }
 }
 
+*/

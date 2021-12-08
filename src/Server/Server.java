@@ -35,7 +35,9 @@ public class Server {
                 Server::createTeacher,
                 Server::loginStudent,
                 Server::createStudent,
-                Server::createQuiz
+                Server::createQuiz,
+                //Server::studentAccount
+                Server::getListOfQuizNames
         };
     }
 
@@ -156,6 +158,14 @@ public class Server {
     public static Object createQuiz(Object inQuiz) {
         Server.quizzes.add((Quiz) inQuiz);
         return true;
+    }
+
+    public static Object getListOfQuizNames(Object o) {
+        ArrayList<String> quizList = new ArrayList<>();
+        for (Quiz q: quizzes) {
+            quizList.add(q.getQuizName());
+        }
+        return quizList;
     }
 
 

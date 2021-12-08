@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 // class that sends requests to the server and receives responses
 public class ClientClass {
@@ -17,8 +18,8 @@ public class ClientClass {
     private static ObjectInputStream input = null;
 
 
-    public static boolean serverCall(int command, Object objToSend) {
-        boolean retVal = false;
+    public static Object serverCall(int command, Object objToSend) {
+        Object retVal = null;
         try {
             //creates a new Socket object and names it socket.
             //Establishes the socket connection between the client & server
@@ -35,14 +36,22 @@ public class ClientClass {
             out.writeInt(command);
             out.writeObject(objToSend);
 
-
             // read the output from the server
             Object in = input.readObject();
             if (in instanceof Exception) throw (Exception) in;
-            else if (in instanceof Boolean)
-                retVal = (Boolean) in;
-            else
-                throw new IOException("Invalid response");
+            else if (!switch (command) {
+                case 0, 1, 2, 3, 4 -> {
+                    if (!(in instanceof Boolean)) yield false;
+                    retVal = in;
+                    yield true;
+                }
+                case 5 -> {
+                    if (!(in instanceof ArrayList)) yield false;
+                    retVal = in;
+                    yield true;
+                }
+                default -> false;
+            }) throw new IOException("Invalid response");
         } catch (UnknownHostException e) {
             System.err.println("Unknown host: " + hostName);
             System.exit(1);

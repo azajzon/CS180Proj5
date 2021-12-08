@@ -1,10 +1,12 @@
 package Client;
 
 import Server.Question;
+import Server.Quiz;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -191,7 +193,7 @@ public class Gui {
 
         loginTeacherAccountButton = new JButton("Login");
         loginTeacherAccountButton.addActionListener((e) -> {
-            if (ClientClass.serverCall(0, new String[] {teacherUsernameText.getText(),
+            if ((Boolean) ClientClass.serverCall(0, new String[] {teacherUsernameText.getText(),
                     teacherPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Logged in successfully.",
                         "Login", JOptionPane.INFORMATION_MESSAGE);
@@ -248,7 +250,7 @@ public class Gui {
         createTeacherAccountButton = new JButton("Create Account");
         createTeacherAccountButton.setBounds(30, 150, 150, 25);
         createTeacherAccountButton.addActionListener((e) -> {
-            if (ClientClass.serverCall(1, new String[] {createTeacherNameText.getText(),
+            if ((Boolean) ClientClass.serverCall(1, new String[] {createTeacherNameText.getText(),
                     createTeacherUsernameText.getText(), createTeacherPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Account created successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -295,7 +297,7 @@ public class Gui {
 
         loginStudentAccountButton = new JButton("Login");
         loginStudentAccountButton.addActionListener((e) -> {
-            if (ClientClass.serverCall(2, new String[]{studentUsernameText.getText(), studentPasswordText.getText()})) {
+            if ((Boolean) ClientClass.serverCall(2, new String[]{studentUsernameText.getText(), studentPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Logged in successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
                 studentMenu();
             } else {
@@ -350,8 +352,8 @@ public class Gui {
         createStudentAccountButton = new JButton("Create Account");
         createStudentAccountButton.setBounds(30, 150, 150, 25);
         createStudentAccountButton.addActionListener((e) -> {
-            if (ClientClass.serverCall(3, new String[]{createStudentNameText.getText(),
-                   createStudentUsernameText.getText(), createStudentPasswordText.getText()})) {
+            if ((Boolean) ClientClass.serverCall(3, new String[]{createStudentNameText.getText(),
+                    createStudentUsernameText.getText(), createStudentPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Account created successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
                 mainMenu();
             } else {
@@ -452,9 +454,10 @@ public class Gui {
         teacherQuizMenuPanel.add(editQuizButton);
 
         editQuizButton.addActionListener(e -> {
+            ArrayList<String> quizNames = (ArrayList<String>) ClientClass.serverCall(5, " ");
             teacherQuizMenuFrame.setVisible(false);
             teacherQuizMenuFrame.dispose();
-            //editQuiz();
+            editQuiz(quizNames);
         });
 
         JButton deleteQuizButton = new JButton("Delete Quiz");
@@ -668,7 +671,7 @@ public class Gui {
             noAnotherQuestionButton.setBounds(200, 50, 80, 25);
             addAnotherQuestionPanel.add(noAnotherQuestionButton);
             noAnotherQuestionButton.addActionListener(ae -> {
-                if (ClientClass.serverCall(4, new Server.Quiz(questions, quizName))) {
+                if ((Boolean) ClientClass.serverCall(4, new Server.Quiz(questions, quizName))) {
                     teacherQuizMenu();
                 }
 
@@ -700,8 +703,104 @@ public class Gui {
         multipleChoiceQuizFrame.setVisible(true);
     }
 
-    public static void addAnotherQuestion(ArrayList<Question> questions) {
+    public static void editQuiz(ArrayList<String> quizNames) {
+        JFrame editQuizFrame = new JFrame();
+        JPanel editQuizPanel = new JPanel();
+        editQuizFrame.setSize(400, 300);
+        editQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editQuizFrame.add(editQuizPanel);
 
+        JLabel lsmToolLabel = new JLabel("Edit a Quiz");
+        lsmToolLabel.setBounds(160, 20, 500, 25);
+        editQuizPanel.add(lsmToolLabel);
+
+
+        JComboBox jComboBox = new JComboBox(quizNames.toArray());
+        jComboBox.setBounds(100, 70, 180, 20);
+
+        editQuizPanel.add(jComboBox);
+
+        // dropdown feature to show list of courses
+        /*
+        String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        String getCourse = (String) JOptionPane.showInputDialog(
+                null,
+                "Which course do you want to edit quiz from?",
+                "Choose Course",
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                optionsToChoose,
+                optionsToChoose[0]);
+        */
+
+        editQuizPanel.setLayout(null);
+        editQuizFrame.setVisible(true);
+
+    }
+
+    public static void editTeacherAccount() {
+        JFrame editTeacherAccountFrame = new JFrame();
+        JPanel editTeacherAccountPanel = new JPanel();
+        editTeacherAccountFrame.setSize(400, 300);
+        editTeacherAccountFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editTeacherAccountFrame.add(editTeacherAccountPanel);
+
+        editTeacherAccountPanel.setLayout(null);
+
+        JLabel editTeachAccountLabel = new JLabel("Edit Student Account");
+        editTeachAccountLabel.setBounds(80, 20, 200, 25);
+        editTeacherAccountPanel.add(editTeachAccountLabel);
+
+        JLabel editedTeachNameLabel = new JLabel("First & Last Name:");
+        editedTeachNameLabel.setBounds(20, 50, 150, 25);
+        editTeacherAccountPanel.add(editedTeachNameLabel);
+
+        JTextField editedTeachNameText = new JTextField(20);
+        editedTeachNameText.setBounds(150, 50, 165, 25);
+        editTeacherAccountPanel.add(editedTeachNameText);
+
+        JLabel editedTeachUsernameLabel = new JLabel("Username:");
+        editedTeachUsernameLabel.setBounds(20, 80, 80, 25);
+        editTeacherAccountPanel.add(editedTeachUsernameLabel);
+
+        JTextField editedTeachUsernameText = new JTextField(20);
+        editedTeachUsernameText.setBounds(150, 80, 165, 25);
+        editTeacherAccountPanel.add(editedTeachUsernameText);
+
+        JLabel editedTeachPasswordLabel = new JLabel("Password:");
+        editedTeachPasswordLabel.setBounds(20, 110, 80, 25);
+        editTeacherAccountPanel.add(editedTeachPasswordLabel);
+
+        JTextField editedTeachPasswordText = new JTextField(20);
+        editedTeachPasswordText.setBounds(150, 110, 165, 25);
+        editTeacherAccountPanel.add(editedTeachPasswordText);
+
+        JButton updateTeachAccountButton = new JButton("Save and Update Account");
+        updateTeachAccountButton.setBounds(30, 150, 200, 25);
+        editTeacherAccountPanel.add(updateTeachAccountButton);
+
+        //TODO what should happen when the student save and updates their information (call the specific method that saves the updated data)
+        /*
+        updateTeachAccountButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        */
+
+        JButton editTeachAccountBackButton = new JButton("Back");
+        editTeachAccountBackButton.setBounds(30, 180, 110, 25);
+        editTeacherAccountPanel.add(editTeachAccountBackButton);
+
+        editTeachAccountBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editTeacherAccountFrame.setVisible(false);
+                editTeacherAccountFrame.dispose();
+                studentMenu();
+            }
+        });
+
+
+        editTeacherAccountFrame.setVisible(true);
 
     }
 

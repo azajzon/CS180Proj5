@@ -9,14 +9,14 @@ import java.net.Socket;
  *
  */
 public class ServerThread extends Thread {
-	Socket socket = null;
+	Socket socket;
 	ObjectOutputStream output = null;
 	ObjectInputStream input = null;
-	
+
 	public ServerThread(Socket socket) {
 		this.socket = socket;
 	}
-	
+
 	public void run() {
 		System.out.print("Accepted connection. ");
 
@@ -31,23 +31,26 @@ public class ServerThread extends Thread {
 			int command = input.readInt();
 			System.out.println("Read command " + command);
 
-			// run the command using CommandExecutor and get its output
+
 			Object outObject = Server.getCommandList()[command].apply(input.readObject());
 			System.out.println("Server sending result to client");
 			// send the result of the command to the client
 			output.writeObject(outObject);
+
+			output.close();
+			input.close();
 		}
 		catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
-		} 
+		}
 		finally {
 			// close the connection to the client
 			try {
 				socket.close();
 			}
 			catch (IOException e) {
-				e.printStackTrace();	
-			}			
+				e.printStackTrace();
+			}
 			System.out.println("Output closed.");
 		}
 
