@@ -164,6 +164,7 @@ public class Main implements ActionListener {
     public static JLabel viewGradedQuiz;
 
 
+
     public static void main(String[] args) {
 
         mainMenu();
@@ -613,7 +614,7 @@ public class Main implements ActionListener {
         teacherQuizMenuPanel.setLayout(null);
         teacherQuizMenuFrame.setVisible(true);
     }
-
+    public static int qno = 1;
     public static void createQuiz() {
         createQuizFrame = new JFrame();
         createQuizPanel = new JPanel();
@@ -691,8 +692,8 @@ public class Main implements ActionListener {
         lsmToolLabel.setBounds(130, 20, 500, 25);
         multipleChoiceQuizPanel.add(lsmToolLabel);
 
-        questionOneMCLabel = new JLabel("Type in Question 1:");
-        questionOneMCLabel.setBounds(20, 50, 130, 25);
+        questionOneMCLabel = new JLabel("Type in Question "+qno+" : ");
+        questionOneMCLabel.setBounds(20, 50, 160, 25);
         multipleChoiceQuizPanel.add(questionOneMCLabel);
 
         questionOneMCText = new JTextField(20);
@@ -760,7 +761,7 @@ public class Main implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 multipleChoiceQuizFrame.setVisible(false);
                 multipleChoiceQuizFrame.dispose();
-                addAnotherQuestion();
+                addAnotherQuestion(0);
             }
         });
 
@@ -792,8 +793,8 @@ public class Main implements ActionListener {
         lsmToolLabel.setBounds(130, 20, 500, 25);
         trueOrFalseQuizPanel.add(lsmToolLabel);
 
-        questionOneTFLabel = new JLabel("Type in Question 1:");
-        questionOneTFLabel.setBounds(20, 50, 130, 25);
+        questionOneTFLabel = new JLabel("Type in Question "+qno+" : ");
+        questionOneTFLabel.setBounds(20, 50, 160, 25);
         trueOrFalseQuizPanel.add(questionOneTFLabel);
 
         questionOneTFText = new JTextField(20);
@@ -837,7 +838,7 @@ public class Main implements ActionListener {
             public void actionPerformed(ActionEvent e) {
                 trueOrFalseQuizFrame.setVisible(false);
                 trueOrFalseQuizFrame.dispose();
-                addAnotherQuestion();
+                addAnotherQuestion(1);
             }
         });
 
@@ -846,7 +847,7 @@ public class Main implements ActionListener {
 
     }
 
-    public static void addAnotherQuestion() {
+    public static void addAnotherQuestion(int type) {
         addAnotherQuestionFrame = new JFrame();
         addAnotherQuestionPanel = new JPanel();
         addAnotherQuestionFrame.setSize(400, 300);
@@ -865,14 +866,19 @@ public class Main implements ActionListener {
         //if the user wants to add another question, display the screen of the question, options, correct answer and point value again
         //this time however, it should say type in question 2
         //call whichever type of quiz based on the format of the quiz
-        /*
-        yesAnotherQuestion.addActionListener(new ActionListener() {
+
+        yesAnotherQuestionButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                multipleChoiceQuiz();
-                trueOrFalseQuiz();
+                if(type == 0) {
+                    qno++;
+                    multipleChoiceQuiz();
+                }
+                else {
+                    qno++;
+                    trueOrFalseQuiz();
+                }
             }
         });
-        */
 
         // if the user doesn't want to add another question
         noAnotherQuestionButton = new JButton("No");
@@ -881,12 +887,12 @@ public class Main implements ActionListener {
         addAnotherQuestionPanel.add(noAnotherQuestionButton);
 
         // save the quiz if the user doesn't want to add another question
-        /*
-        noAnotherQuestion.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+
+        noAnotherQuestionButton.addActionListener(new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            teacherMenu();
             }
         });
-        */
 
         addAnotherQuestionPanel.setLayout(null);
         addAnotherQuestionFrame.setVisible(true);
@@ -1236,6 +1242,8 @@ public class Main implements ActionListener {
         JComboBox<String> jComboBox = new JComboBox<>(quizTakeOptionsToChoose);
         jComboBox.setBounds(120, 50, 140, 20);
         takeQuizPanel.add(jComboBox);
+
+
         // dropdown feature to show list of courses so student can choose which course they want to take a quiz from
         /*
         String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
@@ -1248,6 +1256,11 @@ public class Main implements ActionListener {
                 optionsToChoose,
                 optionsToChoose[0]);
         */
+
+        editStuAccountBackButton = new JButton("Back");
+        editStuAccountBackButton.setBounds(30, 180, 110, 25);
+        editStuAccountBackButton.addActionListener(new Main());
+        editStudentAccountPanel.add(editStuAccountBackButton);
 
         takeQuizPanel.setLayout(null);
         takeQuizFrame.setVisible(true);
@@ -1270,6 +1283,7 @@ public class Main implements ActionListener {
         JComboBox<String> jComboBox = new JComboBox<>(quizTakeOptionsToChoose);
         jComboBox.setBounds(120, 50, 140, 20);
         viewGradedQuizPanel.add(jComboBox);
+
 
     }
 
