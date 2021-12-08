@@ -1,14 +1,12 @@
 package Client;
 
-import Server.Question;
-
+import javax.swing.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 
 // class that sends requests to the server and receives responses
 public class ClientClass {
@@ -19,125 +17,65 @@ public class ClientClass {
     private static ObjectInputStream input = null;
 
 
+    public static boolean serverCall(int command, Object objToSend) {
+        boolean retVal = false;
+        try {
+            //creates a new Socket object and names it socket.
+            //Establishes the socket connection between the client & server
+            //name of the machine & the port number to which we want to connect
+            socket = new Socket(hostName, 5000);
 
-        public static boolean createQuiz(String quizName, ArrayList<Question> questions) {
-            boolean retVal = false;
-            try {
-                //creates a new Socket object and names it socket.
-                //Establishes the socket connection between the client & server
-                //name of the machine & the port number to which we want to connect
-                socket = new Socket(hostName, 5000);
+            //opens a PrintWriter on the socket input autoflush mode
+            out = new ObjectOutputStream(socket.getOutputStream());
 
-                //opens a PrintWriter on the socket input autoflush mode
-                out = new ObjectOutputStream(socket.getOutputStream());
+            //opens a BufferedReader on the socket
+            input = new ObjectInputStream(socket.getInputStream());
 
-                //opens a BufferedReader on the socket
-                input = new ObjectInputStream(socket.getInputStream());
+            // write request body to the socket stream
+            out.writeInt(command);
+            out.writeObject(objToSend);
 
-                // write request body to the socket stream
-                out.writeObject("command:5");
-                out.writeObject("name:" + quizName);
-                out.writeObject("username:" + questions); // we will change this username later to the input from gui
-                // read the output from the server
-                String outputString;
-                while (((outputString = (String) input.readObject()) != null) && (!outputString.equals("END_MESSAGE"))) {
-                    //if (printOutput) System.out.println(outputString);
-                    if (outputString.contains("true"))
-                        retVal = true;
-                }
-            }
-            catch (UnknownHostException e) {
-                System.err.println("Unknown host: " + hostName);
-                System.exit(1);
-            }
-            catch (ConnectException e) {
-                System.err.println("Connection refused by host: " + hostName);
-                System.exit(1);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-            // finally, close the socket and decrement runningThreads
-            catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } finally {
-                //if (printOutput) System.out.println("closing");
-                try {
-                    socket.close();
-                    System.out.flush();
 
-                    out.close();
-                    out = null;
-
-                    input.close();
-                    input = null;
-                }
-                catch (IOException e ) {
-                    System.out.println("Couldn't close socket");
-                }
-            }
-            return retVal;
+            // read the output from the server
+            Object in = input.readObject();
+            if (in instanceof Exception) throw (Exception) in;
+            else if (in instanceof Boolean)
+                retVal = (Boolean) in;
+            else
+                throw new IOException("Invalid response");
+        } catch (UnknownHostException e) {
+            System.err.println("Unknown host: " + hostName);
+            System.exit(1);
+        } catch (ConnectException e) {
+            System.err.println("Connection refused by host: " + hostName);
+            System.exit(1);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        public static boolean serverCall(String[] commands) {
-            boolean retVal = false;
+        // finally, close the socket and decrement runningThreads
+        catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(),
+                    "Project 5", JOptionPane.WARNING_MESSAGE);
+        } finally {
+            //if (printOutput) System.out.println("closing");
             try {
-                //creates a new Socket object and names it socket.
-                //Establishes the socket connection between the client & server
-                //name of the machine & the port number to which we want to connect
-                socket = new Socket(hostName, 5000);
+                socket.close();
+                System.out.flush();
 
-                //opens a PrintWriter on the socket input autoflush mode
-                out = new ObjectOutputStream(socket.getOutputStream());
+                out.close();
+                out = null;
 
-                //opens a BufferedReader on the socket
-                input = new ObjectInputStream(socket.getInputStream());
-
-                // write request body to the socket stream
-                for(String str: commands) out.writeObject(str);
-
-
-                // read the output from the server
-                String outputString;
-                while ((outputString = (String) input.readObject()) != null) {
-                    //if (printOutput) System.out.println(outputString);
-                    if (outputString.contains("true"))
-                        retVal = true;
-                    if (outputString.contains("END_MESSAGE"))
-                        break;
-                }
+                input.close();
+                input = null;
+            } catch (IOException e) {
+                System.out.println("Couldn't close socket");
             }
-            catch (UnknownHostException e) {
-                System.err.println("Unknown host: " + hostName);
-                System.exit(1);
-            }
-            catch (ConnectException e) {
-                System.err.println("Connection refused by host: " + hostName);
-                System.exit(1);
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-            }
-            // finally, close the socket and decrement runningThreads
-            catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } finally {
-                //if (printOutput) System.out.println("closing");
-                try {
-                    socket.close();
-                    System.out.flush();
-
-                    out.close();
-                    out = null;
-
-                    input.close();
-                    input = null;
-                }
-                catch (IOException e ) {
-                    System.out.println("Couldn't close socket");
-                }
-            }
-            return retVal;
         }
+        return retVal;
+    }
+
+
 }
 

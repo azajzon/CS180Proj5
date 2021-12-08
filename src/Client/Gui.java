@@ -191,11 +191,11 @@ public class Gui {
 
         loginTeacherAccountButton = new JButton("Login");
         loginTeacherAccountButton.addActionListener((e) -> {
-            if (ClientClass.serverCall(new String[]{"command:0", "username:" + teacherUsernameText.getText(),
-                    "password:" + teacherPasswordText.getText()})) {
+            if (ClientClass.serverCall(0, new String[] {teacherUsernameText.getText(),
+                    teacherPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Logged in successfully.",
                         "Login", JOptionPane.INFORMATION_MESSAGE);
-                teacherMenu();
+                teacherQuizMenu();
             } else {
                 JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
                 mainMenu();
@@ -248,8 +248,8 @@ public class Gui {
         createTeacherAccountButton = new JButton("Create Account");
         createTeacherAccountButton.setBounds(30, 150, 150, 25);
         createTeacherAccountButton.addActionListener((e) -> {
-            if (ClientClass.serverCall(new String[]{"command:1", "name:" + createTeacherNameText.getText(),
-                    "username:" + createTeacherUsernameText.getText(), "password:" + createTeacherPasswordText.getText()})) {
+            if (ClientClass.serverCall(1, new String[] {createTeacherNameText.getText(),
+                    createTeacherUsernameText.getText(), createTeacherPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Account created successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
@@ -295,8 +295,7 @@ public class Gui {
 
         loginStudentAccountButton = new JButton("Login");
         loginStudentAccountButton.addActionListener((e) -> {
-            if (ClientClass.serverCall(new String[]{"command:2", "username:" + studentUsernameText.getText(),
-                    "password:" + studentPasswordText.getText()})) {
+            if (ClientClass.serverCall(2, new String[]{studentUsernameText.getText(), studentPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Logged in successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
                 studentMenu();
             } else {
@@ -351,8 +350,8 @@ public class Gui {
         createStudentAccountButton = new JButton("Create Account");
         createStudentAccountButton.setBounds(30, 150, 150, 25);
         createStudentAccountButton.addActionListener((e) -> {
-            if (ClientClass.serverCall(new String[]{"command:3", "name:" + createStudentNameText.getText(),
-                    "username:" + createStudentUsernameText.getText(), "password:" + createStudentPasswordText})) {
+            if (ClientClass.serverCall(3, new String[]{createStudentNameText.getText(),
+                   createStudentUsernameText.getText(), createStudentPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Account created successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
                 mainMenu();
             } else {
@@ -365,84 +364,6 @@ public class Gui {
         createStudentFrame.setVisible(true);
     }
 
-    public static void teacherMenu() {
-        teacherMenuFrame = new JFrame();
-        teacherMenuPanel = new JPanel();
-        teacherMenuFrame.setSize(400, 300);
-        teacherMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        teacherMenuFrame.add(teacherMenuPanel);
-
-        JLabel addCourseLabel = new JLabel("Do you want to add a course?");
-        addCourseLabel.setBounds(80, 20, 200, 25);
-        teacherMenuPanel.add(addCourseLabel);
-
-        JButton yesCourseButton = new JButton("Yes");
-        yesCourseButton.setBounds(120, 50, 80, 25);
-        teacherMenuPanel.add(yesCourseButton);
-
-        yesCourseButton.addActionListener((e) -> {
-            teacherMenuFrame.setVisible(false);
-            teacherMenuFrame.dispose();
-            addCourse();
-        });
-
-        JButton noCourseButton = new JButton("No");
-        noCourseButton.setBounds(120, 80, 80, 25);
-        teacherMenuPanel.add(noCourseButton);
-
-        //if teacher doesn't want to create a course
-        noCourseButton.addActionListener((e) -> {
-            teacherQuizMenu();
-        });
-
-        teacherMenuPanel.setLayout(null);
-        teacherMenuFrame.setVisible(true);
-    }
-
-    public static void addCourse() {
-        JFrame addCourseFrame = new JFrame();
-        addCoursePanel = new JPanel();
-        addCourseFrame.setSize(400, 300);
-        addCourseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        addCourseFrame.add(addCoursePanel);
-
-        // if yes to adding a course
-        // PATHWAY IS
-
-        JLabel enterCourseNameLabel = new JLabel("Enter Course Name:");
-        enterCourseNameLabel.setBounds(130, 20, 200, 25);
-        addCoursePanel.add(enterCourseNameLabel);
-
-        JTextField enterCourseNameText = new JTextField(50);
-        enterCourseNameText.setBounds(120, 50, 165, 25);
-        addCoursePanel.add(enterCourseNameText);
-
-        JButton createCourseButton = new JButton("Create Course");
-        createCourseButton.setBounds(180, 80, 140, 25);
-
-        addCoursePanel.add(createCourseButton);
-
-        createCourseButton.addActionListener((e) -> {
-
-            if (ClientClass.serverCall(new String[]{"command:4", "name:" + enterCourseNameText.getText()})) {
-                JOptionPane.showMessageDialog(null, "Course created successfully.", "Course Creation", JOptionPane.INFORMATION_MESSAGE);
-                teacherQuizMenu();
-            }
-        });
-
-        JButton addCourseBackButton = new JButton("Back");
-        addCourseBackButton.setBounds(60, 80, 80, 25);
-        addCoursePanel.add(addCourseBackButton);
-
-        addCourseBackButton.addActionListener((e) -> {
-            addCourseFrame.setVisible(false);
-            addCourseFrame.dispose();
-            teacherQuizMenu();
-        });
-
-        addCoursePanel.setLayout(null);
-        addCourseFrame.setVisible(true);
-    }
 
     public static void studentMenu() {
         JFrame studentMenuFrame = new JFrame();
@@ -556,16 +477,14 @@ public class Gui {
         });
 
 
-        JButton teacherQuizMenuBackButton = new JButton("Back");
+        JButton teacherQuizMenuBackButton = new JButton("Logout");
         teacherQuizMenuBackButton.setBounds(30, 200, 110, 25);
         teacherQuizMenuPanel.add(teacherQuizMenuBackButton);
 
-        teacherQuizMenuBackButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                teacherQuizMenuFrame.setVisible(false);
-                teacherQuizMenuFrame.dispose();
-                addCourse();
-            }
+        teacherQuizMenuBackButton.addActionListener(e -> {
+            teacherQuizMenuFrame.setVisible(false);
+            teacherQuizMenuFrame.dispose();
+            mainMenu();
         });
 
         teacherQuizMenuPanel.setLayout(null);
@@ -602,7 +521,7 @@ public class Gui {
         formatOfQuiz1Button.addActionListener(e -> {
             createQuizFrame.setVisible(false);
             createQuizFrame.dispose();
-            multipleChoiceQuiz();
+            multipleChoiceQuiz(nameOfQuizText.getText());
         });
 
         JButton formatOfQuiz2Button = new JButton("True/False");
@@ -629,7 +548,7 @@ public class Gui {
         createQuizFrame.setVisible(true);
     }
 
-    public static void multipleChoiceQuiz() {
+    public static void multipleChoiceQuiz(String quizName) {
         JFrame multipleChoiceQuizFrame = new JFrame();
         JPanel multipleChoiceQuizPanel = new JPanel();
         ArrayList<Question> questions = new ArrayList<>();
@@ -749,7 +668,10 @@ public class Gui {
             noAnotherQuestionButton.setBounds(200, 50, 80, 25);
             addAnotherQuestionPanel.add(noAnotherQuestionButton);
             noAnotherQuestionButton.addActionListener(ae -> {
-                ClientClass.createQuiz(questionOneMCText.getText(), questions);
+                if (ClientClass.serverCall(4, new Server.Quiz(questions, quizName))) {
+                    teacherQuizMenu();
+                }
+
             });
 
             // save the quiz if the user doesn't want to add another question

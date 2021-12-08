@@ -27,16 +27,15 @@ public class ServerThread extends Thread {
 			input = new ObjectInputStream(socket.getInputStream());
 			System.out.print("Reader and writer created. ");
 
-			String command;
 			// read the command from the client
-			while((command = (String) input.readObject()) == null);
+			int command = input.readInt();
 			System.out.println("Read command " + command);
 
 			// run the command using CommandExecutor and get its output
-			String outString = CommandExecutor.run(command, input);
+			Object outObject = Server.getCommandList()[command].apply(input.readObject());
 			System.out.println("Server sending result to client");
 			// send the result of the command to the client
-			output.writeObject(outString);
+			output.writeObject(outObject);
 		}
 		catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
