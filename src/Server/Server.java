@@ -36,7 +36,7 @@ public class Server {
                 Server::loginStudent,
                 Server::createStudent,
                 Server::createQuiz,
-                //Server::studentAccount
+                Server::editStudentAccount,
                 Server::getListOfQuizNames
         };
     }
@@ -167,7 +167,15 @@ public class Server {
         }
         return quizList;
     }
-
+    
+    public static Object editStudentAccount(Object o) {
+        String[] infoLog = (String[]) o;
+        Student student = getStudentByUsername(infoLog[0]);
+        student.setName(infoLog[0]);
+        student.setUsername(infoLog[1]);
+        student.setPassword(infoLog[2]);
+        return true;
+    }
 
 }
 
