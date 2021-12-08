@@ -149,6 +149,7 @@ public class Main implements ActionListener {
     public static JTextField studentLogInPasswordText;
     public static JButton studentLogInBackButton;
     public static JButton takeQuizButton;
+    public static JButton takeQuizBackButton;
     public static JButton viewGradedQuizButton;
     public static JButton editStudentAccountButton;
     public static JButton studentLogOutButton;
@@ -889,8 +890,8 @@ public class Main implements ActionListener {
         // save the quiz if the user doesn't want to add another question
 
         noAnotherQuestionButton.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            teacherMenu();
+            public void actionPerformed(ActionEvent e) {
+                teacherMenu();
             }
         });
 
@@ -1244,23 +1245,10 @@ public class Main implements ActionListener {
         takeQuizPanel.add(jComboBox);
 
 
-        // dropdown feature to show list of courses so student can choose which course they want to take a quiz from
-        /*
-        String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
-        String getCourse = (String) JOptionPane.showInputDialog(
-                null,
-                "Which course would you like to take or view a quiz from?",
-                "Choose Course",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                optionsToChoose,
-                optionsToChoose[0]);
-        */
-
-        editStuAccountBackButton = new JButton("Back");
-        editStuAccountBackButton.setBounds(30, 180, 110, 25);
-        editStuAccountBackButton.addActionListener(new Main());
-        editStudentAccountPanel.add(editStuAccountBackButton);
+        takeQuizBackButton = new JButton("Back");
+        takeQuizBackButton.setBounds(30, 180, 110, 25);
+        takeQuizBackButton.addActionListener(new Main());
+        takeQuizPanel.add(takeQuizBackButton);
 
         takeQuizPanel.setLayout(null);
         takeQuizFrame.setVisible(true);
