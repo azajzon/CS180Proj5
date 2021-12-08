@@ -408,7 +408,7 @@ public class Gui {
         editStudentAccountButton.addActionListener(e -> {
             studentMenuFrame.setVisible(false);
             studentMenuFrame.dispose();
-            //editStudentAccount();
+            editStudentAccount();
         });
 
         JButton studentLogOutButton = new JButton("Logout");
