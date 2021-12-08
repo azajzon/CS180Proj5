@@ -803,6 +803,83 @@ public class Gui {
         editTeacherAccountFrame.setVisible(true);
 
     }
+    
+    public static void editStudentAccount() {
+        JFrame editStudentAccountFrame = new JFrame();
+        JPanel editStudentAccountPanel = new JPanel();
+        editStudentAccountFrame.setSize(400, 300);
+        editStudentAccountFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editStudentAccountFrame.add(editStudentAccountPanel);
+
+        editStudentAccountPanel.setLayout(null);
+        // TODO USE LOGGED IN USERNAME VAR FOR OLD USERNAME
+        JLabel oldUserNameLabel = new JLabel("Old Username:");
+        oldUserNameLabel.setBounds(20, 20, 150, 25);
+        editStudentAccountPanel.add(oldUserNameLabel);
+
+        JTextField oldUserNameText = new JTextField(20);
+        oldUserNameText.setBounds(150, 20, 165, 25);
+        editStudentAccountPanel.add(oldUserNameText);
+
+        JLabel editedStuNameLabel = new JLabel("First & Last Name:");
+        editedStuNameLabel.setBounds(20, 50, 150, 25);
+        editStudentAccountPanel.add(editedStuNameLabel);
+
+        JTextField editedStuNameText = new JTextField(20);
+        editedStuNameText.setBounds(150, 50, 165, 25);
+        editStudentAccountPanel.add(editedStuNameText);
+
+        JLabel editedStuUsernameLabel = new JLabel("Username:");
+        editedStuUsernameLabel.setBounds(20, 80, 80, 25);
+        editStudentAccountPanel.add(editedStuUsernameLabel);
+
+        JTextField editedStuUsernameText = new JTextField(20);
+        editedStuUsernameText.setBounds(150, 80, 165, 25);
+        editStudentAccountPanel.add(editedStuUsernameText);
+
+        JLabel editedStuPasswordLabel = new JLabel("Password:");
+        editedStuPasswordLabel.setBounds(20, 110, 80, 25);
+        editStudentAccountPanel.add(editedStuPasswordLabel);
+
+        JTextField editedStuPasswordText = new JTextField(20);
+        editedStuPasswordText.setBounds(150, 110, 165, 25);
+        editStudentAccountPanel.add(editedStuPasswordText);
+
+        JButton updateStuAccountButton = new JButton("Save and Update Account");
+        updateStuAccountButton.setBounds(30, 150, 200, 25);
+        updateStuAccountButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if ((Boolean) ClientClass.serverCall(6, new String[] {oldUserNameText.getText(),
+                        editedStuNameText.getText(),
+                        editedStuUsernameLabel.getText(),
+                        editedStuPasswordLabel.getText()})) {
+                    JOptionPane.showMessageDialog(null, "Account Info Changed successfully.",
+                            "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Account Info Changed unsuccessfully.",
+                            "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
+                }
+                editStudentAccountFrame.setVisible(false);
+                editStudentAccountFrame.dispose();
+                studentMenu();
+            }
+        });
+        editStudentAccountPanel.add(updateStuAccountButton);
+
+        JButton editStuAccountBackButton = new JButton("Back");
+        editStuAccountBackButton.setBounds(30, 180, 110, 25);
+        editStudentAccountPanel.add(editStuAccountBackButton);
+
+        editStuAccountBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editStudentAccountFrame.setVisible(false);
+                editStudentAccountFrame.dispose();
+                studentMenu();
+            }
+        });
+
+        editStudentAccountFrame.setVisible(true);
+    }
 
 
 }
