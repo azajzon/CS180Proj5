@@ -35,7 +35,10 @@ public class Server {
                 Server::createTeacher,
                 Server::loginStudent,
                 Server::createStudent,
-                Server::createQuiz
+                Server::createQuiz,
+                Server::editStudentAccount,
+                Server::getListOfQuizNames,
+                Server::getQuiz
         };
     }
 
@@ -158,6 +161,33 @@ public class Server {
         return true;
     }
 
+    public static Object getListOfQuizNames(Object o) {
+        ArrayList<String> quizList = new ArrayList<>();
+        for (Quiz q: quizzes) {
+            quizList.add(q.getQuizName());
+        }
+        return quizList;
+    }
+    
+    public static Object editStudentAccount(Object o) {
+        String[] infoLog = (String[]) o;
+        Student student = getStudentByUsername(infoLog[0]);
+        student.setName(infoLog[0]);
+        student.setUsername(infoLog[1]);
+        student.setPassword(infoLog[2]);
+        return true;
+    }
+
+    private static Object getQuiz(Object o) {
+        String qName = (String) o;
+        for (Quiz q : quizzes) {
+            if (q.getQuizName().equals(qName)) {
+                System.out.println(q.getQuizName());
+                return q;
+            }
+        }
+        return null;
+    }
 
 }
 
