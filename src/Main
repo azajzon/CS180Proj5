@@ -218,7 +218,7 @@ public class Main implements ActionListener {
 
     public static void main(String[] args) {
 
-        mainMenu();
+        //mainMenu();
         //createTeacher();
         //accountCreatedTeacher();
         //teacherLogIn();
@@ -227,7 +227,7 @@ public class Main implements ActionListener {
         //teacherQuizMenu();
         //editStudentAccount();
         //createQuiz();
-        //editQuiz();
+        editQuiz();
         //multipleChoiceQuiz();
         //trueOrFalseQuiz();
         //editTeacherAccount();
@@ -966,42 +966,42 @@ public class Main implements ActionListener {
         /// CHOOSE COURSE
         editCourseLabel = new JLabel("Which course would you like to edit a quiz from?");
         editCourseLabel.setBounds(30, 50, 700, 25);
-        editQuizFrame.add(editCourseLabel);
+        editQuizPanel.add(editCourseLabel);
 
         //below array needs to contain the list of courses that have bene created so far
         String[] coursesToEditQuiz = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
         JComboBox<String> coursesList = new JComboBox<>(coursesToEditQuiz);
         coursesList.setBounds(120, 70, 140, 20);
-        editQuizFrame.add(coursesList);
+        editQuizPanel.add(coursesList);
 
         //CHOOSE QUIZ
         editQuizLabel = new JLabel("Which quiz would you like to edit?");
         editQuizLabel.setBounds(30, 100, 700, 25);
-        editQuizFrame.add(editQuizLabel);
+        editQuizPanel.add(editQuizLabel);
 
         //below array needs to contain the list of courses that have bene created so far
         String[] editQuizFromList = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
         JComboBox<String> editQuizList = new JComboBox<>(editQuizFromList);
         editQuizList.setBounds(120, 130, 140, 20);
-        editQuizFrame.add(editQuizList);
+        editQuizPanel.add(editQuizList);
 
         //CHOOSE QUESTION
         editQuestionLabel = new JLabel("Which question would you like to edit?");
         editQuestionLabel.setBounds(30, 150, 700, 25);
-        editQuizFrame.add(editQuestionLabel);
+        editQuizPanel.add(editQuestionLabel);
 
         //below array needs to contain the list of courses that have bene created so far
         String[] editQuestionFromList = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
         JComboBox<String> editQuestionList = new JComboBox<>(editQuestionFromList);
         editQuestionList.setBounds(120, 180, 140, 20);
-        editQuizFrame.add(editQuestionList);
+        editQuizPanel.add(editQuestionList);
 
 
         //next screen button
         nextForEditQuiz = new JButton("Next");
         nextForEditQuiz.setBounds(120, 220, 110, 25);
         nextForEditQuiz.addActionListener(new Main());
-        editQuizFrame.add(nextForEditQuiz);
+        editQuizPanel.add(nextForEditQuiz);
 
         nextForEditQuiz.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -1029,16 +1029,16 @@ public class Main implements ActionListener {
 
         lsmToolLabel = new JLabel("Name of Quiz: "); // + show name of quiz);
         lsmToolLabel.setBounds(130, 20, 500, 25);
-        questionForEditQuizFrame.add(lsmToolLabel);
+        questionForEditQuizPanel.add(lsmToolLabel);
 
         questionOneMCLabel = new JLabel("Type in Question : ");
         questionOneMCLabel.setBounds(20, 50, 160, 25);
-        questionForEditQuizFrame.add(questionOneMCLabel);
+        questionForEditQuizPanel.add(questionOneMCLabel);
 
 
         editQuestionOneMCText = new JTextField(20);
         editQuestionOneMCText.setBounds(210, 50, 165, 25);
-        questionForEditQuizFrame.add(editQuestionOneMCText);
+        questionForEditQuizPanel.add(editQuestionOneMCText);
 
         optionOneEditLabel = new JLabel("Option 1:");
         optionOneEditLabel.setBounds(20, 80, 80, 25);
@@ -1113,8 +1113,8 @@ public class Main implements ActionListener {
 
         //
 
-        multipleChoiceQuizPanel.setLayout(null);
-        multipleChoiceQuizFrame.setVisible(true);
+        questionForEditQuizPanel.setLayout(null);
+        questionForEditQuizFrame.setVisible(true);
     }
 
     public static void editTeacherAccount() {
