@@ -1,6 +1,6 @@
 package Server;
 
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -46,13 +46,23 @@ public class Server {
         return commandList;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
         teachers = new CopyOnWriteArrayList<>();
         students = new CopyOnWriteArrayList<>();
         courses = new CopyOnWriteArrayList<>();
         quizzes = new CopyOnWriteArrayList<>();
         loggedInStudents = new CopyOnWriteArrayList<>();
         loggedInTeachers = new CopyOnWriteArrayList<>();
+        Thread saveStateHook = new Thread(() -> {
+            try {
+                saveProgramState();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        Runtime.getRuntime().addShutdownHook(saveStateHook);
+        loadProgramState();
 
         AtomicInteger numThreads = new AtomicInteger(0);
         // the list of threads is kept in a linked list
@@ -79,7 +89,7 @@ public class Server {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-    }
+        }
 
     public static Object loginTeacher(Object array) {
         // creates an object of the Teacher class
@@ -187,6 +197,132 @@ public class Server {
             }
         }
         return null;
+    }
+
+    public static void saveArrayToFile(String filename, int arrayType) {
+        try {
+            //Saves an object in a file
+            FileOutputStream file = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(file);
+            switch (arrayType) {
+                case 1:
+                    for (Teacher teacher : teachers) {
+                        //writes and saves the list of teachers in a file
+                        out.writeObject(teacher);
+                    }
+                    break;
+                case 2:
+                    for (Student student : students) {
+                        //writes and saves the list of students in a file
+                        out.writeObject(student);
+                    }
+                    break;
+                case 3:
+                    for (Quiz quiz : quizzes) {
+                        //writes and saves the list of courses in a file
+                        out.writeObject(quiz);
+                    }
+                    break;
+            } out.close();
+            file.close();
+
+            System.out.println();
+        } catch (IOException ex) {
+            System.out.println("IOException is caught");
+        }
+
+    }
+
+    // loadArrayFromFile method loads the saved data from the file that we stored the data in
+    public static void loadArrayFromFile(String filename, int arrayType) {
+        try {
+            //Saves an object in a file
+            FileInputStream file = new FileInputStream(filename);
+            ObjectInputStream in = new ObjectInputStream(file);
+
+            switch(arrayType) {
+                case 1:
+                    while (true) {
+                        try {
+                            // stores the teachers data from the file in an object of the Teacher class
+                            Teacher teacher = (Teacher) in.readObject();
+                            teachers.add(teacher);
+                            // catches any exceptions
+                        } catch (EOFException e) {
+                            break;
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    break;
+                case 2:
+                    while (true) {
+                        try {
+                            // stores the students data from the file in an object of the Teacher class
+                            Student student = (Student) in.readObject();
+                            students.add(student);
+                        } catch (EOFException e) {
+                            break;
+                            // catches a ClassNotFoundException if found
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    break;
+                case 3:
+                    while (true) {
+                        try {
+                            // stores the courses data from the file in an object of the Teacher class
+                            Quiz quiz = (Quiz) in.readObject();
+                            quizzes.add(quiz);
+                        } catch (EOFException e) {
+                            break;
+                        } catch (ClassNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    break;
+            }
+
+            in.close();
+            file.close();
+
+            System.out.print("");
+            // catches exceptions such as not being able to
+            // find the files that stored the arrays of teachers, students, and courses
+        } catch (IOException ex) {
+            if (ex.getMessage().equals("teachers.txt (The system cannot find the file specified)"))
+                System.out.println("No teachers saved");
+            else if (ex.getMessage().equals("students.txt (The system cannot find the file specified)"))
+                System.out.println("No students saved");
+            else if (ex.getMessage().equals("courses.txt (The system cannot find the file specified)"))
+                System.out.println("No courses saved");
+            else
+                System.out.println("IOException is caught");
+        }
+
+    }
+
+    // saveProgramState method saves the data even when we end the program
+    public static void saveProgramState() throws IOException {
+        //create a txt file that contains the list of teachers, students, and courses
+        // Serialization
+        if (teachers.size() > 0)
+            saveArrayToFile("teachers.txt", 1);
+        if (students.size() > 0)
+            saveArrayToFile("students.txt", 2);
+        if (courses.size() > 0)
+            saveArrayToFile("quizzes.txt", 3);
+
+    }
+
+    // loadProgramState method loads the data that was saved when a previous program was ended
+    public static void loadProgramState() {
+        // Reading the object from a file
+        loadArrayFromFile("teachers.txt", 1);
+        loadArrayFromFile("students.txt", 2);
+        loadArrayFromFile("quizzes.txt", 3);
+
     }
 
 }
