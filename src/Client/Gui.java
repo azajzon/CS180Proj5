@@ -932,42 +932,66 @@ public class Gui {
     }
 
     public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num) {
-        String choices = "";
         int cNum = 1;
-        Question q = questions.get(num-1);
-        for( String i : q.getChoices()) {
-            choices = choices + "Choice " + cNum + ": " + i + ", ";
-            cNum+=1;
-        }
+        Question q = questions.get(num - 1);
+        ArrayList<String> choices =  q.getChoices();
 
-        JFrame quizStudentTakesFrame1 = new JFrame();
-        JPanel quizStudentTakesPanel1 = new JPanel();
+        JFrame quizStudentTakesFrame1;
+        quizStudentTakesFrame1 = new JFrame();
+        JPanel quizStudentTakesPanel1;
+        quizStudentTakesPanel1 = new JPanel();
         quizStudentTakesFrame1.setSize(400, 300);
         quizStudentTakesFrame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         quizStudentTakesFrame1.add(quizStudentTakesPanel1);
-        JLabel questionOneTitleLabel = new JLabel("Question " + num);
-        num += 1;
-        questionOneTitleLabel.setBounds(120, 20, 500, 60);
+
+
+        JLabel questionOneTitleLabel;
+        questionOneTitleLabel = new JLabel("Question " + num);
+        questionOneTitleLabel.setBounds(120, 20, 500, 25);
         quizStudentTakesPanel1.add(questionOneTitleLabel);
+
         //below label will display the first question of the quiz
-        JLabel questionOneStuQuizLabel = new JLabel("<html>" + q.getQuestionTitle() + "<br/>" + choices + "</html>");
+        JLabel questionOneStuQuizLabel;
+        questionOneStuQuizLabel = new JLabel( q.getQuestionTitle());
         questionOneStuQuizLabel.setBounds(30, 50, 700, 25);
         quizStudentTakesPanel1.add(questionOneStuQuizLabel);
-        JLabel typeInAnswerLabel = new JLabel("Type in Answer: ");
-        typeInAnswerLabel.setBounds(30, 120, 700, 25);
+
+        //OPTIONS DISPLAYED (MULTIPLE CHOICE)
+        JLabel optionOneMC = new JLabel("Option 1: " + choices.get(0));
+        optionOneMC.setBounds(30, 80, 300, 25);
+        quizStudentTakesPanel1.add(optionOneMC);
+
+        JLabel optionTwoMC = new JLabel("Option 2: " + choices.get(1));
+        optionTwoMC.setBounds(30, 110, 300, 25);
+        quizStudentTakesPanel1.add(optionTwoMC);
+
+        JLabel optionThreeMC = new JLabel("Option 3: " + choices.get(2));
+        optionThreeMC.setBounds(30, 140, 300, 25);
+        quizStudentTakesPanel1.add(optionThreeMC);
+
+        JLabel optionFourMC = new JLabel("Option 4: " + choices.get(3));
+        optionFourMC.setBounds(30, 170, 300, 25);
+        quizStudentTakesPanel1.add(optionFourMC);
+
+
+        JLabel typeInAnswerLabel = new JLabel("Type in Answer Choice #: ");
+        typeInAnswerLabel.setBounds(30, 200, 700, 25);
         quizStudentTakesPanel1.add(typeInAnswerLabel);
+
         JTextField questionOneStuAns = new JTextField(20);
-        questionOneStuAns.setBounds(140, 120, 165, 25);
+        questionOneStuAns.setBounds(200, 200, 60, 25);
         quizStudentTakesPanel1.add(questionOneStuAns);
+
         JButton quizStuTakesNextButton = new JButton("Next");
-        quizStuTakesNextButton.setBounds(220, 180, 110, 25);
+        quizStuTakesNextButton.setBounds(250, 230, 110, 25);
         quizStudentTakesPanel1.add(quizStuTakesNextButton);
+
         int fNum = num;
         quizStuTakesNextButton.addActionListener(e -> {
             answers.add(new Answer(q.getQuestionTitle(), questionOneStuAns.getText()));
             quizStudentTakesFrame1.setVisible(false);
             quizStudentTakesFrame1.dispose();
-            if (answers.size() == questions.size() ) {
+            if (answers.size() == questions.size()) {
                 quizSubmitted();
                 // TODO SERVER SUBMIT CALL
             } else {

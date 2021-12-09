@@ -192,7 +192,7 @@ public class Server {
         String qName = (String) o;
         for (Quiz q : quizzes) {
             if (q.getQuizName().equals(qName)) {
-                System.out.println(q.getQuizName());
+                //System.out.println(q.getQuizName());
                 return q;
             }
         }
