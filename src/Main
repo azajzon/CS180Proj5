@@ -30,6 +30,7 @@ public class Main implements ActionListener {
     public static JFrame viewGradedQuizFrame;
     public static JFrame editStudentAccountFrame;
     public static JFrame editStudentAccountDoneFrame;
+    public static JFrame questionForEditQuizFrame;
 
 
     //ALL PANELS
@@ -58,6 +59,7 @@ public class Main implements ActionListener {
     public static JPanel viewGradedQuizPanel;
     public static JPanel editStudentAccountPanel;
     public static JPanel editStudentAccountDonePanel;
+    public static JPanel questionForEditQuizPanel;
 
     public static JLabel lsmToolLabel;
 
@@ -141,6 +143,22 @@ public class Main implements ActionListener {
     public static JButton updateTeachAccountButton;
     public static JButton editTeachAccountBackButton;
     public static JButton editAccountDoneBackButton;
+    public static JLabel editCourseLabel;
+    public static JLabel editQuizLabel;
+    public static JLabel editQuestionLabel;
+    public static JLabel optionOneEditLabel;
+    public static JLabel optionTwoEditLabel;
+    public static JLabel optionThreeEditLabel;
+    public static JLabel optionFourEditLabel;
+    public static JButton saveEditQuizButton;
+    public static JTextField editPointValueMCText;
+    public static JTextField editCorrectAnsChoiceMCText;
+    public static JTextField editOptionOneMCText;
+    public static JTextField editOptionTwoMCText;
+    public static JTextField editOptionThreeMCText;
+    public static JTextField editOptionFourMCText;
+    public static JTextField editQuestionOneMCText;
+
 
     //STUDENT VARIABLES
     public static JLabel createStudentLabel;
@@ -193,6 +211,7 @@ public class Main implements ActionListener {
     public static JTextField editedStuPasswordText;
     public static JButton updateStuAccountButton;
     public static JButton editStuAccountBackButton;
+    public static JButton nextForEditQuiz;
 
     //COMMON VARIABLES
     public static JLabel accountUpdatedLabel;
@@ -944,29 +963,158 @@ public class Main implements ActionListener {
         lsmToolLabel.setBounds(160, 20, 500, 25);
         editQuizPanel.add(lsmToolLabel);
 
-        String[] quizOptionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        /// CHOOSE COURSE
+        editCourseLabel = new JLabel("Which course would you like to edit a quiz from?");
+        editCourseLabel.setBounds(30, 50, 700, 25);
+        editQuizFrame.add(editCourseLabel);
 
-        JComboBox<String> jComboBox = new JComboBox<>(quizOptionsToChoose);
-        jComboBox.setBounds(100, 70, 180, 20);
+        //below array needs to contain the list of courses that have bene created so far
+        String[] coursesToEditQuiz = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> coursesList = new JComboBox<>(coursesToEditQuiz);
+        coursesList.setBounds(120, 70, 140, 20);
+        editQuizFrame.add(coursesList);
 
-        editQuizPanel.add(jComboBox);
+        //CHOOSE QUIZ
+        editQuizLabel = new JLabel("Which quiz would you like to edit?");
+        editQuizLabel.setBounds(30, 100, 700, 25);
+        editQuizFrame.add(editQuizLabel);
 
-        // dropdown feature to show list of courses
+        //below array needs to contain the list of courses that have bene created so far
+        String[] editQuizFromList = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> editQuizList = new JComboBox<>(editQuizFromList);
+        editQuizList.setBounds(120, 130, 140, 20);
+        editQuizFrame.add(editQuizList);
 
-        String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
-        String getCourse = (String) JOptionPane.showInputDialog(
-                null,
-                "Which course do you want to edit quiz from?",
-                "Choose Course",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                optionsToChoose,
-                optionsToChoose[0]);
+        //CHOOSE QUESTION
+        editQuestionLabel = new JLabel("Which question would you like to edit?");
+        editQuestionLabel.setBounds(30, 150, 700, 25);
+        editQuizFrame.add(editQuestionLabel);
 
+        //below array needs to contain the list of courses that have bene created so far
+        String[] editQuestionFromList = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> editQuestionList = new JComboBox<>(editQuestionFromList);
+        editQuestionList.setBounds(120, 180, 140, 20);
+        editQuizFrame.add(editQuestionList);
+
+
+        //next screen button
+        nextForEditQuiz = new JButton("Next");
+        nextForEditQuiz.setBounds(120, 220, 110, 25);
+        nextForEditQuiz.addActionListener(new Main());
+        editQuizFrame.add(nextForEditQuiz);
+
+        nextForEditQuiz.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editQuizFrame.setVisible(false);
+                editQuizFrame.dispose();
+                questionForEditQuiz(); // this brings the question to the next screen
+                // (where they can edit the questions)
+            }
+        });
 
         editQuizPanel.setLayout(null);
         editQuizFrame.setVisible(true);
 
+    }
+
+    //question screen that teacher can edit from
+    public static void questionForEditQuiz() {
+
+        //if multiple choice
+        questionForEditQuizFrame = new JFrame();
+        questionForEditQuizPanel = new JPanel();
+        questionForEditQuizFrame.setSize(400, 320);
+        questionForEditQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        questionForEditQuizFrame.add(questionForEditQuizPanel);
+
+        lsmToolLabel = new JLabel("Name of Quiz: "); // + show name of quiz);
+        lsmToolLabel.setBounds(130, 20, 500, 25);
+        questionForEditQuizFrame.add(lsmToolLabel);
+
+        questionOneMCLabel = new JLabel("Type in Question : ");
+        questionOneMCLabel.setBounds(20, 50, 160, 25);
+        questionForEditQuizFrame.add(questionOneMCLabel);
+
+
+        editQuestionOneMCText = new JTextField(20);
+        editQuestionOneMCText.setBounds(210, 50, 165, 25);
+        questionForEditQuizFrame.add(editQuestionOneMCText);
+
+        optionOneEditLabel = new JLabel("Option 1:");
+        optionOneEditLabel.setBounds(20, 80, 80, 25);
+        questionForEditQuizPanel.add(optionOneEditLabel);
+
+
+        editOptionOneMCText = new JTextField(20);
+        editOptionOneMCText.setBounds(210, 80, 165, 25);
+        questionForEditQuizPanel.add(editOptionOneMCText);
+
+        optionTwoEditLabel = new JLabel("Option 2:");
+        optionTwoEditLabel.setBounds(20, 110, 80, 25);
+        questionForEditQuizPanel.add(optionTwoEditLabel);
+
+
+        editOptionTwoMCText = new JTextField(20);
+        editOptionTwoMCText.setBounds(210, 110, 165, 25);
+        questionForEditQuizPanel.add(editOptionTwoMCText);
+
+        optionThreeEditLabel = new JLabel("Option 3:");
+        optionThreeEditLabel.setBounds(20, 140, 80, 25);
+        questionForEditQuizPanel.add(optionThreeEditLabel);
+
+
+        editOptionThreeMCText = new JTextField(20);
+        editOptionThreeMCText.setBounds(210, 140, 165, 25);
+        questionForEditQuizPanel.add(editOptionThreeMCText);
+
+        optionFourEditLabel = new JLabel("Option 4:");
+        optionFourEditLabel.setBounds(20, 170, 80, 25);
+        questionForEditQuizPanel.add(optionFourEditLabel);
+
+
+        editOptionFourMCText = new JTextField(20);
+        editOptionFourMCText.setBounds(210, 170, 165, 25);
+        questionForEditQuizPanel.add(editOptionFourMCText);
+
+        correctAnsChoiceMCLabel = new JLabel("Enter correct answer choice:");
+        correctAnsChoiceMCLabel.setBounds(20, 200, 250, 25);
+        questionForEditQuizPanel.add(correctAnsChoiceMCLabel);
+
+
+        editCorrectAnsChoiceMCText = new JTextField(20);
+        editCorrectAnsChoiceMCText.setBounds(210, 200, 165, 25);
+        questionForEditQuizPanel.add(editCorrectAnsChoiceMCText);
+
+        pointValueMCLabel = new JLabel("Enter the point value:");
+        pointValueMCLabel.setBounds(20, 230, 250, 25);
+        questionForEditQuizPanel.add(pointValueMCLabel);
+
+
+        editPointValueMCText = new JTextField(20);
+        editPointValueMCText.setBounds(210, 230, 165, 25);
+        questionForEditQuizPanel.add(editPointValueMCText);
+
+        //saves question
+        saveEditQuizButton = new JButton("Save and Update Quiz");
+        saveEditQuizButton.setBounds(210, 260, 150, 25);
+        saveEditQuizButton.addActionListener(new Main());
+        questionForEditQuizPanel.add(saveEditQuizButton);
+
+        // once the add question button is clicked, we need to add the question to the list of questions for that specific quiz
+        // calls the method that displays the screen and asks if the user wants to add another question or not
+
+        saveEditQuizButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                questionForEditQuizFrame.setVisible(false);
+                questionForEditQuizFrame.dispose();
+                teacherMenu();
+            }
+        });
+
+        //
+
+        multipleChoiceQuizPanel.setLayout(null);
+        multipleChoiceQuizFrame.setVisible(true);
     }
 
     public static void editTeacherAccount() {
@@ -1627,4 +1775,3 @@ public class Main implements ActionListener {
 
     }
 }
-
