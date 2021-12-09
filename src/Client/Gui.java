@@ -666,7 +666,7 @@ public class Gui {
             yesAnotherQuestionButton.setBounds(110, 50, 80, 25);
             addAnotherQuestionPanel.add(yesAnotherQuestionButton);
             yesAnotherQuestionButton.addActionListener(ae -> {
-                createQuiz();
+                multipleChoiceQuiz(quizName);
             });
 
             //if the user wants to add another question, display the screen of the question, options, correct answer and point value again
