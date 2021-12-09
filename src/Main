@@ -1,4 +1,3 @@
-/*
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -172,6 +171,10 @@ public class Main implements ActionListener {
     public static JLabel questionOneStuQuizLabel;
     public static JTextField questionOneStuAns;
     public static JLabel typeInAnswerLabel;
+    public static JLabel optionOneMC;
+    public static JLabel optionTwoMC;
+    public static JLabel optionThreeMC;
+    public static JLabel optionFourMC;
     public static JButton quizStuTakesNextButton;
     public static JLabel quizSubmittedLabel;
     public static JButton quizDoneBackToStuMenuButton;
@@ -196,7 +199,7 @@ public class Main implements ActionListener {
 
     public static void main(String[] args) {
 
-        //mainMenu();
+        mainMenu();
         //createTeacher();
         //accountCreatedTeacher();
         //teacherLogIn();
@@ -217,7 +220,7 @@ public class Main implements ActionListener {
         //whichQuizToTake();
         //quizStudentTakes();
         //viewGradedQuiz();
-        editStudentAccount();
+        //editStudentAccount();
 
     }
 
@@ -289,13 +292,11 @@ public class Main implements ActionListener {
         saveButton.setBounds(120, 170, 150, 25);
         saveButton.addActionListener(new Main());
         maineMenuPanel.add(saveButton);
-
-        */
-/*saveButton.addActionListener(new ActionListener() {
+        saveButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //call the save data methods
             }
-        });*//*
+        });
 
 
         maineMenuPanel.setLayout(null);
@@ -951,8 +952,7 @@ public class Main implements ActionListener {
         editQuizPanel.add(jComboBox);
 
         // dropdown feature to show list of courses
-        */
-/*
+
         String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
         String getCourse = (String) JOptionPane.showInputDialog(
                 null,
@@ -962,7 +962,6 @@ public class Main implements ActionListener {
                 null,
                 optionsToChoose,
                 optionsToChoose[0]);
-        *//*
 
 
         editQuizPanel.setLayout(null);
@@ -1286,13 +1285,11 @@ public class Main implements ActionListener {
         studentMenuPanel.add(studentLogOutButton);
 
         //TODO what should happen when the student log outs
-        */
-/*
+
         studentLogOutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
         });
-        *//*
 
 
         studentMenuPanel.setLayout(null);
@@ -1396,16 +1393,34 @@ public class Main implements ActionListener {
         questionOneStuQuizLabel.setBounds(30, 50, 700, 25);
         quizStudentTakesPanel1.add(questionOneStuQuizLabel);
 
+        //OPTIONS DISPLAYED (MULTIPLE CHOICE)
+        optionOneMC = new JLabel("Option 1:");
+        optionOneMC.setBounds(30, 80, 300, 25);
+        quizStudentTakesPanel1.add(optionOneMC);
+
+        optionTwoMC = new JLabel("Option 2:");
+        optionTwoMC.setBounds(30, 110, 300, 25);
+        quizStudentTakesPanel1.add(optionTwoMC);
+
+        optionThreeMC = new JLabel("Option 3:");
+        optionThreeMC.setBounds(30, 140, 300, 25);
+        quizStudentTakesPanel1.add(optionThreeMC);
+
+        optionFourMC = new JLabel("Option 4:");
+        optionFourMC.setBounds(30, 170, 300, 25);
+        quizStudentTakesPanel1.add(optionFourMC);
+
+
         typeInAnswerLabel = new JLabel("Type in Answer: ");
-        typeInAnswerLabel.setBounds(30, 80, 700, 25);
+        typeInAnswerLabel.setBounds(30, 200, 700, 25);
         quizStudentTakesPanel1.add(typeInAnswerLabel);
 
         questionOneStuAns = new JTextField(20);
-        questionOneStuAns.setBounds(140, 80, 165, 25);
+        questionOneStuAns.setBounds(140, 200, 165, 25);
         quizStudentTakesPanel1.add(questionOneStuAns);
 
         quizStuTakesNextButton = new JButton("Next");
-        quizStuTakesNextButton.setBounds(220, 180, 110, 25);
+        quizStuTakesNextButton.setBounds(250, 230, 110, 25);
         quizStuTakesNextButton.addActionListener(new Main());
         quizStudentTakesPanel1.add(quizStuTakesNextButton);
 
@@ -1613,4 +1628,3 @@ public class Main implements ActionListener {
     }
 }
 
-*/
