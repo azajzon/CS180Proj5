@@ -634,10 +634,20 @@ public class Gui {
 
         addQuestionMCButton.addActionListener(e -> {
             Question q = new Question(questionOneMCText.getText());
-            q.addChoice(optionOneMCLabel.getText());
-            q.addChoice(optionTwoMCLabel.getText());
-            q.addChoice(optionThreeMCLabel.getText());
-            q.addChoice(optionFourMCLabel.getText());
+            q.addChoice(optionOneMCText.getText());
+            q.addChoice(optionTwoMCText.getText());
+            q.addChoice(optionThreeMCText.getText());
+            q.addChoice(optionFourMCText.getText());
+
+            if (correctAnsChoiceMCText.getText().equals("1"))
+                q.setAnswer(optionOneMCText.getText());
+            if (correctAnsChoiceMCText.getText().equals("2"))
+                q.setAnswer(optionTwoMCText.getText());
+            if (correctAnsChoiceMCText.getText().equals("3"))
+                q.setAnswer(optionThreeMCText.getText());
+            if (correctAnsChoiceMCText.getText().equals("4"))
+                q.setAnswer(optionFourMCText.getText());
+
             q.setPointValue(Integer.parseInt(pointValueMCText.getText()));
             questions.add(q);
 
@@ -907,13 +917,7 @@ public class Gui {
                 whichQuizToTakeFrame.dispose();
 
                 if( !(q == null) ) {
-                    try {
-                        quizStudentTakes(q);
-                    } catch (InterruptedException ex) {
-                        ex.printStackTrace();
-                    }
-                } else {
-                    // TODO error mess
+                    quizStudentTakes(q);
                 }
             }
         });
@@ -921,48 +925,57 @@ public class Gui {
         whichQuizToTakeFrame.setVisible(true);
     }
 
-    public static void quizStudentTakes(Quiz q) throws InterruptedException {
-        int num = 1;
-        AtomicBoolean click = new AtomicBoolean(false);
+    public static void quizStudentTakes(Quiz q){
+        ArrayList<Question> questions = q.getQuestions();
         ArrayList<Answer> answers = new ArrayList<>();
-        for ( Question question : q.getQuestions()) {
-            while (click.get() == false) {
-                JFrame quizStudentTakesFrame1 = new JFrame();
-                JPanel quizStudentTakesPanel1 = new JPanel();
-                quizStudentTakesFrame1.setSize(400, 300);
-                quizStudentTakesFrame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                quizStudentTakesFrame1.add(quizStudentTakesPanel1);
-                JLabel questionOneTitleLabel = new JLabel("Question " + num);
-                num += 1;
-                questionOneTitleLabel.setBounds(120, 20, 500, 25);
-                quizStudentTakesPanel1.add(questionOneTitleLabel);
-                //below label will display the first question of the quiz
-                JLabel questionOneStuQuizLabel = new JLabel(question.getQuestionTitle());
-                questionOneStuQuizLabel.setBounds(30, 50, 700, 25);
-                quizStudentTakesPanel1.add(questionOneStuQuizLabel);
-                JLabel typeInAnswerLabel = new JLabel("Type in Answer: ");
-                typeInAnswerLabel.setBounds(30, 80, 700, 25);
-                quizStudentTakesPanel1.add(typeInAnswerLabel);
-                JTextField questionOneStuAns = new JTextField(20);
-                questionOneStuAns.setBounds(140, 80, 165, 25);
-                quizStudentTakesPanel1.add(questionOneStuAns);
-                JButton quizStuTakesNextButton = new JButton("Next");
-                quizStuTakesNextButton.setBounds(220, 180, 110, 25);
-                quizStudentTakesPanel1.add(quizStuTakesNextButton);
-                quizStuTakesNextButton.addActionListener(e -> {
-                    answers.add(new Answer(question.getQuestionTitle(), questionOneStuAns.getText()));
-                    quizStudentTakesFrame1.setVisible(false);
-                    quizStudentTakesFrame1.dispose();
-                    click.set(true);
-                });
-                quizStudentTakesPanel1.setLayout(null);
-                quizStudentTakesFrame1.setVisible(true);
-                Thread.sleep(100000000);
-            }
+        quizView(questions, answers, 1);
+    }
 
+    public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num) {
+        String choices = "";
+        int cNum = 1;
+        Question q = questions.get(num-1);
+        for( String i : q.getChoices()) {
+            choices = choices + "Choice " + cNum + ": " + i + ", ";
+            cNum+=1;
         }
-        // TODO SERVER SUBMIT CALL
-        quizSubmitted();
+
+        JFrame quizStudentTakesFrame1 = new JFrame();
+        JPanel quizStudentTakesPanel1 = new JPanel();
+        quizStudentTakesFrame1.setSize(400, 300);
+        quizStudentTakesFrame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        quizStudentTakesFrame1.add(quizStudentTakesPanel1);
+        JLabel questionOneTitleLabel = new JLabel("Question " + num);
+        num += 1;
+        questionOneTitleLabel.setBounds(120, 20, 500, 60);
+        quizStudentTakesPanel1.add(questionOneTitleLabel);
+        //below label will display the first question of the quiz
+        JLabel questionOneStuQuizLabel = new JLabel("<html>" + q.getQuestionTitle() + "<br/>" + choices + "</html>");
+        questionOneStuQuizLabel.setBounds(30, 50, 700, 25);
+        quizStudentTakesPanel1.add(questionOneStuQuizLabel);
+        JLabel typeInAnswerLabel = new JLabel("Type in Answer: ");
+        typeInAnswerLabel.setBounds(30, 120, 700, 25);
+        quizStudentTakesPanel1.add(typeInAnswerLabel);
+        JTextField questionOneStuAns = new JTextField(20);
+        questionOneStuAns.setBounds(140, 120, 165, 25);
+        quizStudentTakesPanel1.add(questionOneStuAns);
+        JButton quizStuTakesNextButton = new JButton("Next");
+        quizStuTakesNextButton.setBounds(220, 180, 110, 25);
+        quizStudentTakesPanel1.add(quizStuTakesNextButton);
+        int fNum = num;
+        quizStuTakesNextButton.addActionListener(e -> {
+            answers.add(new Answer(q.getQuestionTitle(), questionOneStuAns.getText()));
+            quizStudentTakesFrame1.setVisible(false);
+            quizStudentTakesFrame1.dispose();
+            if (answers.size() == questions.size() ) {
+                quizSubmitted();
+                // TODO SERVER SUBMIT CALL
+            } else {
+                quizView(questions, answers, fNum + 1);
+            }
+        });
+        quizStudentTakesPanel1.setLayout(null);
+        quizStudentTakesFrame1.setVisible(true);
     }
 
     public static void quizSubmitted() {
