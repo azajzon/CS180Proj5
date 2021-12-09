@@ -1,14 +1,15 @@
 package Client;
 
+import Server.Answer;
 import Server.Question;
 import Server.Quiz;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Gui {
     private static String hostName;
@@ -101,6 +102,8 @@ public class Gui {
     public static JButton viewGradedQuiz;
     public static JButton editAccount;
     public static JButton logout;
+
+    public static String username = "";
 
 
     public static void main(String[] args) {
@@ -198,6 +201,7 @@ public class Gui {
                 JOptionPane.showMessageDialog(null, "Logged in successfully.",
                         "Login", JOptionPane.INFORMATION_MESSAGE);
                 teacherQuizMenu();
+                username = teacherUsernameText.getText();
             } else {
                 JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
                 mainMenu();
@@ -300,6 +304,7 @@ public class Gui {
             if ((Boolean) ClientClass.serverCall(2, new String[]{studentUsernameText.getText(), studentPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Logged in successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
                 studentMenu();
+                username = studentUsernameText.getText();
             } else {
                 JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
                 mainMenu();
@@ -386,7 +391,7 @@ public class Gui {
         takeQuizButton.addActionListener(e -> {
             studentMenuFrame.setVisible(false);
             studentMenuFrame.dispose();
-            //takeQuiz();
+            whichQuizToTake();
         });
 
         JButton viewGradedQuizButton = new JButton("View Graded Quiz");
@@ -454,7 +459,7 @@ public class Gui {
         teacherQuizMenuPanel.add(editQuizButton);
 
         editQuizButton.addActionListener(e -> {
-            ArrayList<String> quizNames = (ArrayList<String>) ClientClass.serverCall(5, " ");
+            ArrayList<String> quizNames = (ArrayList<String>) ClientClass.serverCall(6, " ");
             teacherQuizMenuFrame.setVisible(false);
             teacherQuizMenuFrame.dispose();
             editQuiz(quizNames);
@@ -629,10 +634,20 @@ public class Gui {
 
         addQuestionMCButton.addActionListener(e -> {
             Question q = new Question(questionOneMCText.getText());
-            q.addChoice(optionOneMCLabel.getText());
-            q.addChoice(optionTwoMCLabel.getText());
-            q.addChoice(optionThreeMCLabel.getText());
-            q.addChoice(optionFourMCLabel.getText());
+            q.addChoice(optionOneMCText.getText());
+            q.addChoice(optionTwoMCText.getText());
+            q.addChoice(optionThreeMCText.getText());
+            q.addChoice(optionFourMCText.getText());
+
+            if (correctAnsChoiceMCText.getText().equals("1"))
+                q.setAnswer(optionOneMCText.getText());
+            if (correctAnsChoiceMCText.getText().equals("2"))
+                q.setAnswer(optionTwoMCText.getText());
+            if (correctAnsChoiceMCText.getText().equals("3"))
+                q.setAnswer(optionThreeMCText.getText());
+            if (correctAnsChoiceMCText.getText().equals("4"))
+                q.setAnswer(optionFourMCText.getText());
+
             q.setPointValue(Integer.parseInt(pointValueMCText.getText()));
             questions.add(q);
 
@@ -810,16 +825,12 @@ public class Gui {
         editStudentAccountFrame.setSize(400, 300);
         editStudentAccountFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         editStudentAccountFrame.add(editStudentAccountPanel);
-
         editStudentAccountPanel.setLayout(null);
-        // TODO USE LOGGED IN USERNAME VAR FOR OLD USERNAME
-        JLabel oldUserNameLabel = new JLabel("Old Username:");
-        oldUserNameLabel.setBounds(20, 20, 150, 25);
-        editStudentAccountPanel.add(oldUserNameLabel);
 
-        JTextField oldUserNameText = new JTextField(20);
-        oldUserNameText.setBounds(150, 20, 165, 25);
-        editStudentAccountPanel.add(oldUserNameText);
+        JLabel editStuAccountLabel = new JLabel("Edit Student Account");
+        editStuAccountLabel.setBounds(130, 20, 200, 25);
+        editStudentAccountPanel.add(editStuAccountLabel);
+
 
         JLabel editedStuNameLabel = new JLabel("First & Last Name:");
         editedStuNameLabel.setBounds(20, 50, 150, 25);
@@ -847,22 +858,20 @@ public class Gui {
 
         JButton updateStuAccountButton = new JButton("Save and Update Account");
         updateStuAccountButton.setBounds(30, 150, 200, 25);
-        updateStuAccountButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                if ((Boolean) ClientClass.serverCall(6, new String[] {oldUserNameText.getText(),
-                        editedStuNameText.getText(),
-                        editedStuUsernameLabel.getText(),
-                        editedStuPasswordLabel.getText()})) {
-                    JOptionPane.showMessageDialog(null, "Account Info Changed successfully.",
-                            "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Account Info Changed unsuccessfully.",
-                            "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
-                }
-                editStudentAccountFrame.setVisible(false);
-                editStudentAccountFrame.dispose();
-                studentMenu();
+        updateStuAccountButton.addActionListener(e -> {
+            if ( ((Boolean) ClientClass.serverCall(5, new String[] {username,
+                    editedStuNameText.getText(),
+                    editedStuUsernameLabel.getText(),
+                    editedStuPasswordLabel.getText()})).booleanValue() ){
+                JOptionPane.showMessageDialog(null, "Account Info Changed successfully.",
+                        "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Account Info Changed unsuccessfully.",
+                        "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
             }
+            editStudentAccountFrame.setVisible(false);
+            editStudentAccountFrame.dispose();
+            studentMenu();
         });
         editStudentAccountPanel.add(updateStuAccountButton);
 
@@ -879,6 +888,117 @@ public class Gui {
         });
 
         editStudentAccountFrame.setVisible(true);
+    }
+
+    public static void whichQuizToTake() {
+        JFrame whichQuizToTakeFrame = new JFrame();
+        JPanel whichQuizToTakePanel = new JPanel();
+        whichQuizToTakeFrame.setSize(400, 300);
+        whichQuizToTakeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        whichQuizToTakeFrame.add(whichQuizToTakePanel);
+        JLabel chooseQuizTakeTitleLabel = new JLabel("Choose Quiz To Take");
+        chooseQuizTakeTitleLabel.setBounds(120, 20, 500, 25);
+        whichQuizToTakePanel.add(chooseQuizTakeTitleLabel);
+        JLabel studentChooseQuizLabel = new JLabel("Which quiz would you like to take?");
+        studentChooseQuizLabel.setBounds(30, 50, 700, 25);
+        whichQuizToTakePanel.add(studentChooseQuizLabel);
+        //below array needs to contain the list of quizzes for the course choose by the user
+        ArrayList<String> quizNames = (ArrayList<String>) ClientClass.serverCall(6, " ");
+        JComboBox jComboBox = new JComboBox(quizNames.toArray());
+        jComboBox.setBounds(120, 80, 140, 20);
+        whichQuizToTakePanel.add(jComboBox);
+        JButton quizChoosenNextButton = new JButton("Next");
+        quizChoosenNextButton.setBounds(220, 180, 110, 25);
+        whichQuizToTakePanel.add(quizChoosenNextButton);
+        Quiz q = (Quiz) ClientClass.serverCall(7, jComboBox.getSelectedItem());
+        quizChoosenNextButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                whichQuizToTakeFrame.setVisible(false);
+                whichQuizToTakeFrame.dispose();
+
+                if( !(q == null) ) {
+                    quizStudentTakes(q);
+                }
+            }
+        });
+        whichQuizToTakePanel.setLayout(null);
+        whichQuizToTakeFrame.setVisible(true);
+    }
+
+    public static void quizStudentTakes(Quiz q){
+        ArrayList<Question> questions = q.getQuestions();
+        ArrayList<Answer> answers = new ArrayList<>();
+        quizView(questions, answers, 1);
+    }
+
+    public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num) {
+        String choices = "";
+        int cNum = 1;
+        Question q = questions.get(num-1);
+        for( String i : q.getChoices()) {
+            choices = choices + "Choice " + cNum + ": " + i + ", ";
+            cNum+=1;
+        }
+
+        JFrame quizStudentTakesFrame1 = new JFrame();
+        JPanel quizStudentTakesPanel1 = new JPanel();
+        quizStudentTakesFrame1.setSize(400, 300);
+        quizStudentTakesFrame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        quizStudentTakesFrame1.add(quizStudentTakesPanel1);
+        JLabel questionOneTitleLabel = new JLabel("Question " + num);
+        num += 1;
+        questionOneTitleLabel.setBounds(120, 20, 500, 60);
+        quizStudentTakesPanel1.add(questionOneTitleLabel);
+        //below label will display the first question of the quiz
+        JLabel questionOneStuQuizLabel = new JLabel("<html>" + q.getQuestionTitle() + "<br/>" + choices + "</html>");
+        questionOneStuQuizLabel.setBounds(30, 50, 700, 25);
+        quizStudentTakesPanel1.add(questionOneStuQuizLabel);
+        JLabel typeInAnswerLabel = new JLabel("Type in Answer: ");
+        typeInAnswerLabel.setBounds(30, 120, 700, 25);
+        quizStudentTakesPanel1.add(typeInAnswerLabel);
+        JTextField questionOneStuAns = new JTextField(20);
+        questionOneStuAns.setBounds(140, 120, 165, 25);
+        quizStudentTakesPanel1.add(questionOneStuAns);
+        JButton quizStuTakesNextButton = new JButton("Next");
+        quizStuTakesNextButton.setBounds(220, 180, 110, 25);
+        quizStudentTakesPanel1.add(quizStuTakesNextButton);
+        int fNum = num;
+        quizStuTakesNextButton.addActionListener(e -> {
+            answers.add(new Answer(q.getQuestionTitle(), questionOneStuAns.getText()));
+            quizStudentTakesFrame1.setVisible(false);
+            quizStudentTakesFrame1.dispose();
+            if (answers.size() == questions.size() ) {
+                quizSubmitted();
+                // TODO SERVER SUBMIT CALL
+            } else {
+                quizView(questions, answers, fNum + 1);
+            }
+        });
+        quizStudentTakesPanel1.setLayout(null);
+        quizStudentTakesFrame1.setVisible(true);
+    }
+
+    public static void quizSubmitted() {
+        JFrame quizSubmittedFrame = new JFrame();
+        JPanel quizSubmittedPanel = new JPanel();
+        quizSubmittedFrame.setSize(400, 300);
+        quizSubmittedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        quizSubmittedFrame.add(quizSubmittedPanel);
+        JLabel quizSubmittedLabel = new JLabel("You are done with the quiz and it has been submitted!");
+        quizSubmittedLabel.setBounds(30, 20, 500, 25);
+        quizSubmittedPanel.add(quizSubmittedLabel);
+        JButton quizDoneBackToStuMenuButton = new JButton("Back To HomePage");
+        quizDoneBackToStuMenuButton.setBounds(90, 60, 200, 25);
+        quizSubmittedPanel.add(quizDoneBackToStuMenuButton);
+        quizDoneBackToStuMenuButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                quizSubmittedFrame.setVisible(false);
+                quizSubmittedFrame.dispose();
+                studentMenu();
+            }
+        });
+        quizSubmittedPanel.setLayout(null);
+        quizSubmittedFrame.setVisible(true);
     }
 
 

@@ -37,7 +37,8 @@ public class Server {
                 Server::createStudent,
                 Server::createQuiz,
                 Server::editStudentAccount,
-                Server::getListOfQuizNames
+                Server::getListOfQuizNames,
+                Server::getQuiz
         };
     }
 
@@ -175,6 +176,17 @@ public class Server {
         student.setUsername(infoLog[1]);
         student.setPassword(infoLog[2]);
         return true;
+    }
+
+    private static Object getQuiz(Object o) {
+        String qName = (String) o;
+        for (Quiz q : quizzes) {
+            if (q.getQuizName().equals(qName)) {
+                System.out.println(q.getQuizName());
+                return q;
+            }
+        }
+        return null;
     }
 
 }

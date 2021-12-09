@@ -40,13 +40,18 @@ public class ClientClass {
             Object in = input.readObject();
             if (in instanceof Exception) throw (Exception) in;
             else if (!switch (command) {
-                case 0, 1, 2, 3, 4 -> {
+                case 0, 1, 2, 3, 4, 5 -> {
                     if (!(in instanceof Boolean)) yield false;
                     retVal = in;
                     yield true;
                 }
-                case 5 -> {
+                case 6 -> {
                     if (!(in instanceof ArrayList)) yield false;
+                    retVal = in;
+                    yield true;
+                }
+                case 7 -> {
+                    if (!(in instanceof Server.Quiz)) yield false;
                     retVal = in;
                     yield true;
                 }
@@ -87,4 +92,3 @@ public class ClientClass {
 
 
 }
-
