@@ -330,13 +330,17 @@
 | CreateTeacher()  | public static String  | String teacherName, String teacherUsername, String teacherPassword | Description |
 | LoginStudent()  | public static String  | tring username, String password | Description |
 | getStudentByUsername()  | public static Student | String username | Description |
-| getListOfQuizNames()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
+| CreateStudent()  | public static String  | Object array | Description |
 | createQuiz()  |  public static Object | Object inQuiz | Description |
-| CreateStudent()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
-| CreateStudent()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
-| CreateStudent()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
- 
- 
+| getListOfQuizNames()  | public static Object  | Object o | Description |
+| editStudentAccount()  | public static Object  | Object o | Description |
+| getQuiz()  | public static Object  | Object o | Description |
+| submitQuiz()  | public static Object  | Object o | Description |
+| getSubmissions()  | public static Object  | Object o | Description |
+| saveArrayToFile()  | public static void | String filename, int arrayType| Description |
+| loadArrayFromFile()  | public static void | String filename, int arrayType | Description |
+| saveProgramState()  | public static void | None | Description |
+| loadProgramState()  | public static Object  | None | Description |
  
  
 #### 12) ServerThread.java
