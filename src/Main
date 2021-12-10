@@ -1850,7 +1850,6 @@ public class Main implements ActionListener {
         stuGradedQuizLabel.setBounds(210, 20, 500, 25);
         stuGradedQuizPanel.add(stuGradedQuizLabel);
 
-        //TODO: show the graded quiz here
         showsStuGradedQuizText = new JTextArea();
         showsStuGradedQuizText.setBounds(30,50, 400,200);
         stuGradedQuizPanel.add(showsStuGradedQuizText);
