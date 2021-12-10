@@ -300,7 +300,7 @@
 | setUsername() | public void   | String username | Sets the username instance variable to the value given as a parameter |
 
 
-#### 10 ) Server.java
+#### 10) Server.java
  
 ##### Description: 
 <p> The Server class </p>
@@ -343,7 +343,7 @@
 | loadProgramState()  | public static Object  | None | Description |
  
  
-#### 12) ServerThread.java
+#### 11) ServerThread.java
  
 ##### Description: 
 <p> The ServerThread class </p>
@@ -354,7 +354,6 @@
 | Socket | client |  | 
 | PrintWriter | output |  | 
 | BufferedReader | input |  | 
-
 
 ##### Constructors: 
 
@@ -368,137 +367,56 @@
 | ------------- | ------------- | ------------- | ------------- |
 | run()  | public void  | None | Description |
 
- 
-#### 13) ClientThread.java
+
+#### 12) ClientClass.java
  
 ##### Description: 
-<p> The ClientThread class </p>
+<p> The ClientClass class </p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| int | menuSelection |  | 
-| Object | threadParams |  | 
-| String | hostName |  | 
-| Socket | socket |  | 
-| AtomicLong | totalTime |  | 
-| AtomicLong | runningThreads |  | 
-| boolean | printOutput |  | 
+| private static String | hostName |  | 
+| private static Socket | socket |  | 
+| private static ObjectOutputStream | out |  | 
+| private static ObjectInputStream | input |  |  
+
+
+##### Constructors: 
+ 
+ <p> None </p>
+ 
+##### Methods: 
+
+| Method  | Signature | Parameters  | Description |
+| ------------- | ------------- | ------------- | ------------- |
+| serverCall()  |   public static Object | int command, Object objToSend | Description |
+
+ 
+ #### 13) GUI.java
+ 
+##### Description: 
+<p> The GUI class </p>
+
+##### Fields: 
+| Modifier and Type  | Field | Description |
+| ------------- | ------------- | ------------- |
+|  |  |  | 
+| |  |  | 
+| p |  |  | 
  
 
 ##### Constructors: 
 
 | Constructor  | Description |
 | ------------- | ------------- |
-|  public ClientThread(int menuSelection, Object threadParameters) | Constructs a newly allocated ClientThread object with the field values specified by the input parameters. |
-
+|   |  |
  
 ##### Methods: 
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| run()  | public void  | None | Description |
-| sendCommandToServer()  | public void  | int menuSelection, Object threadParameters, PrintWriter out | Description |
- 
- #### 14) CreateStudentParams.java
- 
-##### Description: 
-<p> The CreateStudentParams class </p>
+|  |.  |  | Description |
 
-##### Fields: 
-| Modifier and Type  | Field | Description |
-| ------------- | ------------- | ------------- |
-| private String | name |  | 
-| private String | username |  | 
-| private String | password |  | 
- 
-
-##### Constructors: 
-
-| Constructor  | Description |
-| ------------- | ------------- |
-|  public CreateStudentParams(String name, String username, String password) | Constructs a newly allocated CreateStudentParams object with the field values specified by the input parameters. |
- 
-##### Methods: 
-
-| Method  | Signature | Parameters  | Description |
-| ------------- | ------------- | ------------- | ------------- |
-| formatCreateStudentRequest()  | public void  | PrintWriter out | Description |
-
- 
- #### 15) CreateTeacherParams.java
- 
-##### Description: 
-<p> The CreateTeacherParams class </p>
-
-##### Fields: 
-| Modifier and Type  | Field | Description |
-| ------------- | ------------- | ------------- |
-| private String | name |  | 
-| private String | username |  | 
-| private String | password |  | 
- 
-
-##### Constructors: 
-
-| Constructor  | Description |
-| ------------- | ------------- |
-|  public CreateTeacherParams(String name, String username, String password) | Constructs a newly allocated CreateTeacherParams object with the field values specified by the input parameters. |
- 
-##### Methods: 
-
-| Method  | Signature | Parameters  | Description |
-| ------------- | ------------- | ------------- | ------------- |
-| formatCreateTeacherRequest()  | public void  | PrintWriter out | Description |
-
-
- #### 16) LoginStudentParams.java
- 
-##### Description: 
-<p> The LoginStudentParams class </p>
-
-##### Fields: 
-| Modifier and Type  | Field | Description |
-| ------------- | ------------- | ------------- |
-| private String | username |  | 
-| private String | password |  | 
- 
-
-##### Constructors: 
-
-| Constructor  | Description |
-| ------------- | ------------- |
-|  public LoginStudentParams(String username, String password) | Constructs a newly allocated LoginStudentParams object with the field values specified by the input parameters. |
- 
-##### Methods: 
-
-| Method  | Signature | Parameters  | Description |
-| ------------- | ------------- | ------------- | ------------- |
-| formatLoginStudentRequest()  | public void  | PrintWriter out | Description |
- 
-
-#### 17)  LoginTeacherParams.java
- 
-##### Description: 
-<p> The LoginTeacherParams class </p>
-
-##### Fields: 
-| Modifier and Type  | Field | Description |
-| ------------- | ------------- | ------------- |
-| private String | username |  | 
-| private String | password |  | 
- 
-
-##### Constructors: 
-
-| Constructor  | Description |
-| ------------- | ------------- |
-|  public LoginTeacherParams (String username, String password) | Constructs a newly allocated LoginTeacherParams  object with the field values specified by the input parameters. |
- 
-##### Methods: 
-
-| Method  | Signature | Parameters  | Description |
-| ------------- | ------------- | ------------- | ------------- |
-| formatLoginTeacherRequest()  | public void  | PrintWriter out | Description |
 
 
