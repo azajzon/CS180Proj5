@@ -46,18 +46,13 @@ public class ClientClass {
                     retVal = in;
                     yield true;
                 }
-                case 6 -> {
+                case 6, 9 -> {
                     if (!(in instanceof ArrayList)) yield false;
                     retVal = in;
                     yield true;
                 }
                 case 7 -> {
                     if (!(in instanceof Server.Quiz)) yield false;
-                    retVal = in;
-                    yield true;
-                }
-                case 9 -> {
-                    if (!(in instanceof ArrayList)) yield false;
                     retVal = in;
                     yield true;
                 }
