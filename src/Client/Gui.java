@@ -3,12 +3,14 @@ package Client;
 import Server.Answer;
 import Server.Question;
 import Server.Quiz;
+import Server.QuizSubmission;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Gui {
@@ -402,7 +404,7 @@ public class Gui {
         viewGradedQuizButton.addActionListener(e -> {
             studentMenuFrame.setVisible(false);
             studentMenuFrame.dispose();
-            //viewGradedQuiz();
+            viewGradedQuiz((CopyOnWriteArrayList<QuizSubmission>) ClientClass.serverCall(9," "));
         });
 
         JButton editStudentAccountButton = new JButton("Edit Account");
@@ -926,10 +928,10 @@ public class Gui {
     public static void quizStudentTakes(Quiz q){
         ArrayList<Question> questions = q.getQuestions();
         ArrayList<Answer> answers = new ArrayList<>();
-        quizView(questions, answers, 1);
+        quizView(questions, answers, 1, q);
     }
 
-    public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num) {
+    public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz) {
         int cNum = 1;
         Question q = questions.get(num - 1);
         ArrayList<String> choices =  q.getChoices();
@@ -954,6 +956,7 @@ public class Gui {
         questionOneStuQuizLabel.setBounds(30, 50, 700, 25);
         quizStudentTakesPanel1.add(questionOneStuQuizLabel);
 
+        // TODO true false quiz
         //OPTIONS DISPLAYED (MULTIPLE CHOICE)
         JLabel optionOneMC = new JLabel("Option 1: " + choices.get(0));
         optionOneMC.setBounds(30, 80, 300, 25);
@@ -990,10 +993,11 @@ public class Gui {
             quizStudentTakesFrame1.setVisible(false);
             quizStudentTakesFrame1.dispose();
             if (answers.size() == questions.size()) {
+                QuizSubmission qs = new QuizSubmission("", quiz.getQuizName() + " - " + username, answers);
+                ClientClass.serverCall(8, qs);
                 quizSubmitted();
-                // TODO SERVER SUBMIT CALL
             } else {
-                quizView(questions, answers, fNum + 1);
+                quizView(questions, answers, fNum + 1, quiz);
             }
         });
         quizStudentTakesPanel1.setLayout(null);
@@ -1021,5 +1025,59 @@ public class Gui {
         quizSubmittedFrame.setVisible(true);
     }
 
+    public static void viewGradedQuiz(CopyOnWriteArrayList<QuizSubmission> qs) {
+        CopyOnWriteArrayList<QuizSubmission> subs = qs;
+
+        for (QuizSubmission q : subs) {
+            if (!(q.getQuizName().contains(username)))
+                subs.remove(q);
+        }
+
+        String[] quizzes = new String[subs.size()];
+        int i = 0;
+        for (QuizSubmission q : subs) {
+            quizzes[i] = q.getQuizName();
+            i += 1;
+        }
+
+        JFrame viewGradedQuizFrame = new JFrame();
+        JPanel viewGradedQuizPanel = new JPanel();
+        viewGradedQuizFrame.setSize(400, 300);
+        viewGradedQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        viewGradedQuizFrame.add(viewGradedQuizPanel);
+
+        JLabel viewGradedQuizTitleLabel = new JLabel("View a Graded Quiz");
+        viewGradedQuizTitleLabel.setBounds(140, 20, 500, 25);
+        viewGradedQuizPanel.add(viewGradedQuizTitleLabel);
+
+        JLabel whichGradedQuizToViewLabel = new JLabel("Which of the graded quizzes do you want to view?");
+        whichGradedQuizToViewLabel.setBounds(30, 50, 500, 25);
+        viewGradedQuizPanel.add(whichGradedQuizToViewLabel);
+
+        // below array has to contain the graded quizzes for the student that is logged in
+        String[] gradedQuizOptions = quizzes;
+        JComboBox<String> jComboBox = new JComboBox<>(gradedQuizOptions);
+        jComboBox.setBounds(120, 80, 140, 20);
+        viewGradedQuizPanel.add(jComboBox);
+
+        JButton viewQuizButton = new JButton("View Quiz");
+        viewQuizButton.setBounds(90, 140, 200, 25);
+        viewGradedQuizPanel.add(viewQuizButton);
+
+        viewQuizButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewGradedQuizFrame.setVisible(false);
+                viewGradedQuizFrame.dispose();
+
+                //create a method that shows graded quiz and call it here
+
+            }
+        });
+
+        viewGradedQuizPanel.setLayout(null);
+        viewGradedQuizFrame.setVisible(true);
+
+
+    }
 
 }
