@@ -31,6 +31,9 @@ public class Main implements ActionListener {
     public static JFrame editStudentAccountFrame;
     public static JFrame editStudentAccountDoneFrame;
     public static JFrame questionForEditQuizFrame;
+    public static JFrame deleteQuizFrame;
+    public static JFrame quizDeletedFrame;
+    public static JFrame viewStudentQuizSubmissionsFrame;
 
 
     //ALL PANELS
@@ -60,8 +63,9 @@ public class Main implements ActionListener {
     public static JPanel editStudentAccountPanel;
     public static JPanel editStudentAccountDonePanel;
     public static JPanel questionForEditQuizPanel;
-
-    public static JLabel lsmToolLabel;
+    public static JPanel deleteQuizPanel;
+    public static JPanel quizDeletedPanel;
+    public static JPanel viewStudentQuizSubmissionsPanel;
 
     //TEACHER VARIABLES
     public static JButton createTeacherButton;
@@ -133,6 +137,13 @@ public class Main implements ActionListener {
     public static JLabel addAnotherQuestionLabel;
     public static JButton yesAnotherQuestionButton;
     public static JButton noAnotherQuestionButton;
+    public static JButton deleteTheQuizButton;
+    public static JLabel deleteQuizLabel;
+    public static JButton quizDeletedBackButton;
+    public static JLabel chooseCourseForViewStuSubmissLabel;
+    public static JLabel chooseStudForViewStuSubmissLabel;
+    public static JLabel chooseQuizForViewStuSubmissLabel;
+    public static JButton viewStudSubmissionsViewButton;
     public static JLabel editTeachAccountLabel;
     public static JLabel editedTeachNameLabel;
     public static JTextField editedTeachNameText;
@@ -215,6 +226,8 @@ public class Main implements ActionListener {
 
     //COMMON VARIABLES
     public static JLabel accountUpdatedLabel;
+    public static JLabel lsmToolLabel;
+
 
     public static void main(String[] args) {
 
@@ -224,10 +237,12 @@ public class Main implements ActionListener {
         //teacherLogIn();
         //teacherMenu();
         //addCourse();
-        //teacherQuizMenu();
+        teacherQuizMenu();
         //editStudentAccount();
         //createQuiz();
-        editQuiz();
+        //editQuiz();
+        //deleteQuiz();
+        //viewStudentQuizSubmissions();
         //multipleChoiceQuiz();
         //trueOrFalseQuiz();
         //editTeacherAccount();
@@ -632,10 +647,27 @@ public class Main implements ActionListener {
         deleteQuizButton.addActionListener(new Main());
         teacherQuizMenuPanel.add(deleteQuizButton);
 
+        deleteQuizButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                teacherQuizMenuFrame.setVisible(false);
+                teacherQuizMenuFrame.dispose();
+                deleteQuiz();
+            }
+        });
+
+
         viewStudentQuizSubmissionsButton = new JButton("View Student Quiz Submissions");
         viewStudentQuizSubmissionsButton.setBounds(80, 140, 250, 25);
         viewStudentQuizSubmissionsButton.addActionListener(new Main());
         teacherQuizMenuPanel.add(viewStudentQuizSubmissionsButton);
+
+        viewStudentQuizSubmissionsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                teacherQuizMenuFrame.setVisible(false);
+                teacherQuizMenuFrame.dispose();
+                viewStudentQuizSubmissions();
+            }
+        });
 
         editTeacherAccountButton = new JButton("Edit Account");
         editTeacherAccountButton.setBounds(80, 170, 250, 25);
@@ -1116,6 +1148,143 @@ public class Main implements ActionListener {
         questionForEditQuizPanel.setLayout(null);
         questionForEditQuizFrame.setVisible(true);
     }
+
+
+    //delete quiz gui
+    public static void deleteQuiz(){
+        deleteQuizFrame = new JFrame();
+        deleteQuizPanel = new JPanel();
+        deleteQuizFrame.setSize(400, 300);
+        deleteQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        deleteQuizFrame.add(deleteQuizPanel);
+
+        lsmToolLabel = new JLabel("Delete a Quiz");
+        lsmToolLabel.setBounds(160, 20, 500, 25);
+        deleteQuizPanel.add(lsmToolLabel);
+
+        /// CHOOSE COURSE
+        deleteQuizLabel = new JLabel("Which quiz would you like to delete?");
+        deleteQuizLabel.setBounds(30, 50, 700, 25);
+        deleteQuizPanel.add(deleteQuizLabel);
+
+        //below array needs to contain the list of quizzes that have been created
+        String[] listOfQuizzes = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> quizzesList = new JComboBox<>(listOfQuizzes);
+        quizzesList.setBounds(120, 80, 140, 20);
+        deleteQuizPanel.add(quizzesList);
+
+
+        deleteTheQuizButton = new JButton("Delete");
+        deleteTheQuizButton.setBounds(230, 130, 110, 25);
+        deleteTheQuizButton.addActionListener(new Main());
+        deleteQuizPanel.add(deleteTheQuizButton);
+
+        deleteTheQuizButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deleteQuizFrame.setVisible(false);
+                deleteQuizFrame.dispose();
+                quizDeleted(); // this brings the question to the next screen
+                // (where they can edit the questions)
+            }
+        });
+
+        deleteQuizPanel.setLayout(null);
+        deleteQuizFrame.setVisible(true);
+    }
+
+
+    public static void quizDeleted(){
+        quizDeletedFrame = new JFrame();
+        quizDeletedPanel = new JPanel();
+        quizDeletedFrame.setSize(400, 300);
+        quizDeletedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        quizDeletedFrame.add(quizDeletedPanel);
+
+        deleteQuizLabel = new JLabel("Quiz has been deleted!");
+        deleteQuizLabel.setBounds(120, 50, 700, 25);
+        quizDeletedPanel.add(deleteQuizLabel);
+
+        quizDeletedBackButton = new JButton("Return to Homepage");
+        quizDeletedBackButton.setBounds(100, 100, 190, 25);
+        quizDeletedBackButton.addActionListener(new Main());
+        quizDeletedPanel.add(quizDeletedBackButton);
+
+        quizDeletedBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                quizDeletedFrame.setVisible(false);
+                quizDeletedFrame.dispose();
+                teacherQuizMenu(); // this brings the question to the next screen
+                // (where they can edit the questions)
+            }
+        });
+
+        quizDeletedPanel.setLayout(null);
+        quizDeletedFrame.setVisible(true);
+    }
+
+    // viewStudentQuizSubmission GUI
+    public static void viewStudentQuizSubmissions(){
+        viewStudentQuizSubmissionsFrame = new JFrame();
+        viewStudentQuizSubmissionsPanel = new JPanel();
+        viewStudentQuizSubmissionsFrame.setSize(400, 300);
+        viewStudentQuizSubmissionsFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        viewStudentQuizSubmissionsFrame.add(viewStudentQuizSubmissionsPanel);
+
+        lsmToolLabel = new JLabel("View Student Quiz Submissions");
+        lsmToolLabel.setBounds(100, 20, 500, 25);
+        viewStudentQuizSubmissionsPanel.add(lsmToolLabel);
+
+        chooseCourseForViewStuSubmissLabel = new JLabel("Choose the course you would like to view quiz submissions for:");
+        chooseCourseForViewStuSubmissLabel.setBounds(20, 50, 700, 25);
+        viewStudentQuizSubmissionsPanel.add(chooseCourseForViewStuSubmissLabel);
+
+        //below array needs to contain the list of courses that have been created
+        String[] listOfCourses = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> coursesList = new JComboBox<>(listOfCourses);
+        coursesList.setBounds(120, 80, 140, 20);
+        viewStudentQuizSubmissionsPanel.add(coursesList);
+
+        chooseStudForViewStuSubmissLabel = new JLabel("Choose student to view their quizzes:");
+        chooseStudForViewStuSubmissLabel.setBounds(20, 110, 700, 25);
+        viewStudentQuizSubmissionsPanel.add(chooseStudForViewStuSubmissLabel);
+
+        //below array needs to contain the list of students that are there
+        String[] listOfStudents = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> studentsList = new JComboBox<>(listOfStudents);
+        studentsList.setBounds(120, 140, 140, 20);
+        viewStudentQuizSubmissionsPanel.add(studentsList);
+
+
+        chooseQuizForViewStuSubmissLabel = new JLabel("Which quiz do you want to view?");
+        chooseQuizForViewStuSubmissLabel.setBounds(20, 170, 700, 25);
+        viewStudentQuizSubmissionsPanel.add(chooseQuizForViewStuSubmissLabel);
+
+        //below array needs to contain the list of quizzes that have been created
+        String[] listOfQuizzes = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
+        JComboBox<String> quizzesList = new JComboBox<>(listOfQuizzes);
+        quizzesList.setBounds(120, 200, 140, 20);
+        viewStudentQuizSubmissionsPanel.add(quizzesList);
+
+
+        viewStudSubmissionsViewButton = new JButton("View");
+        viewStudSubmissionsViewButton.setBounds(260, 230, 110, 25);
+        viewStudSubmissionsViewButton.addActionListener(new Main());
+        viewStudentQuizSubmissionsPanel.add(viewStudSubmissionsViewButton);
+
+        viewStudSubmissionsViewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                viewStudentQuizSubmissionsFrame.setVisible(false);
+                viewStudentQuizSubmissionsFrame.dispose();
+                //call a method here which will then allow the teacher to view the student's quiz after they click the above button
+
+            }
+        });
+
+        viewStudentQuizSubmissionsPanel.setLayout(null);
+        viewStudentQuizSubmissionsFrame .setVisible(true);
+    }
+
+
 
     public static void editTeacherAccount() {
         editTeacherAccountFrame = new JFrame();
