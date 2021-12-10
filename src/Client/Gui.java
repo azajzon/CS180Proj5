@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -423,12 +424,15 @@ public class Gui {
         studentMenuPanel.add(studentLogOutButton);
 
         //TODO what should happen when the student log outs
-        /*
+
         studentLogOutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                studentMenuFrame.setVisible(false);
+                studentMenuFrame.dispose();
+                mainMenu();
             }
         });
-        */
+
 
         studentMenuPanel.setLayout(null);
         studentMenuFrame.setVisible(true);
@@ -1068,8 +1072,10 @@ public class Gui {
                 viewGradedQuizFrame.setVisible(false);
                 viewGradedQuizFrame.dispose();
 
-                //create a method that shows graded quiz and call it here
-
+                for (QuizSubmission q : subs) {
+                    if ((q.getQuizName().equals(jComboBox.getSelectedItem())))
+                        showsStuGradedQuiz(q);
+                }
             }
         });
 
@@ -1077,6 +1083,82 @@ public class Gui {
         viewGradedQuizFrame.setVisible(true);
 
 
+    }
+
+    public static void showsStuGradedQuiz(QuizSubmission qs){
+        JFrame stuGradedQuizFrame = new JFrame();
+        JPanel stuGradedQuizPanel = new JPanel();
+        stuGradedQuizFrame.setSize(500, 400);
+        stuGradedQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        stuGradedQuizFrame.add(stuGradedQuizPanel);
+
+        JLabel stuGradedQuizLabel = new JLabel("Graded Quiz");
+        stuGradedQuizLabel.setBounds(210, 20, 500, 25);
+        stuGradedQuizPanel.add(stuGradedQuizLabel);
+
+        JTextArea showsStuGradedQuizText = new JTextArea(getQuizString(qs));
+        showsStuGradedQuizText.setBounds(30,50, 400,200);
+
+        JScrollPane scrollPane = new JScrollPane(showsStuGradedQuizText);
+        scrollPane.setBounds(10,60,300,200);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        stuGradedQuizPanel.add(scrollPane);
+
+        JButton stuGradedQuizScreenBackButton = new JButton("Back To HomePage");
+        stuGradedQuizScreenBackButton.setBounds(270, 320, 190, 25);
+        stuGradedQuizPanel.add(stuGradedQuizScreenBackButton);
+
+        stuGradedQuizScreenBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                stuGradedQuizFrame.setVisible(false);
+                stuGradedQuizFrame.dispose();
+                studentMenu();
+            }
+        });
+
+        stuGradedQuizPanel.setLayout(null);
+        stuGradedQuizFrame.setVisible(true);
+
+    }
+
+    public static String getQuizString(QuizSubmission qs) {
+        int total = 0;
+        int points = 0;
+        String returnStr = "";
+
+        returnStr = "Quiz: " + qs.getQuizName() + "\n";
+        Date date = new Date(qs.getTimeStamp());
+        returnStr = returnStr + date + "\n\n";
+
+        int index = qs.getQuizName().indexOf("---");
+        String name = "";
+        if (index >= 0)
+            name = qs.getQuizName().substring(0, index);
+        //System.out.println(name);
+        Quiz q = (Quiz) ClientClass.serverCall(7, name.trim());
+        int x = 0;
+        ArrayList<Answer> answs = qs.getAnswers();
+        for(Question ques : q.getQuestions()) {
+            returnStr = returnStr + ques.getQuestionTitle() + "\n";
+            int i = 1;
+            for (String c : ques.getChoices()) {
+                returnStr = returnStr + i + ". " + c + "\n";
+                i += 1;
+            }
+            String anw = answs.get(x).getAnswerChosen();
+            returnStr = returnStr + "Your Answer: " + anw + "\n";
+            returnStr = returnStr + "Correct Answer: " + ques.getAnswer() + "\n";
+            x += 1;
+            returnStr = returnStr + "\n";
+
+            total += ques.getPointValue();
+            if (anw.equals(ques.getAnswer())){
+                points += ques.getPointValue();
+            }
+        }
+
+        returnStr = returnStr + "\nYou scored " + points + " out of " + total;
+        return returnStr;
     }
 
 }
