@@ -766,42 +766,42 @@ public class Gui {
         editTeacherAccountFrame.add(editTeacherAccountPanel);
         editTeacherAccountPanel.setLayout(null);
 
-        JLabel editStuAccountLabel = new JLabel("Edit Teacher Account");
-        editStuAccountLabel.setBounds(130, 20, 200, 25);
-        editTeacherAccountPanel.add(editStuAccountLabel);
+        JLabel editTeacherAccountLabel = new JLabel("Edit Teacher Account");
+        editTeacherAccountLabel.setBounds(130, 20, 200, 25);
+        editTeacherAccountPanel.add(editTeacherAccountLabel);
 
 
-        JLabel editedStuNameLabel = new JLabel("First & Last Name:");
-        editedStuNameLabel.setBounds(20, 50, 150, 25);
-        editTeacherAccountPanel.add(editedStuNameLabel);
+        JLabel editedTeacherNameLabel = new JLabel("First & Last Name:");
+        editedTeacherNameLabel.setBounds(20, 50, 150, 25);
+        editTeacherAccountPanel.add(editedTeacherNameLabel);
 
-        JTextField editedStuNameText = new JTextField(20);
-        editedStuNameText.setBounds(150, 50, 165, 25);
-        editTeacherAccountPanel.add(editedStuNameText);
+        JTextField editedTeacherNameText = new JTextField(20);
+        editedTeacherNameText.setBounds(150, 50, 165, 25);
+        editTeacherAccountPanel.add(editedTeacherNameText);
 
-        JLabel editedStuUsernameLabel = new JLabel("Username:");
-        editedStuUsernameLabel.setBounds(20, 80, 80, 25);
-        editTeacherAccountPanel.add(editedStuUsernameLabel);
+        JLabel editedTeacherUsernameLabel = new JLabel("Username:");
+        editedTeacherUsernameLabel.setBounds(20, 80, 80, 25);
+        editTeacherAccountPanel.add(editedTeacherUsernameLabel);
 
-        JTextField editedStuUsernameText = new JTextField(20);
-        editedStuUsernameText.setBounds(150, 80, 165, 25);
-        editTeacherAccountPanel.add(editedStuUsernameText);
+        JTextField editedTeacherUsernameText = new JTextField(20);
+        editedTeacherUsernameText.setBounds(150, 80, 165, 25);
+        editTeacherAccountPanel.add(editedTeacherUsernameText);
 
-        JLabel editedStuPasswordLabel = new JLabel("Password:");
-        editedStuPasswordLabel.setBounds(20, 110, 80, 25);
-        editTeacherAccountPanel.add(editedStuPasswordLabel);
+        JLabel editedTeacherPasswordLabel = new JLabel("Password:");
+        editedTeacherPasswordLabel.setBounds(20, 110, 80, 25);
+        editTeacherAccountPanel.add(editedTeacherPasswordLabel);
 
-        JTextField editedStuPasswordText = new JTextField(20);
-        editedStuPasswordText.setBounds(150, 110, 165, 25);
-        editTeacherAccountPanel.add(editedStuPasswordText);
+        JTextField editedTeacherPasswordText = new JTextField(20);
+        editedTeacherPasswordText.setBounds(150, 110, 165, 25);
+        editTeacherAccountPanel.add(editedTeacherPasswordText);
 
-        JButton updateStuAccountButton = new JButton("Save and Update Account");
-        updateStuAccountButton.setBounds(30, 150, 200, 25);
-        updateStuAccountButton.addActionListener(e -> {
+        JButton updateTeacherAccountButton = new JButton("Save and Update Account");
+        updateTeacherAccountButton.setBounds(30, 150, 200, 25);
+        updateTeacherAccountButton.addActionListener(e -> {
             if ( ((Boolean) ClientClass.serverCall(10, new String[] {username,
-                    editedStuNameText.getText(),
-                    editedStuUsernameLabel.getText(),
-                    editedStuPasswordLabel.getText()})).booleanValue() ){
+                    editedTeacherNameText.getText(),
+                    editedTeacherUsernameText.getText(),
+                    editedTeacherPasswordText.getText()})).booleanValue() ){
                 JOptionPane.showMessageDialog(null, "Account Info Changed successfully.",
                         "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -812,19 +812,18 @@ public class Gui {
             editTeacherAccountFrame.dispose();
             teacherQuizMenu();
         });
-        editTeacherAccountPanel.add(updateStuAccountButton);
+        editTeacherAccountPanel.add(updateTeacherAccountButton);
 
-        JButton editStuAccountBackButton = new JButton("Back");
-        editStuAccountBackButton.setBounds(30, 180, 110, 25);
-        editTeacherAccountPanel.add(editStuAccountBackButton);
+        JButton editTeacherAccountBackButton = new JButton("Back");
+        editTeacherAccountBackButton.setBounds(30, 180, 110, 25);
+        editTeacherAccountPanel.add(editTeacherAccountBackButton);
 
-        editStuAccountBackButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                editTeacherAccountFrame.setVisible(false);
-                editTeacherAccountFrame.dispose();
-                teacherQuizMenu();
-            }
+        editTeacherAccountBackButton.addActionListener(e -> {
+            editTeacherAccountFrame.setVisible(false);
+            editTeacherAccountFrame.dispose();
+            teacherQuizMenu();
         });
+
         editTeacherAccountFrame.setVisible(true);
     }
 
@@ -870,8 +869,8 @@ public class Gui {
         updateStuAccountButton.addActionListener(e -> {
             if ( ((Boolean) ClientClass.serverCall(5, new String[] {username,
                     editedStuNameText.getText(),
-                    editedStuUsernameLabel.getText(),
-                    editedStuPasswordLabel.getText()})).booleanValue() ){
+                    editedStuUsernameText.getText(),
+                    editedStuPasswordText.getText()})).booleanValue() ){
                 JOptionPane.showMessageDialog(null, "Account Info Changed successfully.",
                         "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -939,7 +938,6 @@ public class Gui {
     }
 
     public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz) {
-        int cNum = 1;
         Question q = questions.get(num - 1);
         ArrayList<String> choices =  q.getChoices();
 
@@ -1071,15 +1069,13 @@ public class Gui {
         viewQuizButton.setBounds(90, 140, 200, 25);
         viewGradedQuizPanel.add(viewQuizButton);
 
-        viewQuizButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                viewGradedQuizFrame.setVisible(false);
-                viewGradedQuizFrame.dispose();
+        viewQuizButton.addActionListener(e -> {
+            viewGradedQuizFrame.setVisible(false);
+            viewGradedQuizFrame.dispose();
 
-                for (QuizSubmission q : subs) {
-                    if ((q.getQuizName().equals(jComboBox.getSelectedItem())))
-                        showsStuGradedQuiz(q);
-                }
+            for (QuizSubmission q : subs) {
+                if ((q.getQuizName().equals(jComboBox.getSelectedItem())))
+                    showsStuGradedQuiz(q);
             }
         });
 
@@ -1112,12 +1108,10 @@ public class Gui {
         stuGradedQuizScreenBackButton.setBounds(270, 320, 190, 25);
         stuGradedQuizPanel.add(stuGradedQuizScreenBackButton);
 
-        stuGradedQuizScreenBackButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                stuGradedQuizFrame.setVisible(false);
-                stuGradedQuizFrame.dispose();
-                studentMenu();
-            }
+        stuGradedQuizScreenBackButton.addActionListener(e -> {
+            stuGradedQuizFrame.setVisible(false);
+            stuGradedQuizFrame.dispose();
+            studentMenu();
         });
 
         stuGradedQuizPanel.setLayout(null);

@@ -187,9 +187,9 @@ public class Server {
     public static Object editStudentAccount(Object o) {
         String[] infoLog = (String[]) o;
         Student student = getStudentByUsername(infoLog[0]);
-        student.setName(infoLog[0]);
-        student.setUsername(infoLog[1]);
-        student.setPassword(infoLog[2]);
+        student.setName(infoLog[1]);
+        student.setUsername(infoLog[2]);
+        student.setPassword(infoLog[3]);
         return true;
     }
 
@@ -218,9 +218,9 @@ public class Server {
     public static Object editTeacherAccount(Object o) {
         String[] infoLog = (String[]) o;
         Teacher t = getTeacherByUsername(infoLog[0]);
-        t.setName(infoLog[0]);
-        t.setUsername(infoLog[1]);
-        t.setPassword(infoLog[2]);
+        t.setName(infoLog[1]);
+        t.setUsername(infoLog[2]);
+        t.setPassword(infoLog[3]);
         return true;
     }
 
@@ -302,7 +302,7 @@ public class Server {
                 case 3:
                     while (true) {
                         try {
-                            // stores the quizzes data from the file in an object of the Teacher class
+                            // stores the quizzes data
                             Quiz quiz = (Quiz) in.readObject();
                             quizzes.add(quiz);
                         } catch (EOFException e) {
