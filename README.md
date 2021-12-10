@@ -408,11 +408,9 @@
 | public static JLabel | userLabel | |
 | public static JLabel | passwordLabel | |
 | public static JTextField | userText | |
-| public static JTextField passText | |
-
+| public static JTextField | passText | |
 | public static JLabel | welcomeLabel | |
 | public static JLabel | lsmTool | |
-
 | public static JButton | createTeacherButton | |
 | public static JButton | loginTeacherAccountButton | |
 | public static JButton | createTeacherAccountButton | |
@@ -439,7 +437,6 @@
 | public static JTextField | nameText | |
 | public static JPanel | teacherMenuPanel | |
 | public static JPanel | addCoursePanel | |
-
 | public static JButton | createStudentButton | |
 | public static JButton |createStudentAccountButton | |
 | public static JFrame | studentLoginFrame | |
@@ -474,7 +471,6 @@
 | public static JButton | viewGradedQuiz | |
 | public static JButton | editAccount | |
 | public static JButton | logout | |
-
 | public static String | username = ""  | |
 
 ##### Constructors: 
