@@ -41,7 +41,8 @@ public class Server {
                 Server::getListOfQuizNames,
                 Server::getQuiz,
                 Server::submitQuiz,
-                Server::getSubmissions
+                Server::getSubmissions,
+                Server::editTeacherAccount
         };
     }
 
@@ -211,6 +212,15 @@ public class Server {
 
         getStudentByUsername(username).addQuizSubmission(qs);
         quizSubmissions.add(qs);
+        return true;
+    }
+
+    public static Object editTeacherAccount(Object o) {
+        String[] infoLog = (String[]) o;
+        Teacher t = getTeacherByUsername(infoLog[0]);
+        t.setName(infoLog[0]);
+        t.setUsername(infoLog[1]);
+        t.setPassword(infoLog[2]);
         return true;
     }
 
