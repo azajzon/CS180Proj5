@@ -300,30 +300,7 @@
 | setUsername() | public void   | String username | Sets the username instance variable to the value given as a parameter |
 
 
-#### 10) CommandExecutor.java
- 
-##### Description: 
-<p> The Command Executor class </p>
-
-##### Fields: 
-| Modifier and Type  | Field | Description |
-| ------------- | ------------- | ------------- |
-| |  |  | 
-|   |  |  | 
-
-
-##### Constructors: 
-
- <p> None </p>
- 
-##### Methods: 
-
-| Method  | Signature | Parameters  | Description |
-| ------------- | ------------- | ------------- | ------------- |
-| run()  | public static String  | String commandString, BufferedReader input | Description |
-
-
-#### 11) Server.java
+#### 10 ) Server.java
  
 ##### Description: 
 <p> The Server class </p>
@@ -336,6 +313,7 @@
 | public static CopyOnWriteArrayList<Course> | students |  | 
 | public static CopyOnWriteArrayList<Teacher> | loggedInTeachers |  | 
 | public static CopyOnWriteArrayList<Student> | loggedInStudents |  | 
+| private static Function<Object, Object>[] | commandList |  |
  
 ##### Constructors: 
 
@@ -345,13 +323,20 @@
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
+| getCommandList |  public static Function<Object, Object>[] | None | Description |
 | main()  | public static void  | String [] args | Description |
 | LoginTeacher()  | public static String  | String username, String password | Description |
 | getTeacherByUsername()  | public static Teacher | String username | Description |
 | CreateTeacher()  | public static String  | String teacherName, String teacherUsername, String teacherPassword | Description |
 | LoginStudent()  | public static String  | tring username, String password | Description |
 | getStudentByUsername()  | public static Student | String username | Description |
+| getListOfQuizNames()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
+| createQuiz()  |  public static Object | Object inQuiz | Description |
 | CreateStudent()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
+| CreateStudent()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
+| CreateStudent()  | public static String  | String studentName, String studentUsername, String studentPassword | Description |
+ 
+ 
  
  
 #### 12) ServerThread.java
