@@ -993,7 +993,7 @@ public class Gui {
             quizStudentTakesFrame1.setVisible(false);
             quizStudentTakesFrame1.dispose();
             if (answers.size() == questions.size()) {
-                QuizSubmission qs = new QuizSubmission("", quiz.getQuizName() + " - " + username, answers);
+                QuizSubmission qs = new QuizSubmission("", quiz.getQuizName() + " --- " + username, answers);
                 ClientClass.serverCall(8, qs);
                 quizSubmitted();
             } else {

@@ -204,7 +204,12 @@ public class Server {
     }
 
     public static Object submitQuiz(Object o) {
+        String str = "---";
         QuizSubmission qs = (QuizSubmission) o;
+        int sepPos = qs.getQuizName().indexOf(str);
+        String username = qs.getQuizName().substring(sepPos + str.length()).trim();
+
+        getStudentByUsername(username).addQuizSubmission(qs);
         quizSubmissions.add(qs);
         return true;
     }
