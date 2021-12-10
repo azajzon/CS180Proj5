@@ -485,26 +485,20 @@
 | loginTeacher()| public static void | None | Description |
 | createTeacher()| public static void | None | Description |
 | loginStudent()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-| mainMenu()| public static void | None | Description |
-   
+| createStudent()| public static void | None | Description |
+| studentMenu()| public static void | None | Description |
+| teacherQuizMenu()| public static void | None | Description |
+| createQuiz()| public static void | None | Description |
+| multipleChoiceQuiz()| public static void | String quizName | Description |
+| editQuiz()| public static void | ArrayList<String> quizNames | Description |
+| editTeacherAccount()| public static void | None | Description |
+| editStudentAccount()| public static void | None | Description |
+| whichQuizToTake()| public static void | None | Description |
+| quizStudentTakes()| public static void | Quiz q | Description |
+| quizView()| public static void | ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz | Description |
+| quizSubmitted()| public static void | None | Description |
+| viewGradedQuiz()| public static void | ArrayList<QuizSubmission> qs | Description |
+
  
  
  
