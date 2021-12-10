@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ConnectException;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class ClientClass {
             Object in = input.readObject();
             if (in instanceof Exception) throw (Exception) in;
             else if (!switch (command) {
-                case 0, 1, 2, 3, 4, 5 -> {
+                case 0, 1, 2, 3, 4, 5, 8 -> {
                     if (!(in instanceof Boolean)) yield false;
                     retVal = in;
                     yield true;
@@ -52,6 +53,11 @@ public class ClientClass {
                 }
                 case 7 -> {
                     if (!(in instanceof Server.Quiz)) yield false;
+                    retVal = in;
+                    yield true;
+                }
+                case 9 -> {
+                    if (!(in instanceof CopyOnWriteArrayList)) yield false;
                     retVal = in;
                     yield true;
                 }

@@ -23,6 +23,7 @@ public class Server {
     static CopyOnWriteArrayList<Teacher> teachers;//these are thread safe arraylists
     static CopyOnWriteArrayList<Course> courses;//these are thread safe arraylists
     static CopyOnWriteArrayList<Quiz> quizzes;//these are thread safe arraylists
+    static CopyOnWriteArrayList<QuizSubmission> quizSubmissions;//these are thread safe arraylists
     // sets the loggedInTeacher Server.Teacher object and loggedInStudent Server.Student object to null
     static CopyOnWriteArrayList<Teacher> loggedInTeachers;
     static CopyOnWriteArrayList<Student> loggedInStudents;
@@ -38,7 +39,9 @@ public class Server {
                 Server::createQuiz,
                 Server::editStudentAccount,
                 Server::getListOfQuizNames,
-                Server::getQuiz
+                Server::getQuiz,
+                Server::submitQuiz,
+                Server::getSubmissions
         };
     }
 
@@ -54,6 +57,7 @@ public class Server {
         quizzes = new CopyOnWriteArrayList<>();
         loggedInStudents = new CopyOnWriteArrayList<>();
         loggedInTeachers = new CopyOnWriteArrayList<>();
+        quizSubmissions = new CopyOnWriteArrayList<>();
         Thread saveStateHook = new Thread(() -> {
             try {
                 saveProgramState();
@@ -197,6 +201,16 @@ public class Server {
             }
         }
         return null;
+    }
+
+    public static Object submitQuiz(Object o) {
+        QuizSubmission qs = (QuizSubmission) o;
+        quizSubmissions.add(qs);
+        return true;
+    }
+
+    private static Object getSubmissions(Object o) {
+        return quizSubmissions;
     }
 
     public static void saveArrayToFile(String filename, int arrayType) {
