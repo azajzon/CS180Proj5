@@ -89,7 +89,7 @@ public class Server {
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
-        }
+    }
 
     public static Object loginTeacher(Object array) {
         // creates an object of the Teacher class
@@ -178,7 +178,7 @@ public class Server {
         }
         return quizList;
     }
-    
+
     public static Object editStudentAccount(Object o) {
         String[] infoLog = (String[]) o;
         Student student = getStudentByUsername(infoLog[0]);
@@ -192,7 +192,7 @@ public class Server {
         String qName = (String) o;
         for (Quiz q : quizzes) {
             if (q.getQuizName().equals(qName)) {
-                System.out.println(q.getQuizName());
+                //System.out.println(q.getQuizName());
                 return q;
             }
         }
@@ -272,7 +272,7 @@ public class Server {
                 case 3:
                     while (true) {
                         try {
-                            // stores the courses data from the file in an object of the Teacher class
+                            // stores the quizzes data from the file in an object of the Teacher class
                             Quiz quiz = (Quiz) in.readObject();
                             quizzes.add(quiz);
                         } catch (EOFException e) {
@@ -295,7 +295,7 @@ public class Server {
                 System.out.println("No teachers saved");
             else if (ex.getMessage().equals("students.txt (The system cannot find the file specified)"))
                 System.out.println("No students saved");
-            else if (ex.getMessage().equals("courses.txt (The system cannot find the file specified)"))
+            else if (ex.getMessage().equals("quizzes.txt (The system cannot find the file specified)"))
                 System.out.println("No courses saved");
             else
                 System.out.println("IOException is caught");
@@ -311,7 +311,7 @@ public class Server {
             saveArrayToFile("teachers.txt", 1);
         if (students.size() > 0)
             saveArrayToFile("students.txt", 2);
-        if (courses.size() > 0)
+        if (quizzes.size() > 0)
             saveArrayToFile("quizzes.txt", 3);
 
     }
@@ -326,4 +326,3 @@ public class Server {
     }
 
 }
-
