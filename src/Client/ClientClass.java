@@ -57,7 +57,7 @@ public class ClientClass {
                     yield true;
                 }
                 case 9 -> {
-                    if (!(in instanceof CopyOnWriteArrayList)) yield false;
+                    if (!(in instanceof ArrayList)) yield false;
                     retVal = in;
                     yield true;
                 }
