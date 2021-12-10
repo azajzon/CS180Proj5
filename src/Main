@@ -34,8 +34,7 @@ public class Main implements ActionListener {
     public static JFrame deleteQuizFrame;
     public static JFrame quizDeletedFrame;
     public static JFrame viewStudentQuizSubmissionsFrame;
-
-
+    public static JFrame stuGradedQuizFrame;
     //ALL PANELS
     public static JPanel maineMenuPanel;
     public static JPanel createTeacherPanel;
@@ -66,6 +65,7 @@ public class Main implements ActionListener {
     public static JPanel deleteQuizPanel;
     public static JPanel quizDeletedPanel;
     public static JPanel viewStudentQuizSubmissionsPanel;
+    public static JPanel stuGradedQuizPanel;
 
     //TEACHER VARIABLES
     public static JButton createTeacherButton;
@@ -211,6 +211,8 @@ public class Main implements ActionListener {
     public static JButton viewGradedQuizButton;
     public static JLabel whichGradedQuizToViewLabel;
     public static JButton viewQuizButton;
+    public static JLabel stuGradedQuizLabel;
+    public static JButton stuGradedQuizScreenBackButton;
     public static JButton editStudentAccountButton;
     public static JButton studentLogOutButton;
     public static JLabel editStuAccountLabel;
@@ -237,7 +239,7 @@ public class Main implements ActionListener {
         //teacherLogIn();
         //teacherMenu();
         //addCourse();
-        teacherQuizMenu();
+        //teacherQuizMenu();
         //editStudentAccount();
         //createQuiz();
         //editQuiz();
@@ -254,6 +256,7 @@ public class Main implements ActionListener {
         //whichQuizToTake();
         //quizStudentTakes();
         //viewGradedQuiz();
+        showsStuGradedQuiz();
         //editStudentAccount();
 
     }
@@ -1826,14 +1829,46 @@ public class Main implements ActionListener {
                 viewGradedQuizFrame.setVisible(false);
                 viewGradedQuizFrame.dispose();
 
-                //create a method that shows graded quiz and call it here
-
+                showsStuGradedQuiz();
             }
         });
 
         viewGradedQuizPanel.setLayout(null);
         viewGradedQuizFrame.setVisible(true);
 
+    }
+
+    public static void showsStuGradedQuiz(){
+        stuGradedQuizFrame = new JFrame();
+        stuGradedQuizPanel = new JPanel();
+        stuGradedQuizFrame.setSize(500, 400);
+        stuGradedQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        stuGradedQuizFrame.add(stuGradedQuizPanel);
+
+        stuGradedQuizLabel = new JLabel("Graded Quiz");
+        stuGradedQuizLabel.setBounds(210, 20, 500, 25);
+        stuGradedQuizPanel.add(stuGradedQuizLabel);
+
+        //TODO: show the graded quiz here
+
+
+
+        stuGradedQuizScreenBackButton = new JButton("Back To HomePage");
+        stuGradedQuizScreenBackButton.setBounds(270, 320, 190, 25);
+        stuGradedQuizScreenBackButton.addActionListener(new Main());
+        stuGradedQuizPanel.add(stuGradedQuizScreenBackButton);
+
+        stuGradedQuizScreenBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                stuGradedQuizFrame.setVisible(false);
+                stuGradedQuizFrame.dispose();
+                teacherQuizMenu();
+
+            }
+        });
+
+        stuGradedQuizPanel.setLayout(null);
+        stuGradedQuizFrame.setVisible(true);
 
     }
 
