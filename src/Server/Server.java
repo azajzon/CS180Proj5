@@ -215,7 +215,8 @@ public class Server {
     }
 
     private static Object getSubmissions(Object o) {
-        return quizSubmissions;
+        String username = (String) o;
+        return getStudentByUsername(username).getQuizSubmissions();
     }
 
     public static void saveArrayToFile(String filename, int arrayType) {

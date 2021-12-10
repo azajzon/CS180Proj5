@@ -11,7 +11,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Gui {
     private static String hostName;
@@ -404,7 +403,7 @@ public class Gui {
         viewGradedQuizButton.addActionListener(e -> {
             studentMenuFrame.setVisible(false);
             studentMenuFrame.dispose();
-            viewGradedQuiz((CopyOnWriteArrayList<QuizSubmission>) ClientClass.serverCall(9," "));
+            viewGradedQuiz((ArrayList<QuizSubmission>) ClientClass.serverCall(9,username));
         });
 
         JButton editStudentAccountButton = new JButton("Edit Account");
@@ -1025,8 +1024,8 @@ public class Gui {
         quizSubmittedFrame.setVisible(true);
     }
 
-    public static void viewGradedQuiz(CopyOnWriteArrayList<QuizSubmission> qs) {
-        CopyOnWriteArrayList<QuizSubmission> subs = qs;
+    public static void viewGradedQuiz(ArrayList<QuizSubmission> qs) {
+        ArrayList<QuizSubmission> subs = qs;
 
         for (QuizSubmission q : subs) {
             if (!(q.getQuizName().contains(username)))
