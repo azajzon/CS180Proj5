@@ -474,13 +474,40 @@
 | public static String | username = ""  | |
 
 ##### Constructors: 
-
-| Constructor  | Description |
-| ------------- | ------------- |
-|   |  |
+ 
+ <p> None </p>
  
 ##### Methods: 
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-|  | |  | Description |
+| mainMenu()| public static void | String[] args | Description |
+| loginTeacher()| public static void | None | Description |
+| createTeacher()| public static void | None | Description |
+| loginStudent()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+| mainMenu()| public static void | None | Description |
+   
+ 
+ 
+ 
+ 
+ 
+ 
