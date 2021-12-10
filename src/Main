@@ -169,6 +169,7 @@ public class Main implements ActionListener {
     public static JTextField editOptionThreeMCText;
     public static JTextField editOptionFourMCText;
     public static JTextField editQuestionOneMCText;
+    public static JTextArea showsStuGradedQuizText;
 
 
     //STUDENT VARIABLES
@@ -213,7 +214,6 @@ public class Main implements ActionListener {
     public static JButton viewQuizButton;
     public static JLabel stuGradedQuizLabel;
     public static JButton stuGradedQuizScreenBackButton;
-    public static JTextField showsStuGradedQuizText;
     public static JButton editStudentAccountButton;
     public static JButton studentLogOutButton;
     public static JLabel editStuAccountLabel;
@@ -1851,11 +1851,9 @@ public class Main implements ActionListener {
         stuGradedQuizPanel.add(stuGradedQuizLabel);
 
         //TODO: show the graded quiz here
-        showsStuGradedQuizText = new JTextField(20);
-        showsStuGradedQuizText.setBounds(30, 50, 440, 225);
+        showsStuGradedQuizText = new JTextArea();
+        showsStuGradedQuizText.setBounds(30,50, 400,200);
         stuGradedQuizPanel.add(showsStuGradedQuizText);
-
-
 
 
         stuGradedQuizScreenBackButton = new JButton("Back To HomePage");
