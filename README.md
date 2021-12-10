@@ -401,10 +401,81 @@
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-|  |  |  | 
-| |  |  | 
-| p |  |  | 
- 
+| private static String | hostName
+| private static LinkedList<Thread> | list | 
+| public static JFrame | mainFrame
+| public static JPanel | panel
+| public static JLabel | userLabel
+| public static JLabel | passwordLabel
+| public static JTextField | userText
+| public static JTextField passText
+
+| public static JLabel | welcomeLabel
+| public static JLabel | lsmTool
+
+| public static JButton | createTeacherButton
+| public static JButton | loginTeacherAccountButton
+| public static JButton | createTeacherAccountButton
+| public static JFrame | teacherLoginFrame
+| public static JPanel | teacherLoginPanel
+| public static JLabel | teacherWelcomeLabel
+| public static JLabel |teacherLoginLabel
+| public static JLabel | teacherPasswordLabel
+| public static JTextField | teacherUsernameText
+| public static JTextField | teacherPasswordText
+| public static JFrame | createTeacherFrame
+| public static JPanel | createTeacherPanel
+| public static JLabel | createTeacherWelcomeLabel
+| public static JLabel | createTeacherNameLabel
+| public static JTextField | createTeacherUsernameText
+| public static JTextField | createTeacherNameText
+| public static JLabel | createTeacherUsernameLabel
+| public static JLabel | createTeacherPasswordLabel
+| public static JTextField | createTeacherPasswordText
+| public static JButton | loginTeacherButton
+| public static JButton | loginStudentButton
+| public static JButton | saveButton
+| public static JLabel | nameLabel
+| public static JTextField | nameText
+| public static JPanel | teacherMenuPanel
+| public static JPanel | addCoursePanel
+
+| public static JButton | createStudentButton
+| public static JButton |createStudentAccountButton
+| public static JFrame | studentLoginFrame
+| public static JPanel | studentLoginPanel
+| public static JLabel | studentWelcomeLabel
+| public static JLabel | studentLoginLabel
+| public static JLabel | studentPasswordLabel
+| public static JTextField | studentUsernameText
+| public static JTextField | studentPasswordText
+| public static JFrame | createStudentFrame
+| public static JPanel | createStudentPanel
+| public static JLabel | createStudentWelcomeLabel
+| public static JLabel | createStudentNameLabel
+| public static JTextField | createStudentUsernameText
+| public static JTextField | createStudentNameText
+| public static JLabel | createStudentUsernameLabel
+| public static JLabel | createStudentPasswordLabel
+| public static JTextField | createStudentPasswordText
+| public static JFrame | teacherMenuFrame
+| public static JPanel | studentMenuPanel
+| public static JLabel | addCourse
+| public static JButton | yesCourse
+| public static JButton | noCourse
+| public static JLabel | courseName
+| public static JTextField | courseText
+| public static JButton | courseEnter
+| public static JButton | createQuiz
+| public static JButton | editQuiz
+| public static JButton | deleteQuiz
+| public static JButton | viewStudentQuizSubmissions
+| public static JButton | takeQuiz
+| public static JButton | viewGradedQuiz
+| public static JButton | editAccount
+| public static JButton | logout
+
+| public static String | username = "" 
 
 ##### Constructors: 
 
