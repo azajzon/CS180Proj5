@@ -1,12 +1,9 @@
-package Client;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
-import Server.*;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -596,7 +593,7 @@ public class Gui {
         });
 
         JButton deleteStudentAccount = new JButton("Delete Account");
-        deleteStudentAccount.setBounds(30, 170, 110, 25);
+        deleteStudentAccount.setBounds(30, 170, 190, 25);
         studentMenuPanel.add(deleteStudentAccount);
 
         deleteStudentAccount.addActionListener(e -> {
@@ -685,7 +682,7 @@ public class Gui {
         });
 
         JButton deleteTeacherAccount = new JButton("Delete Account");
-        deleteTeacherAccount.setBounds(30, 230, 110, 25);
+        deleteTeacherAccount.setBounds(30, 230, 190, 25);
         teacherQuizMenuPanel.add(deleteTeacherAccount);
         deleteTeacherAccount.addActionListener(e -> {
             ClientClass.serverCall(12, username);
@@ -1546,7 +1543,7 @@ public class Gui {
         stuGradedQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         stuGradedQuizFrame.add(stuGradedQuizPanel);
 
-        JLabel stuGradedQuizLabel = new JLabel("Graded Quiz");
+        JLabel stuGradedQuizLabel = new JLabel("Student Quiz Submissions");
         stuGradedQuizLabel.setBounds(210, 20, 500, 25);
         stuGradedQuizPanel.add(stuGradedQuizLabel);
 
@@ -1565,7 +1562,7 @@ public class Gui {
         stuGradedQuizScreenBackButton.addActionListener(e -> {
             stuGradedQuizFrame.setVisible(false);
             stuGradedQuizFrame.dispose();
-            studentMenu();
+            teacherQuizMenu();
         });
 
         stuGradedQuizPanel.setLayout(null);
