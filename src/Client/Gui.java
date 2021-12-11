@@ -345,7 +345,9 @@ public class Gui {
         //if teacher doesn't want to create a course
         noCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mainMenu();
+                teacherCourseMenuFrame.setVisible(false);
+                teacherCourseMenuFrame.dispose();
+                teacherQuizMenu();
             }
         });
 
@@ -1518,7 +1520,7 @@ public class Gui {
             }
         }
 
-        returnStr = returnStr + "\nYou scored " + points + " out of " + total;
+        returnStr = returnStr + "\nStudent scored " + points + " out of " + total;
         return returnStr;
     }
 
