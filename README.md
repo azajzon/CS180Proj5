@@ -355,15 +355,10 @@
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| private static String | hostName | |
+| private static String | hostName | The |
 | private static LinkedList<Thread> | list | 
 | public static JFrame | mainFrame | |
 | public static JPanel | panel | |
-| public static JLabel | userLabel | |
-| public static JLabel | passwordLabel | |
-| public static JTextField | userText | |
-| public static JTextField | passText | |
-| public static JLabel | welcomeLabel | |
 | public static JLabel | lsmTool | |
 | public static JButton | createTeacherButton | |
 | public static JButton | loginTeacherAccountButton | |
@@ -384,15 +379,21 @@
 | public static JLabel | createTeacherUsernameLabel | |
 | public static JLabel | createTeacherPasswordLabel | |
 | public static JTextField | createTeacherPasswordText | |
+| public static JFrame | editTeachAccountDoneFrame | |
+| public static JPanel | editTeachAccountDonePanel | |
+| public static JLabel | accountUpdatedLabel | |
+| public static JButton | editTeacAccountDoneBackButton | |
+ 
 | public static JButton | loginTeacherButton | |
 | public static JButton | loginStudentButton | |
-| public static JButton | saveButton | |
-| public static JLabel | nameLabel | |
-| public static JTextField | nameText | |
-| public static JPanel | teacherMenuPanel | |
-| public static JPanel | addCoursePanel | |
+ 
 | public static JButton | createStudentButton | |
+| public static JButton | loginStudentAccountButton | |
 | public static JButton |createStudentAccountButton | |
+| public static JFrame | accountCreatedStudentFrame | |
+| public static JPanel | accountCreatedStudentPanel | |
+| public static JLabel | studentAccountCreatedLabel | |
+| public static JButton | studentLogInButton | |
 | public static JFrame | studentLoginFrame | |
 | public static JPanel | studentLoginPanel | |
 | public static JLabel | studentWelcomeLabel | |
@@ -409,24 +410,24 @@
 | public static JLabel | createStudentUsernameLabel | |
 | public static JLabel | createStudentPasswordLabel | |
 | public static JTextField | createStudentPasswordText | |
-| public static JFrame | teacherMenuFrame | |
+| public static JFrame | editStudentAccountDoneFrame | |
+| public static JPanel | editStudentAccountDonePanel | |
+| public static JButton | editStuAccountDoneBackButton | |
 | public static JPanel | studentMenuPanel | |
-| public static JLabel | addCourse | |
-| public static JButton | yesCourse | |
-| public static JButton | noCourse | |
-| public static JLabel | courseName | |
-| public static JTextField | courseText | |
-| public static JButton | courseEnter | |
-| public static JButton | createQuiz | |
-| public static JButton | editQuiz | |
-| public static JButton | deleteQuiz | |
-| public static JButton | viewStudentQuizSubmissions | |
-| public static JButton | takeQuiz | |
-| public static JButton | viewGradedQuiz | |
-| public static JButton | editAccount | |
-| public static JButton | logout | |
+| public static JFrame teacherCourseMenuFrame | |
+| public static JPanel teacherCourseMenuPanel | |
+| public static JLabel addCourseLabel | |
+| public static JButton yesCourseButton | |
+| public static JButton noCourseButton | |
+| public static JPanel addCoursePanel | |
+| public static JFrame addCourseFrame | |
+| public static JLabel enterCourseNameLabel | |
+| public static JTextField enterCourseNameText | |
+| public static JButton createCourseButton | |
+| public static JButton addCourseBackButton | |
 | public static String | username = ""  | |
-
+| public static JLabel | createAccountErrorLabel |
+| public static JLabel | logInErrorLabel | |
 ##### Constructors: 
  
  <p> None </p>
@@ -436,10 +437,14 @@
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
 | mainMenu()| public static void | String[] args | Description |
-| loginTeacher()| public static void | None | Description |
 | createTeacher()| public static void | None | Description |
-| loginStudent()| public static void | None | Description |
+| accountCreatedTeacher() | public static void | None | Description |
+| loginTeacher()| public static void | None | Description |
+| teacherCourseMenu()| public static void | None | Description |
+| addCourse()| public static void | None | Description |
 | createStudent()| public static void | None | Description |
+| accountCreatedStudent() | public static void | None | Description |
+| loginStudent()| public static void | None | Description |
 | studentMenu()| public static void | None | Description |
 | teacherQuizMenu()| public static void | None | Description |
 | createQuiz()| public static void | None | Description |
@@ -452,9 +457,8 @@
 | quizView()| public static void | ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz | Description |
 | quizSubmitted()| public static void | None | Description |
 | viewGradedQuiz()| public static void | ArrayList<QuizSubmission> qs | Description |
-
- 
- 
+| showsStuGradedQuiz()| public static void | QuizSubmission qs | Description |
+| getQuizString()| public static void | QuizSubmission qs | Description |
  
  
  
