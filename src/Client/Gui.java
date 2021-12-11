@@ -60,11 +60,8 @@ public class Gui {
 
     public static JButton loginTeacherButton;
     public static JButton loginStudentButton;
-    public static JButton saveButton;
     public static JLabel nameLabel;
     public static JTextField nameText;
-    public static JPanel teacherMenuPanel;
-    public static JPanel addCoursePanel;
 
 
     /////////////////////
@@ -102,12 +99,17 @@ public class Gui {
 
 
     public static JPanel studentMenuPanel;
-    public static JLabel addCourse;
-    public static JButton yesCourse;
-    public static JButton noCourse;
-    public static JLabel courseName;
-    public static JTextField courseText;
-    public static JButton courseEnter;
+    public static JFrame teacherCourseMenuFrame;
+    public static JPanel teacherCourseMenuPanel;
+    public static JLabel addCourseLabel;
+    public static JButton yesCourseButton;
+    public static JButton noCourseButton;
+    public static JPanel addCoursePanel;
+    public static JFrame addCourseFrame;
+    public static JLabel enterCourseNameLabel;
+    public static JTextField enterCourseNameText;
+    public static JButton createCourseButton;
+    public static JButton addCourseBackButton;
     public static JButton createQuiz;
     public static JButton editQuiz;
     public static JButton deleteQuiz;
@@ -119,6 +121,9 @@ public class Gui {
 
     public static String username = "";
 
+    //////////INVALID LABELS (replaced from JOptionPanes/////////////
+    public static JLabel createAccountErrorLabel;
+    public static JLabel logInErrorLabel;
 
     public static void main(String[] args) {
         mainMenu();
@@ -175,13 +180,7 @@ public class Gui {
         });
         panel.add(createStudentButton);
 
-
-        saveButton = new JButton("Save and Exit");
-        saveButton.setBounds(110, 170, 150, 25);
-        panel.add(saveButton);
-
         panel.setLayout(null);
-
         mainFrame.setVisible(true);
 
     }
@@ -234,7 +233,11 @@ public class Gui {
                 accountCreatedTeacher();
             } else {
                 //TODO: cannot use joptionpane
-                JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
+
+                createAccountErrorLabel = new JLabel("Account creation failed.");
+                createAccountErrorLabel.setBounds(150, 150, 150, 25);
+                createTeacherPanel.add(createAccountErrorLabel);
+
             }
 
         });
@@ -312,11 +315,13 @@ public class Gui {
                     teacherPasswordText.getText()})) {
                 teacherLoginFrame.setVisible(false);
                 teacherLoginFrame.dispose();
-                teacherQuizMenu();
+                teacherCourseMenu();
                 username = teacherUsernameText.getText();
             } else {
-                //TODO: cannot use joptionpane
-                JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
+                logInErrorLabel = new JLabel("Login Error Label");
+                logInErrorLabel.setBounds(150, 150, 150, 25);
+                teacherLoginPanel.add(logInErrorLabel);
+                //JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
                 mainMenu();
             }
         });
@@ -325,6 +330,97 @@ public class Gui {
 
 
         teacherLoginFrame.setVisible(true);
+    }
+
+    public static void teacherCourseMenu() {
+        teacherCourseMenuFrame = new JFrame();
+        teacherCourseMenuPanel = new JPanel();
+        teacherCourseMenuFrame.setSize(400, 300);
+        teacherCourseMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        teacherCourseMenuFrame.add(teacherCourseMenuPanel);
+
+        addCourseLabel = new JLabel("Do you want to add a course?");
+        addCourseLabel.setBounds(80, 20, 200, 25);
+        teacherCourseMenuPanel.add(addCourseLabel);
+
+        yesCourseButton = new JButton("Yes");
+        yesCourseButton.setBounds(120, 50, 80, 25);
+        yesCourseButton.addActionListener(new Main());
+        teacherCourseMenuPanel.add(yesCourseButton);
+
+        yesCourseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                teacherCourseMenuFrame.setVisible(false);
+                teacherCourseMenuFrame.dispose();
+                addCourse();
+            }
+        });
+
+        noCourseButton = new JButton("No");
+        noCourseButton.setBounds(120, 80, 80, 25);
+        noCourseButton.addActionListener(new Main());
+        teacherCourseMenuPanel.add(noCourseButton);
+
+        //if teacher doesn't want to create a course
+        noCourseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mainMenu();
+            }
+        });
+
+
+        teacherCourseMenuPanel.setLayout(null);
+        teacherCourseMenuFrame.setVisible(true);
+
+    }
+
+    public static void addCourse() {
+
+        addCourseFrame = new JFrame();
+        addCoursePanel = new JPanel();
+        addCourseFrame.setSize(400, 300);
+        addCourseFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        addCourseFrame.add(addCoursePanel);
+
+        // if yes to adding a course
+        // PATHWAY IS
+
+        enterCourseNameLabel = new JLabel("Enter Course Name:");
+        enterCourseNameLabel.setBounds(130, 20, 200, 25);
+        addCoursePanel.add(enterCourseNameLabel);
+
+        enterCourseNameText = new JTextField(50);
+        enterCourseNameText.setBounds(120, 50, 165, 25);
+        addCoursePanel.add(enterCourseNameText);
+
+        createCourseButton = new JButton("Create Course");
+        createCourseButton.setBounds(180, 80, 140, 25);
+        createCourseButton.addActionListener(new Main());
+        addCoursePanel.add(createCourseButton);
+
+        createCourseButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                addCourseFrame.setVisible(false);
+                addCourseFrame.dispose();
+                teacherQuizMenu();
+            }
+        });
+
+        addCourseBackButton = new JButton("Back");
+        addCourseBackButton.setBounds(60, 80, 80, 25);
+        addCourseBackButton.addActionListener(new Main());
+        addCoursePanel.add(addCourseBackButton);
+
+        addCourseBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                addCourseFrame.setVisible(false);
+                addCourseFrame.dispose();
+                teacherCourseMenu();
+            }
+        });
+
+        addCoursePanel.setLayout(null);
+        addCourseFrame.setVisible(true);
     }
 
 
@@ -374,7 +470,9 @@ public class Gui {
                 createStudentFrame.dispose();
                 accountCreatedStudent();
             } else {
-                JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
+                createAccountErrorLabel = new JLabel("Account creation failed.");
+                createAccountErrorLabel.setBounds(150, 150, 150, 25);
+                createStudentPanel.add(createAccountErrorLabel);
             }
         });
         createStudentPanel.add(createStudentAccountButton);
@@ -450,7 +548,10 @@ public class Gui {
                 studentMenu();
                 username = studentUsernameText.getText();
             } else {
-                JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
+                logInErrorLabel = new JLabel("Login Error Label");
+                logInErrorLabel.setBounds(150, 150, 150, 25);
+                studentLoginPanel.add(logInErrorLabel);
+                //JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
                 mainMenu();
             }
         });
@@ -1168,17 +1269,21 @@ public class Gui {
         whichQuizToTakeFrame.setSize(400, 300);
         whichQuizToTakeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         whichQuizToTakeFrame.add(whichQuizToTakePanel);
+
         JLabel chooseQuizTakeTitleLabel = new JLabel("Choose Quiz To Take");
         chooseQuizTakeTitleLabel.setBounds(120, 20, 500, 25);
         whichQuizToTakePanel.add(chooseQuizTakeTitleLabel);
+
         JLabel studentChooseQuizLabel = new JLabel("Which quiz would you like to take?");
         studentChooseQuizLabel.setBounds(30, 50, 700, 25);
         whichQuizToTakePanel.add(studentChooseQuizLabel);
+
         //below array needs to contain the list of quizzes for the course choose by the user
         ArrayList<String> quizNames = (ArrayList<String>) ClientClass.serverCall(6, " ");
         JComboBox jComboBox = new JComboBox(quizNames.toArray());
         jComboBox.setBounds(120, 80, 140, 20);
         whichQuizToTakePanel.add(jComboBox);
+
         JButton quizChoosenNextButton = new JButton("Next");
         quizChoosenNextButton.setBounds(220, 180, 110, 25);
         whichQuizToTakePanel.add(quizChoosenNextButton);
@@ -1284,7 +1389,7 @@ public class Gui {
         JLabel quizSubmittedLabel = new JLabel("You are done with the quiz and it has been submitted!");
         quizSubmittedLabel.setBounds(30, 20, 500, 25);
         quizSubmittedPanel.add(quizSubmittedLabel);
-        JButton quizDoneBackToStuMenuButton = new JButton("Back To Homepage");
+        JButton quizDoneBackToStuMenuButton = new JButton("Back To HomePage");
         quizDoneBackToStuMenuButton.setBounds(90, 60, 200, 25);
         quizSubmittedPanel.add(quizDoneBackToStuMenuButton);
         quizDoneBackToStuMenuButton.addActionListener(e -> {
