@@ -267,7 +267,7 @@
 | public static CopyOnWriteArrayList<Course> | course | The thread safe arraylist for courses | 
 | public static CopyOnWriteArrayList<Teacher> | loggedInTeachers | The thread safe arraylist for the teachers that are logged in  | 
 | public static CopyOnWriteArrayList<Student> | loggedInStudents | The thread safe arraylist for the students that are logged in | 
-| private static Function<Object, Object>[] | commandList | An array of functions  |
+| private static Function<Object, Object>[] | commandList | An array of functions (command executor for Server) |
  
 ##### Constructors: 
 
@@ -327,15 +327,15 @@
 #### 11) ClientClass.java
  
 ##### Description: 
-<p> The ClientClass class </p>
+<p> The ClientClass class sends requests to the server and receives responses. </p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| private static String | hostName |  | 
-| private static Socket | socket |  | 
-| private static ObjectOutputStream | out |  | 
-| private static ObjectInputStream | input |  |  
+| private static String | hostName | A string that is set to local host | 
+| private static Socket | socket | The socket object  | 
+| private static ObjectOutputStream | out | An object of ObjectOutputStream is set to null | 
+| private static ObjectInputStream | input | An object of ObjectInputStream is set to null |  
 
 
 ##### Constructors: 
@@ -346,7 +346,7 @@
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| serverCall()  |   public static Object | int command, Object objToSend | Description |
+| serverCall()  |   public static Object | int command, Object objToSend | Creates a new Socket object and establishes the socket connection between the client and server
 
  
  #### 12) GUI.java
