@@ -43,9 +43,12 @@ public class Server {
                 Server::submitQuiz,
                 Server::getSubmissions,
                 Server::editTeacherAccount,
-                Server::updateQuiz
+                Server::updateQuiz,
+                Server::deleteTeacherAccount,
+                Server::deleteStudentAccount
         };
     }
+
 
 
 
@@ -132,6 +135,11 @@ public class Server {
     public static Object createTeacher(Object array) {
         String[] arr = (String[]) array;
         Teacher teacher = new Teacher(arr[0], arr[1], arr[2]);
+        for(Teacher t: teachers) {
+            if (teacher.getUsername().equals(t.getUsername())) {
+                return false;
+            }
+        }
         teachers.add(teacher);
         return true;
     }
@@ -170,6 +178,11 @@ public class Server {
     public static Object createStudent(Object array) {
         String[] arr = (String[]) array;
         Student student = new Student(arr[0], arr[1], arr[2]);
+        for(Student s: students) {
+            if (student.getUsername().equals(s.getUsername())) {
+                return false;
+            }
+        }
         students.add(student);
         return true;
     }
@@ -240,6 +253,18 @@ public class Server {
         t.setName(infoLog[1]);
         t.setUsername(infoLog[2]);
         t.setPassword(infoLog[3]);
+        return true;
+    }
+
+    public static Object deleteTeacherAccount(Object o) {
+        Teacher t = getTeacherByUsername((String) o);
+        teachers.remove(t);
+        return true;
+    }
+
+    private static Object deleteStudentAccount(Object o) {
+        Student s = getStudentByUsername((String) o);
+        students.remove(s);
         return true;
     }
 

@@ -1,9 +1,12 @@
+package Client;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
+import Server.*;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -216,7 +219,6 @@ public class Gui {
                 accountCreatedTeacher();
             } else {
                 //TODO: cannot use joptionpane
-
                 createAccountErrorLabel = new JLabel("Account creation failed.");
                 createAccountErrorLabel.setBounds(150, 150, 150, 25);
                 createTeacherPanel.add(createAccountErrorLabel);
@@ -245,7 +247,6 @@ public class Gui {
 
         teacherLogInButton = new JButton("Log In");
         teacherLogInButton.setBounds(150, 70, 90, 25);
-        teacherLogInButton.addActionListener(new Main());
         accountCreatedTeacherPanel.add(teacherLogInButton);
 
         teacherLogInButton.addActionListener(new ActionListener() {
@@ -328,7 +329,6 @@ public class Gui {
 
         yesCourseButton = new JButton("Yes");
         yesCourseButton.setBounds(120, 50, 80, 25);
-        yesCourseButton.addActionListener(new Main());
         teacherCourseMenuPanel.add(yesCourseButton);
 
         yesCourseButton.addActionListener(new ActionListener() {
@@ -341,7 +341,6 @@ public class Gui {
 
         noCourseButton = new JButton("No");
         noCourseButton.setBounds(120, 80, 80, 25);
-        noCourseButton.addActionListener(new Main());
         teacherCourseMenuPanel.add(noCourseButton);
 
         //if teacher doesn't want to create a course
@@ -378,20 +377,16 @@ public class Gui {
 
         createCourseButton = new JButton("Create Course");
         createCourseButton.setBounds(180, 80, 140, 25);
-        createCourseButton.addActionListener(new Main());
         addCoursePanel.add(createCourseButton);
 
-        createCourseButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                addCourseFrame.setVisible(false);
-                addCourseFrame.dispose();
-                teacherQuizMenu();
-            }
+        createCourseButton.addActionListener(e -> {
+            addCourseFrame.setVisible(false);
+            addCourseFrame.dispose();
+            teacherQuizMenu();
         });
 
         addCourseBackButton = new JButton("Back");
         addCourseBackButton.setBounds(60, 80, 80, 25);
-        addCourseBackButton.addActionListener(new Main());
         addCoursePanel.add(addCourseBackButton);
 
         addCourseBackButton.addActionListener(new ActionListener() {
@@ -478,15 +473,12 @@ public class Gui {
 
         studentLogInButton = new JButton("Log In");
         studentLogInButton.setBounds(130, 60, 80, 25);
-        studentLogInButton.addActionListener(new Main());
         accountCreatedStudentPanel.add(studentLogInButton);
 
-        studentLogInButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                accountCreatedStudentFrame.setVisible(false);
-                accountCreatedStudentFrame.dispose();
-                loginStudent();
-            }
+        studentLogInButton.addActionListener(e -> {
+            accountCreatedStudentFrame.setVisible(false);
+            accountCreatedStudentFrame.dispose();
+            loginStudent();
         });
 
         accountCreatedStudentFrame.setVisible(true);
@@ -595,21 +587,23 @@ public class Gui {
 
         studentMenuPanel.add(studentLogOutButton);
 
-        //TODO what should happen when the student log outs
 
-        studentLogOutButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                studentMenuFrame.setVisible(false);
-                studentMenuFrame.dispose();
-                mainMenu();
-            }
+        studentLogOutButton.addActionListener(e -> {
+            studentMenuFrame.setVisible(false);
+            studentMenuFrame.dispose();
+            mainMenu();
         });
 
         JButton deleteStudentAccount = new JButton("Delete Account");
         deleteStudentAccount.setBounds(30, 170, 110, 25);
         studentMenuPanel.add(deleteStudentAccount);
 
-        //TODO: delete account
+        deleteStudentAccount.addActionListener(e -> {
+            ClientClass.serverCall(13, username);
+            studentMenuFrame.setVisible(false);
+            studentMenuFrame.dispose();
+            mainMenu();
+        });
 
         studentMenuPanel.setLayout(null);
         studentMenuFrame.setVisible(true);
@@ -680,8 +674,13 @@ public class Gui {
         JButton deleteTeacherAccount = new JButton("Delete Account");
         deleteTeacherAccount.setBounds(30, 230, 110, 25);
         teacherQuizMenuPanel.add(deleteTeacherAccount);
+        deleteTeacherAccount.addActionListener(e -> {
+            ClientClass.serverCall(12, username);
+            teacherQuizMenuFrame.setVisible(false);
+            teacherQuizMenuFrame.dispose();
+            mainMenu();
+        });
 
-        //TODO: delete account
 
         teacherQuizMenuPanel.setLayout(null);
         teacherQuizMenuFrame.setVisible(true);
@@ -1140,15 +1139,12 @@ public class Gui {
 
         editTeacAccountDoneBackButton = new JButton("Back To HomePage");
         editTeacAccountDoneBackButton.setBounds(100, 60, 180, 25);
-        editTeacAccountDoneBackButton.addActionListener(new Main());
         editTeachAccountDonePanel.add(editTeacAccountDoneBackButton);
 
-        editTeacAccountDoneBackButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                editTeachAccountDoneFrame.setVisible(false);
-                editTeachAccountDoneFrame.dispose();
-                teacherQuizMenu();
-            }
+        editTeacAccountDoneBackButton.addActionListener(e -> {
+            editTeachAccountDoneFrame.setVisible(false);
+            editTeachAccountDoneFrame.dispose();
+            teacherQuizMenu();
         });
 
 
@@ -1216,12 +1212,10 @@ public class Gui {
         editStuAccountBackButton.setBounds(30, 180, 110, 25);
         editStudentAccountPanel.add(editStuAccountBackButton);
 
-        editStuAccountBackButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                editStudentAccountFrame.setVisible(false);
-                editStudentAccountFrame.dispose();
-                studentMenu();
-            }
+        editStuAccountBackButton.addActionListener(e -> {
+            editStudentAccountFrame.setVisible(false);
+            editStudentAccountFrame.dispose();
+            studentMenu();
         });
 
         editStudentAccountFrame.setVisible(true);
@@ -1241,7 +1235,6 @@ public class Gui {
 
         editStuAccountDoneBackButton = new JButton("Back To HomePage");
         editStuAccountDoneBackButton.setBounds(100, 60, 180, 25);
-        editStuAccountDoneBackButton.addActionListener(new Main());
         editStudentAccountDonePanel.add(editStuAccountDoneBackButton);
 
         editStuAccountDoneBackButton.addActionListener(new ActionListener() {
