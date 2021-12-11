@@ -1284,7 +1284,7 @@ public class Gui {
         JLabel quizSubmittedLabel = new JLabel("You are done with the quiz and it has been submitted!");
         quizSubmittedLabel.setBounds(30, 20, 500, 25);
         quizSubmittedPanel.add(quizSubmittedLabel);
-        JButton quizDoneBackToStuMenuButton = new JButton("Back To HomePage");
+        JButton quizDoneBackToStuMenuButton = new JButton("Back To Homepage");
         quizDoneBackToStuMenuButton.setBounds(90, 60, 200, 25);
         quizSubmittedPanel.add(quizDoneBackToStuMenuButton);
         quizDoneBackToStuMenuButton.addActionListener(e -> {
