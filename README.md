@@ -257,17 +257,17 @@
 #### 9) Server.java
  
 ##### Description: 
-<p> The Server class </p>
+<p> The Server class includes the main and this is the class that listens for incoming connections and starts ServerThreads to handle those connections.</p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| public static CopyOnWriteArrayList<Student> | teachers |  | 
-| public static CopyOnWriteArrayList<Teacher> | courses |  | 
-| public static CopyOnWriteArrayList<Course> | students |  | 
-| public static CopyOnWriteArrayList<Teacher> | loggedInTeachers |  | 
-| public static CopyOnWriteArrayList<Student> | loggedInStudents |  | 
-| private static Function<Object, Object>[] | commandList |  |
+| public static CopyOnWriteArrayList<Teacher> | teachers | The thread safe arraylist for teachers | 
+| public static CopyOnWriteArrayList<Student> | students | The thread safe arraylist for students | 
+| public static CopyOnWriteArrayList<Course> | course | The thread safe arraylist for courses | 
+| public static CopyOnWriteArrayList<Teacher> | loggedInTeachers | The thread safe arraylist for the teachers that are logged in  | 
+| public static CopyOnWriteArrayList<Student> | loggedInStudents | The thread safe arraylist for the students that are logged in | 
+| private static Function<Object, Object>[] | commandList |   |
  
 ##### Constructors: 
 
@@ -277,17 +277,17 @@
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| getCommandList |  public static Function<Object, Object>[] | None | Description |
-| main()  | public static void  | String [] args | Description |
-| LoginTeacher()  | public static String  | String username, String password | Description |
-| getTeacherByUsername()  | public static Teacher | String username | Description |
-| CreateTeacher()  | public static String  | String teacherName, String teacherUsername, String teacherPassword | Description |
-| LoginStudent()  | public static String  | tring username, String password | Description |
-| getStudentByUsername()  | public static Student | String username | Description |
-| CreateStudent()  | public static String  | Object array | Description |
-| createQuiz()  |  public static Object | Object inQuiz | Description |
+| getCommandList |  public static Function<Object, Object>[] | None | Returns the command list |
+| main()  | public static void  | String [] args | Sets the thread safe array lists and listens for connections and starts server threads tp handle the connection and send output to the client |
+| LoginTeacher()  | public static String  | String username, String password | Creates object of teacher class and reads input and checks if it is right |
+| getTeacherByUsername()  | public static Teacher | String username | Gets the username input of user and returns the teacher object |
+| CreateTeacher()  | public static String  | String teacherName, String teacherUsername, String teacherPassword | Creates an object array that stores the name, username and passowrd of teacher |
+| LoginStudent()  | public static String  | tring username, String password | Creates object of student class and reads input and checks if it is right |
+| getStudentByUsername()  | public static Student | String username | Gets the username input of user and returns the student object |
+| CreateStudent()  | public static String  | Object array |  Creates an object array that stores the name, username and passowrd of student |
+| createQuiz()  |  public static Object | Object inQuiz | aAdds the quiz object to the thread safe list of quizzes |
 | getListOfQuizNames()  | public static Object  | Object o | Description |
-| editStudentAccount()  | public static Object  | Object o | Description |
+| editStudentAccount()  | public static Object  | Object o | Returns the list of quiz names |
 | getQuiz()  | public static Object  | Object o | Description |
 | submitQuiz()  | public static Object  | Object o | Description |
 | getSubmissions()  | public static Object  | Object o | Description |
