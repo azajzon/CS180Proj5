@@ -257,17 +257,17 @@
 #### 9) Server.java
  
 ##### Description: 
-<p> The Server class </p>
+<p> The Server class includes the main and this is the class that listens for incoming connections and starts ServerThreads to handle those connections.</p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| public static CopyOnWriteArrayList<Student> | teachers |  | 
-| public static CopyOnWriteArrayList<Teacher> | courses |  | 
-| public static CopyOnWriteArrayList<Course> | students |  | 
-| public static CopyOnWriteArrayList<Teacher> | loggedInTeachers |  | 
-| public static CopyOnWriteArrayList<Student> | loggedInStudents |  | 
-| private static Function<Object, Object>[] | commandList |  |
+| public static CopyOnWriteArrayList<Teacher> | teachers | The thread safe arraylist for teachers | 
+| public static CopyOnWriteArrayList<Student> | students | The thread safe arraylist for students | 
+| public static CopyOnWriteArrayList<Course> | course | The thread safe arraylist for courses | 
+| public static CopyOnWriteArrayList<Teacher> | loggedInTeachers | The thread safe arraylist for the teachers that are logged in  | 
+| public static CopyOnWriteArrayList<Student> | loggedInStudents | The thread safe arraylist for the students that are logged in | 
+| private static Function<Object, Object>[] | commandList | An array of functions (command executor for Server) |
  
 ##### Constructors: 
 
@@ -277,37 +277,39 @@
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| getCommandList |  public static Function<Object, Object>[] | None | Description |
-| main()  | public static void  | String [] args | Description |
-| LoginTeacher()  | public static String  | String username, String password | Description |
-| getTeacherByUsername()  | public static Teacher | String username | Description |
-| CreateTeacher()  | public static String  | String teacherName, String teacherUsername, String teacherPassword | Description |
-| LoginStudent()  | public static String  | tring username, String password | Description |
-| getStudentByUsername()  | public static Student | String username | Description |
-| CreateStudent()  | public static String  | Object array | Description |
-| createQuiz()  |  public static Object | Object inQuiz | Description |
-| getListOfQuizNames()  | public static Object  | Object o | Description |
-| editStudentAccount()  | public static Object  | Object o | Description |
-| getQuiz()  | public static Object  | Object o | Description |
-| submitQuiz()  | public static Object  | Object o | Description |
-| getSubmissions()  | public static Object  | Object o | Description |
-| saveArrayToFile()  | public static void | String filename, int arrayType| Description |
-| loadArrayFromFile()  | public static void | String filename, int arrayType | Description |
-| saveProgramState()  | public static void | None | Description |
-| loadProgramState()  | public static Object  | None | Description |
+| getCommandList |  public static Function<Object, Object>[] | None | Returns the command list |
+| main()  | public static void  | String [] args | Sets the thread safe array lists and listens for connections and starts server threads tp handle the connection and send output to the client |
+| LoginTeacher()  | public static String  | String username, String password | Creates object of teacher class and reads input and checks if it is right |
+| getTeacherByUsername()  | public static Teacher | String username | Gets the username input of user and returns the teacher object |
+| CreateTeacher()  | public static String  | String teacherName, String teacherUsername, String teacherPassword | Creates an object array that stores the name, username and passowrd of teacher |
+| LoginStudent()  | public static String  | tring username, String password | Creates object of student class and reads input and checks if it is right |
+| getStudentByUsername()  | public static Student | String username | Gets the username input of user and returns the student object |
+| CreateStudent()  | public static String  | Object array |  Creates an object array that stores the name, username and passowrd of student |
+| createQuiz()  |  public static Object | Object inQuiz | aAdds the quiz object to the thread safe list of quizzes |
+| getListOfQuizNames()  | public static Object  | Object o | Returns the list of quiz names |
+| editStudentAccount()  | public static Object  | Object o | Gets the student's username and updates the 3 fields and stores it in a student object |
+| updateQuiz()  | public static Object  | Object o | Updates the quiz name based on the index and the contents of the Quiz object |
+| getQuiz()  | public static Object  | Object o | Returns a quiz object |
+| submitQuiz()  | public static Object  | Object o | Gets the name of quiz that has to be submitted and adds it to the quiz subbmission list of the specific student's username |
+| editTeacherAccount | public static Object | Object o | Gets the teacher's username and updates the 3 fields and stores it in a teacher object |
+| getSubmissions()  | public static Object  | Object o | Returns the quiz submission based on the student's username |
+| saveArrayToFile()  | public static void | String filename, int arrayType| Saves the arrays of teachers, students and quizzes objects to 3 files |
+| loadArrayFromFile()  | public static void | String filename, int arrayType | Loads the 3 arrays from the files once the program starts again |
+| saveProgramState()  | public static void | None | Saves the data even when we end the program |
+| loadProgramState()  | public static Object  | None | Loads the data that was saved when a previous program was ended |
  
  
 #### 10) ServerThread.java
  
 ##### Description: 
-<p> The ServerThread class </p>
+<p> The ServerThread class listens for the client to tell it what command to run and then runs that command and sends the output of that command to the client. </p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| Socket | client |  | 
-| PrintWriter | output |  | 
-| BufferedReader | input |  | 
+| Socket | client | The socket object | 
+| ObjectOutputStream | output | The object of the ObjectOutputStream | 
+| ObjectInputStream | input | The object of the ObjectInputStream | 
 
 ##### Constructors: 
 
@@ -319,21 +321,21 @@
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| run()  | public void  | None | Description |
+| run()  | public void  | None | Reads the command line from the client using Bufferedreader and then closes the client |
 
 
 #### 11) ClientClass.java
  
 ##### Description: 
-<p> The ClientClass class </p>
+<p> The ClientClass class sends requests to the server and receives responses. </p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| private static String | hostName |  | 
-| private static Socket | socket |  | 
-| private static ObjectOutputStream | out |  | 
-| private static ObjectInputStream | input |  |  
+| private static String | hostName | A string that is set to local host | 
+| private static Socket | socket | The socket object  | 
+| private static ObjectOutputStream | out | An object of ObjectOutputStream is set to null | 
+| private static ObjectInputStream | input | An object of ObjectInputStream is set to null |  
 
 
 ##### Constructors: 
@@ -344,7 +346,7 @@
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| serverCall()  |   public static Object | int command, Object objToSend | Description |
+| serverCall()  |   public static Object | int command, Object objToSend | Creates a new Socket object and establishes the socket connection between the client and server
 
  
  #### 12) GUI.java
@@ -355,15 +357,10 @@
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| private static String | hostName | |
+| private static String | hostName | The |
 | private static LinkedList<Thread> | list | 
 | public static JFrame | mainFrame | |
 | public static JPanel | panel | |
-| public static JLabel | userLabel | |
-| public static JLabel | passwordLabel | |
-| public static JTextField | userText | |
-| public static JTextField | passText | |
-| public static JLabel | welcomeLabel | |
 | public static JLabel | lsmTool | |
 | public static JButton | createTeacherButton | |
 | public static JButton | loginTeacherAccountButton | |
@@ -384,15 +381,19 @@
 | public static JLabel | createTeacherUsernameLabel | |
 | public static JLabel | createTeacherPasswordLabel | |
 | public static JTextField | createTeacherPasswordText | |
+| public static JFrame | editTeachAccountDoneFrame | |
+| public static JPanel | editTeachAccountDonePanel | |
+| public static JLabel | accountUpdatedLabel | |
+| public static JButton | editTeacAccountDoneBackButton | |
 | public static JButton | loginTeacherButton | |
 | public static JButton | loginStudentButton | |
-| public static JButton | saveButton | |
-| public static JLabel | nameLabel | |
-| public static JTextField | nameText | |
-| public static JPanel | teacherMenuPanel | |
-| public static JPanel | addCoursePanel | |
 | public static JButton | createStudentButton | |
+| public static JButton | loginStudentAccountButton | |
 | public static JButton |createStudentAccountButton | |
+| public static JFrame | accountCreatedStudentFrame | |
+| public static JPanel | accountCreatedStudentPanel | |
+| public static JLabel | studentAccountCreatedLabel | |
+| public static JButton | studentLogInButton | |
 | public static JFrame | studentLoginFrame | |
 | public static JPanel | studentLoginPanel | |
 | public static JLabel | studentWelcomeLabel | |
@@ -409,24 +410,24 @@
 | public static JLabel | createStudentUsernameLabel | |
 | public static JLabel | createStudentPasswordLabel | |
 | public static JTextField | createStudentPasswordText | |
-| public static JFrame | teacherMenuFrame | |
+| public static JFrame | editStudentAccountDoneFrame | |
+| public static JPanel | editStudentAccountDonePanel | |
+| public static JButton | editStuAccountDoneBackButton | |
 | public static JPanel | studentMenuPanel | |
-| public static JLabel | addCourse | |
-| public static JButton | yesCourse | |
-| public static JButton | noCourse | |
-| public static JLabel | courseName | |
-| public static JTextField | courseText | |
-| public static JButton | courseEnter | |
-| public static JButton | createQuiz | |
-| public static JButton | editQuiz | |
-| public static JButton | deleteQuiz | |
-| public static JButton | viewStudentQuizSubmissions | |
-| public static JButton | takeQuiz | |
-| public static JButton | viewGradedQuiz | |
-| public static JButton | editAccount | |
-| public static JButton | logout | |
+| public static JFrame | teacherCourseMenuFrame | |
+| public static JPanel | teacherCourseMenuPanel | |
+| public static JLabel | addCourseLabel | |
+| public static JButton | yesCourseButton | |
+| public static JButton | noCourseButton | |
+| public static JPanel | addCoursePanel | |
+| public static JFrame | addCourseFrame | |
+| public static JLabel | enterCourseNameLabel | |
+| public static JTextField | enterCourseNameText | |
+| public static JButton | createCourseButton | |
+| public static JButton | addCourseBackButton | |
 | public static String | username = ""  | |
-
+| public static JLabel | createAccountErrorLabel |
+| public static JLabel | logInErrorLabel | |
 ##### Constructors: 
  
  <p> None </p>
@@ -436,10 +437,14 @@
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
 | mainMenu()| public static void | String[] args | Description |
-| loginTeacher()| public static void | None | Description |
 | createTeacher()| public static void | None | Description |
-| loginStudent()| public static void | None | Description |
+| accountCreatedTeacher() | public static void | None | Description |
+| loginTeacher()| public static void | None | Description |
+| teacherCourseMenu()| public static void | None | Description |
+| addCourse()| public static void | None | Description |
 | createStudent()| public static void | None | Description |
+| accountCreatedStudent() | public static void | None | Description |
+| loginStudent()| public static void | None | Description |
 | studentMenu()| public static void | None | Description |
 | teacherQuizMenu()| public static void | None | Description |
 | createQuiz()| public static void | None | Description |
@@ -452,9 +457,8 @@
 | quizView()| public static void | ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz | Description |
 | quizSubmitted()| public static void | None | Description |
 | viewGradedQuiz()| public static void | ArrayList<QuizSubmission> qs | Description |
-
- 
- 
+| showsStuGradedQuiz()| public static void | QuizSubmission qs | Description |
+| getQuizString()| public static void | QuizSubmission qs | Description |
  
  
  
