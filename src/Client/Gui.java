@@ -1,5 +1,3 @@
-package Client;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,7 +6,6 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import Server.*;
 
 public class Gui {
     private static String hostName;
@@ -54,6 +51,11 @@ public class Gui {
     public static JPanel editTeachAccountDonePanel;
     public static JLabel accountUpdatedLabel;
     public static JButton editTeacAccountDoneBackButton;
+    public static JFrame teachAccountCreationFailedFrame;
+    public static JPanel teachAccountCreationFailedPanel;
+    public static JLabel accountCreationLabel;
+    public static JButton teachAccountCreationFailedBackButton;
+
 
     public static JButton loginTeacherButton;
     public static JButton loginStudentButton;
@@ -91,6 +93,9 @@ public class Gui {
     public static JPanel editStudentAccountDonePanel;
     public static JButton editStuAccountDoneBackButton;
 
+    public static JFrame studAccountCreationFailedFrame;
+    public static JPanel studAccountCreationFailedPanel;
+    public static JButton stuAccountCreationFailedBackButton;
 
     public static JPanel studentMenuPanel;
     public static JFrame teacherCourseMenuFrame;
@@ -218,11 +223,9 @@ public class Gui {
                 createTeacherFrame.dispose();
                 accountCreatedTeacher();
             } else {
-                createAccountErrorLabel = new JLabel("Account creation failed.");
-                createAccountErrorLabel.setBounds(150, 150, 150, 25);
-                createTeacherPanel.add(createAccountErrorLabel);
-                createTeacherFrame.add(createAccountErrorLabel);
-                mainMenu();
+                createTeacherFrame.setVisible(false);
+                createTeacherFrame.dispose();
+                teachAccountCreationFailed();
 
             }
 
@@ -233,6 +236,34 @@ public class Gui {
         createTeacherFrame.setVisible(true);
 
     }
+
+    public static void teachAccountCreationFailed(){
+        teachAccountCreationFailedFrame = new JFrame();
+        teachAccountCreationFailedPanel = new JPanel();
+        teachAccountCreationFailedFrame.setSize(400, 300);
+        teachAccountCreationFailedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        teachAccountCreationFailedFrame.add(teachAccountCreationFailedPanel);
+        teachAccountCreationFailedPanel.setLayout(null);
+
+        accountCreationLabel = new JLabel("This account has already been created.");
+        accountCreationLabel.setBounds(110, 20, 330, 25);
+        teachAccountCreationFailedPanel.add(accountCreationLabel);
+
+        teachAccountCreationFailedBackButton = new JButton("Back to Create Account");
+        teachAccountCreationFailedBackButton.setBounds(150, 70, 210, 25);
+        teachAccountCreationFailedPanel.add(teachAccountCreationFailedBackButton);
+
+        teachAccountCreationFailedBackButton.addActionListener(e -> {
+            teachAccountCreationFailedPanel.setVisible(false);
+            teachAccountCreationFailedFrame.dispose();
+            createTeacher();
+        });
+
+        teachAccountCreationFailedPanel.setLayout(null);
+
+        teachAccountCreationFailedFrame.setVisible(true);
+    }
+
 
     public static void accountCreatedTeacher() {
         accountCreatedTeacherFrame = new JFrame();
@@ -301,9 +332,8 @@ public class Gui {
                 teacherCourseMenu();
                 username = teacherUsernameText.getText();
             } else {
-                logInErrorLabel = new JLabel("Login Error Label");
-                logInErrorLabel.setBounds(150, 150, 150, 25);
-                teacherLoginPanel.add(logInErrorLabel);
+                teacherLoginFrame.setVisible(false);
+                teacherLoginFrame.dispose();
                 //JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
                 mainMenu();
             }
@@ -314,6 +344,7 @@ public class Gui {
 
         teacherLoginFrame.setVisible(true);
     }
+
 
     public static void teacherCourseMenu() {
         teacherCourseMenuFrame = new JFrame();
@@ -449,15 +480,42 @@ public class Gui {
                 createStudentFrame.dispose();
                 accountCreatedStudent();
             } else {
-                createAccountErrorLabel = new JLabel("Account creation failed.");
-                createAccountErrorLabel.setBounds(150, 150, 150, 25);
-                createStudentPanel.add(createAccountErrorLabel);
+                createStudentFrame.setVisible(false);
+                createStudentFrame.dispose();
+                studAccountCreationFailed();
             }
         });
         createStudentPanel.add(createStudentAccountButton);
 
 
         createStudentFrame.setVisible(true);
+    }
+
+    public static void studAccountCreationFailed(){
+        studAccountCreationFailedFrame = new JFrame();
+        studAccountCreationFailedPanel = new JPanel();
+        studAccountCreationFailedFrame.setSize(400, 300);
+        studAccountCreationFailedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        studAccountCreationFailedFrame.add(studAccountCreationFailedPanel);
+        studAccountCreationFailedPanel.setLayout(null);
+
+        accountCreationLabel = new JLabel("This account has already been created.");
+        accountCreationLabel.setBounds(15, 20, 380, 25);
+        studAccountCreationFailedPanel.add(accountCreationLabel);
+
+        stuAccountCreationFailedBackButton = new JButton("Back to Create Account");
+        stuAccountCreationFailedBackButton.setBounds(100, 70, 210, 25);
+        studAccountCreationFailedPanel.add(stuAccountCreationFailedBackButton);
+
+        stuAccountCreationFailedBackButton.addActionListener(e -> {
+            studAccountCreationFailedPanel.setVisible(false);
+            studAccountCreationFailedFrame.dispose();
+            createStudent();
+        });
+
+        studAccountCreationFailedPanel.setLayout(null);
+
+        studAccountCreationFailedFrame.setVisible(true);
     }
 
     public static void accountCreatedStudent() {
@@ -866,6 +924,10 @@ public class Gui {
             yesAnotherQuestionButton.setBounds(110, 50, 80, 25);
             addAnotherQuestionPanel.add(yesAnotherQuestionButton);
             yesAnotherQuestionButton.addActionListener(ae -> {
+                multipleChoiceQuizFrame.setVisible(false);
+                multipleChoiceQuizFrame.dispose();
+                addAnotherQuestionFrame.setVisible(false);
+                addAnotherQuestionFrame.dispose();
                 multipleChoiceQuiz(quizName);
             });
 
@@ -889,6 +951,8 @@ public class Gui {
                 if ((Boolean) ClientClass.serverCall(4, new Quiz(questions, quizName))) {
                     multipleChoiceQuizFrame.setVisible(false);
                     multipleChoiceQuizFrame.dispose();
+                    addAnotherQuestionFrame.setVisible(false);
+                    addAnotherQuestionFrame.dispose();
                     teacherQuizMenu();
                 }
 
@@ -972,76 +1036,78 @@ public class Gui {
             questionTitles.add(question.getQuestionTitle());
         }
         JComboBox jComboBox = new JComboBox(questionTitles.toArray());
-        jComboBox.setBounds(130, 20, 500, 25);
+        jComboBox.setBounds(130, 30, 200, 25);
 
         questionForEditQuizPanel.add(jComboBox);
 
-        JLabel questionOneMCLabel = new JLabel("Type in Question : ");
-        questionOneMCLabel.setBounds(20, 50, 160, 25);
+        JLabel questionOneMCLabel = new JLabel("Question: ");
+        questionOneMCLabel.setBounds(20, 30, 160, 25);
         questionForEditQuizPanel.add(questionOneMCLabel);
 
-
+/*
         JTextField editQuestionOneMCText = new JTextField(20);
         editQuestionOneMCText.setBounds(210, 50, 165, 25);
         questionForEditQuizPanel.add(editQuestionOneMCText);
 
+ */
+
         JLabel optionOneEditLabel = new JLabel("Option 1:");
-        optionOneEditLabel.setBounds(20, 80, 80, 25);
+        optionOneEditLabel.setBounds(20, 60, 80, 25);
         questionForEditQuizPanel.add(optionOneEditLabel);
 
 
         JTextField editOptionOneMCText = new JTextField(20);
-        editOptionOneMCText.setBounds(210, 80, 165, 25);
+        editOptionOneMCText.setBounds(210, 60, 165, 25);
         questionForEditQuizPanel.add(editOptionOneMCText);
 
         JLabel optionTwoEditLabel = new JLabel("Option 2:");
-        optionTwoEditLabel.setBounds(20, 110, 80, 25);
+        optionTwoEditLabel.setBounds(20, 90, 80, 25);
         questionForEditQuizPanel.add(optionTwoEditLabel);
 
 
         JTextField editOptionTwoMCText = new JTextField(20);
-        editOptionTwoMCText.setBounds(210, 110, 165, 25);
+        editOptionTwoMCText.setBounds(210, 90, 165, 25);
         questionForEditQuizPanel.add(editOptionTwoMCText);
 
         JLabel optionThreeEditLabel = new JLabel("Option 3:");
-        optionThreeEditLabel.setBounds(20, 140, 80, 25);
+        optionThreeEditLabel.setBounds(20, 120, 80, 25);
         questionForEditQuizPanel.add(optionThreeEditLabel);
 
 
         JTextField editOptionThreeMCText = new JTextField(20);
-        editOptionThreeMCText.setBounds(210, 140, 165, 25);
+        editOptionThreeMCText.setBounds(210, 120, 165, 25);
         questionForEditQuizPanel.add(editOptionThreeMCText);
 
         JLabel optionFourEditLabel = new JLabel("Option 4:");
-        optionFourEditLabel.setBounds(20, 170, 80, 25);
+        optionFourEditLabel.setBounds(20, 150, 80, 25);
         questionForEditQuizPanel.add(optionFourEditLabel);
 
 
         JTextField editOptionFourMCText = new JTextField(20);
-        editOptionFourMCText.setBounds(210, 170, 165, 25);
+        editOptionFourMCText.setBounds(210, 150, 165, 25);
         questionForEditQuizPanel.add(editOptionFourMCText);
 
         JLabel correctAnsChoiceMCLabel = new JLabel("Enter correct answer choice:");
-        correctAnsChoiceMCLabel.setBounds(20, 200, 250, 25);
+        correctAnsChoiceMCLabel.setBounds(20, 180, 250, 25);
         questionForEditQuizPanel.add(correctAnsChoiceMCLabel);
 
 
         JTextField editCorrectAnsChoiceMCText = new JTextField(20);
-        editCorrectAnsChoiceMCText.setBounds(210, 200, 165, 25);
+        editCorrectAnsChoiceMCText.setBounds(210, 180, 165, 25);
         questionForEditQuizPanel.add(editCorrectAnsChoiceMCText);
 
         JLabel pointValueMCLabel = new JLabel("Enter the point value:");
-        pointValueMCLabel.setBounds(20, 230, 250, 25);
+        pointValueMCLabel.setBounds(20, 210, 250, 25);
         questionForEditQuizPanel.add(pointValueMCLabel);
 
 
         JTextField editPointValueMCText = new JTextField(20);
-        editPointValueMCText.setBounds(210, 230, 165, 25);
+        editPointValueMCText.setBounds(210, 210, 165, 25);
         questionForEditQuizPanel.add(editPointValueMCText);
 
         //saves question
         JButton saveEditQuizButton = new JButton("Save and Update Quiz");
-        saveEditQuizButton.setBounds(210, 260, 150, 25);
+        saveEditQuizButton.setBounds(210, 240, 150, 25);
         questionForEditQuizPanel.add(saveEditQuizButton);
 
         // once the add question button is clicked, we need to add the question to the list of questions \
