@@ -386,50 +386,50 @@
 | public static JFrame | editTeachAccountDoneFrame | The frame for editing teacher account done |
 | public static JPanel | editTeachAccountDonePanel | The panel for editing teacher account done |
 | public static JLabel | accountUpdatedLabel | The label for account updating done |
-| public static JButton | editTeacAccountDoneBackButton | the back button after editing account done |
-| public static JButton | loginTeacherButton | |
-| public static JButton | loginStudentButton | |
-| public static JButton | createStudentButton | |
-| public static JButton | loginStudentAccountButton | |
-| public static JButton |createStudentAccountButton | |
-| public static JFrame | accountCreatedStudentFrame | |
-| public static JPanel | accountCreatedStudentPanel | |
-| public static JLabel | studentAccountCreatedLabel | |
-| public static JButton | studentLogInButton | |
-| public static JFrame | studentLoginFrame | |
-| public static JPanel | studentLoginPanel | |
-| public static JLabel | studentWelcomeLabel | |
-| public static JLabel | studentLoginLabel | |
-| public static JLabel | studentPasswordLabel | |
-| public static JTextField | studentUsernameText | |
-| public static JTextField | studentPasswordText | |
-| public static JFrame | createStudentFrame | |
-| public static JPanel | createStudentPanel | |
-| public static JLabel | createStudentWelcomeLabel | |
-| public static JLabel | createStudentNameLabel | |
-| public static JTextField | createStudentUsernameText | |
-| public static JTextField | createStudentNameText | |
-| public static JLabel | createStudentUsernameLabel | |
-| public static JLabel | createStudentPasswordLabel | |
-| public static JTextField | createStudentPasswordText | |
-| public static JFrame | editStudentAccountDoneFrame | |
-| public static JPanel | editStudentAccountDonePanel | |
-| public static JButton | editStuAccountDoneBackButton | |
-| public static JPanel | studentMenuPanel | |
-| public static JFrame | teacherCourseMenuFrame | |
-| public static JPanel | teacherCourseMenuPanel | |
-| public static JLabel | addCourseLabel | |
-| public static JButton | yesCourseButton | |
-| public static JButton | noCourseButton | |
-| public static JPanel | addCoursePanel | |
-| public static JFrame | addCourseFrame | |
-| public static JLabel | enterCourseNameLabel | |
-| public static JTextField | enterCourseNameText | |
-| public static JButton | createCourseButton | |
-| public static JButton | addCourseBackButton | |
-| public static String | username = ""  | |
-| public static JLabel | createAccountErrorLabel |
-| public static JLabel | logInErrorLabel | |
+| public static JButton | editTeacAccountDoneBackButton | The back button after editing teacher account done |
+| public static JButton | loginTeacherButton | The button for logging in for teacher |
+| public static JButton | loginStudentButton | the button for logging in for student |
+| public static JButton | createStudentButton | The button for creating student account |
+| public static JButton | loginStudentAccountButton | The button for logging in as a student |
+| public static JButton |createStudentAccountButton | The button that creates a student account |
+| public static JFrame | accountCreatedStudentFrame | The frame that shows student account created |
+| public static JPanel | accountCreatedStudentPanel | The panel that shows student account created |
+| public static JLabel | studentAccountCreatedLabel | The label for student account created |
+| public static JButton | studentLogInButton | The button that allows the student to log in |
+| public static JFrame | studentLoginFrame | The frame for student login |
+| public static JPanel | studentLoginPanel | The panel for student log in |
+| public static JLabel | studentWelcomeLabel | The welcome label for students |
+| public static JLabel | studentLoginLabel | The label for student log in |
+| public static JLabel | studentPasswordLabel | The label for student password |
+| public static JTextField | studentUsernameText | The text field for student username |
+| public static JTextField | studentPasswordText | The text field for student password |
+| public static JFrame | createStudentFrame | The frame for create student account |
+| public static JPanel | createStudentPanel | The panel for creating student account |
+| public static JLabel | createStudentWelcomeLabel | The welcome label for creating student account |
+| public static JLabel | createStudentNameLabel | The label for student name |
+| public static JTextField | createStudentUsernameText | The text field of student username when creating account |
+| public static JTextField | createStudentNameText | The text field for name of user when creating account |
+| public static JLabel | createStudentUsernameLabel | The label for student username when creating account|
+| public static JLabel | createStudentPasswordLabel | The label for student password when creating account |
+| public static JTextField | createStudentPasswordText | The text field for student password when creating account |
+| public static JFrame | editStudentAccountDoneFrame | The frame for editing student account done |
+| public static JPanel | editStudentAccountDonePanel | The panel for editing student account done |
+| public static JButton | editStuAccountDoneBackButton | The back button after editing student account done |
+| public static JPanel | studentMenuPanel | The panel for the student menu |
+| public static JFrame | teacherCourseMenuFrame | The frame for the teacher course menu |
+| public static JPanel | teacherCourseMenuPanel | The panel for the teacher course menu |
+| public static JLabel | addCourseLabel | The label for adding course |
+| public static JButton | yesCourseButton | The yes button for adding course |
+| public static JButton | noCourseButton | The no button for not adding course |
+| public static JPanel | addCoursePanel | The panel for adding a course |
+| public static JFrame | addCourseFrame | The frame for adding a course |
+| public static JLabel | enterCourseNameLabel | The label for the name of the course |
+| public static JTextField | enterCourseNameText | The text field for the course name |
+| public static JButton | createCourseButton | The button to create a course |
+| public static JButton | addCourseBackButton | The back button if want to go back to menu |
+| public static String | username = ""  | The username of the user |
+| public static JLabel | createAccountErrorLabel | The label for an error in creating account |
+| public static JLabel | logInErrorLabel | The label for an error in log in |
 ##### Constructors: 
  
  <p> None </p>
