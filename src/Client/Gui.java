@@ -18,12 +18,6 @@ public class Gui {
 
     public static JFrame mainFrame;
     public static JPanel panel;
-    public static JLabel userLabel;
-    public static JLabel passwordLabel;
-    public static JTextField userText;
-    public static JTextField passText;
-
-    public static JLabel welcomeLabel;
     public static JLabel lsmTool;
 
     /////////////////////////
@@ -60,8 +54,6 @@ public class Gui {
 
     public static JButton loginTeacherButton;
     public static JButton loginStudentButton;
-    public static JLabel nameLabel;
-    public static JTextField nameText;
 
 
     /////////////////////
@@ -95,7 +87,6 @@ public class Gui {
     public static JFrame editStudentAccountDoneFrame;
     public static JPanel editStudentAccountDonePanel;
     public static JButton editStuAccountDoneBackButton;
-    public static JFrame teacherMenuFrame;
 
 
     public static JPanel studentMenuPanel;
@@ -110,14 +101,6 @@ public class Gui {
     public static JTextField enterCourseNameText;
     public static JButton createCourseButton;
     public static JButton addCourseBackButton;
-    public static JButton createQuiz;
-    public static JButton editQuiz;
-    public static JButton deleteQuiz;
-    public static JButton viewStudentQuizSubmissions;
-    public static JButton takeQuiz;
-    public static JButton viewGradedQuiz;
-    public static JButton editAccount;
-    public static JButton logout;
 
     public static String username = "";
 
@@ -622,6 +605,11 @@ public class Gui {
             }
         });
 
+        JButton deleteStudentAccount = new JButton("Delete Account");
+        deleteStudentAccount.setBounds(30, 170, 110, 25);
+        studentMenuPanel.add(deleteStudentAccount);
+
+        //TODO: delete account
 
         studentMenuPanel.setLayout(null);
         studentMenuFrame.setVisible(true);
@@ -688,6 +676,12 @@ public class Gui {
             teacherQuizMenuFrame.dispose();
             mainMenu();
         });
+
+        JButton deleteTeacherAccount = new JButton("Delete Account");
+        deleteTeacherAccount.setBounds(30, 230, 110, 25);
+        teacherQuizMenuPanel.add(deleteTeacherAccount);
+
+        //TODO: delete account
 
         teacherQuizMenuPanel.setLayout(null);
         teacherQuizMenuFrame.setVisible(true);
