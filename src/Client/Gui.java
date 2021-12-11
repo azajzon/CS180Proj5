@@ -648,6 +648,12 @@ public class Gui {
         viewStudentQuizSubmissionsButton.setBounds(80, 140, 250, 25);
         teacherQuizMenuPanel.add(viewStudentQuizSubmissionsButton);
 
+        viewStudentQuizSubmissionsButton.addActionListener((e) -> {
+            teacherQuizMenuFrame.setVisible(false);
+            teacherQuizMenuFrame.dispose();
+            viewStudentQuizSubmissions();
+        });
+
         JButton editTeacherAccountButton = new JButton("Edit Account");
         editTeacherAccountButton.setBounds(80, 170, 250, 25);
         teacherQuizMenuPanel.add(editTeacherAccountButton);
@@ -1516,4 +1522,45 @@ public class Gui {
         return returnStr;
     }
 
+    public static void viewStudentQuizSubmissions() {
+        CopyOnWriteArrayList<Student> students = (CopyOnWriteArrayList<Student>) ClientClass.serverCall(14," ");
+        String str = "";
+
+        for( Student s : students ) {
+            for (QuizSubmission q : s.getQuizSubmissions()) {
+                str = str + getQuizString(q);
+            }
+        }
+
+        JFrame stuGradedQuizFrame = new JFrame();
+        JPanel stuGradedQuizPanel = new JPanel();
+        stuGradedQuizFrame.setSize(500, 400);
+        stuGradedQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        stuGradedQuizFrame.add(stuGradedQuizPanel);
+
+        JLabel stuGradedQuizLabel = new JLabel("Graded Quiz");
+        stuGradedQuizLabel.setBounds(210, 20, 500, 25);
+        stuGradedQuizPanel.add(stuGradedQuizLabel);
+
+        JTextArea showsStuGradedQuizText = new JTextArea(str);
+        showsStuGradedQuizText.setBounds(30,50, 400,200);
+
+        JScrollPane scrollPane = new JScrollPane(showsStuGradedQuizText);
+        scrollPane.setBounds(10,60,300,200);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        stuGradedQuizPanel.add(scrollPane);
+
+        JButton stuGradedQuizScreenBackButton = new JButton("Back To HomePage");
+        stuGradedQuizScreenBackButton.setBounds(270, 320, 190, 25);
+        stuGradedQuizPanel.add(stuGradedQuizScreenBackButton);
+
+        stuGradedQuizScreenBackButton.addActionListener(e -> {
+            stuGradedQuizFrame.setVisible(false);
+            stuGradedQuizFrame.dispose();
+            studentMenu();
+        });
+
+        stuGradedQuizPanel.setLayout(null);
+        stuGradedQuizFrame.setVisible(true);
+    }
 }

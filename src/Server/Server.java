@@ -45,11 +45,10 @@ public class Server {
                 Server::editTeacherAccount,
                 Server::updateQuiz,
                 Server::deleteTeacherAccount,
-                Server::deleteStudentAccount
+                Server::deleteStudentAccount,
+                Server::getStudents
         };
     }
-
-
 
 
     public static Function<Object, Object>[] getCommandList() {
@@ -392,4 +391,7 @@ public class Server {
 
     }
 
+    private static Object getStudents(Object o) {
+        return students;
+    }
 }
