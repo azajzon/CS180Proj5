@@ -398,7 +398,7 @@ public class Server {
     private static Object deleteQuiz(Object o) {
         String qName = (String) o;
         for( Quiz q : quizzes ){
-            if(q.equals(qName))
+            if(q.getQuizName().equals(qName))
                 quizzes.remove(q);
         }
         return true;

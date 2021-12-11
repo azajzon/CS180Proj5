@@ -1,3 +1,5 @@
+package Client;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +8,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import Server.*;
 
 public class Gui {
     private static String hostName;
@@ -1596,14 +1599,12 @@ public class Gui {
         deleteTheQuizButton.setBounds(230, 130, 110, 25);
         deleteQuizPanel.add(deleteTheQuizButton);
 
-        deleteTheQuizButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                deleteQuizFrame.setVisible(false);
-                deleteQuizFrame.dispose();
-                ClientClass.serverCall(15, quizzesList.getSelectedItem());
-                quizDeleted(); // this brings the question to the next screen
-                // (where they can edit the questions)
-            }
+        deleteTheQuizButton.addActionListener(e -> {
+            deleteQuizFrame.setVisible(false);
+            deleteQuizFrame.dispose();
+            ClientClass.serverCall(15, quizzesList.getSelectedItem());
+            quizDeleted(); // this brings the question to the next screen
+            // (where they can edit the questions)
         });
 
         deleteQuizPanel.setLayout(null);
