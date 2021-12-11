@@ -1590,8 +1590,7 @@ public class Gui {
 
         //below array needs to contain the list of quizzes that have been created
         ArrayList<String> quizNames = (ArrayList<String>) ClientClass.serverCall(6, " ");
-        String[] listOfQuizzes = (String[]) quizNames.toArray();
-        JComboBox<String> quizzesList = new JComboBox<>(listOfQuizzes);
+        JComboBox<String> quizzesList = new JComboBox(quizNames.toArray());
         quizzesList.setBounds(120, 80, 140, 20);
         deleteQuizPanel.add(quizzesList);
 
