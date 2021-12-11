@@ -1,10 +1,3 @@
-package Client;
-
-import Server.Answer;
-import Server.Question;
-import Server.Quiz;
-import Server.QuizSubmission;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -39,6 +32,10 @@ public class Gui {
     public static JButton createTeacherButton;
     public static JButton loginTeacherAccountButton;
     public static JButton createTeacherAccountButton;
+    public static JFrame accountCreatedTeacherFrame;
+    public static JPanel accountCreatedTeacherPanel;
+    public static JLabel teacherAccountCreatedLabel;
+    public static JButton teacherLogInButton;
     public static JFrame teacherLoginFrame;
     public static JPanel teacherLoginPanel;
     public static JLabel teacherWelcomeLabel;
@@ -56,6 +53,11 @@ public class Gui {
     public static JLabel createTeacherPasswordLabel;
     public static JTextField createTeacherPasswordText;
 
+    public static JFrame editTeachAccountDoneFrame;
+    public static JPanel editTeachAccountDonePanel;
+    public static JLabel accountUpdatedLabel;
+    public static JButton editTeacAccountDoneBackButton;
+
     public static JButton loginTeacherButton;
     public static JButton loginStudentButton;
     public static JButton saveButton;
@@ -71,6 +73,11 @@ public class Gui {
     public static JButton createStudentButton;
     public static JButton loginStudentAccountButton;
     public static JButton createStudentAccountButton;
+
+    public static JFrame accountCreatedStudentFrame;
+    public static JPanel accountCreatedStudentPanel;
+    public static JLabel studentAccountCreatedLabel;
+    public static JButton studentLogInButton;
     public static JFrame studentLoginFrame;
     public static JPanel studentLoginPanel;
     public static JLabel studentWelcomeLabel;
@@ -87,6 +94,10 @@ public class Gui {
     public static JLabel createStudentUsernameLabel;
     public static JLabel createStudentPasswordLabel;
     public static JTextField createStudentPasswordText;
+
+    public static JFrame editStudentAccountDoneFrame;
+    public static JPanel editStudentAccountDonePanel;
+    public static JButton editStuAccountDoneBackButton;
     public static JFrame teacherMenuFrame;
 
 
@@ -128,6 +139,8 @@ public class Gui {
         loginTeacherButton = new JButton("Login Teacher");
         loginTeacherButton.setBounds(110, 50, 150, 25);
         loginTeacherButton.addActionListener((e) -> {
+            mainFrame.setVisible(false);
+            mainFrame.dispose();
             loginTeacher();
 
         });
@@ -136,6 +149,8 @@ public class Gui {
         loginStudentButton = new JButton("Login Student");
         loginStudentButton.setBounds(110, 80, 150, 25);
         loginStudentButton.addActionListener((e) -> {
+            mainFrame.setVisible(false);
+            mainFrame.dispose();
             loginStudent();
 
         });
@@ -144,6 +159,8 @@ public class Gui {
         createTeacherButton = new JButton("Create Teacher");
         createTeacherButton.setBounds(110, 110, 150, 25);
         createTeacherButton.addActionListener((e) -> {
+            mainFrame.setVisible(false);
+            mainFrame.dispose();
             createTeacher();
         });
         panel.add(createTeacherButton);
@@ -151,6 +168,8 @@ public class Gui {
         createStudentButton = new JButton("Create Student");
         createStudentButton.setBounds(110, 140, 150, 25);
         createStudentButton.addActionListener((e) -> {
+            mainFrame.setVisible(false);
+            mainFrame.dispose();
             createStudent();
 
         });
@@ -167,57 +186,6 @@ public class Gui {
 
     }
 
-    public static void loginTeacher() {
-        teacherLoginFrame = new JFrame();
-        teacherLoginPanel = new JPanel();
-        teacherLoginFrame.setSize(400, 300);
-        teacherLoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        teacherLoginFrame.add(teacherLoginPanel);
-
-        teacherLoginPanel.setLayout(null);
-
-        teacherWelcomeLabel = new JLabel("Welcome teachers!");
-        teacherWelcomeLabel.setBounds(80, 20, 150, 25);
-        teacherLoginPanel.add(teacherWelcomeLabel);
-
-        teacherLoginLabel = new JLabel("Username:");
-        teacherLoginLabel.setBounds(20, 50, 80, 25);
-        teacherLoginPanel.add(teacherLoginLabel);
-
-        teacherPasswordLabel = new JLabel("Password:");
-        teacherPasswordLabel.setBounds(20, 80, 80, 25);
-        teacherLoginPanel.add(teacherPasswordLabel);
-
-
-        teacherUsernameText = new JTextField(20);
-        teacherUsernameText.setBounds(100, 50, 165, 25);
-        teacherLoginPanel.add(teacherUsernameText);
-
-        teacherPasswordText = new JTextField(20);
-        teacherPasswordText.setBounds(100, 80, 165, 25);
-        teacherLoginPanel.add(teacherPasswordText);
-
-        loginTeacherAccountButton = new JButton("Login");
-        loginTeacherAccountButton.addActionListener((e) -> {
-            if ((Boolean) ClientClass.serverCall(0, new String[] {teacherUsernameText.getText(),
-                    teacherPasswordText.getText()})) {
-                JOptionPane.showMessageDialog(null, "Logged in successfully.",
-                        "Login", JOptionPane.INFORMATION_MESSAGE);
-                teacherLoginFrame.setVisible(false);
-                teacherLoginFrame.dispose();
-                teacherQuizMenu();
-                username = teacherUsernameText.getText();
-            } else {
-                JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
-                mainMenu();
-            }
-        });
-        loginTeacherAccountButton.setBounds(30, 120, 80, 25);
-        teacherLoginPanel.add(loginTeacherAccountButton);
-
-
-        teacherLoginFrame.setVisible(true);
-    }
 
     public static void createTeacher() {
         createTeacherFrame = new JFrame();
@@ -261,11 +229,14 @@ public class Gui {
         createTeacherAccountButton.addActionListener((e) -> {
             if ((Boolean) ClientClass.serverCall(1, new String[] {createTeacherNameText.getText(),
                     createTeacherUsernameText.getText(), createTeacherPasswordText.getText()})) {
-                JOptionPane.showMessageDialog(null, "Account created successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
+                createTeacherFrame.setVisible(false);
+                createTeacherFrame.dispose();
+                accountCreatedTeacher();
             } else {
+                //TODO: cannot use joptionpane
                 JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
             }
-            mainMenu();
+
         });
         createTeacherPanel.add(createTeacherAccountButton);
 
@@ -274,55 +245,88 @@ public class Gui {
 
     }
 
-    public static void loginStudent() {
-        studentLoginFrame = new JFrame();
-        studentLoginPanel = new JPanel();
-        studentLoginFrame.setSize(400, 300);
-        studentLoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        studentLoginFrame.add(studentLoginPanel);
+    public static void accountCreatedTeacher() {
+        accountCreatedTeacherFrame = new JFrame();
+        accountCreatedTeacherPanel = new JPanel();
+        accountCreatedTeacherFrame.setSize(400, 300);
+        accountCreatedTeacherFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        accountCreatedTeacherFrame.add(accountCreatedTeacherPanel);
+        accountCreatedTeacherPanel.setLayout(null);
 
-        studentLoginPanel.setLayout(null);
+        teacherAccountCreatedLabel = new JLabel("Account successfully created!");
+        teacherAccountCreatedLabel.setBounds(110, 20, 200, 25);
+        accountCreatedTeacherPanel.add(teacherAccountCreatedLabel);
 
-        studentWelcomeLabel = new JLabel("Welcome students!");
-        studentWelcomeLabel.setBounds(80, 20, 150, 25);
-        studentLoginPanel.add(studentWelcomeLabel);
+        teacherLogInButton = new JButton("Log In");
+        teacherLogInButton.setBounds(150, 70, 90, 25);
+        teacherLogInButton.addActionListener(new Main());
+        accountCreatedTeacherPanel.add(teacherLogInButton);
 
-        studentLoginLabel = new JLabel("Username:");
-        studentLoginLabel.setBounds(20, 50, 80, 25);
-        studentLoginPanel.add(studentLoginLabel);
+        teacherLogInButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                accountCreatedTeacherFrame.setVisible(false);
+                accountCreatedTeacherFrame.dispose();
+                loginTeacher();
+            }
+        });
 
-        studentPasswordLabel = new JLabel("Password:");
-        studentPasswordLabel.setBounds(20, 80, 80, 25);
-        studentLoginPanel.add(studentPasswordLabel);
+        accountCreatedTeacherPanel.setLayout(null);
+
+        accountCreatedTeacherFrame.setVisible(true);
+
+    }
+
+    public static void loginTeacher() {
+        teacherLoginFrame = new JFrame();
+        teacherLoginPanel = new JPanel();
+        teacherLoginFrame.setSize(400, 300);
+        teacherLoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        teacherLoginFrame.add(teacherLoginPanel);
+
+        teacherLoginPanel.setLayout(null);
+
+        teacherWelcomeLabel = new JLabel("Welcome teachers!");
+        teacherWelcomeLabel.setBounds(80, 20, 150, 25);
+        teacherLoginPanel.add(teacherWelcomeLabel);
+
+        teacherLoginLabel = new JLabel("Username:");
+        teacherLoginLabel.setBounds(20, 50, 80, 25);
+        teacherLoginPanel.add(teacherLoginLabel);
+
+        teacherPasswordLabel = new JLabel("Password:");
+        teacherPasswordLabel.setBounds(20, 80, 80, 25);
+        teacherLoginPanel.add(teacherPasswordLabel);
 
 
-        studentUsernameText = new JTextField(20);
-        studentUsernameText.setBounds(100, 50, 165, 25);
-        studentLoginPanel.add(studentUsernameText);
+        teacherUsernameText = new JTextField(20);
+        teacherUsernameText.setBounds(100, 50, 165, 25);
+        teacherLoginPanel.add(teacherUsernameText);
 
-        studentPasswordText = new JTextField(20);
-        studentPasswordText.setBounds(100, 80, 165, 25);
-        studentLoginPanel.add(studentPasswordText);
+        teacherPasswordText = new JTextField(20);
+        teacherPasswordText.setBounds(100, 80, 165, 25);
+        teacherLoginPanel.add(teacherPasswordText);
 
-        loginStudentAccountButton = new JButton("Login");
-        loginStudentAccountButton.addActionListener((e) -> {
-            if ((Boolean) ClientClass.serverCall(2, new String[]{studentUsernameText.getText(), studentPasswordText.getText()})) {
-                JOptionPane.showMessageDialog(null, "Logged in successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
-                studentLoginFrame.setVisible(false);
-                studentLoginFrame.dispose();
-                studentMenu();
-                username = studentUsernameText.getText();
+        loginTeacherAccountButton = new JButton("Login");
+        loginTeacherAccountButton.addActionListener((e) -> {
+            if ((Boolean) ClientClass.serverCall(0, new String[] {teacherUsernameText.getText(),
+                    teacherPasswordText.getText()})) {
+                teacherLoginFrame.setVisible(false);
+                teacherLoginFrame.dispose();
+                teacherQuizMenu();
+                username = teacherUsernameText.getText();
             } else {
-                JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
+                //TODO: cannot use joptionpane
+                JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
                 mainMenu();
             }
         });
-        loginStudentAccountButton.setBounds(30, 120, 80, 25);
-        studentLoginPanel.add(loginStudentAccountButton);
+        loginTeacherAccountButton.setBounds(30, 120, 80, 25);
+        teacherLoginPanel.add(loginTeacherAccountButton);
 
 
-        studentLoginFrame.setVisible(true);
+        teacherLoginFrame.setVisible(true);
     }
+
 
     public static void createStudent() {
         createStudentFrame = new JFrame();
@@ -366,10 +370,9 @@ public class Gui {
         createStudentAccountButton.addActionListener((e) -> {
             if ((Boolean) ClientClass.serverCall(3, new String[]{createStudentNameText.getText(),
                     createStudentUsernameText.getText(), createStudentPasswordText.getText()})) {
-                JOptionPane.showMessageDialog(null, "Account created successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
                 createStudentFrame.setVisible(false);
                 createStudentFrame.dispose();
-                mainMenu();
+                accountCreatedStudent();
             } else {
                 JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
             }
@@ -378,6 +381,84 @@ public class Gui {
 
 
         createStudentFrame.setVisible(true);
+    }
+
+    public static void accountCreatedStudent() {
+        accountCreatedStudentFrame = new JFrame();
+        accountCreatedStudentPanel = new JPanel();
+        accountCreatedStudentFrame.setSize(400, 300);
+        accountCreatedStudentFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        accountCreatedStudentFrame.add(accountCreatedStudentPanel);
+        accountCreatedStudentPanel.setLayout(null);
+
+        studentAccountCreatedLabel = new JLabel("Account successfully created!");
+        studentAccountCreatedLabel.setBounds(80, 20, 200, 25);
+        accountCreatedStudentPanel.add(studentAccountCreatedLabel);
+
+        studentLogInButton = new JButton("Log In");
+        studentLogInButton.setBounds(130, 60, 80, 25);
+        studentLogInButton.addActionListener(new Main());
+        accountCreatedStudentPanel.add(studentLogInButton);
+
+        studentLogInButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                accountCreatedStudentFrame.setVisible(false);
+                accountCreatedStudentFrame.dispose();
+                loginStudent();
+            }
+        });
+
+        accountCreatedStudentFrame.setVisible(true);
+
+    }
+
+    public static void loginStudent() {
+        studentLoginFrame = new JFrame();
+        studentLoginPanel = new JPanel();
+        studentLoginFrame.setSize(400, 300);
+        studentLoginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        studentLoginFrame.add(studentLoginPanel);
+
+        studentLoginPanel.setLayout(null);
+
+        studentWelcomeLabel = new JLabel("Welcome students!");
+        studentWelcomeLabel.setBounds(80, 20, 150, 25);
+        studentLoginPanel.add(studentWelcomeLabel);
+
+        studentLoginLabel = new JLabel("Username:");
+        studentLoginLabel.setBounds(20, 50, 80, 25);
+        studentLoginPanel.add(studentLoginLabel);
+
+        studentPasswordLabel = new JLabel("Password:");
+        studentPasswordLabel.setBounds(20, 80, 80, 25);
+        studentLoginPanel.add(studentPasswordLabel);
+
+
+        studentUsernameText = new JTextField(20);
+        studentUsernameText.setBounds(100, 50, 165, 25);
+        studentLoginPanel.add(studentUsernameText);
+
+        studentPasswordText = new JTextField(20);
+        studentPasswordText.setBounds(100, 80, 165, 25);
+        studentLoginPanel.add(studentPasswordText);
+
+        loginStudentAccountButton = new JButton("Login");
+        loginStudentAccountButton.addActionListener((e) -> {
+            if ((Boolean) ClientClass.serverCall(2, new String[]{studentUsernameText.getText(), studentPasswordText.getText()})) {
+                studentLoginFrame.setVisible(false);
+                studentLoginFrame.dispose();
+                studentMenu();
+                username = studentUsernameText.getText();
+            } else {
+                JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
+                mainMenu();
+            }
+        });
+        loginStudentAccountButton.setBounds(30, 120, 80, 25);
+        studentLoginPanel.add(loginStudentAccountButton);
+
+
+        studentLoginFrame.setVisible(true);
     }
 
 
@@ -698,7 +779,7 @@ public class Gui {
             noAnotherQuestionButton.setBounds(200, 50, 80, 25);
             addAnotherQuestionPanel.add(noAnotherQuestionButton);
             noAnotherQuestionButton.addActionListener(ae -> {
-                if ((Boolean) ClientClass.serverCall(4, new Server.Quiz(questions, quizName))) {
+                if ((Boolean) ClientClass.serverCall(4, new Quiz(questions, quizName))) {
                     multipleChoiceQuizFrame.setVisible(false);
                     multipleChoiceQuizFrame.dispose();
                     teacherQuizMenu();
@@ -922,19 +1003,18 @@ public class Gui {
         JButton updateTeacherAccountButton = new JButton("Save and Update Account");
         updateTeacherAccountButton.setBounds(30, 150, 200, 25);
         updateTeacherAccountButton.addActionListener(e -> {
-            if ( ((Boolean) ClientClass.serverCall(10, new String[] {username,
+            if (((Boolean) ClientClass.serverCall(10, new String[] {username,
                     editedTeacherNameText.getText(),
                     editedTeacherUsernameText.getText(),
-                    editedTeacherPasswordText.getText()})).booleanValue() ){
-                JOptionPane.showMessageDialog(null, "Account Info Changed successfully.",
-                        "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
+                    editedTeacherPasswordText.getText()})).booleanValue()){
+                editTeacherAccountFrame.setVisible(false);
+                editTeacherAccountFrame.dispose();
+                editTeachAccountDone();
             } else {
                 JOptionPane.showMessageDialog(null, "Account Info Changed unsuccessfully.",
                         "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
             }
-            editTeacherAccountFrame.setVisible(false);
-            editTeacherAccountFrame.dispose();
-            teacherQuizMenu();
+
         });
         editTeacherAccountPanel.add(updateTeacherAccountButton);
 
@@ -949,6 +1029,36 @@ public class Gui {
         });
 
         editTeacherAccountFrame.setVisible(true);
+    }
+
+    public static void editTeachAccountDone(){
+        editTeachAccountDoneFrame = new JFrame();
+        editTeachAccountDonePanel = new JPanel();
+        editTeachAccountDoneFrame.setSize(400, 300);
+        editTeachAccountDoneFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editTeachAccountDoneFrame.add(editTeachAccountDonePanel);
+        editTeachAccountDonePanel.setLayout(null);
+
+        accountUpdatedLabel = new JLabel("Account updated!");
+        accountUpdatedLabel.setBounds(140, 30, 280, 25);
+        editTeachAccountDonePanel.add(accountUpdatedLabel);
+
+        editTeacAccountDoneBackButton = new JButton("Back To HomePage");
+        editTeacAccountDoneBackButton.setBounds(100, 60, 180, 25);
+        editTeacAccountDoneBackButton.addActionListener(new Main());
+        editTeachAccountDonePanel.add(editTeacAccountDoneBackButton);
+
+        editTeacAccountDoneBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editTeachAccountDoneFrame.setVisible(false);
+                editTeachAccountDoneFrame.dispose();
+                teacherQuizMenu();
+            }
+        });
+
+
+        editTeachAccountDoneFrame.setVisible(true);
+
     }
 
     public static void editStudentAccount() {
@@ -995,15 +1105,15 @@ public class Gui {
                     editedStuNameText.getText(),
                     editedStuUsernameText.getText(),
                     editedStuPasswordText.getText()})).booleanValue() ){
-                JOptionPane.showMessageDialog(null, "Account Info Changed successfully.",
-                        "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
+                editStudentAccountFrame.setVisible(false);
+                editStudentAccountFrame.dispose();
+                editStudentAccountDone();
+
             } else {
                 JOptionPane.showMessageDialog(null, "Account Info Changed unsuccessfully.",
                         "Acc Info Change", JOptionPane.INFORMATION_MESSAGE);
             }
-            editStudentAccountFrame.setVisible(false);
-            editStudentAccountFrame.dispose();
-            studentMenu();
+
         });
         editStudentAccountPanel.add(updateStuAccountButton);
 
@@ -1020,6 +1130,36 @@ public class Gui {
         });
 
         editStudentAccountFrame.setVisible(true);
+    }
+
+    public static void editStudentAccountDone(){
+        editStudentAccountDoneFrame = new JFrame();
+        editStudentAccountDonePanel = new JPanel();
+        editStudentAccountDoneFrame.setSize(400, 300);
+        editStudentAccountDoneFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        editStudentAccountDoneFrame.add(editStudentAccountDonePanel);
+
+        editStudentAccountDonePanel.setLayout(null);
+        accountUpdatedLabel = new JLabel("Account updated!");
+        accountUpdatedLabel.setBounds(140, 30, 280, 25);
+        editStudentAccountDonePanel.add(accountUpdatedLabel);
+
+        editStuAccountDoneBackButton = new JButton("Back To HomePage");
+        editStuAccountDoneBackButton.setBounds(100, 60, 180, 25);
+        editStuAccountDoneBackButton.addActionListener(new Main());
+        editStudentAccountDonePanel.add(editStuAccountDoneBackButton);
+
+        editStuAccountDoneBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                editStudentAccountDoneFrame.setVisible(false);
+                editStudentAccountDoneFrame.dispose();
+                studentMenu();
+            }
+        });
+
+
+        editStudentAccountDoneFrame.setVisible(true);
+
     }
 
     public static void whichQuizToTake() {
