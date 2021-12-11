@@ -292,6 +292,8 @@
 | getQuiz()  | public static Object  | Object o | Returns a quiz object |
 | submitQuiz()  | public static Object  | Object o | Gets the name of quiz that has to be submitted and adds it to the quiz subbmission list of the specific student's username |
 | editTeacherAccount | public static Object | Object o | Gets the teacher's username and updates the 3 fields and stores it in a teacher object |
+| deleteTeacherAccount | public static Object | Object o | Deletes a teacher account|
+| deleteStudentAccount | public static Object | Object o | Deletes a student account|
 | getSubmissions()  | public static Object  | Object o | Returns the quiz submission based on the student's username |
 | saveArrayToFile()  | public static void | String filename, int arrayType| Saves the arrays of teachers, students and quizzes objects to 3 files |
 | loadArrayFromFile()  | public static void | String filename, int arrayType | Loads the 3 arrays from the files once the program starts again |
