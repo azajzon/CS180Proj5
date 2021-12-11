@@ -203,6 +203,8 @@ public class Gui {
                     teacherPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Logged in successfully.",
                         "Login", JOptionPane.INFORMATION_MESSAGE);
+                teacherLoginFrame.setVisible(false);
+                teacherLoginFrame.dispose();
                 teacherQuizMenu();
                 username = teacherUsernameText.getText();
             } else {
@@ -306,6 +308,8 @@ public class Gui {
         loginStudentAccountButton.addActionListener((e) -> {
             if ((Boolean) ClientClass.serverCall(2, new String[]{studentUsernameText.getText(), studentPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Logged in successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
+                studentLoginFrame.setVisible(false);
+                studentLoginFrame.dispose();
                 studentMenu();
                 username = studentUsernameText.getText();
             } else {
@@ -363,6 +367,8 @@ public class Gui {
             if ((Boolean) ClientClass.serverCall(3, new String[]{createStudentNameText.getText(),
                     createStudentUsernameText.getText(), createStudentPasswordText.getText()})) {
                 JOptionPane.showMessageDialog(null, "Account created successfully.", "Login", JOptionPane.INFORMATION_MESSAGE);
+                createStudentFrame.setVisible(false);
+                createStudentFrame.dispose();
                 mainMenu();
             } else {
                 JOptionPane.showMessageDialog(null, "Account creation failed.", "Login", JOptionPane.WARNING_MESSAGE);
@@ -693,6 +699,8 @@ public class Gui {
             addAnotherQuestionPanel.add(noAnotherQuestionButton);
             noAnotherQuestionButton.addActionListener(ae -> {
                 if ((Boolean) ClientClass.serverCall(4, new Server.Quiz(questions, quizName))) {
+                    multipleChoiceQuizFrame.setVisible(false);
+                    multipleChoiceQuizFrame.dispose();
                     teacherQuizMenu();
                 }
 
@@ -1116,6 +1124,8 @@ public class Gui {
             if (answers.size() == questions.size()) {
                 QuizSubmission qs = new QuizSubmission("", quiz.getQuizName() + " --- " + username, answers);
                 ClientClass.serverCall(8, qs);
+                quizStudentTakesFrame1.setVisible(false);
+                quizStudentTakesFrame1.dispose();
                 quizSubmitted();
             } else {
                 quizView(questions, answers, fNum + 1, quiz);
