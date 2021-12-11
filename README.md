@@ -383,10 +383,8 @@
 | public static JPanel | editTeachAccountDonePanel | |
 | public static JLabel | accountUpdatedLabel | |
 | public static JButton | editTeacAccountDoneBackButton | |
- 
 | public static JButton | loginTeacherButton | |
 | public static JButton | loginStudentButton | |
- 
 | public static JButton | createStudentButton | |
 | public static JButton | loginStudentAccountButton | |
 | public static JButton |createStudentAccountButton | |
