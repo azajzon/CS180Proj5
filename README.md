@@ -360,15 +360,15 @@
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
 | private static String | hostName | Creates a hostname string |
-| private static LinkedList<Thread> | list | 
-| public static JFrame | mainFrame | |
-| public static JPanel | panel | |
-| public static JLabel | lsmTool | |
-| public static JButton | createTeacherButton | |
-| public static JButton | loginTeacherAccountButton | |
-| public static JButton | createTeacherAccountButton | |
-| public static JFrame | teacherLoginFrame | |
-| public static JPanel | teacherLoginPanel | |
+| private static LinkedList<Thread> | list | A linked list that keeps track of the threads | 
+| public static JFrame | mainFrame | The frame of the main screen|
+| public static JPanel | panel | The panel of the main screen |
+| public static JLabel | lsmTool | The label for the title of program |
+| public static JButton | createTeacherButton | The button for creating teacher account |
+| public static JButton | loginTeacherAccountButton |  The button for logging in as a teacher |
+| public static JButton | createTeacherAccountButton | The button that creates a teacher account |
+| public static JFrame | teacherLoginFrame | The frame for teacher log in|
+| public static JPanel | teacherLoginPanel | The panel for teacher log in|
 | public static JLabel | teacherWelcomeLabel | |
 | public static JLabel |teacherLoginLabel | |
 | public static JLabel | teacherPasswordLabel | |
