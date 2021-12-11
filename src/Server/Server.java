@@ -209,7 +209,7 @@ public class Server {
         return true;
     }
 
-    private static boolean updateQuiz(Object o) {
+    public static boolean updateQuiz(Object o) {
         Quiz quiz = (Quiz) o;
         int index = 0;
         for (Quiz q : Server.quizzes) {
@@ -225,7 +225,7 @@ public class Server {
 
 
 
-    private static Object getQuiz(Object o) {
+    public static Object getQuiz(Object o) {
         String qName = (String) o;
         for (Quiz q : quizzes) {
             if (q.getQuizName().equals(qName)) {
@@ -262,13 +262,13 @@ public class Server {
         return true;
     }
 
-    private static Object deleteStudentAccount(Object o) {
+    public static Object deleteStudentAccount(Object o) {
         Student s = getStudentByUsername((String) o);
         students.remove(s);
         return true;
     }
 
-    private static Object getSubmissions(Object o) {
+    public static Object getSubmissions(Object o) {
         String username = (String) o;
         return getStudentByUsername(username).getQuizSubmissions();
     }

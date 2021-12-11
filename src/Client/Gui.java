@@ -218,10 +218,11 @@ public class Gui {
                 createTeacherFrame.dispose();
                 accountCreatedTeacher();
             } else {
-                //TODO: cannot use joptionpane
                 createAccountErrorLabel = new JLabel("Account creation failed.");
                 createAccountErrorLabel.setBounds(150, 150, 150, 25);
                 createTeacherPanel.add(createAccountErrorLabel);
+                createTeacherFrame.add(createAccountErrorLabel);
+                mainMenu();
 
             }
 
@@ -249,12 +250,10 @@ public class Gui {
         teacherLogInButton.setBounds(150, 70, 90, 25);
         accountCreatedTeacherPanel.add(teacherLogInButton);
 
-        teacherLogInButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                accountCreatedTeacherFrame.setVisible(false);
-                accountCreatedTeacherFrame.dispose();
-                loginTeacher();
-            }
+        teacherLogInButton.addActionListener(e -> {
+            accountCreatedTeacherFrame.setVisible(false);
+            accountCreatedTeacherFrame.dispose();
+            loginTeacher();
         });
 
         accountCreatedTeacherPanel.setLayout(null);
