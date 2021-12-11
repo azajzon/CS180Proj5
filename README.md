@@ -346,7 +346,7 @@
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| serverCall()  |   public static Object | int command, Object objToSend | Creates a new Socket object and establishes the socket connection between the client and server
+| serverCall()  |   public static Object | int command, Object objToSend | Creates a new Socket object and establishes the socket connection between the client and server, writes the reuqest to the socket stream and reads the outpur from the server
 
  
  #### 12) GUI.java
