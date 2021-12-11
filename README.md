@@ -379,14 +379,14 @@
 | public static JLabel | createTeacherWelcomeLabel | The welcome label for creating teacher account|
 | public static JLabel | createTeacherNameLabel | The teach name label for creating teacher account |
 | public static JTextField | createTeacherUsernameText | The text field for teacher username for creating teacher account|
-| public static JTextField | createTeacherNameText | |
-| public static JLabel | createTeacherUsernameLabel | |
-| public static JLabel | createTeacherPasswordLabel | |
-| public static JTextField | createTeacherPasswordText | |
-| public static JFrame | editTeachAccountDoneFrame | |
-| public static JPanel | editTeachAccountDonePanel | |
-| public static JLabel | accountUpdatedLabel | |
-| public static JButton | editTeacAccountDoneBackButton | |
+| public static JTextField | createTeacherNameText | The text field for teacher name |
+| public static JLabel | createTeacherUsernameLabel | The label for teacher username |
+| public static JLabel | createTeacherPasswordLabel | The label for teacher password |
+| public static JTextField | createTeacherPasswordText | The text field for teacher password |
+| public static JFrame | editTeachAccountDoneFrame | The frame for editing teacher account done |
+| public static JPanel | editTeachAccountDonePanel | The panel for editing teacher account done |
+| public static JLabel | accountUpdatedLabel | The label for account updating done |
+| public static JButton | editTeacAccountDoneBackButton | the back button after editing account done |
 | public static JButton | loginTeacherButton | |
 | public static JButton | loginStudentButton | |
 | public static JButton | createStudentButton | |
