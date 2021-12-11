@@ -414,17 +414,17 @@
 | public static JPanel | editStudentAccountDonePanel | |
 | public static JButton | editStuAccountDoneBackButton | |
 | public static JPanel | studentMenuPanel | |
-| public static JFrame teacherCourseMenuFrame | |
-| public static JPanel teacherCourseMenuPanel | |
-| public static JLabel addCourseLabel | |
-| public static JButton yesCourseButton | |
-| public static JButton noCourseButton | |
-| public static JPanel addCoursePanel | |
-| public static JFrame addCourseFrame | |
-| public static JLabel enterCourseNameLabel | |
-| public static JTextField enterCourseNameText | |
-| public static JButton createCourseButton | |
-| public static JButton addCourseBackButton | |
+| public static JFrame | teacherCourseMenuFrame | |
+| public static JPanel | teacherCourseMenuPanel | |
+| public static JLabel | addCourseLabel | |
+| public static JButton | yesCourseButton | |
+| public static JButton | noCourseButton | |
+| public static JPanel | addCoursePanel | |
+| public static JFrame | addCourseFrame | |
+| public static JLabel | enterCourseNameLabel | |
+| public static JTextField | enterCourseNameText | |
+| public static JButton | createCourseButton | |
+| public static JButton | addCourseBackButton | |
 | public static String | username = ""  | |
 | public static JLabel | createAccountErrorLabel |
 | public static JLabel | logInErrorLabel | |
