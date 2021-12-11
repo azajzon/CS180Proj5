@@ -267,7 +267,7 @@
 | public static CopyOnWriteArrayList<Course> | course | The thread safe arraylist for courses | 
 | public static CopyOnWriteArrayList<Teacher> | loggedInTeachers | The thread safe arraylist for the teachers that are logged in  | 
 | public static CopyOnWriteArrayList<Student> | loggedInStudents | The thread safe arraylist for the students that are logged in | 
-| private static Function<Object, Object>[] | commandList |   |
+| private static Function<Object, Object>[] | commandList | An array of functions  |
  
 ##### Constructors: 
 
@@ -286,28 +286,30 @@
 | getStudentByUsername()  | public static Student | String username | Gets the username input of user and returns the student object |
 | CreateStudent()  | public static String  | Object array |  Creates an object array that stores the name, username and passowrd of student |
 | createQuiz()  |  public static Object | Object inQuiz | aAdds the quiz object to the thread safe list of quizzes |
-| getListOfQuizNames()  | public static Object  | Object o | Description |
-| editStudentAccount()  | public static Object  | Object o | Returns the list of quiz names |
-| getQuiz()  | public static Object  | Object o | Description |
-| submitQuiz()  | public static Object  | Object o | Description |
-| getSubmissions()  | public static Object  | Object o | Description |
-| saveArrayToFile()  | public static void | String filename, int arrayType| Description |
-| loadArrayFromFile()  | public static void | String filename, int arrayType | Description |
-| saveProgramState()  | public static void | None | Description |
-| loadProgramState()  | public static Object  | None | Description |
+| getListOfQuizNames()  | public static Object  | Object o | Returns the list of quiz names |
+| editStudentAccount()  | public static Object  | Object o | Gets the student's username and updates the 3 fields and stores it in a student object |
+| updateQuiz()  | public static Object  | Object o | Updates the quiz name based on the index and the contents of the Quiz object |
+| getQuiz()  | public static Object  | Object o | Returns a quiz object |
+| submitQuiz()  | public static Object  | Object o | Gets the name of quiz that has to be submitted and adds it to the quiz subbmission list of the specific student's username |
+| editTeacherAccount | public static Object | Object o | Gets the teacher's username and updates the 3 fields and stores it in a teacher object |
+| getSubmissions()  | public static Object  | Object o | Returns the quiz submission based on the student's username |
+| saveArrayToFile()  | public static void | String filename, int arrayType| Saves the arrays of teachers, students and quizzes objects to 3 files |
+| loadArrayFromFile()  | public static void | String filename, int arrayType | Loads the 3 arrays from the files once the program starts again |
+| saveProgramState()  | public static void | None | Saves the data even when we end the program |
+| loadProgramState()  | public static Object  | None | Loads the data that was saved when a previous program was ended |
  
  
 #### 10) ServerThread.java
  
 ##### Description: 
-<p> The ServerThread class </p>
+<p> The ServerThread class listens for the client to tell it what command to run and then runs that command and sends the output of that command to the client. </p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| Socket | client |  | 
-| PrintWriter | output |  | 
-| BufferedReader | input |  | 
+| Socket | client | The socket object | 
+| ObjectOutputStream | output | The object of the ObjectOutputStream | 
+| ObjectInputStream | input | The object of the ObjectInputStream | 
 
 ##### Constructors: 
 
@@ -319,7 +321,7 @@
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| run()  | public void  | None | Description |
+| run()  | public void  | None | Reads the command line from the client using Bufferedreader and then closes the client |
 
 
 #### 11) ClientClass.java
