@@ -42,9 +42,12 @@ public class Server {
                 Server::getQuiz,
                 Server::submitQuiz,
                 Server::getSubmissions,
-                Server::editTeacherAccount
+                Server::editTeacherAccount,
+                Server::updateQuiz
         };
     }
+
+
 
     public static Function<Object, Object>[] getCommandList() {
         return commandList;
@@ -193,6 +196,22 @@ public class Server {
         return true;
     }
 
+    private static boolean updateQuiz(Object o) {
+        Quiz quiz = (Quiz) o;
+        int index = 0;
+        for (Quiz q : Server.quizzes) {
+            if (q.getQuizName().equals(quiz.getQuizName())) {
+                Server.quizzes.set(index, quiz);
+                return true;
+            }
+            index++;
+        }
+        return false;
+    }
+
+
+
+
     private static Object getQuiz(Object o) {
         String qName = (String) o;
         for (Quiz q : quizzes) {
@@ -321,14 +340,7 @@ public class Server {
             // catches exceptions such as not being able to
             // find the files that stored the arrays of teachers, students, and courses
         } catch (IOException ex) {
-            if (ex.getMessage().equals("teachers.txt (The system cannot find the file specified)"))
-                System.out.println("No teachers saved");
-            else if (ex.getMessage().equals("students.txt (The system cannot find the file specified)"))
-                System.out.println("No students saved");
-            else if (ex.getMessage().equals("quizzes.txt (The system cannot find the file specified)"))
-                System.out.println("No courses saved");
-            else
-                System.out.println("IOException is caught");
+           System.out.println(ex.getMessage());
         }
 
     }

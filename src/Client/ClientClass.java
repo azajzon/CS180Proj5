@@ -41,7 +41,7 @@ public class ClientClass {
             Object in = input.readObject();
             if (in instanceof Exception) throw (Exception) in;
             else if (!switch (command) {
-                case 0, 1, 2, 3, 4, 5, 8, 10 -> {
+                case 0, 1, 2, 3, 4, 5, 8, 10, 11 -> {
                     if (!(in instanceof Boolean)) yield false;
                     retVal = in;
                     yield true;

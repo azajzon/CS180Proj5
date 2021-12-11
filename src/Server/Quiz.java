@@ -51,6 +51,10 @@ public class Quiz implements Serializable {
         return score;
     }
 
+    public void setQuestion(Question q, int index) {
+        questions.set(index, q);
+
+    }
     // sets the score instance variable to the value given as a parameter
     public void setScore(double score) {
         this.score = score;

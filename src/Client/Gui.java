@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Gui {
@@ -740,23 +741,138 @@ public class Gui {
 
         editQuizPanel.add(jComboBox);
 
-        // dropdown feature to show list of courses
-        /*
-        String[] optionsToChoose = {"Apple", "Orange", "Banana", "Pineapple", "None of the listed"};
-        String getCourse = (String) JOptionPane.showInputDialog(
-                null,
-                "Which course do you want to edit quiz from?",
-                "Choose Course",
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                optionsToChoose,
-                optionsToChoose[0]);
-        */
+        editQuizPanel.setLayout(null);
+        editQuizFrame.setVisible(true);
+        JButton nextForEditQuiz = new JButton("Next");
+        nextForEditQuiz.setBounds(120, 220, 110, 25);
+        editQuizPanel.add(nextForEditQuiz);
+
+        nextForEditQuiz.addActionListener(e -> {
+            editQuizFrame.setVisible(false);
+            editQuizFrame.dispose();
+
+            questionForEditQuiz((Quiz) ClientClass.serverCall(7, jComboBox.getSelectedItem())); // this brings the question to the next screen
+            // (where they can edit the questions)
+        });
 
         editQuizPanel.setLayout(null);
         editQuizFrame.setVisible(true);
 
     }
+
+    //question screen that teacher can edit from
+    public static void questionForEditQuiz(Quiz q) {
+
+        //if multiple choice
+
+        JFrame questionForEditQuizFrame = new JFrame();
+        JPanel questionForEditQuizPanel = new JPanel();
+        questionForEditQuizFrame.setSize(400, 320);
+        questionForEditQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        questionForEditQuizFrame.add(questionForEditQuizPanel);
+
+        ArrayList<String> questionTitles = new ArrayList<>();
+        for(Question question: q.getQuestions()) {
+            questionTitles.add(question.getQuestionTitle());
+        }
+        JComboBox jComboBox = new JComboBox(questionTitles.toArray());
+        jComboBox.setBounds(130, 20, 500, 25);
+
+        questionForEditQuizPanel.add(jComboBox);
+
+        JLabel questionOneMCLabel = new JLabel("Type in Question : ");
+        questionOneMCLabel.setBounds(20, 50, 160, 25);
+        questionForEditQuizPanel.add(questionOneMCLabel);
+
+
+        JTextField editQuestionOneMCText = new JTextField(20);
+        editQuestionOneMCText.setBounds(210, 50, 165, 25);
+        questionForEditQuizPanel.add(editQuestionOneMCText);
+
+        JLabel optionOneEditLabel = new JLabel("Option 1:");
+        optionOneEditLabel.setBounds(20, 80, 80, 25);
+        questionForEditQuizPanel.add(optionOneEditLabel);
+
+
+        JTextField editOptionOneMCText = new JTextField(20);
+        editOptionOneMCText.setBounds(210, 80, 165, 25);
+        questionForEditQuizPanel.add(editOptionOneMCText);
+
+        JLabel optionTwoEditLabel = new JLabel("Option 2:");
+        optionTwoEditLabel.setBounds(20, 110, 80, 25);
+        questionForEditQuizPanel.add(optionTwoEditLabel);
+
+
+        JTextField editOptionTwoMCText = new JTextField(20);
+        editOptionTwoMCText.setBounds(210, 110, 165, 25);
+        questionForEditQuizPanel.add(editOptionTwoMCText);
+
+        JLabel optionThreeEditLabel = new JLabel("Option 3:");
+        optionThreeEditLabel.setBounds(20, 140, 80, 25);
+        questionForEditQuizPanel.add(optionThreeEditLabel);
+
+
+        JTextField editOptionThreeMCText = new JTextField(20);
+        editOptionThreeMCText.setBounds(210, 140, 165, 25);
+        questionForEditQuizPanel.add(editOptionThreeMCText);
+
+        JLabel optionFourEditLabel = new JLabel("Option 4:");
+        optionFourEditLabel.setBounds(20, 170, 80, 25);
+        questionForEditQuizPanel.add(optionFourEditLabel);
+
+
+        JTextField editOptionFourMCText = new JTextField(20);
+        editOptionFourMCText.setBounds(210, 170, 165, 25);
+        questionForEditQuizPanel.add(editOptionFourMCText);
+
+        JLabel correctAnsChoiceMCLabel = new JLabel("Enter correct answer choice:");
+        correctAnsChoiceMCLabel.setBounds(20, 200, 250, 25);
+        questionForEditQuizPanel.add(correctAnsChoiceMCLabel);
+
+
+        JTextField editCorrectAnsChoiceMCText = new JTextField(20);
+        editCorrectAnsChoiceMCText.setBounds(210, 200, 165, 25);
+        questionForEditQuizPanel.add(editCorrectAnsChoiceMCText);
+
+        JLabel pointValueMCLabel = new JLabel("Enter the point value:");
+        pointValueMCLabel.setBounds(20, 230, 250, 25);
+        questionForEditQuizPanel.add(pointValueMCLabel);
+
+
+        JTextField editPointValueMCText = new JTextField(20);
+        editPointValueMCText.setBounds(210, 230, 165, 25);
+        questionForEditQuizPanel.add(editPointValueMCText);
+
+        //saves question
+        JButton saveEditQuizButton = new JButton("Save and Update Quiz");
+        saveEditQuizButton.setBounds(210, 260, 150, 25);
+        questionForEditQuizPanel.add(saveEditQuizButton);
+
+        // once the add question button is clicked, we need to add the question to the list of questions \
+        // for that specific quiz
+        // calls the method that displays the screen and asks if the user wants to add another question or not
+
+
+        saveEditQuizButton.addActionListener(e -> {
+            Question newQuestion = new Question( (String)jComboBox.getSelectedItem());
+            newQuestion.addChoice(editOptionOneMCText.getText());
+            newQuestion.addChoice(editOptionTwoMCText.getText());
+            newQuestion.addChoice(editOptionThreeMCText.getText());
+            newQuestion.addChoice(editOptionFourMCText.getText());
+            newQuestion.setAnswer(editPointValueMCText.getText());
+            q.setQuestion(newQuestion, jComboBox.getSelectedIndex());
+            ClientClass.serverCall(11, q);
+            questionForEditQuizFrame.setVisible(false);
+            questionForEditQuizFrame.dispose();
+            teacherQuizMenu();
+        });
+
+        //
+
+        questionForEditQuizPanel.setLayout(null);
+        questionForEditQuizFrame.setVisible(true);
+    }
+
 
     public static void editTeacherAccount() {
         JFrame editTeacherAccountFrame = new JFrame();
