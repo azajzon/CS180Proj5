@@ -367,18 +367,18 @@
 | public static JButton | createTeacherButton | The button for creating teacher account |
 | public static JButton | loginTeacherAccountButton |  The button for logging in as a teacher |
 | public static JButton | createTeacherAccountButton | The button that creates a teacher account |
-| public static JFrame | teacherLoginFrame | The frame for teacher log in|
-| public static JPanel | teacherLoginPanel | The panel for teacher log in|
-| public static JLabel | teacherWelcomeLabel | |
-| public static JLabel |teacherLoginLabel | |
-| public static JLabel | teacherPasswordLabel | |
-| public static JTextField | teacherUsernameText | |
-| public static JTextField | teacherPasswordText | |
-| public static JFrame | createTeacherFrame | |
-| public static JPanel | createTeacherPanel | |
-| public static JLabel | createTeacherWelcomeLabel | |
-| public static JLabel | createTeacherNameLabel | |
-| public static JTextField | createTeacherUsernameText | |
+| public static JFrame | teacherLoginFrame | The frame for teacher log in |
+| public static JPanel | teacherLoginPanel | The panel for teacher log in |
+| public static JLabel | teacherWelcomeLabel | The welcome label for teachers |
+| public static JLabel |teacherLoginLabel | The log in label for teacher |
+| public static JLabel | teacherPasswordLabel | The password label for teacher|
+| public static JTextField | teacherUsernameText | The text field for teacher username |
+| public static JTextField | teacherPasswordText | The text field for teacher password|
+| public static JFrame | createTeacherFrame | The frame for creating teacher account |
+| public static JPanel | createTeacherPanel | The panel for creating teacher account |
+| public static JLabel | createTeacherWelcomeLabel | The welcome label for creating teacher account|
+| public static JLabel | createTeacherNameLabel | The teach name label for creating teacher account |
+| public static JTextField | createTeacherUsernameText | The text field for teacher username for creating teacher account|
 | public static JTextField | createTeacherNameText | |
 | public static JLabel | createTeacherUsernameLabel | |
 | public static JLabel | createTeacherPasswordLabel | |
