@@ -646,6 +646,12 @@ public class Gui {
         deleteQuizButton.setBounds(80, 110, 250, 25);
         teacherQuizMenuPanel.add(deleteQuizButton);
 
+        deleteQuizButton.addActionListener((e) -> {
+            teacherQuizMenuFrame.setVisible(false);
+            teacherQuizMenuFrame.dispose();
+            deleteQuiz();
+        });
+
         JButton viewStudentQuizSubmissionsButton = new JButton("View Student Quiz Submissions");
         viewStudentQuizSubmissionsButton.setBounds(80, 140, 250, 25);
         teacherQuizMenuPanel.add(viewStudentQuizSubmissionsButton);
@@ -1564,5 +1570,75 @@ public class Gui {
 
         stuGradedQuizPanel.setLayout(null);
         stuGradedQuizFrame.setVisible(true);
+    }
+
+    public static void deleteQuiz(){
+        JFrame deleteQuizFrame = new JFrame();
+        JPanel deleteQuizPanel = new JPanel();
+        deleteQuizFrame.setSize(400, 300);
+        deleteQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        deleteQuizFrame.add(deleteQuizPanel);
+
+        JLabel lsmToolLabel = new JLabel("Delete a Quiz");
+        lsmToolLabel.setBounds(160, 20, 500, 25);
+        deleteQuizPanel.add(lsmToolLabel);
+
+        /// CHOOSE COURSE
+        JLabel deleteQuizLabel = new JLabel("Which quiz would you like to delete?");
+        deleteQuizLabel.setBounds(30, 50, 700, 25);
+        deleteQuizPanel.add(deleteQuizLabel);
+
+        //below array needs to contain the list of quizzes that have been created
+        ArrayList<String> quizNames = (ArrayList<String>) ClientClass.serverCall(6, " ");
+        String[] listOfQuizzes = (String[]) quizNames.toArray();
+        JComboBox<String> quizzesList = new JComboBox<>(listOfQuizzes);
+        quizzesList.setBounds(120, 80, 140, 20);
+        deleteQuizPanel.add(quizzesList);
+
+
+        JButton deleteTheQuizButton = new JButton("Delete");
+        deleteTheQuizButton.setBounds(230, 130, 110, 25);
+        deleteQuizPanel.add(deleteTheQuizButton);
+
+        deleteTheQuizButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deleteQuizFrame.setVisible(false);
+                deleteQuizFrame.dispose();
+                ClientClass.serverCall(15, quizzesList.getSelectedItem());
+                quizDeleted(); // this brings the question to the next screen
+                // (where they can edit the questions)
+            }
+        });
+
+        deleteQuizPanel.setLayout(null);
+        deleteQuizFrame.setVisible(true);
+    }
+
+    public static void quizDeleted(){
+        JFrame quizDeletedFrame = new JFrame();
+        JPanel quizDeletedPanel = new JPanel();
+        quizDeletedFrame.setSize(400, 300);
+        quizDeletedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        quizDeletedFrame.add(quizDeletedPanel);
+
+        JLabel deleteQuizLabel = new JLabel("Quiz has been deleted!");
+        deleteQuizLabel.setBounds(120, 50, 700, 25);
+        quizDeletedPanel.add(deleteQuizLabel);
+
+        JButton quizDeletedBackButton = new JButton("Return to Homepage");
+        quizDeletedBackButton.setBounds(100, 100, 190, 25);
+        quizDeletedPanel.add(quizDeletedBackButton);
+
+        quizDeletedBackButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                quizDeletedFrame.setVisible(false);
+                quizDeletedFrame.dispose();
+                teacherQuizMenu(); // this brings the question to the next screen
+                // (where they can edit the questions)
+            }
+        });
+
+        quizDeletedPanel.setLayout(null);
+        quizDeletedFrame.setVisible(true);
     }
 }

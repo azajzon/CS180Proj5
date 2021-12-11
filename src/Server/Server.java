@@ -46,10 +46,10 @@ public class Server {
                 Server::updateQuiz,
                 Server::deleteTeacherAccount,
                 Server::deleteStudentAccount,
-                Server::getStudents
+                Server::getStudents,
+                Server::deleteQuiz
         };
     }
-
 
     public static Function<Object, Object>[] getCommandList() {
         return commandList;
@@ -393,5 +393,14 @@ public class Server {
 
     private static Object getStudents(Object o) {
         return students;
+    }
+
+    private static Object deleteQuiz(Object o) {
+        String qName = (String) o;
+        for( Quiz q : quizzes ){
+            if(q.equals(qName))
+                quizzes.remove(q);
+        }
+        return true;
     }
 }
