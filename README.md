@@ -357,7 +357,7 @@
 ##### Fields: 
 | Modifier and Type  | Field | Description |
 | ------------- | ------------- | ------------- |
-| private static String | hostName | The |
+| private static String | hostName | Creates a hostname string |
 | private static LinkedList<Thread> | list | 
 | public static JFrame | mainFrame | |
 | public static JPanel | panel | |
