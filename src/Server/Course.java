@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Project 4 - Server.Course
+ * Project 5 - Server.Course
  * <p>
  * The Server.Course class implements Serializable and has an array
  list of quizzes where you can get a quiz, add a quiz, or
