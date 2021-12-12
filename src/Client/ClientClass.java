@@ -10,15 +10,25 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-// class that sends requests to the server and receives responses
-public class ClientClass {
+/**
+ * Project 4 - ClientClass.java
+ * <p>
+ * The ClientClass.java sends requests to the server and receives responses.
+ * @author Aarohi Panzade, Abel Zazjon, Aditi Barla, and Yaseen Shady 039
+ *
+ * @version 12/12/21
+ */
 
+public class ClientClass {
+   
+    // initializes variables
     private static String hostName = "localhost";
     private static Socket socket = null;
     private static ObjectOutputStream out = null;
     private static ObjectInputStream input = null;
 
-
+    
+    // method that establishes the socket connection between the client and server, writes the reuqest to the socket stream and reads the output from the server
     public static Object serverCall(int command, Object objToSend) {
         Object retVal = null;
         try {
@@ -63,6 +73,7 @@ public class ClientClass {
                 }
                 default -> false;
             }) throw new IOException("Invalid response");
+            // checks for multiple exceptions
         } catch (UnknownHostException e) {
             System.err.println("Unknown host: " + hostName);
             System.exit(1);
