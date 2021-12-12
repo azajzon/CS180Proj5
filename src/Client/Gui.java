@@ -1360,7 +1360,6 @@ public class Gui {
         quizChoosenNextButton.addActionListener(e -> {
             Quiz q = (Quiz) ClientClass.serverCall(7, jComboBox.getSelectedItem());
             whichQuizToTakeFrame.setVisible(false);
-            whichQuizToTakeFrame.dispose();
 
             if(q != null) {
                 try {
@@ -1369,7 +1368,9 @@ public class Gui {
                     ex.printStackTrace();
                 }
             }
+            whichQuizToTakeFrame.dispose();
         });
+
         whichQuizToTakePanel.setLayout(null);
         whichQuizToTakeFrame.setVisible(true);
     }
@@ -1394,6 +1395,8 @@ public class Gui {
             }
             num++;
         }
+        /*AtomicBoolean closed = new AtomicBoolean(false);
+        quizView(questions, answers, num, quiz, closed);*/
 
         //reshuffle answers in the order of the original questions
         ArrayList<Answer> newAnswers = new ArrayList<>(answers);
@@ -1502,6 +1505,9 @@ public class Gui {
                 quizView(questions, answers, fNum + 1, quiz);
             }
         });*/
+
+        quizStudentTakesPanel1.setLayout(null);
+        quizStudentTakesFrame1.setVisible(true);
         quizStudentTakesFrame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         quizStudentTakesFrame1.addWindowListener(new WindowAdapter() {
             @Override
@@ -1510,11 +1516,9 @@ public class Gui {
                     closed.set(true);
                     closed.notify();
                 }
-                super.windowClosed(e);
+                //super.windowClosed(e);
             }
         } );
-        quizStudentTakesPanel1.setLayout(null);
-        quizStudentTakesFrame1.setVisible(true);
     }
 
     public static void quizSubmitted() {
