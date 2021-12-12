@@ -1,11 +1,11 @@
+package Client;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import Server.*;
 
 public class Gui {
     private static String hostName;
@@ -1368,8 +1368,40 @@ public class Gui {
 
     public static void quizStudentTakes(Quiz q){
         ArrayList<Question> questions = q.getQuestions();
+        //save a copy of the original questions before shuffling
+        ArrayList<Question> originalQuestions = new ArrayList<>(questions);
+        Collections.shuffle(questions);
         ArrayList<Answer> answers = new ArrayList<>();
+
+        //get answers from student
         quizView(questions, answers, 1, q);
+
+        //reshuffle answers in the order of the original questions
+        ArrayList<Answer> newAnswers = new ArrayList<>(answers);
+        int index = 0;
+        for(Question question: questions) {
+            int originalIndex = findIndexOfQuestion(question.getQuestionTitle(), originalQuestions);
+            if (originalIndex != -1) {
+                newAnswers.set(originalIndex, answers.get(index));
+            }
+            index++;
+        }
+        answers = new ArrayList<>(newAnswers);
+
+        //send submission to server
+        QuizSubmission qs = new QuizSubmission("", q.getQuizName() + " --- " + username, answers);
+        ClientClass.serverCall(8, qs);
+    }
+
+    public static int findIndexOfQuestion(String question, ArrayList<Question> originalQuestions){
+        int index = 0;
+        for(Question q: originalQuestions) {
+            if (q.getQuestionTitle().equals(question)) {
+                return index;
+            }
+            index++;
+        }
+        return -1;
     }
 
     public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz) {
@@ -1433,8 +1465,6 @@ public class Gui {
             quizStudentTakesFrame1.setVisible(false);
             quizStudentTakesFrame1.dispose();
             if (answers.size() == questions.size()) {
-                QuizSubmission qs = new QuizSubmission("", quiz.getQuizName() + " --- " + username, answers);
-                ClientClass.serverCall(8, qs);
                 quizStudentTakesFrame1.setVisible(false);
                 quizStudentTakesFrame1.dispose();
                 quizSubmitted();
