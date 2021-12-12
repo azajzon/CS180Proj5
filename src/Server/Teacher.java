@@ -1,5 +1,3 @@
-package Server;
-
 import java.io.*;
 
 /** Project 5 - Server.Teacher.java
