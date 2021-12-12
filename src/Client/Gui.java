@@ -3,8 +3,12 @@ package Client;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import Server.*;
 
 public class Gui {
@@ -1358,23 +1362,38 @@ public class Gui {
             whichQuizToTakeFrame.setVisible(false);
             whichQuizToTakeFrame.dispose();
 
-            if( !(q == null) ) {
-                quizStudentTakes(q);
+            if(q != null) {
+                try {
+                    quizStudentTakes(q);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         whichQuizToTakePanel.setLayout(null);
         whichQuizToTakeFrame.setVisible(true);
     }
 
-    public static void quizStudentTakes(Quiz q){
-        ArrayList<Question> questions = q.getQuestions();
+    public static void quizStudentTakes(Quiz quiz) throws InterruptedException {
+        ArrayList<Question> questions = quiz.getQuestions();
         //save a copy of the original questions before shuffling
         ArrayList<Question> originalQuestions = new ArrayList<>(questions);
         Collections.shuffle(questions);
         ArrayList<Answer> answers = new ArrayList<>();
 
         //get answers from student
-        quizView(questions, answers, 1, q);
+        int num = 1;
+
+        while(answers.size() < questions.size()) {
+            AtomicBoolean closed = new AtomicBoolean(false);
+            quizView(questions, answers, num, quiz, closed);
+            synchronized(closed) {
+                while (!closed.get()) {
+                    closed.wait();
+                }
+            }
+            num++;
+        }
 
         //reshuffle answers in the order of the original questions
         ArrayList<Answer> newAnswers = new ArrayList<>(answers);
@@ -1389,7 +1408,7 @@ public class Gui {
         answers = new ArrayList<>(newAnswers);
 
         //send submission to server
-        QuizSubmission qs = new QuizSubmission("", q.getQuizName() + " --- " + username, answers);
+        QuizSubmission qs = new QuizSubmission("", quiz.getQuizName() + " --- " + username, answers);
         ClientClass.serverCall(8, qs);
     }
 
@@ -1404,12 +1423,13 @@ public class Gui {
         return -1;
     }
 
-    public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz) {
+    public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz, AtomicBoolean closed) {
         Question q = questions.get(num - 1);
         ArrayList<String> choices =  q.getChoices();
 
         JFrame quizStudentTakesFrame1;
         quizStudentTakesFrame1 = new JFrame();
+
         JPanel quizStudentTakesPanel1;
         quizStudentTakesPanel1 = new JPanel();
         quizStudentTakesFrame1.setSize(400, 300);
@@ -1459,6 +1479,16 @@ public class Gui {
         quizStuTakesNextButton.setBounds(250, 230, 110, 25);
         quizStudentTakesPanel1.add(quizStuTakesNextButton);
 
+
+        quizStuTakesNextButton.addActionListener(e -> {
+            answers.add(new Answer(q.getQuestionTitle(), questionOneStuAns.getText()));
+            quizStudentTakesFrame1.dispose();
+           /* quizStudentTakesFrame1.setVisible(false);
+            quizStudentTakesFrame1.dispose();
+            quizStudentTakesPanel1.setLayout(null);
+            quizStudentTakesFrame1.setVisible(true);*/
+        });
+        /*
         int fNum = num;
         quizStuTakesNextButton.addActionListener(e -> {
             answers.add(new Answer(q.getQuestionTitle(), questionOneStuAns.getText()));
@@ -1471,7 +1501,18 @@ public class Gui {
             } else {
                 quizView(questions, answers, fNum + 1, quiz);
             }
-        });
+        });*/
+        quizStudentTakesFrame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        quizStudentTakesFrame1.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                synchronized(closed) {
+                    closed.set(true);
+                    closed.notify();
+                }
+                super.windowClosed(e);
+            }
+        } );
         quizStudentTakesPanel1.setLayout(null);
         quizStudentTakesFrame1.setVisible(true);
     }
