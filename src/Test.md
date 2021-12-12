@@ -1,6 +1,6 @@
 Test 1: Create teacher login 
-User launches application
-User selects Create Teacher button
+<p> User launches application </p>
+<p> User selects Create Teacher button </p>
 User selects the first and last name textbox 
 User enters the first and last name through the keyboard 
 User selects the username textbox 
