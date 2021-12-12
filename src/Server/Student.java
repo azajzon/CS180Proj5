@@ -3,7 +3,7 @@ package Server;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/** Project 4 - Server.Student.java
+/** Project 5 - Server.Student.java
  * The Server.Student class contains the login information that belong to student user. This includes their name,
  * username, and password. A super is used to access the teacher and call
  * functions in the Server.Student constructor. It also includes the quiz
