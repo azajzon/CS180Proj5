@@ -67,6 +67,11 @@ public class ClientClass {
                     retVal = in;
                     yield true;
                 }
+                case 14 -> {
+                    if (!(in instanceof CopyOnWriteArrayList)) yield false;
+                    retVal = in;
+                    yield true;
+                }
                 default -> false;
             }) throw new IOException("Invalid response");
             // checks for exceptions
