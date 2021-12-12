@@ -1,4 +1,4 @@
-Test 1: Create teacher login 
+<b> Test 1: Create teacher login <b>
 <p> User launches application </p>
 <p> User selects Create Teacher button </p>
 <p> User selects the first and last name textbox <p> 
