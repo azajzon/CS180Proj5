@@ -16,7 +16,7 @@
 <p> Expected Result: Application makes a new teacher account and loads to the teacher login page automatically. <p> 
 <p> Test Status: Passed <p> 
 
-Test 2: Login Teacher 
+<b> Test 2: Login Teacher <b>
 <p> User clicks Login Teacher button <p> 
 <p> Selects username textbox <p> 
 <p> Enters username via keyboard <p> 
