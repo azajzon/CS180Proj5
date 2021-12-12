@@ -1,5 +1,3 @@
-package Client;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,9 +5,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import Server.*;
-
 
 public class Gui {
     private static String hostName;
@@ -1441,36 +1436,36 @@ public class Gui {
 
 
         JLabel questionOneTitleLabel;
-        questionOneTitleLabel = new JLabel("Question " + num);
+        questionOneTitleLabel = new JLabel("             Question " + num + ": ");
         questionOneTitleLabel.setBounds(120, 20, 500, 25);
         quizStudentTakesPanel1.add(questionOneTitleLabel);
 
         //below label will display the first question of the quiz
         JLabel questionOneStuQuizLabel;
-        questionOneStuQuizLabel = new JLabel( q.getQuestionTitle());
+        questionOneStuQuizLabel = new JLabel( q.getQuestionTitle() + "                                     ");
         questionOneStuQuizLabel.setBounds(30, 50, 700, 25);
         quizStudentTakesPanel1.add(questionOneStuQuizLabel);
 
         // TODO true false quiz
         //OPTIONS DISPLAYED (MULTIPLE CHOICE)
-        JLabel optionOneMC = new JLabel("Option 1: " + choices.get(0));
+        JLabel optionOneMC = new JLabel("Option 1: " + choices.get(0) + "                ");
         optionOneMC.setBounds(30, 80, 300, 25);
         quizStudentTakesPanel1.add(optionOneMC);
 
-        JLabel optionTwoMC = new JLabel("Option 2: " + choices.get(1));
+        JLabel optionTwoMC = new JLabel("Option 2: " + choices.get(1) + "                ");
         optionTwoMC.setBounds(30, 110, 300, 25);
         quizStudentTakesPanel1.add(optionTwoMC);
 
-        JLabel optionThreeMC = new JLabel("Option 3: " + choices.get(2));
+        JLabel optionThreeMC = new JLabel("Option 3: " + choices.get(2) + "                ");
         optionThreeMC.setBounds(30, 140, 300, 25);
         quizStudentTakesPanel1.add(optionThreeMC);
 
-        JLabel optionFourMC = new JLabel("Option 4: " + choices.get(3));
+        JLabel optionFourMC = new JLabel("Option 4: " + choices.get(3) + "                ");
         optionFourMC.setBounds(30, 170, 300, 25);
         quizStudentTakesPanel1.add(optionFourMC);
 
 
-        JLabel typeInAnswerLabel = new JLabel("Type in Answer Choice #: ");
+        JLabel typeInAnswerLabel = new JLabel("Type in the answer (not the option number): ");
         typeInAnswerLabel.setBounds(30, 200, 700, 25);
         quizStudentTakesPanel1.add(typeInAnswerLabel);
 
