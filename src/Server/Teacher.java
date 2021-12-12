@@ -2,7 +2,7 @@ package Server;
 
 import java.io.*;
 
-/** Project 4 - Server.Teacher.java
+/** Project 5 - Server.Teacher.java
  * The Server.Teacher class contains the login information that belong to teacher user.
  * This includes their name, username, and password. A super is used to access the teacher and call
  * functions in the Server.Teacher constructor.

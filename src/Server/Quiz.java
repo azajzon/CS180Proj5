@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Project 4 - Server.Quiz
+ * Project 5 - Server.Quiz
  * <p>
  * The Server.Quiz class implements Serializable and gets the array
  * list of questions with the name of the quiz, the score

@@ -3,7 +3,7 @@ package Server;
 import java.io.Serializable;
 
 /**
- * Project 4 - Server.Answer
+ * Project 5 - Server.Answer
  * <p>
  * The Server.Answer class implements Serializable and gets the question title and the answer chosen.
  * @author Aarohi Panzade, Abel Zazjon, Aditi Barla, and Yaseen Shady 039

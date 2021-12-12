@@ -4,7 +4,7 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/** Project 4 - Server.User.java
+/** Project 5 - Server.User.java
  * The Server.User class implements Serializable to use the Server.User
  * object and store/serialize itcontains the create
  * account/login information that belong to a user (whether

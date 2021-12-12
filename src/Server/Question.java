@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Project 4 - Server.Question
+ * Project 5 - Server.Question
  * <p>
  * The Server.Question class implements Serializable and gets the
  title of the question, the choices, answer and the point
