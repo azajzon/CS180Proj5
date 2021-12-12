@@ -7,9 +7,9 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import Server.*;
+
 
 public class Gui {
     private static String hostName;
@@ -19,7 +19,9 @@ public class Gui {
 
     // the threads are kept track of with a linked list
     private static LinkedList<Thread> list = new LinkedList<Thread>();
+    private static JDialog currentQuestionQuizDialog;
 
+    private static Object answersLock;
     public static JFrame mainFrame;
     public static JPanel panel;
     public static JLabel lsmTool;
@@ -119,6 +121,7 @@ public class Gui {
     //////////INVALID LABELS (replaced from JOptionPanes/////////////
     public static JLabel createAccountErrorLabel;
     public static JLabel logInErrorLabel;
+
 
     public static void main(String[] args) {
         mainMenu();
@@ -1363,7 +1366,7 @@ public class Gui {
 
             if(q != null) {
                 try {
-                    quizStudentTakes(q);
+                    quizStudentTakes(whichQuizToTakeFrame, q);
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
@@ -1375,7 +1378,7 @@ public class Gui {
         whichQuizToTakeFrame.setVisible(true);
     }
 
-    public static void quizStudentTakes(Quiz quiz) throws InterruptedException {
+    public static void quizStudentTakes(JFrame parentFrame, Quiz quiz) throws InterruptedException {
         ArrayList<Question> questions = quiz.getQuestions();
         //save a copy of the original questions before shuffling
         ArrayList<Question> originalQuestions = new ArrayList<>(questions);
@@ -1384,19 +1387,15 @@ public class Gui {
 
         //get answers from student
         int num = 1;
-
         while(answers.size() < questions.size()) {
-            AtomicBoolean closed = new AtomicBoolean(false);
-            quizView(questions, answers, num, quiz, closed);
-            synchronized(closed) {
-                while (!closed.get()) {
-                    closed.wait();
-                }
-            }
+
+            // create dialog for question view
+            currentQuestionQuizDialog = quizView(parentFrame, questions, num, quiz, answers);
+            currentQuestionQuizDialog.setVisible(true);
+
             num++;
         }
-        /*AtomicBoolean closed = new AtomicBoolean(false);
-        quizView(questions, answers, num, quiz, closed);*/
+        //at this point all answers have been entered
 
         //reshuffle answers in the order of the original questions
         ArrayList<Answer> newAnswers = new ArrayList<>(answers);
@@ -1413,6 +1412,8 @@ public class Gui {
         //send submission to server
         QuizSubmission qs = new QuizSubmission("", quiz.getQuizName() + " --- " + username, answers);
         ClientClass.serverCall(8, qs);
+        //show view to get back to student home page
+        quizSubmitted();
     }
 
     public static int findIndexOfQuestion(String question, ArrayList<Question> originalQuestions){
@@ -1426,18 +1427,17 @@ public class Gui {
         return -1;
     }
 
-    public static void quizView(ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz, AtomicBoolean closed) {
+    public static JDialog quizView(JFrame parent, ArrayList<Question> questions, int num, Quiz quiz, ArrayList<Answer> answers) {
         Question q = questions.get(num - 1);
         ArrayList<String> choices =  q.getChoices();
 
-        JFrame quizStudentTakesFrame1;
-        quizStudentTakesFrame1 = new JFrame();
+        currentQuestionQuizDialog = new JDialog(parent);
+        currentQuestionQuizDialog.setModal(true);
 
         JPanel quizStudentTakesPanel1;
         quizStudentTakesPanel1 = new JPanel();
-        quizStudentTakesFrame1.setSize(400, 300);
-        quizStudentTakesFrame1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        quizStudentTakesFrame1.add(quizStudentTakesPanel1);
+        currentQuestionQuizDialog.setSize(400, 300);
+        currentQuestionQuizDialog.add(quizStudentTakesPanel1);
 
 
         JLabel questionOneTitleLabel;
@@ -1485,40 +1485,11 @@ public class Gui {
 
         quizStuTakesNextButton.addActionListener(e -> {
             answers.add(new Answer(q.getQuestionTitle(), questionOneStuAns.getText()));
-            quizStudentTakesFrame1.dispose();
-           /* quizStudentTakesFrame1.setVisible(false);
-            quizStudentTakesFrame1.dispose();
-            quizStudentTakesPanel1.setLayout(null);
-            quizStudentTakesFrame1.setVisible(true);*/
+            currentQuestionQuizDialog.dispose();
+            currentQuestionQuizDialog = null;
         });
-        /*
-        int fNum = num;
-        quizStuTakesNextButton.addActionListener(e -> {
-            answers.add(new Answer(q.getQuestionTitle(), questionOneStuAns.getText()));
-            quizStudentTakesFrame1.setVisible(false);
-            quizStudentTakesFrame1.dispose();
-            if (answers.size() == questions.size()) {
-                quizStudentTakesFrame1.setVisible(false);
-                quizStudentTakesFrame1.dispose();
-                quizSubmitted();
-            } else {
-                quizView(questions, answers, fNum + 1, quiz);
-            }
-        });*/
 
-        quizStudentTakesPanel1.setLayout(null);
-        quizStudentTakesFrame1.setVisible(true);
-        quizStudentTakesFrame1.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        quizStudentTakesFrame1.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                synchronized(closed) {
-                    closed.set(true);
-                    closed.notify();
-                }
-                //super.windowClosed(e);
-            }
-        } );
+        return currentQuestionQuizDialog;
     }
 
     public static void quizSubmitted() {

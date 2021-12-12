@@ -1,3 +1,7 @@
+package Client;
+
+import Server.Quiz;
+
 import javax.swing.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;

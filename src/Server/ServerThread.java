@@ -1,7 +1,8 @@
-
+package Server;
 
 import java.io.*;
 import java.net.Socket;
+import Server.*;
 
 /**
  * Project 4 - ServerThread.java
