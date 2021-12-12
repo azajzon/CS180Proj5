@@ -1,4 +1,4 @@
-<b> Test 1: Create teacher login <b>
+**Test 1: Create teacher login**
 <p> User launches application </p>
 <p> User selects Create Teacher button </p>
 <p> User selects the first and last name textbox <p> 
@@ -16,7 +16,7 @@
 <p> Expected Result: Application makes a new teacher account and loads to the teacher login page automatically. <p> 
 <p> Test Status: Passed <p> 
 
-<b> Test 2: Login Teacher <b>
+**Test 2: Login Teacher**
 <p> User clicks Login Teacher button <p> 
 <p> Selects username textbox <p> 
 <p> Enters username via keyboard <p> 
