@@ -1996,7 +1996,7 @@ public class Gui {
         quizDeletedFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         quizDeletedFrame.add(quizDeletedPanel);
 
-        // label that quiz has been deleted
+        // label that the quiz has been deleted
         JLabel deleteQuizLabel = new JLabel("Quiz has been deleted!");
         deleteQuizLabel.setBounds(120, 50, 700, 25);
         quizDeletedPanel.add(deleteQuizLabel);
