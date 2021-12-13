@@ -1976,6 +1976,7 @@ public class Gui {
         deleteQuizPanel.add(deleteTheQuizButton);
 
         deleteTheQuizButton.addActionListener(e -> {
+            ClientClass.serverCall(15, " ");
             deleteQuizFrame.setVisible(false);
             deleteQuizFrame.dispose();
             ClientClass.serverCall(15, quizzesList.getSelectedItem());
@@ -2007,13 +2008,11 @@ public class Gui {
         quizDeletedPanel.add(quizDeletedBackButton);
 
         // button for leading back to teacher menu screen
-        quizDeletedBackButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                quizDeletedFrame.setVisible(false);
-                quizDeletedFrame.dispose();
-                teacherQuizMenu(); // this brings the question to the next screen
-                // (where they can edit the questions)
-            }
+        quizDeletedBackButton.addActionListener(e -> {
+            quizDeletedFrame.setVisible(false);
+            quizDeletedFrame.dispose();
+            teacherQuizMenu(); // this brings the question to the next screen
+            // (where they can edit the questions)
         });
 
         quizDeletedPanel.setLayout(null);

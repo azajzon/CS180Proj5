@@ -320,7 +320,7 @@ public class Server {
 
             System.out.println();
         } catch (IOException ex) {
-            System.out.println("IOException is caught");
+            System.out.println("");
         }
 
     }
@@ -378,8 +378,6 @@ public class Server {
 
             in.close();
             file.close();
-
-            System.out.print("");
             // catches exceptions such as not being able to
             // find the files that stored the arrays of teachers, students, and courses
         } catch (IOException ex) {
