@@ -9,11 +9,17 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 
-/*
- * Main server class. This class includes main(), and is the class that listens
- * for incoming connections and starts ServerThreads to handle those connections
+/**
+ * Project 4 - Server.java
+ * <p>
+ * The Server.java includes main(), and is the class that listens for incoming connections and starts ServerThreads to
+ * handle those connections.
  *
+ * @author Aarohi Panzade, Abel Zazjon, Aditi Barla, and Yaseen Shady 039
+ *
+ * @version 12/12/21
  */
+
 public class Server {
 
     /**
