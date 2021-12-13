@@ -9,7 +9,7 @@
 
 ### List Of Who Submitted Which Parts:
 <p> - Aarohi: Submitted Vocareum Workspace   </p>
-<p> - Aarohi: Sumbitted Report on Brightspace  </p>
+<p> - Aditi: Sumbitted Report on Brightspace  </p>
 <p> - Aarohi: Sumbitted Presentation on Brightspace  </p>
 
 ### Description of Classes
