@@ -355,7 +355,7 @@
  #### 12) GUI.java
  
 ##### Description: 
-<p> The GUI class </p>
+<p> The GUI class works with the client side of the network I/O and uses graphical user interfaces and integrates the logic with objects from other classes to create the learning system management program. </p>
 
 ##### Fields: 
 | Modifier and Type  | Field | Description |
