@@ -441,36 +441,39 @@
 
 | Method  | Signature | Parameters  | Description |
 | ------------- | ------------- | ------------- | ------------- |
-| mainMenu()| public static void | String[] args | Description |
-| createTeacher()| public static void | None | Description |
-| accountCreatedTeacher() | public static void | None | Description |
-| loginTeacher()| public static void | None | Description |
-| teacherCourseMenu()| public static void | None | Description |
-| addCourse()| public static void | None | Description |
-| createStudent()| public static void | None | Description |
-| accountCreatedStudent() | public static void | None | Description |
-| loginStudent()| public static void | None | Description |
-| studentMenu()| public static void | None | Description |
-| teacherQuizMenu()| public static void | None | Description |
-| createQuiz()| public static void | None | Description |
-| multipleChoiceQuiz()| public static void | String quizName | Description |
-| editQuiz()| public static void | ArrayList<String> quizNames | Description |
+| main()| public static void | String[] args | Main method calls mainMenu() to begin the application flow |
+| mainMenu()| public static void | None | Contains centralized location of pathways that student and teacher can access |
+| createTeacher()| public static void | None | Creates a teacher account |
+| teachAccountCreationFailed()| public static void | None | Checks for account duplication validation for teacher |
+| accountCreatedTeacher() | public static void | None | Screen for when the user create account is validated |
+| loginTeacher()| public static void | None | Login screen for teacher user to interact with |
+| teacherCourseMenu()| public static void | None | Allows teacher to add a course for students |
+| addCourse()| public static void | None | Allows teacher to add a new course |
+| createStudent()| public static void | None | Creates a student account |
+| studAccountCreationFailed()| public static void | None | Checks for account duplication validation for student | 
+| accountCreatedStudent() | public static void | None | Shows the message dialog for a successful account that has been created |
+| loginStudent()| public static void | None | The login screen for student user to log in |
+| studentMenu()| public static void | None | Displays the screen for the student menu and checks for user input validation by getting text from all text fields |
+| teacherQuizMenu()| public static void | None | Allows teacher to do various options with quiz |
+| createQuiz()| public static void | None | Allows teacher user to create a quiz for students to access |
+| multipleChoiceQuiz()| public static void | String quizName | Contains screen for teacher user to input and create a multiple choice question in a quiz |
+| editQuiz()| public static void | ArrayList<String> quizNames | Allows teacher to edit a quiz that they have previously made |
 | questionForEditQuiz()| public static void | Quiz q | Question screen that teacher can edit from |
-| editTeacherAccount()| public static void | None | Description |
-| editTeachAccountDone()| public static void | None | Description |
-| editStudentAccount()| public static void | None | Description |
-| editStudentAccountDone()| public static void | None | Description |
-| whichQuizToTake()| public static void | None | Description |
-| quizStudentTakes()| public static void | JFrame parentFrame, Quiz quiz | Description |
+| editTeacherAccount()| public static void | None | Allows the teacher to edit their account and the fields |
+| editTeachAccountDone()| public static void | None | Screen which shows information about the teacher account being updated |
+| editStudentAccount()| public static void | None |  Allows the student to edit their account and the fields |
+| editStudentAccountDone()| public static void | None | Screen which shows information about the student account being updated |
+| whichQuizToTake()| public static void | None | Allows student user to choose a quiz to take |
+| quizStudentTakes()| public static void | JFrame parentFrame, Quiz quiz | Allows students to take the questions within the quiz and answers |
 | findIndexOfQuestion()| public static int | String question, ArrayList<Question> originalQuestions| Finds the index of the question and returns the index |
-| quizView()| public static JDialog | JFrame parent, ArrayList<Question> questions, int num, Quiz quiz, ArrayList<Answer> answers | Description |
-| quizSubmitted()| public static void | None | Description |
-| viewGradedQuiz()| public static void | ArrayList<QuizSubmission> qs | Description |
-| showsStuGradedQuiz()| public static void | QuizSubmission qs | Description |
-| getQuizString()| public static String | QuizSubmission qs | Description |
-| viewStudentQuizSubmissions()| public static void | None | Description |
-| deleteQuiz()| public static void | None | Description |
-| quizDeleted()| public static void | None | Description | 
+| quizView()| public static JDialog | JFrame parent, ArrayList<Question> questions, int num, Quiz quiz, ArrayList<Answer> answers | Allows a student user to view the quiz while taking the quiz |
+| quizSubmitted()| public static void | None | Sets the quiz to be submitted |
+| viewGradedQuiz()| public static void | ArrayList<QuizSubmission> qs | Allows students to view thier graded quiz |
+| showsStuGradedQuiz()| public static void | QuizSubmission qs | Shows students their graded quiz, passes through the quiz submission object |
+| getQuizString()| public static String | QuizSubmission qs | Returns the string of the quiz that the teacher user has created |
+| viewStudentQuizSubmissions()| public static void | None | Allows teacher user to view the student quiz submissions |
+| deleteQuiz()| public static void | None | Screen that allows for a teacher to delete a quiz |
+| quizDeleted()| public static void | None | Contains the updated message of whether a quiz has been deleted | 
  
  
  
