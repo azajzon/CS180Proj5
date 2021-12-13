@@ -299,7 +299,8 @@
 | loadArrayFromFile()  | public static void | String filename, int arrayType | Loads the 3 arrays from the files once the program starts again |
 | saveProgramState()  | public static void | None | Saves the data even when we end the program |
 | loadProgramState()  | public static Object  | None | Loads the data that was saved when a previous program was ended |
- 
+| getStudents()  | private static Object  | Object o | Returns the students arrayd |
+| deleteQuiz()  | private static Object  | Object o | Deletes a quiz from the list of quizzes |
  
 #### 10) ServerThread.java
  
@@ -430,6 +431,8 @@
 | public static String | username = ""  | The username of the user |
 | public static JLabel | createAccountErrorLabel | The label for an error in creating account |
 | public static JLabel | logInErrorLabel | The label for an error in log in |
+| static ArrayList<Question>  | questions | An array list of questions from the quizzes |
+ 
 ##### Constructors: 
  
  <p> None </p>
@@ -452,16 +455,22 @@
 | createQuiz()| public static void | None | Description |
 | multipleChoiceQuiz()| public static void | String quizName | Description |
 | editQuiz()| public static void | ArrayList<String> quizNames | Description |
+| questionForEditQuiz()| public static void | Quiz q | Question screen that teacher can edit from |
 | editTeacherAccount()| public static void | None | Description |
+| editTeachAccountDone()| public static void | None | Description |
 | editStudentAccount()| public static void | None | Description |
+| editStudentAccountDone()| public static void | None | Description |
 | whichQuizToTake()| public static void | None | Description |
-| quizStudentTakes()| public static void | Quiz q | Description |
-| quizView()| public static void | ArrayList<Question> questions, ArrayList<Answer> answers, int num, Quiz quiz | Description |
+| quizStudentTakes()| public static void | JFrame parentFrame, Quiz quiz | Description |
+| findIndexOfQuestion()| public static int | String question, ArrayList<Question> originalQuestions| Finds the index of the question and returns the index |
+| quizView()| public static JDialog | JFrame parent, ArrayList<Question> questions, int num, Quiz quiz, ArrayList<Answer> answers | Description |
 | quizSubmitted()| public static void | None | Description |
 | viewGradedQuiz()| public static void | ArrayList<QuizSubmission> qs | Description |
 | showsStuGradedQuiz()| public static void | QuizSubmission qs | Description |
-| getQuizString()| public static void | QuizSubmission qs | Description |
- 
+| getQuizString()| public static String | QuizSubmission qs | Description |
+| viewStudentQuizSubmissions()| public static void | None | Description |
+| deleteQuiz()| public static void | None | Description |
+| quizDeleted()| public static void | None | Description | 
  
  
  
