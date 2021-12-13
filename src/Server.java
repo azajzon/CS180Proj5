@@ -164,11 +164,11 @@ public class Server {
         Student student = getStudentByUsername(arr[0]);
         // checks if object is null or not
         if (student == null) {
-            return new Exception("Invalid username.");
+            return false;
         } else {
             // reads the password input and checks if it's right or not
             if (!student.getPassword().equals(arr[1])) {
-                return new Exception("Invalid password.");
+                return false;
             } else {
                 // returns the student object
                 loggedInStudents.add(student);
