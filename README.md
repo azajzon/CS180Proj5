@@ -2,9 +2,9 @@
 
 ### Instructions on How to Compile and Run this Project:
 
-<p> 1. Run the LearningSystemManager.java file on a Java IDE </p>
-<p> 2. Upload all the other class in the scr folder onto the IDE. In total, there should be 9 classes including the LearningSystemManager.java file. </p>
-<p> 3. Do not upload any of the test files to your IDE. For example, do not upload the "UserTest.java" file because it is a testing file. </p>
+<p> 1. Upload all classes on a Java IDE </p>
+<p> 2. Run Server.java. </p>
+<p> 3. After it says, listening to port on the terminal run Gui.java and follow the program. </p>
 
 
 ### List Of Who Submitted Which Parts:
