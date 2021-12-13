@@ -1948,33 +1948,38 @@ public class Gui {
         stuGradedQuizFrame.setVisible(true);
     }
 
-    // deletes a quiz
+    // deleteQuiz allows a quiz to be deleted by the teacher
     public static void deleteQuiz(){
+        // creates a frame and panel
         JFrame deleteQuizFrame = new JFrame();
         JPanel deleteQuizPanel = new JPanel();
         deleteQuizFrame.setSize(400, 300);
         deleteQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         deleteQuizFrame.add(deleteQuizPanel);
 
+        // label for delete a quiz
         JLabel lsmToolLabel = new JLabel("Delete a Quiz");
         lsmToolLabel.setBounds(160, 20, 500, 25);
         deleteQuizPanel.add(lsmToolLabel);
 
+        // label for selecting which quiz to delete
         JLabel deleteQuizLabel = new JLabel("Which quiz would you like to delete?");
         deleteQuizLabel.setBounds(30, 50, 700, 25);
         deleteQuizPanel.add(deleteQuizLabel);
 
-        //below array needs to contain the list of quizzes that have been created
+        //an array that contains the list of quizzes that have been created
         ArrayList<String> quizNames = (ArrayList<String>) ClientClass.serverCall(6, " ");
+        // drop down menu of the quiz list
         JComboBox<String> quizzesList = new JComboBox(quizNames.toArray());
         quizzesList.setBounds(120, 80, 140, 20);
         deleteQuizPanel.add(quizzesList);
 
-
+        // button for deleting quiz
         JButton deleteTheQuizButton = new JButton("Delete");
         deleteTheQuizButton.setBounds(230, 130, 110, 25);
         deleteQuizPanel.add(deleteTheQuizButton);
 
+        // action button for deleting the quiz
         deleteTheQuizButton.addActionListener(e -> {
             ClientClass.serverCall(15, " ");
             deleteQuizFrame.setVisible(false);
