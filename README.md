@@ -4,7 +4,7 @@
 
 <p> 1. Upload all classes on a Java IDE </p>
 <p> 2. Run Server.java. </p>
-<p> 3. After it says, listening to port on the terminal run Gui.java and follow the program. </p>
+<p> 3. After it says, 'listening to port' on the terminal run Gui.java and follow the program. </p>
 
 
 ### List Of Who Submitted Which Parts:
