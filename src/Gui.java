@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * Project 4 - Gui.java
+ * Project 5 - Gui.java
  * <p>
  * The Gui.java class works with the client side of the network I/O and uses graphical user interfaces
  * and integrates the logic with objects from other classes to create the learning system management program.
@@ -485,13 +485,13 @@ public class Gui {
                 addCourse();
             }
         });
-        
+
         // button for not adding a course
         noCourseButton = new JButton("No");
         noCourseButton.setBounds(120, 80, 80, 25);
         teacherCourseMenuPanel.add(noCourseButton);
 
-         //if teacher doesn't want to create a course, they are directed to the quiz menu screen
+        //if teacher doesn't want to create a course, they are directed to the quiz menu screen
         noCourseButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 teacherCourseMenuFrame.setVisible(false);
@@ -537,12 +537,12 @@ public class Gui {
             teacherQuizMenu();
         });
 
-         // button for back page
+        // button for back page
         addCourseBackButton = new JButton("Back");
         addCourseBackButton.setBounds(60, 80, 80, 25);
         addCoursePanel.add(addCourseBackButton);
 
-         // action button will lead teacher back to the course menu
+        // action button will lead teacher back to the course menu
         addCourseBackButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 addCourseFrame.setVisible(false);
@@ -557,7 +557,7 @@ public class Gui {
 
     // createStudent() has text fields and validates the teacher to create an account
     public static void createStudent() {
-         // frame and panel created pertaining to createStudent screen
+        // frame and panel created pertaining to createStudent screen
         createStudentFrame = new JFrame();
         createStudentPanel = new JPanel();
         createStudentFrame.setSize(400, 300);
@@ -566,7 +566,7 @@ public class Gui {
 
         createStudentPanel.setLayout(null);
 
-         // label for create a student account
+        // label for create a student account
         createStudentWelcomeLabel = new JLabel("Create a student account");
         createStudentWelcomeLabel.setBounds(80, 20, 200, 25);
         createStudentPanel.add(createStudentWelcomeLabel);
@@ -581,7 +581,7 @@ public class Gui {
         createStudentNameText.setBounds(150, 50, 165, 25);
         createStudentPanel.add(createStudentNameText);
 
-         // label for create student
+        // label for create student
         createStudentUsernameLabel = new JLabel("Username:");
         createStudentUsernameLabel.setBounds(20, 80, 80, 25);
         createStudentPanel.add(createStudentUsernameLabel);
@@ -596,16 +596,16 @@ public class Gui {
         createStudentPasswordLabel.setBounds(20, 110, 80, 25);
         createStudentPanel.add(createStudentPasswordLabel);
 
-         // text field for create student password
+        // text field for create student password
         createStudentPasswordText = new JTextField(20);
         createStudentPasswordText.setBounds(150, 110, 165, 25);
         createStudentPanel.add(createStudentPasswordText);
 
-         // button for create student account
+        // button for create student account
         createStudentAccountButton = new JButton("Create Account");
         createStudentAccountButton.setBounds(30, 150, 150, 25);
         createStudentAccountButton.addActionListener((e) -> {
-             //checks for user input validation by getting text field for all text fields
+            //checks for user input validation by getting text field for all text fields
             if ((Boolean) ClientClass.serverCall(3, new String[]{createStudentNameText.getText(),
                     createStudentUsernameText.getText(), createStudentPasswordText.getText()})) {
                 createStudentFrame.setVisible(false);
@@ -623,7 +623,7 @@ public class Gui {
 
     // studAccountCreationFailed() checks for student input validation
     public static void studAccountCreationFailed(){
-         // creates a specific frame and panel
+        // creates a specific frame and panel
         studAccountCreationFailedFrame = new JFrame();
         studAccountCreationFailedPanel = new JPanel();
         studAccountCreationFailedFrame.setSize(400, 300);
@@ -631,7 +631,7 @@ public class Gui {
         studAccountCreationFailedFrame.add(studAccountCreationFailedPanel);
         studAccountCreationFailedPanel.setLayout(null);
 
-         // label for duplicated account created
+        // label for duplicated account created
         accountCreationLabel = new JLabel("This account has already been created.");
         accountCreationLabel.setBounds(15, 20, 380, 25);
         studAccountCreationFailedPanel.add(accountCreationLabel);
@@ -722,7 +722,7 @@ public class Gui {
         // login button for student user
         loginStudentAccountButton = new JButton("Login");
         loginStudentAccountButton.addActionListener((e) -> {
-             // checks for user input validation by getting text from all text fields
+            // checks for user input validation by getting text from all text fields
             if ((Boolean) ClientClass.serverCall(2, new String[]{studentUsernameText.getText(), studentPasswordText.getText()})) {
                 studentLoginFrame.setVisible(false);
                 studentLoginFrame.dispose();
@@ -742,9 +742,9 @@ public class Gui {
         studentLoginFrame.setVisible(true);
     }
 
-     // checks for user input validation by getting text from all text fields
+    // checks for user input validation by getting text from all text fields
     public static void studentMenu() {
-         //creates specific frame and panel
+        //creates specific frame and panel
         JFrame studentMenuFrame = new JFrame();
         studentMenuPanel = new JPanel();
         studentMenuFrame.setSize(400, 300);
@@ -762,7 +762,7 @@ public class Gui {
 
         studentMenuPanel.add(takeQuizButton);
 
-         // button leads to a drop down menu for student user to choose which quiz they want to take
+        // button leads to a drop down menu for student user to choose which quiz they want to take
         takeQuizButton.addActionListener(e -> {
             studentMenuFrame.setVisible(false);
             studentMenuFrame.dispose();
@@ -776,7 +776,7 @@ public class Gui {
         studentMenuPanel.add(viewGradedQuizButton);
 
         viewGradedQuizButton.addActionListener(e -> {
-             // student user gains access to view a graded quiz they submitted once button is pushed
+            // student user gains access to view a graded quiz they submitted once button is pushed
             studentMenuFrame.setVisible(false);
             studentMenuFrame.dispose();
             viewGradedQuiz((ArrayList<QuizSubmission>) ClientClass.serverCall(9,username));
@@ -789,7 +789,7 @@ public class Gui {
         studentMenuPanel.add(editStudentAccountButton);
 
         editStudentAccountButton.addActionListener(e -> {
-             // student user can edit account once button is pushed
+            // student user can edit account once button is pushed
             studentMenuFrame.setVisible(false);
             studentMenuFrame.dispose();
             editStudentAccount();
@@ -814,7 +814,7 @@ public class Gui {
         studentMenuPanel.add(deleteStudentAccount);
 
         deleteStudentAccount.addActionListener(e -> {
-             // once account is deleted, student user goes back to mainMenu()
+            // once account is deleted, student user goes back to mainMenu()
             ClientClass.serverCall(13, username);
             studentMenuFrame.setVisible(false);
             studentMenuFrame.dispose();
@@ -825,7 +825,7 @@ public class Gui {
         studentMenuFrame.setVisible(true);
     }
 
-     // teacherQuizMenu() allows teacher to do various options with quiz
+    // teacherQuizMenu() allows teacher to do various options with quiz
     public static void teacherQuizMenu() {
         // creates a new frame and panel
         JFrame teacherQuizMenuFrame = new JFrame();
@@ -834,18 +834,18 @@ public class Gui {
         teacherQuizMenuFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         teacherQuizMenuFrame.add(teacherQuizMenuPanel);
 
-         // label for learning system management tool
+        // label for learning system management tool
         JLabel lsmToolLabel = new JLabel("Learning System Management Tool");
         lsmToolLabel.setBounds(90, 20, 500, 25);
         teacherQuizMenuPanel.add(lsmToolLabel);
 
-         // button for create quiz
+        // button for create quiz
         JButton createQuizButton = new JButton("Create a Quiz");
         createQuizButton.setBounds(80, 50, 250, 25);
         teacherQuizMenuPanel.add(createQuizButton);
 
         createQuizButton.addActionListener(e -> {
-             // action button that leads to create quiz screen
+            // action button that leads to create quiz screen
             teacherQuizMenuFrame.setVisible(false);
             teacherQuizMenuFrame.dispose();
             createQuiz();
@@ -857,14 +857,14 @@ public class Gui {
         teacherQuizMenuPanel.add(editQuizButton);
 
         editQuizButton.addActionListener(e -> {
-              // action button that leads to edit quiz screen
+            // action button that leads to edit quiz screen
             ArrayList<String> quizNames = (ArrayList<String>) ClientClass.serverCall(6, " ");
             teacherQuizMenuFrame.setVisible(false);
             teacherQuizMenuFrame.dispose();
             editQuiz(quizNames);
         });
 
-          // button for delete quiz
+        // button for delete quiz
         JButton deleteQuizButton = new JButton("Delete Quiz");
         deleteQuizButton.setBounds(80, 110, 250, 25);
         teacherQuizMenuPanel.add(deleteQuizButton);
@@ -893,7 +893,7 @@ public class Gui {
         editTeacherAccountButton.setBounds(80, 170, 250, 25);
         teacherQuizMenuPanel.add(editTeacherAccountButton);
 
-         // action button for editing teacher account
+        // action button for editing teacher account
         editTeacherAccountButton.addActionListener((e) -> {
             teacherQuizMenuFrame.setVisible(false);
             teacherQuizMenuFrame.dispose();
@@ -918,7 +918,7 @@ public class Gui {
         deleteTeacherAccount.setBounds(30, 230, 190, 25);
         teacherQuizMenuPanel.add(deleteTeacherAccount);
         deleteTeacherAccount.addActionListener(e -> {
-             // action button for eading teacher user back to main menu after deleting an account
+            // action button for eading teacher user back to main menu after deleting an account
             ClientClass.serverCall(12, username);
             teacherQuizMenuFrame.setVisible(false);
             teacherQuizMenuFrame.dispose();
@@ -929,7 +929,7 @@ public class Gui {
         teacherQuizMenuFrame.setVisible(true);
     }
 
-     // createQuiz allows teacher user to create a quiz for students to access
+    // createQuiz allows teacher user to create a quiz for students to access
     public static void createQuiz() {
         // create a specific frame and panel
         JFrame createQuizFrame = new JFrame();
@@ -938,7 +938,7 @@ public class Gui {
         createQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         createQuizFrame.add(createQuizPanel);
 
-         // label for create quiz
+        // label for create quiz
         JLabel lsmToolLabel = new JLabel("Create a Quiz");
         lsmToolLabel.setBounds(130, 20, 500, 25);
         createQuizPanel.add(lsmToolLabel);
@@ -953,12 +953,12 @@ public class Gui {
         nameOfQuizText.setBounds(120, 50, 125, 25);
         createQuizPanel.add(nameOfQuizText);
 
-         // label for format of quiz
+        // label for format of quiz
         JLabel formatOfQuizLabel = new JLabel("Format of Quiz:");
         formatOfQuizLabel.setBounds(20, 90, 150, 25);
         createQuizPanel.add(formatOfQuizLabel);
 
-         // button for format quiz (multiple choice)
+        // button for format quiz (multiple choice)
         JButton formatOfQuiz1Button = new JButton("Multiple-Choice");
         formatOfQuiz1Button.setBounds(80, 130, 190, 25);
         createQuizPanel.add(formatOfQuiz1Button);
@@ -970,7 +970,7 @@ public class Gui {
             multipleChoiceQuiz(nameOfQuizText.getText());
         });
 
-         // button for format quiz (true/false)
+        // button for format quiz (true/false)
         JButton formatOfQuiz2Button = new JButton("True/False");
         formatOfQuiz2Button.setBounds(80, 160, 190, 25);
         createQuizPanel.add(formatOfQuiz2Button);
@@ -996,12 +996,12 @@ public class Gui {
         createQuizFrame.setVisible(true);
     }
 
-     // array list of questions from the quizzes
+    // array list of questions from the quizzes
     static ArrayList<Question> questions = new ArrayList<>();
 
-     // multiple choice quiz method contains screen for teacher user to input and create a multiple choice question in a quiz
+    // multiple choice quiz method contains screen for teacher user to input and create a multiple choice question in a quiz
     public static void multipleChoiceQuiz(String quizName) {
-         // create a specific frame and panel
+        // create a specific frame and panel
         JFrame multipleChoiceQuizFrame = new JFrame();
         JPanel multipleChoiceQuizPanel = new JPanel();
         multipleChoiceQuizFrame.setSize(400, 320);
@@ -1018,7 +1018,7 @@ public class Gui {
         questionOneMCLabel.setBounds(20, 50, 130, 25);
         multipleChoiceQuizPanel.add(questionOneMCLabel);
 
-         // text field for question
+        // text field for question
         var questionOneMCText = new JTextField(20);
         questionOneMCText.setBounds(210, 50, 165, 25);
         multipleChoiceQuizPanel.add(questionOneMCText);
@@ -1038,7 +1038,7 @@ public class Gui {
         optionTwoMCLabel.setBounds(20, 110, 80, 25);
         multipleChoiceQuizPanel.add(optionTwoMCLabel);
 
-         // text for option 2
+        // text for option 2
         var optionTwoMCText = new JTextField(20);
         optionTwoMCText.setBounds(210, 110, 165, 25);
         multipleChoiceQuizPanel.add(optionTwoMCText);
@@ -1048,17 +1048,17 @@ public class Gui {
         optionThreeMCLabel.setBounds(20, 140, 80, 25);
         multipleChoiceQuizPanel.add(optionThreeMCLabel);
 
-         // text for option 3
+        // text for option 3
         var optionThreeMCText = new JTextField(20);
         optionThreeMCText.setBounds(210, 140, 165, 25);
         multipleChoiceQuizPanel.add(optionThreeMCText);
 
-         // label for option 4
+        // label for option 4
         var optionFourMCLabel = new JLabel("Option 4:");
         optionFourMCLabel.setBounds(20, 170, 80, 25);
         multipleChoiceQuizPanel.add(optionFourMCLabel);
 
-         // text for option 4
+        // text for option 4
         var optionFourMCText = new JTextField(20);
         optionFourMCText.setBounds(210, 170, 165, 25);
         multipleChoiceQuizPanel.add(optionFourMCText);
@@ -1078,7 +1078,7 @@ public class Gui {
         pointValueMCLabel.setBounds(20, 230, 250, 25);
         multipleChoiceQuizPanel.add(pointValueMCLabel);
 
-         // text field for teacher user to enter point value for each question
+        // text field for teacher user to enter point value for each question
         var pointValueMCText = new JTextField(20);
         pointValueMCText.setBounds(210, 230, 165, 25);
         multipleChoiceQuizPanel.add(pointValueMCText);
@@ -1098,7 +1098,7 @@ public class Gui {
             q.addChoice(optionThreeMCText.getText());
             q.addChoice(optionFourMCText.getText());
 
-             // gets the text from the text field in relation to the correct answer
+            // gets the text from the text field in relation to the correct answer
             if (correctAnsChoiceMCText.getText().equals("1"))
                 q.setAnswer(optionOneMCText.getText());
             if (correctAnsChoiceMCText.getText().equals("2"))
@@ -1108,11 +1108,11 @@ public class Gui {
             if (correctAnsChoiceMCText.getText().equals("4"))
                 q.setAnswer(optionFourMCText.getText());
 
-             // converting to an integer
+            // converting to an integer
             q.setPointValue(Integer.parseInt(pointValueMCText.getText()));
             questions.add(q);
 
-             // creates a specific frame and panel
+            // creates a specific frame and panel
             JFrame addAnotherQuestionFrame = new JFrame();
             JPanel addAnotherQuestionPanel = new JPanel();
             addAnotherQuestionFrame.setSize(400, 300);
@@ -1129,9 +1129,9 @@ public class Gui {
             yesAnotherQuestionButton.setBounds(110, 50, 80, 25);
             addAnotherQuestionPanel.add(yesAnotherQuestionButton);
             yesAnotherQuestionButton.addActionListener(ae -> {
-            // action button leads to another screen for a multiple choice quiz if the user wants to add another question,
-            // displays the screen of the question, options, correct answer and point value again
-            //this time however, it says type in question 2
+                // action button leads to another screen for a multiple choice quiz if the user wants to add another question,
+                // displays the screen of the question, options, correct answer and point value again
+                //this time however, it says type in question 2
                 multipleChoiceQuizFrame.setVisible(false);
                 multipleChoiceQuizFrame.dispose();
                 addAnotherQuestionFrame.setVisible(false);
@@ -1145,7 +1145,7 @@ public class Gui {
             noAnotherQuestionButton.setBounds(200, 50, 80, 25);
             addAnotherQuestionPanel.add(noAnotherQuestionButton);
             noAnotherQuestionButton.addActionListener(ae -> {
-                 // action button calls the teacher quiz menu for teacher user to go back to
+                // action button calls the teacher quiz menu for teacher user to go back to
                 if ((Boolean) ClientClass.serverCall(4, new Quiz(questions, quizName))) {
                     multipleChoiceQuizFrame.setVisible(false);
                     multipleChoiceQuizFrame.dispose();
@@ -1176,16 +1176,16 @@ public class Gui {
         multipleChoiceQuizFrame.setVisible(true);
     }
 
-     // editQuiz allows teacher to edit a quiz that they have previously made
+    // editQuiz allows teacher to edit a quiz that they have previously made
     public static void editQuiz(ArrayList<String> quizNames) {
-         // create new frame and panel
+        // create new frame and panel
         JFrame editQuizFrame = new JFrame();
         JPanel editQuizPanel = new JPanel();
         editQuizFrame.setSize(400, 300);
         editQuizFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         editQuizFrame.add(editQuizPanel);
 
-         // label for edit a quiz
+        // label for edit a quiz
         JLabel lsmToolLabel = new JLabel("Edit a Quiz");
         lsmToolLabel.setBounds(160, 20, 500, 25);
         editQuizPanel.add(lsmToolLabel);
@@ -1204,7 +1204,7 @@ public class Gui {
         editQuizPanel.add(nextForEditQuiz);
 
         nextForEditQuiz.addActionListener(e -> {
-              // action button allows the selected quiz to be viewed
+            // action button allows the selected quiz to be viewed
             editQuizFrame.setVisible(false);
             editQuizFrame.dispose();
 
@@ -1309,7 +1309,7 @@ public class Gui {
 
         // updates the editing question into the quiz
         saveEditQuizButton.addActionListener(e -> {
-             // action button leads the teacher user back to the teacher quiz menu
+            // action button leads the teacher user back to the teacher quiz menu
             Question newQuestion = new Question( (String)jComboBox.getSelectedItem());
             newQuestion.addChoice(editOptionOneMCText.getText());
             newQuestion.addChoice(editOptionTwoMCText.getText());
@@ -1399,7 +1399,7 @@ public class Gui {
         editTeacherAccountPanel.add(editTeacherAccountBackButton);
 
         editTeacherAccountBackButton.addActionListener(e -> {
-             // action button leads teacher user back to teacher quiz
+            // action button leads teacher user back to teacher quiz
             editTeacherAccountFrame.setVisible(false);
             editTeacherAccountFrame.dispose();
             teacherQuizMenu();
@@ -1408,7 +1408,7 @@ public class Gui {
         editTeacherAccountFrame.setVisible(true);
     }
 
-     // editTeachAccountDone() has the information about the teacher account being updated
+    // editTeachAccountDone() has the information about the teacher account being updated
     public static void editTeachAccountDone(){
         // create a frame and panel
         editTeachAccountDoneFrame = new JFrame();
@@ -1440,7 +1440,7 @@ public class Gui {
 
     }
 
-     // editStudentAccount() allows student to edit their account from all text fields
+    // editStudentAccount() allows student to edit their account from all text fields
     public static void editStudentAccount() {
         // creates new frame and panel
         JFrame editStudentAccountFrame = new JFrame();
@@ -1465,7 +1465,7 @@ public class Gui {
         editedStuNameText.setBounds(150, 50, 165, 25);
         editStudentAccountPanel.add(editedStuNameText);
 
-         // label for student username
+        // label for student username
         JLabel editedStuUsernameLabel = new JLabel("Username:");
         editedStuUsernameLabel.setBounds(20, 80, 80, 25);
         editStudentAccountPanel.add(editedStuUsernameLabel);
@@ -1698,7 +1698,7 @@ public class Gui {
         questionOneStuAns.setBounds(200, 200, 60, 25);
         quizStudentTakesPanel1.add(questionOneStuAns);
 
-       // next button leads to next question for student user
+        // next button leads to next question for student user
         JButton quizStuTakesNextButton = new JButton("Next");
         quizStuTakesNextButton.setBounds(250, 230, 110, 25);
         quizStudentTakesPanel1.add(quizStuTakesNextButton);
@@ -1716,7 +1716,7 @@ public class Gui {
 
     // quizSubmitted() sets the quiz to be submitted
     public static void quizSubmitted() {
-         // creats a frame and panel
+        // creats a frame and panel
         JFrame quizSubmittedFrame = new JFrame();
         JPanel quizSubmittedPanel = new JPanel();
         quizSubmittedFrame.setSize(400, 300);
@@ -1727,14 +1727,14 @@ public class Gui {
         JLabel quizSubmittedLabel = new JLabel("You are done with the quiz and it has been submitted!");
         quizSubmittedLabel.setBounds(30, 20, 500, 25);
         quizSubmittedPanel.add(quizSubmittedLabel);
-        
+
         // button for bringing back to homepag
         JButton quizDoneBackToStuMenuButton = new JButton("Back To HomePage");
         quizDoneBackToStuMenuButton.setBounds(90, 60, 200, 25);
         quizSubmittedPanel.add(quizDoneBackToStuMenuButton);
 
         quizDoneBackToStuMenuButton.addActionListener(e -> {
-             // action button leads the student user back to student menu after finishing their quiz
+            // action button leads the student user back to student menu after finishing their quiz
             quizSubmittedFrame.setVisible(false);
             quizSubmittedFrame.dispose();
             studentMenu();
@@ -1753,7 +1753,7 @@ public class Gui {
             if (!(q.getQuizName().contains(username)))
                 subs.remove(q);
         }
-         // goes through each quiz submission with reference to the username
+        // goes through each quiz submission with reference to the username
         String[] quizzes = new String[subs.size()];
         int i = 0;
         for (QuizSubmission q : subs) {
@@ -1772,7 +1772,7 @@ public class Gui {
         JLabel viewGradedQuizTitleLabel = new JLabel("View a Graded Quiz");
         viewGradedQuizTitleLabel.setBounds(140, 20, 500, 25);
         viewGradedQuizPanel.add(viewGradedQuizTitleLabel);
-        
+
         // label for the graded quizzes that students want to view
         JLabel whichGradedQuizToViewLabel = new JLabel("Which of the graded quizzes do you want to view?");
         whichGradedQuizToViewLabel.setBounds(30, 50, 500, 25);
@@ -1828,7 +1828,7 @@ public class Gui {
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         stuGradedQuizPanel.add(scrollPane);
 
-         // allows student to view and go back to homepage after viewing their quiz submission
+        // allows student to view and go back to homepage after viewing their quiz submission
         JButton stuGradedQuizScreenBackButton = new JButton("Back To HomePage");
         stuGradedQuizScreenBackButton.setBounds(270, 320, 190, 25);
         stuGradedQuizPanel.add(stuGradedQuizScreenBackButton);
@@ -1845,7 +1845,7 @@ public class Gui {
 
     }
 
-     // getQuizString() returns the string of the quiz that the teacher user has created
+    // getQuizString() returns the string of the quiz that the teacher user has created
     public static String getQuizString(QuizSubmission qs) {
         // initializes variable for quiz components like total, points, and the string
         int total = 0;
@@ -1886,7 +1886,7 @@ public class Gui {
             returnStr = returnStr + "\n";
 
             total += ques.getPointValue();
-             // checks for student input and answer key
+            // checks for student input and answer key
             if (anw.equals(ques.getAnswer())){
                 points += ques.getPointValue();
             }
@@ -1922,7 +1922,7 @@ public class Gui {
         stuGradedQuizLabel.setBounds(210, 20, 500, 25);
         stuGradedQuizPanel.add(stuGradedQuizLabel);
 
-         // text area to show the graded quiz text from the student
+        // text area to show the graded quiz text from the student
         JTextArea showsStuGradedQuizText = new JTextArea(str);
         showsStuGradedQuizText.setBounds(30,50, 400,200);
 
@@ -1988,7 +1988,7 @@ public class Gui {
         deleteQuizFrame.setVisible(true);
     }
 
-     // quizDeleted() has the updated message of whether a quiz has been deleted
+    // quizDeleted() has the updated message of whether a quiz has been deleted
     public static void quizDeleted(){
         // creates a frame and panel
         JFrame quizDeletedFrame = new JFrame();
