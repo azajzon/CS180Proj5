@@ -448,7 +448,7 @@ public class Gui {
             } else {
                 teacherLoginFrame.setVisible(false);
                 teacherLoginFrame.dispose();
-                //JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Incorrect username or password.", "Login", JOptionPane.WARNING_MESSAGE);
                 mainMenu();
             }
         });

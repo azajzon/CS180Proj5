@@ -110,11 +110,11 @@ public class Server {
         Teacher teacher = getTeacherByUsername(arr[0]);
         // checks if object is null or not
         if (teacher == null) {
-            return new Exception("Invalid username.");
+            return false;
         } else {
             // reads the password input and checks if it's right or not
             if (!teacher.getPassword().equals(arr[1])) {
-                return new Exception("Invalid password.");
+                return false;
             } else {
                 // returns the student object
                 loggedInTeachers.add(teacher);
