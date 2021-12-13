@@ -970,17 +970,6 @@ public class Gui {
             multipleChoiceQuiz(nameOfQuizText.getText());
         });
 
-        // button for format quiz (true/false)
-        JButton formatOfQuiz2Button = new JButton("True/False");
-        formatOfQuiz2Button.setBounds(80, 160, 190, 25);
-        createQuizPanel.add(formatOfQuiz2Button);
-
-        formatOfQuiz2Button.addActionListener(e -> {
-            createQuizFrame.setVisible(false);
-            createQuizFrame.dispose();
-            //trueOrFalseQuiz();
-        });
-
         // back button to go back tp teacher menu
         JButton createQuizBackButton = new JButton("Back");
         createQuizBackButton.setBounds(30, 190, 110, 25);
